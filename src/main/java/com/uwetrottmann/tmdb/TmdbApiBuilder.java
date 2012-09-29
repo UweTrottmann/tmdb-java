@@ -182,12 +182,12 @@ public abstract class TmdbApiBuilder<T> extends ApiBuilder {
                 Response response = this.service.unmarshall(new TypeToken<Response>() {
                 }, ae.getMessage());
                 if (response != null) {
-                    throw new TraktException(url, this.postBody, ae, response);
+                    throw new TmdbException(url, this.postBody, ae, response);
                 }
             } catch (JsonParseException jpe) {
             }
 
-            throw new TraktException(url, this.postBody, ae);
+            throw new TmdbException(url, this.postBody, ae);
         }
     }
 
