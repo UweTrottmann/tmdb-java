@@ -43,6 +43,10 @@ public abstract class TmdbApiBuilder<T> extends ApiBuilder {
             + API_URL_DELIMITER_END;
 
     protected static final String FIELD_ID = API_URL_DELIMITER_START + "id" + API_URL_DELIMITER_END;
+    protected static final String FIELD_PAGE = API_URL_DELIMITER_START + "page"
+            + API_URL_DELIMITER_END;
+    protected static final String FIELD_LANGUAGE = API_URL_DELIMITER_START + "language"
+            + API_URL_DELIMITER_END;
 
     /** Format for encoding a {@link java.util.Date} in a URL. */
     private static final SimpleDateFormat URL_DATE_FORMAT = new SimpleDateFormat("yyyyMMdd");

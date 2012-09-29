@@ -21,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import com.uwetrottmann.tmdb.TmdbApiBuilder;
 import com.uwetrottmann.tmdb.TmdbApiService;
 import com.uwetrottmann.tmdb.entities.Movie;
+import com.uwetrottmann.tmdb.entities.ResultsPage;
 import com.uwetrottmann.tmdb.entities.Trailers;
 
 public class MoviesService extends TmdbApiService {
@@ -43,14 +44,35 @@ public class MoviesService extends TmdbApiService {
         return new TrailerBuilder(this, id);
     }
 
+    /**
+     * Get the list of popular movies on The Movie Database. This list refreshes
+     * every day.
+     * 
+     * @return Builder instance.
+     */
+    public PopularBuilder popular() {
+        return new PopularBuilder(this);
+    }
+
     public static final class SummaryBuilder extends TmdbApiBuilder<Movie> {
-        private static final String URI = "/movie/" + FIELD_ID + FIELD_API_KEY;
+        private static final String URI = "/movie/" + FIELD_ID + FIELD_API_KEY + FIELD_LANGUAGE;
 
         private SummaryBuilder(MoviesService service, Integer id) {
             super(service, new TypeToken<Movie>() {
             }, URI);
 
             field(FIELD_ID, id);
+        }
+
+        /**
+         * Set the language. Attention: will not default to English, but instead
+         * will return empty field.
+         * 
+         * @param languageCode ISO 639-1 code.
+         */
+        public SummaryBuilder language(String languageCode) {
+            parameter(FIELD_LANGUAGE, languageCode);
+            return this;
         }
     }
 
@@ -62,6 +84,33 @@ public class MoviesService extends TmdbApiService {
             }, URI);
 
             field(FIELD_ID, id);
+        }
+    }
+
+    public static final class PopularBuilder extends TmdbApiBuilder<ResultsPage> {
+        private static final String URI = "/movie/popular" + FIELD_API_KEY + FIELD_PAGE
+                + FIELD_LANGUAGE;
+
+        private PopularBuilder(MoviesService service) {
+            super(service, new TypeToken<ResultsPage>() {
+            }, URI);
+        }
+
+        private PopularBuilder(MoviesService service, int page) {
+            this(service);
+
+            parameter(FIELD_PAGE, page);
+        }
+
+        /**
+         * Set the language. Attention: will not default to English, but instead
+         * will return empty field.
+         * 
+         * @param languageCode ISO 639-1 code.
+         */
+        public PopularBuilder language(String languageCode) {
+            parameter(FIELD_LANGUAGE, languageCode);
+            return this;
         }
     }
 }
