@@ -67,6 +67,25 @@ public class MoviesService extends TmdbApiService {
     }
 
     /**
+     * Get the similar movies for a specific movie id.
+     * 
+     * @return Builder instance.
+     */
+    public SimilarBuilder similarMovies(Integer id) {
+        return new SimilarBuilder(this, id);
+    }
+
+    /**
+     * Get the list of top rated movies. By default, this list will only include
+     * movies that have 10 or more votes. This list refreshes every day.
+     * 
+     * @return Builder instance.
+     */
+    public TopRatedBuilder topRated() {
+        return new TopRatedBuilder(this);
+    }
+
+    /**
      * Get the list of upcoming movies. This list refreshes every day. The
      * maximum number of items this list will include is 100.
      * 
@@ -166,6 +185,72 @@ public class MoviesService extends TmdbApiService {
          * @param page Index of the page.
          */
         public PopularBuilder page(int page) {
+            parameter(FIELD_PAGE, page);
+            return this;
+        }
+    }
+
+    public static final class SimilarBuilder extends TmdbApiBuilder<ResultsPage> {
+        private static final String URI = "/movie/" + FIELD_ID + "/similar_movies"
+                + FIELD_API_KEY
+                + FIELD_PAGE
+                + FIELD_LANGUAGE;
+
+        private SimilarBuilder(MoviesService service, Integer id) {
+            super(service, new TypeToken<ResultsPage>() {
+            }, URI);
+
+            field(FIELD_ID, id);
+        }
+
+        /**
+         * Set the language (optional). Attention: will not default to English,
+         * but instead will return empty field.
+         * 
+         * @param languageCode ISO 639-1 code.
+         */
+        public SimilarBuilder language(String languageCode) {
+            parameter(FIELD_LANGUAGE, languageCode);
+            return this;
+        }
+
+        /**
+         * Set the page to return (optional). Values start at 1.
+         * 
+         * @param page Index of the page.
+         */
+        public SimilarBuilder page(int page) {
+            parameter(FIELD_PAGE, page);
+            return this;
+        }
+    }
+
+    public static final class TopRatedBuilder extends TmdbApiBuilder<ResultsPage> {
+        private static final String URI = "/movie/top_rated" + FIELD_API_KEY + FIELD_PAGE
+                + FIELD_LANGUAGE;
+
+        private TopRatedBuilder(MoviesService service) {
+            super(service, new TypeToken<ResultsPage>() {
+            }, URI);
+        }
+
+        /**
+         * Set the language (optional). Attention: will not default to English,
+         * but instead will return empty field.
+         * 
+         * @param languageCode ISO 639-1 code.
+         */
+        public TopRatedBuilder language(String languageCode) {
+            parameter(FIELD_LANGUAGE, languageCode);
+            return this;
+        }
+
+        /**
+         * Set the page to return (optional). Values start at 1.
+         * 
+         * @param page Index of the page.
+         */
+        public TopRatedBuilder page(int page) {
             parameter(FIELD_PAGE, page);
             return this;
         }
