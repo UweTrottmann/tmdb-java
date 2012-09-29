@@ -17,6 +17,7 @@
 
 package com.uwetrottmann.tmdb;
 
+import com.uwetrottmann.tmdb.services.ConfigurationService;
 import com.uwetrottmann.tmdb.services.MoviesService;
 
 /**
@@ -85,12 +86,15 @@ public class ServiceManager {
     }
 
     public MoviesService moviesService() {
-        MoviesService service = ServiceManager.createMoviesService();
-        this.setupService(service);
+        MoviesService service = new MoviesService();
+        setupService(service);
         return service;
     }
 
-    public static final MoviesService createMoviesService() {
-        return new MoviesService();
+    public ConfigurationService configurationService() {
+        ConfigurationService service = new ConfigurationService();
+        setupService(service);
+        return service;
     }
+
 }
