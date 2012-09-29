@@ -1,13 +1,11 @@
 tmdb-java
 ============
 
-A Java wrapper around the [TMDb v3 API][1] and a simple DSL for easy
-interaction, based upon [JakeWharton/trakt-java/][2].
+A Java wrapper around the [TMDb v3 API][1], based upon [JakeWharton/trakt-java/][2].
 
 Remote services are grouped into local service objects which can be centrally
 managed by a `ServiceManager` instance. The manager will act as a factory for
-all of the services and will automatically initialize them with your
-credentials and API key.
+all of the services and will automatically initialize them with your API key.
 
 Each service contains methods which correspond to a remote method. Each of
 these methods instantiates a class that will allow for you to build the
@@ -25,7 +23,7 @@ Based upon
 ============
 
 The overall package and class layout as well as most of the code
-originates from JakeWharton/trakt-java/.
+originates from [JakeWharton/trakt-java/][2].
 
 Using with Android
 ============
