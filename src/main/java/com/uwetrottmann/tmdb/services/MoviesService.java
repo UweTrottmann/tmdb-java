@@ -29,6 +29,7 @@ public class MoviesService extends TmdbApiService {
     /**
      * Get the basic movie information for a specific movie id.
      * 
+     * @param id TMDb id.
      * @return Builder instance.
      */
     public SummaryBuilder summary(Integer id) {
@@ -36,8 +37,20 @@ public class MoviesService extends TmdbApiService {
     }
 
     /**
+     * Get the basic movie information for a specific movie id.
+     * 
+     * @param id TMDb id.
+     * @param langCode ISO 639-1 code.
+     * @return Builder instance.
+     */
+    public SummaryBuilder summary(Integer id, String langCode) {
+        return new SummaryBuilder(this, id).language(langCode);
+    }
+
+    /**
      * Get the trailers for a specific movie id.
      * 
+     * @param id TMDb id.
      * @return Builder instance.
      */
     public TrailerBuilder trailers(Integer id) {
@@ -52,6 +65,17 @@ public class MoviesService extends TmdbApiService {
      */
     public PopularBuilder popular() {
         return new PopularBuilder(this);
+    }
+
+    /**
+     * Get the list of popular movies on The Movie Database. This list refreshes
+     * every day.
+     * 
+     * @param langCode ISO 639-1 code.
+     * @return Builder instance.
+     */
+    public PopularBuilder popular(String langCode) {
+        return new PopularBuilder(this).language(langCode);
     }
 
     public static final class SummaryBuilder extends TmdbApiBuilder<Movie> {
