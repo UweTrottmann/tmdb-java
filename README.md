@@ -27,6 +27,11 @@ Based upon
 The overall package and class layout as well as most of the code
 originates from JakeWharton/trakt-java/.
 
+Using with Android
+============
+
+Because some device manufactures shipped a non-hidden version of GSON you *HAVE* to include a version of GSON with the package name customized, to e.g. myjson. For details see this [GSON help page][3].
+
 License
 =======
 
@@ -49,3 +54,4 @@ License
 
  [1]: http://docs.themoviedb.apiary.io/
  [2]: https://github.com/JakeWharton/trakt-java/
+ [3]: https://sites.google.com/site/gson/gson-on-android
