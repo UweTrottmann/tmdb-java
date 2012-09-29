@@ -3,12 +3,12 @@ package com.uwetrottmann.tmdb.services;
 
 import com.google.gson.reflect.TypeToken;
 import com.uwetrottmann.tmdb.TmdbApiBuilder;
-import com.uwetrottmann.tmdb.TraktApiService;
+import com.uwetrottmann.tmdb.TmdbApiService;
 import com.uwetrottmann.tmdb.entities.Genre;
 
 import java.util.List;
 
-public class GenreService extends TraktApiService {
+public class GenreService extends TmdbApiService {
     public MoviesBuilder movies() {
         return new MoviesBuilder(this);
     }

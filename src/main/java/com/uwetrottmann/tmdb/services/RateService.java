@@ -3,11 +3,11 @@ package com.uwetrottmann.tmdb.services;
 
 import com.google.gson.reflect.TypeToken;
 import com.uwetrottmann.tmdb.TmdbApiBuilder;
-import com.uwetrottmann.tmdb.TraktApiService;
+import com.uwetrottmann.tmdb.TmdbApiService;
 import com.uwetrottmann.tmdb.entities.RatingResponse;
 import com.uwetrottmann.tmdb.enumerations.Rating;
 
-public class RateService extends TraktApiService {
+public class RateService extends TmdbApiService {
     /**
      * Rate an episode on Trakt. Depending on the user settings, this will also
      * send out social updates to Facebook, Twitter, and Tumblr.

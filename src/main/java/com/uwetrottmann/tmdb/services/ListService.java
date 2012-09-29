@@ -5,14 +5,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.uwetrottmann.tmdb.TmdbApiBuilder;
-import com.uwetrottmann.tmdb.TraktApiService;
+import com.uwetrottmann.tmdb.TmdbApiService;
 import com.uwetrottmann.tmdb.entities.ListItemsResponse;
 import com.uwetrottmann.tmdb.entities.ListResponse;
 import com.uwetrottmann.tmdb.entities.Response;
 import com.uwetrottmann.tmdb.enumerations.ListItemType;
 import com.uwetrottmann.tmdb.enumerations.ListPrivacy;
 
-public class ListService extends TraktApiService {
+public class ListService extends TmdbApiService {
     /**
      * Add a new custom list.
      * 

@@ -49,12 +49,12 @@ import java.util.TimeZone;
  * 
  * @author Jake Wharton <jakewharton@gmail.com>
  */
-public abstract class TraktApiService extends ApiService {
+public abstract class TmdbApiService extends ApiService {
     /** Default connection timeout (in milliseconds). */
-    private static final int DEFAULT_TIMEOUT_CONNECT = 60 * (int) TmdbApiBuilder.MILLISECONDS_IN_SECOND;
+    private static final int DEFAULT_TIMEOUT_CONNECT = 15 * (int) TmdbApiBuilder.MILLISECONDS_IN_SECOND;
 
     /** Default read timeout (in milliseconds). */
-    private static final int DEFAULT_TIMEOUT_READ = 60 * (int) TmdbApiBuilder.MILLISECONDS_IN_SECOND;
+    private static final int DEFAULT_TIMEOUT_READ = 10 * (int) TmdbApiBuilder.MILLISECONDS_IN_SECOND;
 
     /** HTTP header name for authorization. */
     private static final String HEADER_AUTHORIZATION = "Authorization";
@@ -113,7 +113,7 @@ public abstract class TraktApiService extends ApiService {
     /**
      * Create a new Trakt service with our proper default values.
      */
-    public TraktApiService() {
+    public TmdbApiService() {
         this.parser = new JsonParser();
 
         // Setup timeout defaults
@@ -289,7 +289,7 @@ public abstract class TraktApiService extends ApiService {
      */
     @SuppressWarnings("unchecked")
     protected <T> T unmarshall(TypeToken<T> typeToken, JsonElement response) {
-        return (T) TraktApiService.getGsonBuilder().create()
+        return (T) TmdbApiService.getGsonBuilder().create()
                 .fromJson(response, typeToken.getType());
     }
 
@@ -303,7 +303,7 @@ public abstract class TraktApiService extends ApiService {
      */
     @SuppressWarnings("unchecked")
     protected <T> T unmarshall(TypeToken<T> typeToken, String reponse) {
-        return (T) TraktApiService.getGsonBuilder().create().fromJson(reponse, typeToken.getType());
+        return (T) TmdbApiService.getGsonBuilder().create().fromJson(reponse, typeToken.getType());
     }
 
     /**

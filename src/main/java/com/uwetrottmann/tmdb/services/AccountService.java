@@ -3,10 +3,10 @@ package com.uwetrottmann.tmdb.services;
 
 import com.google.gson.reflect.TypeToken;
 import com.uwetrottmann.tmdb.TmdbApiBuilder;
-import com.uwetrottmann.tmdb.TraktApiService;
+import com.uwetrottmann.tmdb.TmdbApiService;
 import com.uwetrottmann.tmdb.entities.Response;
 
-public class AccountService extends TraktApiService {
+public class AccountService extends TmdbApiService {
     /**
      * Create a new trakt account. Username and e-mail must be unique and not
      * already exist in trakt.

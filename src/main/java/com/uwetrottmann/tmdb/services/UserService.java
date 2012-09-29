@@ -3,7 +3,7 @@ package com.uwetrottmann.tmdb.services;
 
 import com.google.gson.reflect.TypeToken;
 import com.uwetrottmann.tmdb.TmdbApiBuilder;
-import com.uwetrottmann.tmdb.TraktApiService;
+import com.uwetrottmann.tmdb.TmdbApiService;
 import com.uwetrottmann.tmdb.entities.ActivityItem;
 import com.uwetrottmann.tmdb.entities.ActivityItemBase;
 import com.uwetrottmann.tmdb.entities.CalendarDate;
@@ -15,7 +15,7 @@ import com.uwetrottmann.tmdb.enumerations.ExtendedParam;
 import java.util.Date;
 import java.util.List;
 
-public final class UserService extends TraktApiService {
+public final class UserService extends TmdbApiService {
     /**
      * Returns a users shows airing during the time period specified. Protected
      * users won't return any data unless you are friends.

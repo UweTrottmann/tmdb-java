@@ -3,7 +3,7 @@ package com.uwetrottmann.tmdb.services;
 
 import com.google.gson.reflect.TypeToken;
 import com.uwetrottmann.tmdb.TmdbApiBuilder;
-import com.uwetrottmann.tmdb.TraktApiService;
+import com.uwetrottmann.tmdb.TmdbApiService;
 import com.uwetrottmann.tmdb.entities.Movie;
 import com.uwetrottmann.tmdb.entities.Person;
 import com.uwetrottmann.tmdb.entities.TvEntity;
@@ -12,7 +12,7 @@ import com.uwetrottmann.tmdb.entities.UserProfile;
 
 import java.util.List;
 
-public class SearchService extends TraktApiService {
+public class SearchService extends TmdbApiService {
     /**
      * Search for TV show episodes.
      * 

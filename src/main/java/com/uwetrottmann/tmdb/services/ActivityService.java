@@ -3,14 +3,14 @@ package com.uwetrottmann.tmdb.services;
 
 import com.google.gson.reflect.TypeToken;
 import com.uwetrottmann.tmdb.TmdbApiBuilder;
-import com.uwetrottmann.tmdb.TraktApiService;
+import com.uwetrottmann.tmdb.TmdbApiService;
 import com.uwetrottmann.tmdb.entities.Activity;
 import com.uwetrottmann.tmdb.enumerations.ActivityAction;
 import com.uwetrottmann.tmdb.enumerations.ActivityType;
 
 import java.util.Date;
 
-public class ActivityService extends TraktApiService {
+public class ActivityService extends TmdbApiService {
     /**
      * Get a list of all public activity for the entire Trakt community. The
      * most recent 100 activities are returned for all types and actions. You

@@ -3,10 +3,10 @@ package com.uwetrottmann.tmdb.services;
 
 import com.google.gson.reflect.TypeToken;
 import com.uwetrottmann.tmdb.TmdbApiBuilder;
-import com.uwetrottmann.tmdb.TraktApiService;
+import com.uwetrottmann.tmdb.TmdbApiService;
 import com.uwetrottmann.tmdb.entities.Response;
 
-public class ShoutService extends TraktApiService {
+public class ShoutService extends TmdbApiService {
     /**
      * Add a shout to an episode on trakt.
      * 

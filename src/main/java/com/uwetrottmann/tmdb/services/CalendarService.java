@@ -3,13 +3,13 @@ package com.uwetrottmann.tmdb.services;
 
 import com.google.gson.reflect.TypeToken;
 import com.uwetrottmann.tmdb.TmdbApiBuilder;
-import com.uwetrottmann.tmdb.TraktApiService;
+import com.uwetrottmann.tmdb.TmdbApiService;
 import com.uwetrottmann.tmdb.entities.CalendarDate;
 
 import java.util.Date;
 import java.util.List;
 
-public class CalendarService extends TraktApiService {
+public class CalendarService extends TmdbApiService {
     /**
      * Returns all shows premiering during the time period specified.
      * 

@@ -3,7 +3,7 @@ package com.uwetrottmann.tmdb.services;
 
 import com.google.gson.reflect.TypeToken;
 import com.uwetrottmann.tmdb.TmdbApiBuilder;
-import com.uwetrottmann.tmdb.TraktApiService;
+import com.uwetrottmann.tmdb.TmdbApiService;
 import com.uwetrottmann.tmdb.entities.DismissResponse;
 import com.uwetrottmann.tmdb.entities.Genre;
 import com.uwetrottmann.tmdb.entities.Movie;
@@ -11,7 +11,7 @@ import com.uwetrottmann.tmdb.entities.TvShow;
 
 import java.util.List;
 
-public class RecommendationsService extends TraktApiService {
+public class RecommendationsService extends TmdbApiService {
     /**
      * Get a list of movie recommendations created from your watching history
      * and your friends. Results returned with the top recommendation first.

@@ -94,7 +94,7 @@ public abstract class TmdbApiBuilder<T> extends ApiBuilder {
     }
 
     /** Service instance. */
-    private final TraktApiService service;
+    private final TmdbApiService service;
 
     /** Type token of return type. */
     private final TypeToken<T> token;
@@ -112,7 +112,7 @@ public abstract class TmdbApiBuilder<T> extends ApiBuilder {
      * @param token Return type token.
      * @param methodUri URI method format string.
      */
-    public TmdbApiBuilder(TraktApiService service, TypeToken<T> token, String methodUri) {
+    public TmdbApiBuilder(TmdbApiService service, TypeToken<T> token, String methodUri) {
         this(service, token, methodUri, HttpMethod.Get);
     }
 
@@ -124,7 +124,7 @@ public abstract class TmdbApiBuilder<T> extends ApiBuilder {
      * @param urlFormat URL format string.
      * @param method HTTP method.
      */
-    public TmdbApiBuilder(TraktApiService service, TypeToken<T> token, String urlFormat,
+    public TmdbApiBuilder(TmdbApiService service, TypeToken<T> token, String urlFormat,
             HttpMethod method) {
         super(BASE_URL + urlFormat);
 

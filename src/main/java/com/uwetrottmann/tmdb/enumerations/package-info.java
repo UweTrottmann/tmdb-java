@@ -9,7 +9,7 @@
  *
  * <p>Deserialization of an enumerable value requires registration with the
  * GSON builder in the
- * {@link com.uwetrottmann.tmdb.TraktApiService#getGsonBuilder()} method.
+ * {@link com.uwetrottmann.tmdb.TmdbApiService#getGsonBuilder()} method.
  * An appropriate method of deserialization should be handled by a static
  * method defined within the type, by convention,
  * <code>fromString(String)</code>.</p>

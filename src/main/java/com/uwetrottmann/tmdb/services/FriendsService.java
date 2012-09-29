@@ -3,13 +3,13 @@ package com.uwetrottmann.tmdb.services;
 
 import com.google.gson.reflect.TypeToken;
 import com.uwetrottmann.tmdb.TmdbApiBuilder;
-import com.uwetrottmann.tmdb.TraktApiService;
+import com.uwetrottmann.tmdb.TmdbApiService;
 import com.uwetrottmann.tmdb.entities.Response;
 import com.uwetrottmann.tmdb.entities.UserProfile;
 
 import java.util.List;
 
-public class FriendsService extends TraktApiService {
+public class FriendsService extends TmdbApiService {
     /**
      * Add a new friend. This will put the request in pending status until the
      * potential friend accepts.

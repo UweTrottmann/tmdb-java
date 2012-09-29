@@ -5,7 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.uwetrottmann.tmdb.TmdbApiBuilder;
-import com.uwetrottmann.tmdb.TraktApiService;
+import com.uwetrottmann.tmdb.TmdbApiService;
 import com.uwetrottmann.tmdb.entities.Response;
 import com.uwetrottmann.tmdb.entities.Shout;
 import com.uwetrottmann.tmdb.entities.TvEntity;
@@ -16,7 +16,7 @@ import com.uwetrottmann.tmdb.entities.UserProfile;
 
 import java.util.List;
 
-public class ShowService extends TraktApiService {
+public class ShowService extends TmdbApiService {
     /**
      * <p>
      * Notify Trakt that a user has stopped watching a show.

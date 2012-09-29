@@ -35,8 +35,6 @@ public class ServiceManager {
     private String mediaCenterVersion;
     /** Media center build date debug string. */
     private String mediaCenterDate;
-    /** Whether or not to use SSL API endpoint. */
-    private boolean useSsl;
 
     /** Create a new manager instance. */
     public ServiceManager() {
@@ -122,7 +120,7 @@ public class ServiceManager {
      * 
      * @param service Service to set up.
      */
-    private void setupService(TraktApiService service) {
+    private void setupService(TmdbApiService service) {
         if (this.apiKeyValue != null) {
             service.setApiKey(this.apiKeyValue);
         }
@@ -144,7 +142,6 @@ public class ServiceManager {
         if (this.mediaCenterDate != null) {
             service.setMediaCenterDate(this.mediaCenterDate);
         }
-        service.setUseSsl(this.useSsl);
     }
 
     public AccountService accountService() {
