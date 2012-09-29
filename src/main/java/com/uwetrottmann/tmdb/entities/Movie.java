@@ -19,6 +19,8 @@ package com.uwetrottmann.tmdb.entities;
 
 import com.uwetrottmann.tmdb.Entity;
 
+import java.util.Date;
+
 public class Movie implements Entity {
     private static final long serialVersionUID = 4604935751051141456L;
 
@@ -37,7 +39,7 @@ public class Movie implements Entity {
     public String poster_path;
     // TODO production_companies
     // TODO production_countries
-    public String release_date;
+    public Date release_date;
     public Integer revenue;
     public Integer runtime;
     // TODO spoken_languages
