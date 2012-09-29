@@ -20,11 +20,22 @@ package com.uwetrottmann.tmdb.services;
 import com.google.gson.reflect.TypeToken;
 import com.uwetrottmann.tmdb.TmdbApiBuilder;
 import com.uwetrottmann.tmdb.TmdbApiService;
+import com.uwetrottmann.tmdb.entities.Casts;
 import com.uwetrottmann.tmdb.entities.Movie;
 import com.uwetrottmann.tmdb.entities.ResultsPage;
 import com.uwetrottmann.tmdb.entities.Trailers;
 
 public class MoviesService extends TmdbApiService {
+
+    /**
+     * Get the cast information for a specific movie id.
+     * 
+     * @param id TMDb id.
+     * @return Builder instance.
+     */
+    public CastsBuilder casts(Integer id) {
+        return new CastsBuilder(this, id);
+    }
 
     /**
      * Get the basic movie information for a specific movie id.
@@ -93,6 +104,17 @@ public class MoviesService extends TmdbApiService {
      */
     public UpcomingBuilder upcoming() {
         return new UpcomingBuilder(this);
+    }
+
+    public static final class CastsBuilder extends TmdbApiBuilder<Casts> {
+        private static final String URI = "/movie/" + FIELD_ID + "/casts" + FIELD_API_KEY;
+
+        private CastsBuilder(MoviesService service, Integer id) {
+            super(service, new TypeToken<Casts>() {
+            }, URI);
+
+            field(FIELD_ID, id);
+        }
     }
 
     public static final class SummaryBuilder extends TmdbApiBuilder<Movie> {
