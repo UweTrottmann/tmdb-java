@@ -26,7 +26,6 @@ import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.jakewharton.apibuilder.ApiException;
 import com.jakewharton.apibuilder.ApiService;
-import com.uwetrottmann.tmdb.util.Base64;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
