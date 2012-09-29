@@ -37,11 +37,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Trakt-specific API service extension which facilitates provides helper
- * methods for performing remote method calls as well as deserializing the
- * corresponding JSON responses.
- * 
- * @author Jake Wharton <jakewharton@gmail.com>
+ * TMDb-specific API service extension which facilitates provides helper methods
+ * for performing remote method calls as well as deserializing the corresponding
+ * JSON responses.
  */
 public abstract class TmdbApiService extends ApiService {
     /** Default connection timeout (in milliseconds). */
@@ -108,7 +106,7 @@ public abstract class TmdbApiService extends ApiService {
     }
 
     /**
-     * Set API key to use for client authentication by Trakt.
+     * Set API key to use for client authentication.
      * 
      * @param value Value.
      */
