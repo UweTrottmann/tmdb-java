@@ -37,17 +37,6 @@ public class MoviesService extends TmdbApiService {
     }
 
     /**
-     * Get the basic movie information for a specific movie id.
-     * 
-     * @param id TMDb id.
-     * @param langCode ISO 639-1 code.
-     * @return Builder instance.
-     */
-    public SummaryBuilder summary(Integer id, String langCode) {
-        return new SummaryBuilder(this, id).language(langCode);
-    }
-
-    /**
      * Get the trailers for a specific movie id.
      * 
      * @param id TMDb id.
@@ -55,6 +44,16 @@ public class MoviesService extends TmdbApiService {
      */
     public TrailerBuilder trailers(Integer id) {
         return new TrailerBuilder(this, id);
+    }
+
+    /**
+     * Get the list of movies playing in theaters. This list refreshes every
+     * day. The maximum number of items this list will include is 100.
+     * 
+     * @return Builder instance.
+     */
+    public NowPlayingBuilder nowPlaying() {
+        return new NowPlayingBuilder(this);
     }
 
     /**
@@ -68,14 +67,13 @@ public class MoviesService extends TmdbApiService {
     }
 
     /**
-     * Get the list of popular movies on The Movie Database. This list refreshes
-     * every day.
+     * Get the list of upcoming movies. This list refreshes every day. The
+     * maximum number of items this list will include is 100.
      * 
-     * @param langCode ISO 639-1 code.
      * @return Builder instance.
      */
-    public PopularBuilder popular(String langCode) {
-        return new PopularBuilder(this).language(langCode);
+    public UpcomingBuilder upcoming() {
+        return new UpcomingBuilder(this);
     }
 
     public static final class SummaryBuilder extends TmdbApiBuilder<Movie> {
@@ -111,6 +109,37 @@ public class MoviesService extends TmdbApiService {
         }
     }
 
+    public static final class NowPlayingBuilder extends TmdbApiBuilder<ResultsPage> {
+        private static final String URI = "/movie/now_playing" + FIELD_API_KEY + FIELD_PAGE
+                + FIELD_LANGUAGE;
+
+        private NowPlayingBuilder(MoviesService service) {
+            super(service, new TypeToken<ResultsPage>() {
+            }, URI);
+        }
+
+        /**
+         * Set the language (optional). Attention: will not default to English,
+         * but instead will return empty field.
+         * 
+         * @param languageCode ISO 639-1 code.
+         */
+        public NowPlayingBuilder language(String languageCode) {
+            parameter(FIELD_LANGUAGE, languageCode);
+            return this;
+        }
+
+        /**
+         * Set the page to return (optional). Values start at 1.
+         * 
+         * @param page Index of the page.
+         */
+        public NowPlayingBuilder page(int page) {
+            parameter(FIELD_PAGE, page);
+            return this;
+        }
+    }
+
     public static final class PopularBuilder extends TmdbApiBuilder<ResultsPage> {
         private static final String URI = "/movie/popular" + FIELD_API_KEY + FIELD_PAGE
                 + FIELD_LANGUAGE;
@@ -120,20 +149,55 @@ public class MoviesService extends TmdbApiService {
             }, URI);
         }
 
-        private PopularBuilder(MoviesService service, int page) {
-            this(service);
-
-            parameter(FIELD_PAGE, page);
-        }
-
         /**
-         * Set the language. Attention: will not default to English, but instead
-         * will return empty field.
+         * Set the language (optional). Attention: will not default to English,
+         * but instead will return empty field.
          * 
          * @param languageCode ISO 639-1 code.
          */
         public PopularBuilder language(String languageCode) {
             parameter(FIELD_LANGUAGE, languageCode);
+            return this;
+        }
+
+        /**
+         * Set the page to return (optional). Values start at 1.
+         * 
+         * @param page Index of the page.
+         */
+        public PopularBuilder page(int page) {
+            parameter(FIELD_PAGE, page);
+            return this;
+        }
+    }
+
+    public static final class UpcomingBuilder extends TmdbApiBuilder<ResultsPage> {
+        private static final String URI = "/movie/upcoming" + FIELD_API_KEY + FIELD_PAGE
+                + FIELD_LANGUAGE;
+
+        private UpcomingBuilder(MoviesService service) {
+            super(service, new TypeToken<ResultsPage>() {
+            }, URI);
+        }
+
+        /**
+         * Set the language (optional). Attention: will not default to English,
+         * but instead will return empty field.
+         * 
+         * @param languageCode ISO 639-1 code.
+         */
+        public UpcomingBuilder language(String languageCode) {
+            parameter(FIELD_LANGUAGE, languageCode);
+            return this;
+        }
+
+        /**
+         * Set the page to return (optional). Values start at 1.
+         * 
+         * @param page Index of the page.
+         */
+        public UpcomingBuilder page(int page) {
+            parameter(FIELD_PAGE, page);
             return this;
         }
     }
