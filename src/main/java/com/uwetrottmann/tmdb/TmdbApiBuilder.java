@@ -70,12 +70,6 @@ public abstract class TmdbApiBuilder<T> extends ApiBuilder {
     protected static final String FIELD_TIMESTAMP = API_URL_DELIMITER_START + "timestamp"
             + API_URL_DELIMITER_END;
 
-    private static final String POST_PLUGIN_VERSION = "plugin_version";
-    private static final String POST_MEDIA_CENTER_VERSION = "media_center_version";
-    private static final String POST_MEDIA_CENTER_DATE = "media_center_date";
-    private static final String POST_APP_DATE = "app_date";
-    private static final String POST_APP_VERSION = "app_version";
-
     /** Format for encoding a {@link java.util.Date} in a URL. */
     private static final SimpleDateFormat URL_DATE_FORMAT = new SimpleDateFormat("yyyyMMdd");
 
@@ -179,23 +173,6 @@ public abstract class TmdbApiBuilder<T> extends ApiBuilder {
      */
     protected void postFireCallback(T result) {
         // Override me!
-    }
-
-    /**
-     * Add scrobble debug fields to the builder post body.
-     */
-    protected final void includeScrobbleDebugStrings() {
-        this.postParameter(POST_PLUGIN_VERSION, service.getPluginVersion());
-        this.postParameter(POST_MEDIA_CENTER_VERSION, service.getMediaCenterVersion());
-        this.postParameter(POST_MEDIA_CENTER_DATE, service.getMediaCenterDate());
-    }
-
-    /**
-     * MAdd check-in debug fields to the builder post body.
-     */
-    protected final void includeCheckinDebugStrings() {
-        this.postParameter(POST_APP_VERSION, service.getAppVersion());
-        this.postParameter(POST_APP_DATE, service.getAppDate());
     }
 
     /**

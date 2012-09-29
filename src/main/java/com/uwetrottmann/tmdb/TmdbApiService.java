@@ -71,21 +71,6 @@ public abstract class TmdbApiService extends ApiService {
     /** Format for decoding JSON dates in string format. */
     private static final SimpleDateFormat JSON_STRING_DATE = new SimpleDateFormat("yyy-MM-dd");
 
-    /** Default plugin version debug string. */
-    private static final String DEFAULT_PLUGIN_VERSION = Info.FULL_NAME;
-
-    /** Default media center version debug string. */
-    private static final String DEFAULT_MEDIA_CENTER_VERSION = Info.FULL_NAME;
-
-    /** Default media center build date debug string. */
-    private static final String DEFAULT_MEDIA_CENTER_DATE = Info.DATE;
-
-    /** Default application name debug string. */
-    private static final String DEFAULT_APP_DATE = Info.DATE;
-
-    /** Default application version debug string. */
-    private static final String DEFAULT_APP_VERSION = Info.FULL_NAME;
-
     /** Time zone for Trakt dates. */
     private static final TimeZone TRAKT_TIME_ZONE = TimeZone.getTimeZone("GMT-8:00");
 
@@ -95,23 +80,8 @@ public abstract class TmdbApiService extends ApiService {
     /** API key. */
     private String apiKey;
 
-    /** Plugin version debug string. */
-    private String pluginVersion;
-
-    /** Media center version debug string. */
-    private String mediaCenterVersion;
-
-    /** Media center build date debug string. */
-    private String mediaCenterDate;
-
-    /** Application date debug string. */
-    private String appDate;
-
-    /** Application version debug string. */
-    private String appVersion;
-
     /**
-     * Create a new Trakt service with our proper default values.
+     * Create a new service with our proper default values.
      */
     public TmdbApiService() {
         this.parser = new JsonParser();
@@ -119,13 +89,6 @@ public abstract class TmdbApiService extends ApiService {
         // Setup timeout defaults
         this.setConnectTimeout(DEFAULT_TIMEOUT_CONNECT);
         this.setReadTimeout(DEFAULT_TIMEOUT_READ);
-
-        // Setup debug string defaults
-        this.setPluginVersion(DEFAULT_PLUGIN_VERSION);
-        this.setMediaCenterVersion(DEFAULT_MEDIA_CENTER_VERSION);
-        this.setMediaCenterDate(DEFAULT_MEDIA_CENTER_DATE);
-        this.setAppDate(DEFAULT_APP_DATE);
-        this.setAppVersion(DEFAULT_APP_VERSION);
     }
 
     /**
@@ -187,96 +150,6 @@ public abstract class TmdbApiService extends ApiService {
      */
     public void setApiKey(String value) {
         this.apiKey = value;
-    }
-
-    /**
-     * Get the plugin version debug string used for scrobbling.
-     * 
-     * @return Value.
-     */
-    /* package */String getPluginVersion() {
-        return pluginVersion;
-    }
-
-    /**
-     * Set the plugin version debug string used for scrobbling.
-     * 
-     * @param pluginVersion Value.
-     */
-    public void setPluginVersion(String pluginVersion) {
-        this.pluginVersion = pluginVersion;
-    }
-
-    /**
-     * Get the media center version debug string used for scrobbling.
-     * 
-     * @return Value.
-     */
-    /* package */String getMediaCenterVersion() {
-        return mediaCenterVersion;
-    }
-
-    /**
-     * Set the media center version debug string used for scrobbling.
-     * 
-     * @param mediaCenterVersion Value.
-     */
-    public void setMediaCenterVersion(String mediaCenterVersion) {
-        this.mediaCenterVersion = mediaCenterVersion;
-    }
-
-    /**
-     * Get the media center build date debug string used for scrobbling.
-     * 
-     * @return Value.
-     */
-    /* package */String getMediaCenterDate() {
-        return mediaCenterDate;
-    }
-
-    /**
-     * Set the media center build date debug string used for scrobbling.
-     * 
-     * @param mediaCenterDate Value.
-     */
-    public void setMediaCenterDate(String mediaCenterDate) {
-        this.mediaCenterDate = mediaCenterDate;
-    }
-
-    /**
-     * Get the application date debug string used for checking in.
-     * 
-     * @return Value.
-     */
-    /* package */String getAppDate() {
-        return appDate;
-    }
-
-    /**
-     * Set the application date debug string used for checking in.
-     * 
-     * @param appDate Value.
-     */
-    public void setAppDate(String appDate) {
-        this.appDate = appDate;
-    }
-
-    /**
-     * Get the application version debug string used for checking in.
-     * 
-     * @return Value.
-     */
-    /* package */String getAppVersion() {
-        return appVersion;
-    }
-
-    /**
-     * Set the application version debug string used for checking in.
-     * 
-     * @param appVersion Value.
-     */
-    public void setAppVersion(String appVersion) {
-        this.appVersion = appVersion;
     }
 
     /**
