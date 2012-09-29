@@ -39,7 +39,7 @@ import java.util.List;
  */
 public abstract class TmdbApiBuilder<T> extends ApiBuilder {
     /** API key field name. */
-    protected static final String FIELD_API_KEY = API_URL_DELIMITER_START + "apikey"
+    protected static final String FIELD_API_KEY = API_URL_DELIMITER_START + "api_key"
             + API_URL_DELIMITER_END;
 
     protected static final String FIELD_ID = API_URL_DELIMITER_START + "id" + API_URL_DELIMITER_END;
@@ -128,7 +128,7 @@ public abstract class TmdbApiBuilder<T> extends ApiBuilder {
         this.method = method;
         this.postBody = new JsonObject();
 
-        this.field(FIELD_API_KEY, this.service.getApiKey());
+        this.parameter(FIELD_API_KEY, this.service.getApiKey());
     }
 
     /**

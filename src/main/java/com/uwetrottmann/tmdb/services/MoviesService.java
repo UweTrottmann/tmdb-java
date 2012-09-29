@@ -34,13 +34,13 @@ public class MoviesService extends TmdbApiService {
     }
 
     public static final class SummaryBuilder extends TmdbApiBuilder<Movie> {
-        private static final String URI = "/movie/" + FIELD_ID;
+        private static final String URI = "/movie/" + FIELD_ID + FIELD_API_KEY;
 
         private SummaryBuilder(MoviesService service, Integer id) {
             super(service, new TypeToken<Movie>() {
             }, URI);
 
-            this.field(FIELD_QUERY, id);
+            field(FIELD_QUERY, id);
         }
     }
 }
