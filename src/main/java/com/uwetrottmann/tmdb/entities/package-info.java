@@ -3,6 +3,7 @@
  * returned by remote API calls.</p>
  *
  * <p>All classes must implement the
- * {@link com.uwetrottmann.tmdb.TraktEntity} interface.</p>
+ * {@link com.uwetrottmann.tmdb.Entity} interface.</p>
  */
+
 package com.uwetrottmann.tmdb.entities;

@@ -1,71 +1,32 @@
+
 package com.uwetrottmann.tmdb.entities;
 
-import java.util.Date;
-import com.google.gson.annotations.SerializedName;
-import com.uwetrottmann.tmdb.TraktEntity;
+import com.uwetrottmann.tmdb.Entity;
 
-public class Movie extends MediaBase implements TraktEntity {
-    private static final long serialVersionUID = -1543214252495012419L;
+public class Movie implements Entity {
+    private static final long serialVersionUID = 4604935751051141456L;
 
-    @SerializedName("tmdb_id") public String tmdbId;
-    public Integer plays;
-    @SerializedName("in_collection") public Boolean inCollection;
-    public Date released;
-    public String trailer;
-    public Integer runtime;
-    public String tagline;
+    public Integer id;
+
+    public Boolean adult;
+    public String backdrop_path;
+    // TODO belongs_to_collection
+    public Integer budget;
+    // TODO genres
+    public String homepage;
+    public String imdb_id;
+    public String original_title;
     public String overview;
-    public String certification; //TODO make enum
-    public Boolean watched;
-
-    /** @deprecated Use {@link #tmdbId} */
-    @Deprecated
-    public String getTmdbId() {
-        return this.tmdbId;
-    }
-    /** @deprecated Use {@link #plays} */
-    @Deprecated
-    public Integer getPlays() {
-        return this.plays;
-    }
-    /** @deprecated Use {@link #inCollection} */
-    @Deprecated
-    public Boolean getInCollection() {
-        return this.inCollection;
-    }
-    /** @deprecated Use {@link #released} */
-    @Deprecated
-    public Date getReleased() {
-        return this.released;
-    }
-    /** @deprecated Use {@link #trailer} */
-    @Deprecated
-    public String getTrailer() {
-        return this.trailer;
-    }
-    /** @deprecated Use {@link #runtime} */
-    @Deprecated
-    public Integer getRuntime() {
-        return this.runtime;
-    }
-    /** @deprecated Use {@link #tagline} */
-    @Deprecated
-    public String getTagline() {
-        return this.tagline;
-    }
-    /** @deprecated Use {@link #overview} */
-    @Deprecated
-    public String getOverview() {
-        return this.overview;
-    }
-    /** @deprecated Use {@link #certification} */
-    @Deprecated
-    public String getCertification() {
-        return this.certification;
-    }
-    /** @deprecated Use {@link #watched} */
-    @Deprecated
-    public Boolean getWatched() {
-        return this.watched;
-    }
+    public Double popularity;
+    public String poster_path;
+    // TODO production_companies
+    // TODO production_countries
+    public String release_date;
+    public Integer revenue;
+    public Integer runtime;
+    // TODO spoken_languages
+    public String tagline;
+    public String title;
+    public Double vote_average;
+    public Integer vote_count;
 }

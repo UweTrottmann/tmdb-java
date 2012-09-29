@@ -3,4 +3,5 @@
  * remote API calls and the resulting JSON to POJOs specifically for the
  * Trakt RESTful API.
  */
+
 package com.uwetrottmann.tmdb;

@@ -1,13 +1,14 @@
+
 package com.uwetrottmann.tmdb.entities;
+
+import com.uwetrottmann.tmdb.Entity;
 
 import java.util.List;
 
-import com.uwetrottmann.tmdb.TraktEntity;
-
-public class TvShowSeason implements TraktEntity {
+public class TvShowSeason implements Entity {
     private static final long serialVersionUID = -1283154821327471366L;
 
-    public static class Episodes implements TraktEntity {
+    public static class Episodes implements Entity {
         private static final long serialVersionUID = -8143500365188820979L;
 
         public Integer count;
@@ -19,11 +20,13 @@ public class TvShowSeason implements TraktEntity {
         public Integer getCount() {
             return this.count;
         }
+
         /** @deprecated Use {@link #numbers} */
         @Deprecated
         public List<Integer> getNumbers() {
             return this.numbers;
         }
+
         /** @deprecated Use {@link #episodes} */
         @Deprecated
         public List<TvShowEpisode> getEpisodes() {
@@ -41,16 +44,19 @@ public class TvShowSeason implements TraktEntity {
     public Integer getSeason() {
         return this.season;
     }
+
     /** @deprecated Use {@link #episodes} */
     @Deprecated
     public Episodes getEpisodes() {
         return this.episodes;
     }
+
     /** @deprecated Use {@link #url} */
     @Deprecated
     public String getUrl() {
         return this.url;
     }
+
     /** @deprecated Use {@link #images} */
     @Deprecated
     public Images getImages() {

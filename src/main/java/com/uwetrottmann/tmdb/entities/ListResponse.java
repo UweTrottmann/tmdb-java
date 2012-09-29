@@ -1,3 +1,4 @@
+
 package com.uwetrottmann.tmdb.entities;
 
 import com.uwetrottmann.tmdb.enumerations.ListPrivacy;
@@ -14,11 +15,13 @@ public class ListResponse extends Response {
     public String getName() {
         return this.name;
     }
+
     /** @deprecated Use {@link #slug} */
     @Deprecated
     public String getSlug() {
         return this.slug;
     }
+
     /** @deprecated Use {@link #privacy} */
     @Deprecated
     public ListPrivacy getPrivacy() {

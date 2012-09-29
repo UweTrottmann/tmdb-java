@@ -1,9 +1,10 @@
+
 package com.uwetrottmann.tmdb.entities;
 
 /**
- * Represents a Trakt activity item. See
- * <a href="http://trakt.tv/api-docs/activity-community"> the documentation</a>
- * for a list of {@link #type}s and {@link #action}s and which properties they
+ * Represents a Trakt activity item. See <a
+ * href="http://trakt.tv/api-docs/activity-community"> the documentation</a> for
+ * a list of {@link #type}s and {@link #action}s and which properties they
  * include.
  */
 public class ActivityItem extends ActivityItemBase {

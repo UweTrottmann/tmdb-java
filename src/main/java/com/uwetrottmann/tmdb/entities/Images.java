@@ -1,8 +1,9 @@
+
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.TraktEntity;
+import com.uwetrottmann.tmdb.Entity;
 
-public class Images implements TraktEntity {
+public class Images implements Entity {
     private static final long serialVersionUID = -4374523954772900340L;
 
     public String poster;
@@ -15,16 +16,19 @@ public class Images implements TraktEntity {
     public String getPoster() {
         return this.poster;
     }
+
     /** @deprecated Use {@link #fanart} */
     @Deprecated
     public String getFanart() {
         return this.fanart;
     }
+
     /** @deprecated Use {@link #headshot} */
     @Deprecated
     public String getHeadshot() {
         return this.headshot;
     }
+
     /** @deprecated Use {@link #screen} */
     @Deprecated
     public String getScreen() {

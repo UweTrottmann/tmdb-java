@@ -1,3 +1,4 @@
+
 package com.uwetrottmann.tmdb;
 
 import com.uwetrottmann.tmdb.services.AccountService;
@@ -6,7 +7,7 @@ import com.uwetrottmann.tmdb.services.CalendarService;
 import com.uwetrottmann.tmdb.services.FriendsService;
 import com.uwetrottmann.tmdb.services.GenreService;
 import com.uwetrottmann.tmdb.services.ListService;
-import com.uwetrottmann.tmdb.services.MovieService;
+import com.uwetrottmann.tmdb.services.MoviesService;
 import com.uwetrottmann.tmdb.services.RateService;
 import com.uwetrottmann.tmdb.services.RecommendationsService;
 import com.uwetrottmann.tmdb.services.SearchService;
@@ -37,14 +38,13 @@ public class ServiceManager {
     /** Whether or not to use SSL API endpoint. */
     private boolean useSsl;
 
-
     /** Create a new manager instance. */
-    public ServiceManager() {}
-
+    public ServiceManager() {
+    }
 
     /**
      * Set default authentication credentials.
-     *
+     * 
      * @param username Username.
      * @param password_sha SHA1 of user password.
      * @return Current instance for builder pattern.
@@ -57,7 +57,7 @@ public class ServiceManager {
 
     /**
      * Set default API key.
-     *
+     * 
      * @param value API key value.
      * @return Current instance for builder pattern.
      */
@@ -68,7 +68,7 @@ public class ServiceManager {
 
     /**
      * Set default connection timeout.
-     *
+     * 
      * @param connectionTimeout Timeout (in milliseconds).
      * @return Current instance for builder pattern.
      */
@@ -79,7 +79,7 @@ public class ServiceManager {
 
     /**
      * Set default read timeout.
-     *
+     * 
      * @param readTimeout Timeout (in milliseconds).
      * @return Current instance for builder pattern.
      */
@@ -90,15 +90,16 @@ public class ServiceManager {
 
     /**
      * Set default debug information when using a developer method.
-     *
+     * 
      * @param pluginVersion Internal version of your plugin. Make sure to
-     * increment this for each plugin update.
+     *            increment this for each plugin update.
      * @param mediaCenterVersion Version number of the media center, be as
-     * specific as you can including nightly build number, etc.
+     *            specific as you can including nightly build number, etc.
      * @param mediaCenterDate Build date of the media center.
      * @return Current instance for builder pattern.
      */
-    public ServiceManager setDebugInfo(String pluginVersion, String mediaCenterVersion, String mediaCenterDate) {
+    public ServiceManager setDebugInfo(String pluginVersion, String mediaCenterVersion,
+            String mediaCenterDate) {
         this.pluginVersion = pluginVersion;
         this.mediaCenterVersion = mediaCenterVersion;
         this.mediaCenterDate = mediaCenterDate;
@@ -107,7 +108,7 @@ public class ServiceManager {
 
     /**
      * Set whether or not to use SSL API endpoint.
-     *
+     * 
      * @param useSsl Value.
      * @return Current instance for builder pattern.
      */
@@ -118,7 +119,7 @@ public class ServiceManager {
 
     /**
      * Set up a new service with the defaults.
-     *
+     * 
      * @param service Service to set up.
      */
     private void setupService(TraktApiService service) {
@@ -182,8 +183,8 @@ public class ServiceManager {
         return service;
     }
 
-    public MovieService movieService() {
-        MovieService service = ServiceManager.createMovieService();
+    public MoviesService movieService() {
+        MoviesService service = ServiceManager.createMovieService();
         this.setupService(service);
         return service;
     }
@@ -248,8 +249,8 @@ public class ServiceManager {
         return new ListService();
     }
 
-    public static final MovieService createMovieService() {
-        return new MovieService();
+    public static final MoviesService createMovieService() {
+        return new MoviesService();
     }
 
     public static final RateService createRateService() {

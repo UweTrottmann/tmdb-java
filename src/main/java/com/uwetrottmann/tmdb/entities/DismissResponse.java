@@ -1,3 +1,4 @@
+
 package com.uwetrottmann.tmdb.entities;
 
 public class DismissResponse extends Response {
@@ -11,6 +12,7 @@ public class DismissResponse extends Response {
     public Movie getMovie() {
         return this.movie;
     }
+
     /** @deprecated Use {@link #show} */
     @Deprecated
     public TvShow getTvShow() {

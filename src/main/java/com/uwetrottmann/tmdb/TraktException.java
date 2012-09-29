@@ -1,3 +1,4 @@
+
 package com.uwetrottmann.tmdb;
 
 import com.google.gson.JsonObject;
@@ -14,12 +15,14 @@ public final class TraktException extends RuntimeException {
     public TraktException(String url, ApiException cause) {
         this(url, null, cause);
     }
+
     public TraktException(String url, JsonObject postBody, ApiException cause) {
         super(cause);
         this.url = url;
         this.postBody = postBody;
         this.response = null;
     }
+
     public TraktException(String url, JsonObject postBody, ApiException cause, Response response) {
         super(response.error, cause);
         this.url = url;
@@ -30,9 +33,11 @@ public final class TraktException extends RuntimeException {
     public String getUrl() {
         return this.url;
     }
+
     public JsonObject getPostBody() {
         return this.postBody;
     }
+
     public Response getResponse() {
         return this.response;
     }

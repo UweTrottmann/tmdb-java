@@ -1,10 +1,12 @@
+
 package com.uwetrottmann.tmdb.services;
 
-import java.util.List;
 import com.google.gson.reflect.TypeToken;
-import com.uwetrottmann.tmdb.TraktApiBuilder;
+import com.uwetrottmann.tmdb.TmdbApiBuilder;
 import com.uwetrottmann.tmdb.TraktApiService;
 import com.uwetrottmann.tmdb.entities.Genre;
+
+import java.util.List;
 
 public class GenreService extends TraktApiService {
     public MoviesBuilder movies() {
@@ -15,18 +17,21 @@ public class GenreService extends TraktApiService {
         return new ShowsBuilder(this);
     }
 
-    public static final class MoviesBuilder extends TraktApiBuilder<List<Genre>> {
+    public static final class MoviesBuilder extends TmdbApiBuilder<List<Genre>> {
         private static final String URI = "/genres/movies.json/" + FIELD_API_KEY;
 
         private MoviesBuilder(GenreService service) {
-            super(service, new TypeToken<List<Genre>>() {}, URI);
+            super(service, new TypeToken<List<Genre>>() {
+            }, URI);
         }
     }
-    public static final class ShowsBuilder extends TraktApiBuilder<List<Genre>> {
+
+    public static final class ShowsBuilder extends TmdbApiBuilder<List<Genre>> {
         private static final String URI = "/genres/shows.json/" + FIELD_API_KEY;
 
         private ShowsBuilder(GenreService service) {
-            super(service, new TypeToken<List<Genre>>() {}, URI);
+            super(service, new TypeToken<List<Genre>>() {
+            }, URI);
         }
     }
 }

@@ -1,23 +1,28 @@
+
 package com.uwetrottmann.tmdb.services;
 
-import java.util.Date;
-import java.util.List;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import com.uwetrottmann.tmdb.TraktApiBuilder;
+import com.uwetrottmann.tmdb.TmdbApiBuilder;
 import com.uwetrottmann.tmdb.TraktApiService;
 import com.uwetrottmann.tmdb.entities.Movie;
 import com.uwetrottmann.tmdb.entities.Response;
 import com.uwetrottmann.tmdb.entities.Shout;
 import com.uwetrottmann.tmdb.entities.UserProfile;
 
-public class MovieService extends TraktApiService {
+import java.util.Date;
+import java.util.List;
+
+public class MoviesService extends TraktApiService {
     /**
-     * <p>Notify Trakt that a user has stopped watching a movie.</p>
-     *
-     * <p><em>Warning</em>: This method requires a developer API key.</p>
-     *
+     * <p>
+     * Notify Trakt that a user has stopped watching a movie.
+     * </p>
+     * <p>
+     * <em>Warning</em>: This method requires a developer API key.
+     * </p>
+     * 
      * @return Builder instance.
      */
     public CancelWatchingBuilder cancelWatching() {
@@ -25,12 +30,15 @@ public class MovieService extends TraktApiService {
     }
 
     /**
-     * <p>Notify Trakt that a user has finsihed watching a movie. This commits
-     * the movie to the users profile. You should use movie/watching prior to
-     * calling this method.</p>
-     *
-     * <p><em>Warning</em>: This method requires a developer API key.</p>
-     *
+     * <p>
+     * Notify Trakt that a user has finsihed watching a movie. This commits the
+     * movie to the users profile. You should use movie/watching prior to
+     * calling this method.
+     * </p>
+     * <p>
+     * <em>Warning</em>: This method requires a developer API key.
+     * </p>
+     * 
      * @param imdbId IMDB ID for the movie.
      * @return Builder instance.
      */
@@ -39,12 +47,15 @@ public class MovieService extends TraktApiService {
     }
 
     /**
-     * <p>Notify Trakt that a user has finsihed watching a movie. This commits
-     * the movie to the users profile. You should use movie/watching prior to
-     * calling this method.</p>
-     *
-     * <p><em>Warning</em>: This method requires a developer API key.</p>
-     *
+     * <p>
+     * Notify Trakt that a user has finsihed watching a movie. This commits the
+     * movie to the users profile. You should use movie/watching prior to
+     * calling this method.
+     * </p>
+     * <p>
+     * <em>Warning</em>: This method requires a developer API key.
+     * </p>
+     * 
      * @param tmdbId TMDB (themoviedb.org) ID for the movie.
      * @return Builder instance.
      */
@@ -53,12 +64,15 @@ public class MovieService extends TraktApiService {
     }
 
     /**
-     * <p>Notify Trakt that a user has finsihed watching a movie. This commits
-     * the movie to the users profile. You should use movie/watching prior to
-     * calling this method.</p>
-     *
-     * <p><em>Warning</em>: This method requires a developer API key.</p>
-     *
+     * <p>
+     * Notify Trakt that a user has finsihed watching a movie. This commits the
+     * movie to the users profile. You should use movie/watching prior to
+     * calling this method.
+     * </p>
+     * <p>
+     * <em>Warning</em>: This method requires a developer API key.
+     * </p>
+     * 
      * @param title Movie title.
      * @param year Movie year.
      * @return Builder instance.
@@ -69,7 +83,7 @@ public class MovieService extends TraktApiService {
 
     /**
      * Add movies watched outside of Trakt to your library.
-     *
+     * 
      * @return Builder instance.
      */
     public SeenBuilder seen() {
@@ -78,7 +92,7 @@ public class MovieService extends TraktApiService {
 
     /**
      * Add unwatched movies to your library.
-     *
+     * 
      * @return Builder instance.
      */
     public LibraryBuilder library() {
@@ -86,20 +100,17 @@ public class MovieService extends TraktApiService {
     }
 
     /**
-     * Returns information for a movie including ratings and top watchers.
-     *
-     * @param query Either the slug (i.e. the-social-network-2010), IMDB ID, or
-     * TMDB ID. You can get a movie's slug by browsing the website and looking
-     * at the URL when on a movie summary page.
+     * Get the basic movie information for a specific movie id.
+     * 
      * @return Builder instance.
      */
-    public SummaryBuilder summary(String query) {
-        return new SummaryBuilder(this, query);
+    public SummaryBuilder summary(Integer id) {
+        return new SummaryBuilder(this, id);
     }
 
     /**
      * Remove movies from your library collection.
-     *
+     * 
      * @return Builder instance.
      */
     public UnlibraryBuilder unlibrary() {
@@ -108,7 +119,7 @@ public class MovieService extends TraktApiService {
 
     /**
      * Remove movies watched outside of Trakt from your library.
-     *
+     * 
      * @return Builder instance.
      */
     public UnseenBuilder unseen() {
@@ -117,7 +128,7 @@ public class MovieService extends TraktApiService {
 
     /**
      * Remove one or more movies from your watchlist.
-     *
+     * 
      * @return Builder instance.
      */
     public UnwatchlistBuilder unwatchlist() {
@@ -126,9 +137,10 @@ public class MovieService extends TraktApiService {
 
     /**
      * Notify trakt that a user has started watching a movie.
-     *
-     * <p><em>Warning</em>: This method requires a developer API key.</p>
-     *
+     * <p>
+     * <em>Warning</em>: This method requires a developer API key.
+     * </p>
+     * 
      * @param imdbId IMDB ID for the movie.
      * @return Builder instance.
      */
@@ -138,9 +150,10 @@ public class MovieService extends TraktApiService {
 
     /**
      * Notify trakt that a user has started watching a movie.
-     *
-     * <p><em>Warning</em>: This method requires a developer API key.</p>
-     *
+     * <p>
+     * <em>Warning</em>: This method requires a developer API key.
+     * </p>
+     * 
      * @param tmdbId TMDB (themoviedb.org) ID for the movie.
      * @return Builder instance.
      */
@@ -150,7 +163,7 @@ public class MovieService extends TraktApiService {
 
     /**
      * Notify trakt that a user has started watching a movie.
-     *
+     * 
      * @param title Movie title.
      * @param year Movie year.
      * @return Builder instance.
@@ -161,10 +174,10 @@ public class MovieService extends TraktApiService {
 
     /**
      * Returns a array of all users watching a movie.
-     *
+     * 
      * @param query Either the slug (i.e. the-social-network-2010), IMDB ID, or
-     * TMDB ID. You can get a movie's slug by browsing the website and looking
-     * at the URL when on a movie summary page.
+     *            TMDB ID. You can get a movie's slug by browsing the website
+     *            and looking at the URL when on a movie summary page.
      * @return Builder instance.
      */
     public WatchingNowBuilder watchingNow(String query) {
@@ -173,7 +186,7 @@ public class MovieService extends TraktApiService {
 
     /**
      * Add one or more movies to your watchlist.
-     *
+     * 
      * @return Builder instance.
      */
     public WatchlistBuilder watchlist() {
@@ -182,7 +195,7 @@ public class MovieService extends TraktApiService {
 
     /**
      * Returns all shouts for a movie. Most recent shouts returned first.
-     *
+     * 
      * @param titleOrImdbId Movie title or IMDB ID.
      * @return Builder instance.
      */
@@ -192,7 +205,7 @@ public class MovieService extends TraktApiService {
 
     /**
      * Returns all shouts for a movie. Most recent shouts returned first.
-     *
+     * 
      * @param tmdbId TMDB ID.
      * @return Builder instance.
      */
@@ -202,7 +215,7 @@ public class MovieService extends TraktApiService {
 
     /**
      * Returns all movies being watched right now.
-     *
+     * 
      * @return Builder instance.
      */
     public TrendingBuilder trending() {
@@ -211,7 +224,7 @@ public class MovieService extends TraktApiService {
 
     /**
      * Get the top 10 related movies.
-     *
+     * 
      * @param slugOrImdbId Movie title or IMDB ID.
      * @return Builder instance.
      */
@@ -221,7 +234,7 @@ public class MovieService extends TraktApiService {
 
     /**
      * Get the top 10 related movies.
-     *
+     * 
      * @param tmdbId TMDB ID.
      * @return Builder instance.
      */
@@ -230,13 +243,16 @@ public class MovieService extends TraktApiService {
     }
 
     /**
-     * <p>Check into a movie on trakt. Think of this method as in between a
-     * seen and a scrobble. After checking in, the trakt will automatically
-     * display it as watching then switch over to watched status once the
-     * duration has elapsed.<p>
-     *
-     * <p><em>Warning</em>: This method requires a developer API key.</p>
-     *
+     * <p>
+     * Check into a movie on trakt. Think of this method as in between a seen
+     * and a scrobble. After checking in, the trakt will automatically display
+     * it as watching then switch over to watched status once the duration has
+     * elapsed.
+     * <p>
+     * <p>
+     * <em>Warning</em>: This method requires a developer API key.
+     * </p>
+     * 
      * @param imdbId IMDB ID for movie.
      * @return Builder instance.
      */
@@ -245,13 +261,16 @@ public class MovieService extends TraktApiService {
     }
 
     /**
-     * <p>Check into a movie on trakt. Think of this method as in between a
-     * seen and a scrobble. After checking in, the trakt will automatically
-     * display it as watching then switch over to watched status once the
-     * duration has elapsed.<p>
-     *
-     * <p><em>Warning</em>: This method requires a developer API key.</p>
-     *
+     * <p>
+     * Check into a movie on trakt. Think of this method as in between a seen
+     * and a scrobble. After checking in, the trakt will automatically display
+     * it as watching then switch over to watched status once the duration has
+     * elapsed.
+     * <p>
+     * <p>
+     * <em>Warning</em>: This method requires a developer API key.
+     * </p>
+     * 
      * @param tmdbId TMDB ID for movie.
      * @return Builder instance.
      */
@@ -260,13 +279,16 @@ public class MovieService extends TraktApiService {
     }
 
     /**
-     * <p>Check into a movie on trakt. Think of this method as in between a
-     * seen and a scrobble. After checking in, the trakt will automatically
-     * display it as watching then switch over to watched status once the
-     * duration has elapsed.<p>
-     *
-     * <p><em>Warning</em>: This method requires a developer API key.</p>
-     *
+     * <p>
+     * Check into a movie on trakt. Think of this method as in between a seen
+     * and a scrobble. After checking in, the trakt will automatically display
+     * it as watching then switch over to watched status once the duration has
+     * elapsed.
+     * <p>
+     * <p>
+     * <em>Warning</em>: This method requires a developer API key.
+     * </p>
+     * 
      * @param title Movie title.
      * @param year Movie year.
      * @return Builder instance.
@@ -276,25 +298,29 @@ public class MovieService extends TraktApiService {
     }
 
     /**
-     * <p>Notify trakt that a user wants to cancel their current check in.</p>
-     *
-     * <p><em>Warning</em>: This method requires a developer API key.</p>
-     *
+     * <p>
+     * Notify trakt that a user wants to cancel their current check in.
+     * </p>
+     * <p>
+     * <em>Warning</em>: This method requires a developer API key.
+     * </p>
+     * 
      * @return Builder instance.
      */
     public CancelCheckinBuilder cancelCheckin() {
         return new CancelCheckinBuilder(this);
     }
 
-
-    public static final class CancelWatchingBuilder extends TraktApiBuilder<Response> {
+    public static final class CancelWatchingBuilder extends TmdbApiBuilder<Response> {
         private static final String URI = "/movie/cancelwatching/" + FIELD_API_KEY;
 
-        private CancelWatchingBuilder(MovieService service) {
-            super(service, new TypeToken<Response>() {}, URI, HttpMethod.Post);
+        private CancelWatchingBuilder(MoviesService service) {
+            super(service, new TypeToken<Response>() {
+            }, URI, HttpMethod.Post);
         }
     }
-    public static final class ScrobbleBuilder extends TraktApiBuilder<Response> {
+
+    public static final class ScrobbleBuilder extends TmdbApiBuilder<Response> {
         private static final String POST_IMDB_ID = "imdb_id";
         private static final String POST_TMDB_ID = "tmdb_id";
         private static final String POST_TITLE = "title";
@@ -304,14 +330,15 @@ public class MovieService extends TraktApiService {
 
         private static final String URI = "/movie/scrobble/" + FIELD_API_KEY;
 
-        private ScrobbleBuilder(MovieService service) {
-            super(service, new TypeToken<Response>() {}, URI, HttpMethod.Post);
+        private ScrobbleBuilder(MoviesService service) {
+            super(service, new TypeToken<Response>() {
+            }, URI, HttpMethod.Post);
             this.includeScrobbleDebugStrings();
         }
 
         /**
          * IMDB ID for the movie.
-         *
+         * 
          * @param imdbId Value.
          * @return Builder instance.
          */
@@ -322,7 +349,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * TMDB (themoviedb.org) ID for the movie.
-         *
+         * 
          * @param tmdbId Value.
          * @return Builder instance.
          */
@@ -333,7 +360,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Movie title.
-         *
+         * 
          * @param title Value.
          * @return Builder instance.
          */
@@ -344,7 +371,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Movie year.
-         *
+         * 
          * @param year Value.
          * @return Builder instance.
          */
@@ -355,7 +382,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Duration (in minutes).
-         *
+         * 
          * @param duration Value.
          * @return Builder instance.
          */
@@ -368,7 +395,7 @@ public class MovieService extends TraktApiService {
          * Percent progress (0-100). It is recommended to call the watching API
          * every 15 minutes, then call the scrobble API near the end of the
          * movie to lock it in.
-         *
+         * 
          * @param progress Value.
          * @return Builder instance.
          */
@@ -380,14 +407,14 @@ public class MovieService extends TraktApiService {
         @Override
         protected void performValidation() {
             assert this.hasPostParameter(POST_IMDB_ID)
-            || this.hasPostParameter(POST_TMDB_ID)
-            || (this.hasPostParameter(POST_TITLE) && this.hasPostParameter(POST_YEAR))
-            : "Either IMDB ID, TMDB ID, or both title and year is required.";
+                    || this.hasPostParameter(POST_TMDB_ID)
+                    || (this.hasPostParameter(POST_TITLE) && this.hasPostParameter(POST_YEAR)) : "Either IMDB ID, TMDB ID, or both title and year is required.";
             assert this.hasPostParameter(POST_DURATION) : "Duration is required.";
             assert this.hasPostParameter(POST_PROGRESS) : "Progress is required.";
         }
     }
-    public static final class SeenBuilder extends TraktApiBuilder<Void> {
+
+    public static final class SeenBuilder extends TmdbApiBuilder<Void> {
         private static final String POST_IMDB_ID = "imdb_id";
         private static final String POST_TMDB_ID = "tmdb_id";
         private static final String POST_TITLE = "title";
@@ -400,15 +427,16 @@ public class MovieService extends TraktApiService {
 
         private final JsonArray movieList;
 
-        private SeenBuilder(MovieService service) {
-            super(service, new TypeToken<Void>() {}, URI, HttpMethod.Post);
+        private SeenBuilder(MoviesService service) {
+            super(service, new TypeToken<Void>() {
+            }, URI, HttpMethod.Post);
 
             this.movieList = new JsonArray();
         }
 
         /**
          * Add a movie to the list of seen movies.
-         *
+         * 
          * @param imdbId IMDB ID for the movie.
          * @param plays Number of plays.
          * @param lastPlayed Timestamp of the last time it was played.
@@ -418,7 +446,7 @@ public class MovieService extends TraktApiService {
             JsonObject movie = new JsonObject();
             movie.addProperty(POST_IMDB_ID, imdbId);
             movie.addProperty(POST_PLAYS, plays);
-            movie.addProperty(POST_LAST_PLAYED, TraktApiBuilder.dateToUnixTimestamp(lastPlayed));
+            movie.addProperty(POST_LAST_PLAYED, TmdbApiBuilder.dateToUnixTimestamp(lastPlayed));
             this.movieList.add(movie);
 
             return this;
@@ -426,7 +454,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Add a movie to the list of seen movies.
-         *
+         * 
          * @param tmdbId TMDB ID for the movie.
          * @param plays Number of plays.
          * @param lastPlayed Timestamp of the last time it was played.
@@ -436,7 +464,7 @@ public class MovieService extends TraktApiService {
             JsonObject movie = new JsonObject();
             movie.addProperty(POST_TMDB_ID, tmdbId);
             movie.addProperty(POST_PLAYS, plays);
-            movie.addProperty(POST_LAST_PLAYED, TraktApiBuilder.dateToUnixTimestamp(lastPlayed));
+            movie.addProperty(POST_LAST_PLAYED, TmdbApiBuilder.dateToUnixTimestamp(lastPlayed));
             this.movieList.add(movie);
 
             return this;
@@ -444,7 +472,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Add a movie to the list of seen movies.
-         *
+         * 
          * @param title Movie title.
          * @param year Movie year.
          * @param plays Number of plays.
@@ -456,7 +484,7 @@ public class MovieService extends TraktApiService {
             movie.addProperty(POST_TITLE, title);
             movie.addProperty(POST_YEAR, year);
             movie.addProperty(POST_PLAYS, plays);
-            movie.addProperty(POST_LAST_PLAYED, TraktApiBuilder.dateToUnixTimestamp(lastPlayed));
+            movie.addProperty(POST_LAST_PLAYED, TmdbApiBuilder.dateToUnixTimestamp(lastPlayed));
             this.movieList.add(movie);
 
             return this;
@@ -464,11 +492,12 @@ public class MovieService extends TraktApiService {
 
         @Override
         protected void preFireCallback() {
-            //Add the assembled movie list to the JSON post body.
+            // Add the assembled movie list to the JSON post body.
             this.postParameter(POST_MOVIES, this.movieList);
         }
     }
-    public static final class LibraryBuilder extends TraktApiBuilder<Void> {
+
+    public static final class LibraryBuilder extends TmdbApiBuilder<Void> {
         private static final String POST_IMDB_ID = "imdb_id";
         private static final String POST_TMDB_ID = "tmdb_id";
         private static final String POST_TITLE = "title";
@@ -479,15 +508,16 @@ public class MovieService extends TraktApiService {
 
         private final JsonArray movieList;
 
-        private LibraryBuilder(MovieService service) {
-            super(service, new TypeToken<Void>() {}, URI, HttpMethod.Post);
+        private LibraryBuilder(MoviesService service) {
+            super(service, new TypeToken<Void>() {
+            }, URI, HttpMethod.Post);
 
             this.movieList = new JsonArray();
         }
 
         /**
          * Add a movie to the list of library movies.
-         *
+         * 
          * @param imdbId IMDB ID for the movie.
          * @return Builder instance.
          */
@@ -501,7 +531,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Add a movie to the list of library movies.
-         *
+         * 
          * @param tmdbId TMDB ID for the movie.
          * @return Builder instance.
          */
@@ -515,7 +545,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Add a movie to the list of library movies.
-         *
+         * 
          * @param title Movie title.
          * @param year Movie year.
          * @return Builder instance.
@@ -531,20 +561,23 @@ public class MovieService extends TraktApiService {
 
         @Override
         protected void preFireCallback() {
-            //Add the assembled movie list to the JSON post body.
+            // Add the assembled movie list to the JSON post body.
             this.postParameter(POST_MOVIES, this.movieList);
         }
     }
-    public static final class SummaryBuilder extends TraktApiBuilder<Movie> {
-        private static final String URI = "/movie/summary.json/" + FIELD_API_KEY + "/" + FIELD_QUERY;
 
-        private SummaryBuilder(MovieService service, String query) {
-            super(service, new TypeToken<Movie>() {}, URI);
+    public static final class SummaryBuilder extends TmdbApiBuilder<Movie> {
+        private static final String URI = "/movie/" + FIELD_ID;
 
-            this.field(FIELD_QUERY, query);
+        private SummaryBuilder(MoviesService service, Integer id) {
+            super(service, new TypeToken<Movie>() {
+            }, URI);
+
+            this.field(FIELD_QUERY, id);
         }
     }
-    public static final class UnlibraryBuilder extends TraktApiBuilder<Void> {
+
+    public static final class UnlibraryBuilder extends TmdbApiBuilder<Void> {
         private static final String POST_IMDB_ID = "imdb_id";
         private static final String POST_TMDB_ID = "tmdb_id";
         private static final String POST_TITLE = "title";
@@ -555,15 +588,16 @@ public class MovieService extends TraktApiService {
 
         private final JsonArray movieList;
 
-        private UnlibraryBuilder(MovieService service) {
-            super(service, new TypeToken<Void>() {}, URI, HttpMethod.Post);
+        private UnlibraryBuilder(MoviesService service) {
+            super(service, new TypeToken<Void>() {
+            }, URI, HttpMethod.Post);
 
             this.movieList = new JsonArray();
         }
 
         /**
          * Add a movie to the list of library movies for removal.
-         *
+         * 
          * @param imdbId IMDB ID for the movie.
          * @return Builder instance.
          */
@@ -577,7 +611,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Add a movie to the list of library movies for removal.
-         *
+         * 
          * @param tmdbId TMDB ID for the movie.
          * @return Builder instance.
          */
@@ -591,7 +625,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Add a movie to the list of library movies for removal.
-         *
+         * 
          * @param title Movie title.
          * @param year Movie year.
          * @return Builder instance.
@@ -607,11 +641,12 @@ public class MovieService extends TraktApiService {
 
         @Override
         protected void preFireCallback() {
-            //Add the assembled movie list to the JSON post body.
+            // Add the assembled movie list to the JSON post body.
             this.postParameter(POST_MOVIES, this.movieList);
         }
     }
-    public static final class UnseenBuilder extends TraktApiBuilder<Void> {
+
+    public static final class UnseenBuilder extends TmdbApiBuilder<Void> {
         private static final String POST_IMDB_ID = "imdb_id";
         private static final String POST_TMDB_ID = "tmdb_id";
         private static final String POST_TITLE = "title";
@@ -622,15 +657,16 @@ public class MovieService extends TraktApiService {
 
         private final JsonArray movieList;
 
-        private UnseenBuilder(MovieService service) {
-            super(service, new TypeToken<Void>() {}, URI, HttpMethod.Post);
+        private UnseenBuilder(MoviesService service) {
+            super(service, new TypeToken<Void>() {
+            }, URI, HttpMethod.Post);
 
             this.movieList = new JsonArray();
         }
 
         /**
          * Add a movie to the list of seen movies for removal.
-         *
+         * 
          * @param imdbId IMDB ID for the movie.
          * @return Builder instance.
          */
@@ -644,7 +680,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Add a movie to the list of seen movies for removal.
-         *
+         * 
          * @param tmdbId TMDB ID for the movie.
          * @return Builder instance.
          */
@@ -658,7 +694,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Add a movie to the list of seen movies for removal.
-         *
+         * 
          * @param title Movie title.
          * @param year Movie year.
          * @return Builder instance.
@@ -674,11 +710,12 @@ public class MovieService extends TraktApiService {
 
         @Override
         protected void preFireCallback() {
-            //Add the assembled movie list to the JSON post body.
+            // Add the assembled movie list to the JSON post body.
             this.postParameter(POST_MOVIES, this.movieList);
         }
     }
-    public static final class UnwatchlistBuilder extends TraktApiBuilder<Void> {
+
+    public static final class UnwatchlistBuilder extends TmdbApiBuilder<Void> {
         private static final String POST_IMDB_ID = "imdb_id";
         private static final String POST_TMDB_ID = "tmdb_id";
         private static final String POST_TITLE = "title";
@@ -689,15 +726,16 @@ public class MovieService extends TraktApiService {
 
         private final JsonArray movieList;
 
-        private UnwatchlistBuilder(MovieService service) {
-            super(service, new TypeToken<Void>() {}, URI, HttpMethod.Post);
+        private UnwatchlistBuilder(MoviesService service) {
+            super(service, new TypeToken<Void>() {
+            }, URI, HttpMethod.Post);
 
             this.movieList = new JsonArray();
         }
 
         /**
          * Add a movie to the list of watchlist movies for removal.
-         *
+         * 
          * @param imdbId IMDB ID for the movie.
          * @return Builder instance.
          */
@@ -711,7 +749,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Add a movie to the list of watchlist movies for removal.
-         *
+         * 
          * @param tmdbId TMDB ID for the movie.
          * @return Builder instance.
          */
@@ -725,7 +763,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Add a movie to the list of watchlist movies for removal.
-         *
+         * 
          * @param title Movie title.
          * @param year Movie year.
          * @return Builder instance.
@@ -741,11 +779,12 @@ public class MovieService extends TraktApiService {
 
         @Override
         protected void preFireCallback() {
-            //Add the assembled movie list to the JSON post body.
+            // Add the assembled movie list to the JSON post body.
             this.postParameter(POST_MOVIES, this.movieList);
         }
     }
-    public static final class WatchingBuilder extends TraktApiBuilder<Response> {
+
+    public static final class WatchingBuilder extends TmdbApiBuilder<Response> {
         private static final String POST_IMDB_ID = "imdb_id";
         private static final String POST_TMDB_ID = "tmdb_id";
         private static final String POST_TITLE = "title";
@@ -755,13 +794,15 @@ public class MovieService extends TraktApiService {
 
         private static final String URI = "/movie/watching/" + FIELD_API_KEY;
 
-        private WatchingBuilder(MovieService service) {
-            super(service, new TypeToken<Response>() {}, URI, HttpMethod.Post);
+        private WatchingBuilder(MoviesService service) {
+            super(service, new TypeToken<Response>() {
+            }, URI, HttpMethod.Post);
             this.includeScrobbleDebugStrings();
         }
+
         /**
          * IMDB ID for the movie.
-         *
+         * 
          * @param imdbId Value.
          * @return Builder instance.
          */
@@ -772,7 +813,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * TMDB (themoviedb.org) ID for the movie.
-         *
+         * 
          * @param tmdbId Value.
          * @return Builder instance.
          */
@@ -783,7 +824,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Movie title.
-         *
+         * 
          * @param title Value.
          * @return Builder instance.
          */
@@ -794,7 +835,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Movie year.
-         *
+         * 
          * @param year Value.
          * @return Builder instance.
          */
@@ -805,7 +846,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Duration (in minutes).
-         *
+         * 
          * @param duration Value.
          * @return Builder instance.
          */
@@ -818,7 +859,7 @@ public class MovieService extends TraktApiService {
          * Percent progress (0-100). It is recommended to call the watching API
          * every 15 minutes, then call the scrobble API near the end of the
          * movie to lock it in.
-         *
+         * 
          * @param progress Value.
          * @return Builder instance.
          */
@@ -830,23 +871,26 @@ public class MovieService extends TraktApiService {
         @Override
         protected void performValidation() {
             assert this.hasPostParameter(POST_IMDB_ID)
-            || this.hasPostParameter(POST_TMDB_ID)
-            || (this.hasPostParameter(POST_TITLE) && this.hasPostParameter(POST_YEAR))
-            : "Either IMDB ID, TMDB ID, or both title and year is required.";
+                    || this.hasPostParameter(POST_TMDB_ID)
+                    || (this.hasPostParameter(POST_TITLE) && this.hasPostParameter(POST_YEAR)) : "Either IMDB ID, TMDB ID, or both title and year is required.";
             assert this.hasPostParameter(POST_DURATION) : "Duration is required.";
             assert this.hasPostParameter(POST_PROGRESS) : "Progress is required.";
         }
     }
-    public static final class WatchingNowBuilder extends TraktApiBuilder<List<UserProfile>> {
-        private static final String URI = "/movie/watchingnow.json/" + FIELD_API_KEY + "/" + FIELD_QUERY;
 
-        private WatchingNowBuilder(MovieService service, String query) {
-            super(service, new TypeToken<List<UserProfile>>() {}, URI);
+    public static final class WatchingNowBuilder extends TmdbApiBuilder<List<UserProfile>> {
+        private static final String URI = "/movie/watchingnow.json/" + FIELD_API_KEY + "/"
+                + FIELD_QUERY;
+
+        private WatchingNowBuilder(MoviesService service, String query) {
+            super(service, new TypeToken<List<UserProfile>>() {
+            }, URI);
 
             this.field(FIELD_QUERY, query);
         }
     }
-    public static final class WatchlistBuilder extends TraktApiBuilder<Void> {
+
+    public static final class WatchlistBuilder extends TmdbApiBuilder<Void> {
         private static final String POST_IMDB_ID = "imdb_id";
         private static final String POST_TMDB_ID = "tmdb_id";
         private static final String POST_TITLE = "title";
@@ -857,15 +901,16 @@ public class MovieService extends TraktApiService {
 
         private final JsonArray movieList;
 
-        private WatchlistBuilder(MovieService service) {
-            super(service, new TypeToken<Void>() {}, URI, HttpMethod.Post);
+        private WatchlistBuilder(MoviesService service) {
+            super(service, new TypeToken<Void>() {
+            }, URI, HttpMethod.Post);
 
             this.movieList = new JsonArray();
         }
 
         /**
          * Add a movie to the list of library movies for removal.
-         *
+         * 
          * @param imdbId IMDB ID for the movie.
          * @return Builder instance.
          */
@@ -879,7 +924,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Add a movie to the list of library movies for removal.
-         *
+         * 
          * @param tmdbId TMDB ID for the movie.
          * @return Builder instance.
          */
@@ -893,7 +938,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Add a movie to the list of library movies for removal.
-         *
+         * 
          * @param title Movie title.
          * @param year Movie year.
          * @return Builder instance.
@@ -909,20 +954,22 @@ public class MovieService extends TraktApiService {
 
         @Override
         protected void preFireCallback() {
-            //Add the assembled movie list to the JSON post body.
+            // Add the assembled movie list to the JSON post body.
             this.postParameter(POST_MOVIES, this.movieList);
         }
     }
-    public static final class ShoutsBuilder extends TraktApiBuilder<List<Shout>> {
+
+    public static final class ShoutsBuilder extends TmdbApiBuilder<List<Shout>> {
         private static final String URI = "/movie/shouts.json/" + FIELD_API_KEY + "/" + FIELD_TITLE;
 
-        private ShoutsBuilder(MovieService service) {
-            super(service, new TypeToken<List<Shout>>() {}, URI);
+        private ShoutsBuilder(MoviesService service) {
+            super(service, new TypeToken<List<Shout>>() {
+            }, URI);
         }
 
         /**
          * Set show title or IMDB ID.
-         *
+         * 
          * @param titleOrImdbId Value.
          * @return Builder instance.
          */
@@ -933,7 +980,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Set show TMDB ID.
-         *
+         * 
          * @param tmdbId Value.
          * @return Builder instance.
          */
@@ -942,25 +989,30 @@ public class MovieService extends TraktApiService {
             return this;
         }
     }
-    public static final class TrendingBuilder extends TraktApiBuilder<List<Movie>> {
+
+    public static final class TrendingBuilder extends TmdbApiBuilder<List<Movie>> {
         private static final String URI = "/movies/trending.json/" + FIELD_API_KEY;
 
-        private TrendingBuilder(MovieService service) {
-            super(service, new TypeToken<List<Movie>>() {}, URI);
+        private TrendingBuilder(MoviesService service) {
+            super(service, new TypeToken<List<Movie>>() {
+            }, URI);
         }
     }
-    public static final class RelatedBuilder extends TraktApiBuilder<List<Movie>> {
+
+    public static final class RelatedBuilder extends TmdbApiBuilder<List<Movie>> {
         private static final String HIDE_WATCHED = "hidewatched";
 
-        private static final String URI = "/movie/related.json/" + FIELD_API_KEY + "/" + FIELD_TITLE + "/" + FIELD_HIDE_WATCHED;
+        private static final String URI = "/movie/related.json/" + FIELD_API_KEY + "/"
+                + FIELD_TITLE + "/" + FIELD_HIDE_WATCHED;
 
-        private RelatedBuilder(MovieService service) {
-            super(service, new TypeToken<List<Movie>>() {}, URI);
+        private RelatedBuilder(MoviesService service) {
+            super(service, new TypeToken<List<Movie>>() {
+            }, URI);
         }
 
         /**
          * Set show title or IMDB ID.
-         *
+         * 
          * @param slugOrImdbId Value.
          * @return Builder instance.
          */
@@ -971,7 +1023,7 @@ public class MovieService extends TraktApiService {
 
         /**
          * Set show TMDB ID.
-         *
+         * 
          * @param tmdbId Value.
          * @return Builder instance.
          */
@@ -981,8 +1033,9 @@ public class MovieService extends TraktApiService {
         }
 
         /**
-         * If this parameter is set and valid auth is sent, watched movies will be filtered out.
-         *
+         * If this parameter is set and valid auth is sent, watched movies will
+         * be filtered out.
+         * 
          * @param hideWatched Value.
          * @return Builder instance.
          */
@@ -993,7 +1046,8 @@ public class MovieService extends TraktApiService {
             return this;
         }
     }
-    public static final class CheckinBuilder extends TraktApiBuilder<Response> {
+
+    public static final class CheckinBuilder extends TmdbApiBuilder<Response> {
         private static final String POST_IMDB_ID = "imdb_id";
         private static final String POST_TMDB_ID = "tmdb_id";
         private static final String POST_TITLE = "title";
@@ -1005,8 +1059,9 @@ public class MovieService extends TraktApiService {
 
         private static final String URI = "/movie/checkin/" + FIELD_API_KEY;
 
-        private CheckinBuilder(MovieService service) {
-            super(service, new TypeToken<Response>() {}, URI, HttpMethod.Post);
+        private CheckinBuilder(MoviesService service) {
+            super(service, new TypeToken<Response>() {
+            }, URI, HttpMethod.Post);
             this.includeCheckinDebugStrings();
         }
 
@@ -1063,11 +1118,13 @@ public class MovieService extends TraktApiService {
             return this;
         }
     }
-    public static final class CancelCheckinBuilder extends TraktApiBuilder<Response> {
+
+    public static final class CancelCheckinBuilder extends TmdbApiBuilder<Response> {
         private static final String URI = "/movie/cancelcheckin/" + FIELD_API_KEY;
 
-        private CancelCheckinBuilder(MovieService service) {
-            super(service, new TypeToken<Response>() {}, URI, HttpMethod.Post);
+        private CancelCheckinBuilder(MoviesService service) {
+            super(service, new TypeToken<Response>() {
+            }, URI, HttpMethod.Post);
         }
     }
 }

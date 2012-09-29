@@ -1,14 +1,15 @@
+
 package com.uwetrottmann.tmdb.entities;
+
+import com.uwetrottmann.tmdb.Entity;
 
 import java.util.Date;
 import java.util.List;
 
-import com.uwetrottmann.tmdb.TraktEntity;
-
-public class CalendarDate implements TraktEntity {
+public class CalendarDate implements Entity {
     private static final long serialVersionUID = 5985118362541597172L;
 
-    public static class CalendarTvShowEpisode implements TraktEntity {
+    public static class CalendarTvShowEpisode implements Entity {
         private static final long serialVersionUID = -7066863350641449761L;
 
         public TvShow show;
@@ -19,6 +20,7 @@ public class CalendarDate implements TraktEntity {
         public TvShow getShow() {
             return this.show;
         }
+
         /** @deprecated Use {@link #episode} */
         @Deprecated
         public TvShowEpisode getEpisode() {
@@ -34,6 +36,7 @@ public class CalendarDate implements TraktEntity {
     public Date getDate() {
         return this.date;
     }
+
     /** @deprecated Use {@link #episodes} */
     @Deprecated
     public List<CalendarTvShowEpisode> getEpisodes() {

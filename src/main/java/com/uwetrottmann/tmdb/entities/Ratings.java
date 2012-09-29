@@ -1,8 +1,9 @@
+
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.TraktEntity;
+import com.uwetrottmann.tmdb.Entity;
 
-public class Ratings implements TraktEntity {
+public class Ratings implements Entity {
     private static final long serialVersionUID = -7517132370821535250L;
 
     public Integer percentage;
@@ -15,16 +16,19 @@ public class Ratings implements TraktEntity {
     public Integer getPercentage() {
         return percentage;
     }
+
     /** @deprecated Use {@link #votes} */
     @Deprecated
     public Integer getVotes() {
         return votes;
     }
+
     /** @deprecated Use {@link #loved} */
     @Deprecated
     public Integer getLoved() {
         return loved;
     }
+
     /** @deprecated Use {@link #hated} */
     @Deprecated
     public Integer getHated() {

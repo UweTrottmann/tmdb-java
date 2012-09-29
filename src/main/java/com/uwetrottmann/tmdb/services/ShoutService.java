@@ -1,14 +1,15 @@
+
 package com.uwetrottmann.tmdb.services;
 
 import com.google.gson.reflect.TypeToken;
-import com.uwetrottmann.tmdb.TraktApiBuilder;
+import com.uwetrottmann.tmdb.TmdbApiBuilder;
 import com.uwetrottmann.tmdb.TraktApiService;
 import com.uwetrottmann.tmdb.entities.Response;
 
 public class ShoutService extends TraktApiService {
     /**
      * Add a shout to an episode on trakt.
-     *
+     * 
      * @param imdbId IMDB ID for the show.
      * @return Builder instance.
      */
@@ -18,7 +19,7 @@ public class ShoutService extends TraktApiService {
 
     /**
      * Add a shout to an episode on trakt.
-     *
+     * 
      * @param tvdbId TVDB ID (thetvdb.com) for the show.
      * @return Builder instance.
      */
@@ -28,7 +29,7 @@ public class ShoutService extends TraktApiService {
 
     /**
      * Add a shout to an episode on trakt.
-     *
+     * 
      * @param title Show title.
      * @param year Show title.
      * @return Builder instance.
@@ -39,7 +40,7 @@ public class ShoutService extends TraktApiService {
 
     /**
      * Add a shout to a movie on trakt.
-     *
+     * 
      * @param imdbId IMDB ID for the movie.
      * @return Builder instance.
      */
@@ -49,7 +50,7 @@ public class ShoutService extends TraktApiService {
 
     /**
      * Add a shout to a movie on trakt.
-     *
+     * 
      * @param tmdbId TMDB (themoviedb.org) ID for the movie.
      * @return Builder instance.
      */
@@ -59,7 +60,7 @@ public class ShoutService extends TraktApiService {
 
     /**
      * Add a shout to a movie on trakt.
-     *
+     * 
      * @param title Movie title.
      * @param year Movie year.
      * @return Builder instance.
@@ -70,7 +71,7 @@ public class ShoutService extends TraktApiService {
 
     /**
      * Add a shout to a show on trakt.
-     *
+     * 
      * @param imdbId IMDB ID for the show.
      * @return Builder instance.
      */
@@ -80,7 +81,7 @@ public class ShoutService extends TraktApiService {
 
     /**
      * Add a shout to a show on trakt.
-     *
+     * 
      * @param tvdbId TVDB ID (thetvdb.com) for the show.
      * @return Builder instance.
      */
@@ -90,7 +91,7 @@ public class ShoutService extends TraktApiService {
 
     /**
      * Add a shout to a show on trakt.
-     *
+     * 
      * @param title Show title.
      * @param year Show year.
      * @return Builder instance.
@@ -99,8 +100,7 @@ public class ShoutService extends TraktApiService {
         return new ShowBuilder(this).title(title).year(year);
     }
 
-
-    public static final class EpisodeBuilder extends TraktApiBuilder<Response> {
+    public static final class EpisodeBuilder extends TmdbApiBuilder<Response> {
         private static final String POST_IMDB_ID = "imdb_id";
         private static final String POST_TVDB_ID = "tvdb_id";
         private static final String POST_TITLE = "title";
@@ -113,12 +113,13 @@ public class ShoutService extends TraktApiService {
         private static final String URI = "/shout/episode/" + FIELD_API_KEY;
 
         private EpisodeBuilder(ShoutService service) {
-            super(service, new TypeToken<Response>() {}, URI, HttpMethod.Post);
+            super(service, new TypeToken<Response>() {
+            }, URI, HttpMethod.Post);
         }
 
         /**
          * Show IMDB ID.
-         *
+         * 
          * @param imdbId Value.
          * @return Builder instance.
          */
@@ -129,7 +130,7 @@ public class ShoutService extends TraktApiService {
 
         /**
          * Show TVDB ID.
-         *
+         * 
          * @param tvdbId Value.
          * @return Builder instance.
          */
@@ -140,7 +141,7 @@ public class ShoutService extends TraktApiService {
 
         /**
          * Show title.
-         *
+         * 
          * @param title Value.
          * @return Builder instance.
          */
@@ -151,7 +152,7 @@ public class ShoutService extends TraktApiService {
 
         /**
          * Show year.
-         *
+         * 
          * @param year Value.
          * @return Builder instance.
          */
@@ -162,7 +163,7 @@ public class ShoutService extends TraktApiService {
 
         /**
          * Show season. Send 0 if watching a special.
-         *
+         * 
          * @param season Value.
          * @return Builder instance.
          */
@@ -173,7 +174,7 @@ public class ShoutService extends TraktApiService {
 
         /**
          * Show episode.
-         *
+         * 
          * @param episode Value.
          * @return Builder instance.
          */
@@ -184,7 +185,7 @@ public class ShoutService extends TraktApiService {
 
         /**
          * Text for the shout.
-         *
+         * 
          * @param shout Value.
          * @return Builder instance.
          */
@@ -195,7 +196,7 @@ public class ShoutService extends TraktApiService {
 
         /**
          * Shout contains a spoiler
-         *
+         * 
          * @param spoiler Value.
          * @return Builder instance.
          */
@@ -204,7 +205,8 @@ public class ShoutService extends TraktApiService {
             return this;
         }
     }
-    public static final class MovieBuilder extends TraktApiBuilder<Response> {
+
+    public static final class MovieBuilder extends TmdbApiBuilder<Response> {
         private static final String POST_IMDB_ID = "imdb_id";
         private static final String POST_TMDB_ID = "tmdb_id";
         private static final String POST_TITLE = "title";
@@ -215,12 +217,13 @@ public class ShoutService extends TraktApiService {
         private static final String URI = "/shout/movie/" + FIELD_API_KEY;
 
         private MovieBuilder(ShoutService service) {
-            super(service, new TypeToken<Response>() {}, URI, HttpMethod.Post);
+            super(service, new TypeToken<Response>() {
+            }, URI, HttpMethod.Post);
         }
 
         /**
          * Show IMDB ID.
-         *
+         * 
          * @param imdbId Value.
          * @return Builder instance.
          */
@@ -231,7 +234,7 @@ public class ShoutService extends TraktApiService {
 
         /**
          * Show TMDB ID.
-         *
+         * 
          * @param tmdbId Value.
          * @return Builder instance.
          */
@@ -242,7 +245,7 @@ public class ShoutService extends TraktApiService {
 
         /**
          * Show title.
-         *
+         * 
          * @param title Value.
          * @return Builder instance.
          */
@@ -253,7 +256,7 @@ public class ShoutService extends TraktApiService {
 
         /**
          * Show year.
-         *
+         * 
          * @param year Value.
          * @return Builder instance.
          */
@@ -264,7 +267,7 @@ public class ShoutService extends TraktApiService {
 
         /**
          * Text for the shout.
-         *
+         * 
          * @param shout Value.
          * @return Builder instance.
          */
@@ -275,7 +278,7 @@ public class ShoutService extends TraktApiService {
 
         /**
          * Shout contains a spoiler
-         *
+         * 
          * @param spoiler Value.
          * @return Builder instance.
          */
@@ -284,7 +287,8 @@ public class ShoutService extends TraktApiService {
             return this;
         }
     }
-    public static final class ShowBuilder extends TraktApiBuilder<Response> {
+
+    public static final class ShowBuilder extends TmdbApiBuilder<Response> {
         private static final String POST_IMDB_ID = "imdb_id";
         private static final String POST_TVDB_ID = "tvdb_id";
         private static final String POST_TITLE = "title";
@@ -295,12 +299,13 @@ public class ShoutService extends TraktApiService {
         private static final String URI = "/shout/show/" + FIELD_API_KEY;
 
         private ShowBuilder(ShoutService service) {
-            super(service, new TypeToken<Response>() {}, URI, HttpMethod.Post);
+            super(service, new TypeToken<Response>() {
+            }, URI, HttpMethod.Post);
         }
 
         /**
          * Show IMDB ID.
-         *
+         * 
          * @param imdbId Value.
          * @return Builder instance.
          */
@@ -311,7 +316,7 @@ public class ShoutService extends TraktApiService {
 
         /**
          * Show TVDB ID.
-         *
+         * 
          * @param tvdbId Value.
          * @return Builder instance.
          */
@@ -322,7 +327,7 @@ public class ShoutService extends TraktApiService {
 
         /**
          * Show title.
-         *
+         * 
          * @param title Value.
          * @return Builder instance.
          */
@@ -333,7 +338,7 @@ public class ShoutService extends TraktApiService {
 
         /**
          * Show year.
-         *
+         * 
          * @param year Value.
          * @return Builder instance.
          */
@@ -344,7 +349,7 @@ public class ShoutService extends TraktApiService {
 
         /**
          * Text for the shout.
-         *
+         * 
          * @param shout Value.
          * @return Builder instance.
          */
@@ -353,10 +358,9 @@ public class ShoutService extends TraktApiService {
             return this;
         }
 
-
         /**
          * Shout contains a spoiler
-         *
+         * 
          * @param spoiler Value.
          * @return Builder instance.
          */

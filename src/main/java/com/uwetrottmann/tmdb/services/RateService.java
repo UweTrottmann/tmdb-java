@@ -1,7 +1,8 @@
+
 package com.uwetrottmann.tmdb.services;
 
 import com.google.gson.reflect.TypeToken;
-import com.uwetrottmann.tmdb.TraktApiBuilder;
+import com.uwetrottmann.tmdb.TmdbApiBuilder;
 import com.uwetrottmann.tmdb.TraktApiService;
 import com.uwetrottmann.tmdb.entities.RatingResponse;
 import com.uwetrottmann.tmdb.enumerations.Rating;
@@ -10,7 +11,7 @@ public class RateService extends TraktApiService {
     /**
      * Rate an episode on Trakt. Depending on the user settings, this will also
      * send out social updates to Facebook, Twitter, and Tumblr.
-     *
+     * 
      * @param tvdbId TVDB ID for the show.
      * @return Builder instance.
      */
@@ -21,7 +22,7 @@ public class RateService extends TraktApiService {
     /**
      * Rate an episode on Trakt. Depending on the user settings, this will also
      * send out social updates to Facebook, Twitter, and Tumblr.
-     *
+     * 
      * @param title Show title.
      * @param year Show year.
      * @return Builder instance.
@@ -33,7 +34,7 @@ public class RateService extends TraktApiService {
     /**
      * Rate a movie on Trakt. Depending on the user settings, this will also
      * send out social updates to Facebook, Twitter, and Tumblr.
-     *
+     * 
      * @param imdbId IMDB ID for the movie.
      * @return Builder instance.
      */
@@ -44,7 +45,7 @@ public class RateService extends TraktApiService {
     /**
      * Rate a movie on Trakt. Depending on the user settings, this will also
      * send out social updates to Facebook, Twitter, and Tumblr.
-     *
+     * 
      * @param title Movie title.
      * @param year Movie year.
      * @return Builder instance.
@@ -54,9 +55,9 @@ public class RateService extends TraktApiService {
     }
 
     /**
-     * Rate a show on Trakt. Depending on the user settings, this will also
-     * send out social updates to Facebook, Twitter, and Tumblr.
-     *
+     * Rate a show on Trakt. Depending on the user settings, this will also send
+     * out social updates to Facebook, Twitter, and Tumblr.
+     * 
      * @param tvdbId TVDB ID for the show.
      * @return Builder instance.
      */
@@ -65,9 +66,9 @@ public class RateService extends TraktApiService {
     }
 
     /**
-     * Rate a show on Trakt. Depending on the user settings, this will also
-     * send out social updates to Facebook, Twitter, and Tumblr.
-     *
+     * Rate a show on Trakt. Depending on the user settings, this will also send
+     * out social updates to Facebook, Twitter, and Tumblr.
+     * 
      * @param title Show title.
      * @param year Show year.
      * @return Builder instance.
@@ -76,8 +77,7 @@ public class RateService extends TraktApiService {
         return new ShowBuilder(this).title(title).year(year);
     }
 
-
-    public static final class EpisodeBuilder extends TraktApiBuilder<RatingResponse> {
+    public static final class EpisodeBuilder extends TmdbApiBuilder<RatingResponse> {
         private static final String POST_TVDB_ID = "tvdb_id";
         private static final String POST_TITLE = "title";
         private static final String POST_YEAR = "year";
@@ -88,7 +88,8 @@ public class RateService extends TraktApiService {
         private static final String URI = "/rate/episode/" + FIELD_API_KEY;
 
         private EpisodeBuilder(RateService service) {
-            super(service, new TypeToken<RatingResponse>() {}, URI, HttpMethod.Post);
+            super(service, new TypeToken<RatingResponse>() {
+            }, URI, HttpMethod.Post);
         }
 
         public EpisodeBuilder tvdbId(int tvdbId) {
@@ -124,14 +125,14 @@ public class RateService extends TraktApiService {
         @Override
         protected void performValidation() {
             assert this.hasPostParameter(POST_TVDB_ID)
-                || (this.hasPostParameter(POST_TITLE) && this.hasPostParameter(POST_YEAR))
-                : "Either TVDB ID or both title and year is required.";
+                    || (this.hasPostParameter(POST_TITLE) && this.hasPostParameter(POST_YEAR)) : "Either TVDB ID or both title and year is required.";
             assert this.hasPostParameter(POST_SEASON) : "Season is required.";
             assert this.hasPostParameter(POST_EPISODE) : "Episode is required.";
             assert this.hasPostParameter(POST_RATING) : "Rating is required.";
         }
     }
-    public static final class MovieBuilder extends TraktApiBuilder<RatingResponse> {
+
+    public static final class MovieBuilder extends TmdbApiBuilder<RatingResponse> {
         private static final String POST_IMDB_ID = "imdb_id";
         private static final String POST_TITLE = "title";
         private static final String POST_YEAR = "year";
@@ -140,7 +141,8 @@ public class RateService extends TraktApiService {
         private static final String URI = "/rate/movie/" + FIELD_API_KEY;
 
         private MovieBuilder(RateService service) {
-            super(service, new TypeToken<RatingResponse>() {}, URI, HttpMethod.Post);
+            super(service, new TypeToken<RatingResponse>() {
+            }, URI, HttpMethod.Post);
         }
 
         public MovieBuilder imdbId(String imdbId) {
@@ -166,12 +168,12 @@ public class RateService extends TraktApiService {
         @Override
         protected void performValidation() {
             assert this.hasPostParameter(POST_IMDB_ID)
-                || (this.hasPostParameter(POST_TITLE) && this.hasPostParameter(POST_YEAR))
-                : "Either IMDB ID or both title and year is required.";
+                    || (this.hasPostParameter(POST_TITLE) && this.hasPostParameter(POST_YEAR)) : "Either IMDB ID or both title and year is required.";
             assert this.hasPostParameter(POST_RATING) : "Rating is required.";
         }
     }
-    public static final class ShowBuilder extends TraktApiBuilder<RatingResponse> {
+
+    public static final class ShowBuilder extends TmdbApiBuilder<RatingResponse> {
         private static final String POST_TVDB_ID = "tvdb_id";
         private static final String POST_TITLE = "title";
         private static final String POST_YEAR = "year";
@@ -180,7 +182,8 @@ public class RateService extends TraktApiService {
         private static final String URI = "/rate/show/" + FIELD_API_KEY;
 
         private ShowBuilder(RateService service) {
-            super(service, new TypeToken<RatingResponse>() {}, URI, HttpMethod.Post);
+            super(service, new TypeToken<RatingResponse>() {
+            }, URI, HttpMethod.Post);
         }
 
         public ShowBuilder tvdbId(int tvdbId) {
@@ -206,8 +209,7 @@ public class RateService extends TraktApiService {
         @Override
         protected void performValidation() {
             assert this.hasPostParameter(POST_TVDB_ID)
-                || (this.hasPostParameter(POST_TITLE) && this.hasPostParameter(POST_YEAR))
-                : "Either TVDB ID or both title and year is required.";
+                    || (this.hasPostParameter(POST_TITLE) && this.hasPostParameter(POST_YEAR)) : "Either TVDB ID or both title and year is required.";
             assert this.hasPostParameter(POST_RATING) : "Rating is required.";
         }
     }

@@ -1,14 +1,15 @@
+
 package com.uwetrottmann.tmdb.entities;
+
+import com.uwetrottmann.tmdb.Entity;
 
 import java.util.Date;
 import java.util.List;
 
-import com.uwetrottmann.tmdb.TraktEntity;
-
-public class Activity implements TraktEntity {
+public class Activity implements Entity {
     private static final long serialVersionUID = -3180174955865068567L;
 
-    public static class Timestamps implements TraktEntity {
+    public static class Timestamps implements Entity {
         private static final long serialVersionUID = 7812411503074767278L;
 
         public Date start;

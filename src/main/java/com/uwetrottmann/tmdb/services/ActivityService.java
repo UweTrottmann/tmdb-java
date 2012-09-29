@@ -1,12 +1,14 @@
+
 package com.uwetrottmann.tmdb.services;
 
-import java.util.Date;
 import com.google.gson.reflect.TypeToken;
-import com.uwetrottmann.tmdb.TraktApiBuilder;
+import com.uwetrottmann.tmdb.TmdbApiBuilder;
 import com.uwetrottmann.tmdb.TraktApiService;
 import com.uwetrottmann.tmdb.entities.Activity;
 import com.uwetrottmann.tmdb.enumerations.ActivityAction;
 import com.uwetrottmann.tmdb.enumerations.ActivityType;
+
+import java.util.Date;
 
 public class ActivityService extends TraktApiService {
     /**
@@ -20,18 +22,21 @@ public class ActivityService extends TraktApiService {
     }
 
     /**
-     * <p>Get a list of all activity for one or more episodes for one or more
+     * <p>
+     * Get a list of all activity for one or more episodes for one or more
      * seasons for one or more shows. The most recent 100 activities are
-     * returned for all actions. You can customize the activity stream with
-     * only the actions you need.</p>
-     *
-     * <p>You <strong>must</strong> specify one or more values for each of
+     * returned for all actions. You can customize the activity stream with only
+     * the actions you need.
+     * </p>
+     * <p>
+     * You <strong>must</strong> specify one or more values for each of
      * {@link EpisodesBuilder#title(String...)},
      * {@link EpisodesBuilder#season(int...)}, and
      * {@link EpisodesBuilder#episode(int...)} when using this method. If you
      * only want information on a single episode, use
-     * {@link #episodes(String, int, int)} or
-     * {@link #episodes(int, int, int)} for quicker access.</p>
+     * {@link #episodes(String, int, int)} or {@link #episodes(int, int, int)}
+     * for quicker access.
+     * </p>
      */
     public EpisodesBuilder episodes() {
         return new EpisodesBuilder(this);
@@ -40,8 +45,8 @@ public class ActivityService extends TraktApiService {
     /**
      * Get a list of all activity for one or more episodes for one or more
      * seasons for one or more shows. The most recent 100 activities are
-     * returned for all actions. You can customize the activity stream with
-     * only the actions you need.
+     * returned for all actions. You can customize the activity stream with only
+     * the actions you need.
      */
     public EpisodesBuilder episodes(String title, int season, int episode) {
         return new EpisodesBuilder(this).title(title).season(season).episode(episode);
@@ -50,8 +55,8 @@ public class ActivityService extends TraktApiService {
     /**
      * Get a list of all activity for one or more episodes for one or more
      * seasons for one or more shows. The most recent 100 activities are
-     * returned for all actions. You can customize the activity stream with
-     * only the actions you need.
+     * returned for all actions. You can customize the activity stream with only
+     * the actions you need.
      */
     public EpisodesBuilder episodes(int tvdbId, int season, int episode) {
         return new EpisodesBuilder(this).title(tvdbId).season(season).episode(episode);
@@ -85,34 +90,36 @@ public class ActivityService extends TraktApiService {
     }
 
     /**
-     * <p>Get a list of all activity for one or more seasons for one or more
-     * shows. The most recent 100 activities are returned for all actions. You
-     * can customize the activity stream with only the actions you need.</p>
-     *
-     * <p>You <strong>must</strong> specify one or more values for each of
+     * <p>
+     * Get a list of all activity for one or more seasons for one or more shows.
+     * The most recent 100 activities are returned for all actions. You can
+     * customize the activity stream with only the actions you need.
+     * </p>
+     * <p>
+     * You <strong>must</strong> specify one or more values for each of
      * {@link SeasonsBuilder#title(String...)} and
-     * {@link SeasonsBuilder#season(int...)} when using this method. If you
-     * only want information on a single season, use
-     * {@link #seasons(String, int)} or {@link #seasons(int, int)} for
-     * quicker access.</p>
+     * {@link SeasonsBuilder#season(int...)} when using this method. If you only
+     * want information on a single season, use {@link #seasons(String, int)} or
+     * {@link #seasons(int, int)} for quicker access.
+     * </p>
      */
     public SeasonsBuilder seasons() {
         return new SeasonsBuilder(this);
     }
 
     /**
-     * Get a list of all activity for one or more seasons for one or more
-     * shows. The most recent 100 activities are returned for all actions. You
-     * can customize the activity stream with only the actions you need.
+     * Get a list of all activity for one or more seasons for one or more shows.
+     * The most recent 100 activities are returned for all actions. You can
+     * customize the activity stream with only the actions you need.
      */
     public SeasonsBuilder seasons(String title, int season) {
         return new SeasonsBuilder(this).title(title).season(season);
     }
 
     /**
-     * Get a list of all activity for one or more seasons for one or more
-     * shows. The most recent 100 activities are returned for all actions. You
-     * can customize the activity stream with only the actions you need.
+     * Get a list of all activity for one or more seasons for one or more shows.
+     * The most recent 100 activities are returned for all actions. You can
+     * customize the activity stream with only the actions you need.
      */
     public SeasonsBuilder seasons(int tvdbId, int season) {
         return new SeasonsBuilder(this).title(tvdbId).season(season);
@@ -145,12 +152,13 @@ public class ActivityService extends TraktApiService {
         return new UserBuilder(this).username(username);
     }
 
-
-    public static class CommunityBuilder extends TraktApiBuilder<Activity> {
-        private static final String URI = "/activity/community.json/" + FIELD_API_KEY + "/" + FIELD_TYPES + "/" + FIELD_ACTIONS + "/" + FIELD_TIMESTAMP;
+    public static class CommunityBuilder extends TmdbApiBuilder<Activity> {
+        private static final String URI = "/activity/community.json/" + FIELD_API_KEY + "/"
+                + FIELD_TYPES + "/" + FIELD_ACTIONS + "/" + FIELD_TIMESTAMP;
 
         private CommunityBuilder(ActivityService service) {
-            super(service, new TypeToken<Activity>() {}, URI);
+            super(service, new TypeToken<Activity>() {
+            }, URI);
         }
 
         /**
@@ -173,16 +181,16 @@ public class ActivityService extends TraktApiService {
         }
 
         /**
-         * Specify the start timestamp in PST. Only activity from this
-         * timestamp forward will be returned.
+         * Specify the start timestamp in PST. Only activity from this timestamp
+         * forward will be returned.
          */
         public CommunityBuilder timestamp(Date timestamp) {
             return this.timestamp(timestamp.getTime() / MILLISECONDS_IN_SECOND);
         }
 
         /**
-         * Specify the start timestamp in PST. Only activity from this
-         * timestamp forward will be returned.
+         * Specify the start timestamp in PST. Only activity from this timestamp
+         * forward will be returned.
          */
         public CommunityBuilder timestamp(long timestamp) {
             if (!this.hasField(FIELD_ACTIONS)) {
@@ -192,18 +200,22 @@ public class ActivityService extends TraktApiService {
             return this;
         }
     }
-    public static class EpisodesBuilder extends TraktApiBuilder<Activity> {
-        private static final String URI = "/activity/episodes.json/" + FIELD_API_KEY + "/" + FIELD_TITLE + "/" + FIELD_SEASON + "/" + FIELD_EPISODE + "/" + FIELD_ACTIONS + "/" + FIELD_TIMESTAMP;
+
+    public static class EpisodesBuilder extends TmdbApiBuilder<Activity> {
+        private static final String URI = "/activity/episodes.json/" + FIELD_API_KEY + "/"
+                + FIELD_TITLE + "/" + FIELD_SEASON + "/" + FIELD_EPISODE + "/" + FIELD_ACTIONS
+                + "/" + FIELD_TIMESTAMP;
 
         private EpisodesBuilder(ActivityService service) {
-            super(service, new TypeToken<Activity>() {}, URI);
+            super(service, new TypeToken<Activity>() {
+            }, URI);
         }
 
         /**
          * The slug (i.e. the-walking-dead). You can get a show's slug by
          * browsing the website and looking at the URL when on a show summary
-         * page. You can also send a list of titles to get activity for
-         * multiple shows.
+         * page. You can also send a list of titles to get activity for multiple
+         * shows.
          */
         public EpisodesBuilder title(String... titles) {
             this.field(FIELD_TITLE, titles);
@@ -243,16 +255,16 @@ public class ActivityService extends TraktApiService {
         }
 
         /**
-         * Specify the start timestamp in PST. Only activity from this
-         * timestamp forward will be returned.
+         * Specify the start timestamp in PST. Only activity from this timestamp
+         * forward will be returned.
          */
         public EpisodesBuilder timestamp(Date timestamp) {
             return this.timestamp(timestamp.getTime() / MILLISECONDS_IN_SECOND);
         }
 
         /**
-         * Specify the start timestamp in PST. Only activity from this
-         * timestamp forward will be returned.
+         * Specify the start timestamp in PST. Only activity from this timestamp
+         * forward will be returned.
          */
         public EpisodesBuilder timestamp(long timestamp) {
             if (!this.hasField(FIELD_ACTIONS)) {
@@ -262,11 +274,14 @@ public class ActivityService extends TraktApiService {
             return this;
         }
     }
-    public static class FriendsBuilder extends TraktApiBuilder<Activity> {
-        private static final String URI = "/activity/friends.json/" + FIELD_API_KEY + "/" + FIELD_TYPES + "/" + FIELD_ACTIONS + "/" + FIELD_TIMESTAMP;
+
+    public static class FriendsBuilder extends TmdbApiBuilder<Activity> {
+        private static final String URI = "/activity/friends.json/" + FIELD_API_KEY + "/"
+                + FIELD_TYPES + "/" + FIELD_ACTIONS + "/" + FIELD_TIMESTAMP;
 
         private FriendsBuilder(ActivityService service) {
-            super(service, new TypeToken<Activity>() {}, URI, HttpMethod.Post);
+            super(service, new TypeToken<Activity>() {
+            }, URI, HttpMethod.Post);
         }
 
         /**
@@ -289,16 +304,16 @@ public class ActivityService extends TraktApiService {
         }
 
         /**
-         * Specify the start timestamp in PST. Only activity from this
-         * timestamp forward will be returned.
+         * Specify the start timestamp in PST. Only activity from this timestamp
+         * forward will be returned.
          */
         public FriendsBuilder timestamp(Date timestamp) {
             return this.timestamp(timestamp.getTime() / MILLISECONDS_IN_SECOND);
         }
 
         /**
-         * Specify the start timestamp in PST. Only activity from this
-         * timestamp forward will be returned.
+         * Specify the start timestamp in PST. Only activity from this timestamp
+         * forward will be returned.
          */
         public FriendsBuilder timestamp(long timestamp) {
             if (!this.hasField(FIELD_ACTIONS)) {
@@ -308,13 +323,15 @@ public class ActivityService extends TraktApiService {
             return this;
         }
     }
-    public static class MoviesBuilder extends TraktApiBuilder<Activity> {
-        private static final String URI = "/activity/movies.json/" + FIELD_API_KEY + "/" + FIELD_TITLE + "/" + FIELD_ACTIONS + "/" + FIELD_TIMESTAMP;
+
+    public static class MoviesBuilder extends TmdbApiBuilder<Activity> {
+        private static final String URI = "/activity/movies.json/" + FIELD_API_KEY + "/"
+                + FIELD_TITLE + "/" + FIELD_ACTIONS + "/" + FIELD_TIMESTAMP;
 
         private MoviesBuilder(ActivityService service) {
-            super(service, new TypeToken<Activity>() {}, URI);
+            super(service, new TypeToken<Activity>() {
+            }, URI);
         }
-
 
         /**
          * Either the slug (i.e. the-social-network-2010) or IMDB ID. You can
@@ -345,16 +362,16 @@ public class ActivityService extends TraktApiService {
         }
 
         /**
-         * Specify the start timestamp in PST. Only activity from this
-         * timestamp forward will be returned.
+         * Specify the start timestamp in PST. Only activity from this timestamp
+         * forward will be returned.
          */
         public MoviesBuilder timestamp(Date timestamp) {
             return this.timestamp(timestamp.getTime() / MILLISECONDS_IN_SECOND);
         }
 
         /**
-         * Specify the start timestamp in PST. Only activity from this
-         * timestamp forward will be returned.
+         * Specify the start timestamp in PST. Only activity from this timestamp
+         * forward will be returned.
          */
         public MoviesBuilder timestamp(long timestamp) {
             if (!this.hasField(FIELD_ACTIONS)) {
@@ -364,18 +381,21 @@ public class ActivityService extends TraktApiService {
             return this;
         }
     }
-    public static class SeasonsBuilder extends TraktApiBuilder<Activity> {
-        private static final String URI = "/activity/seasons.json/" + FIELD_API_KEY + "/" + FIELD_TITLE + "/" + FIELD_SEASON + "/" + FIELD_ACTIONS + "/" + FIELD_TIMESTAMP;
+
+    public static class SeasonsBuilder extends TmdbApiBuilder<Activity> {
+        private static final String URI = "/activity/seasons.json/" + FIELD_API_KEY + "/"
+                + FIELD_TITLE + "/" + FIELD_SEASON + "/" + FIELD_ACTIONS + "/" + FIELD_TIMESTAMP;
 
         private SeasonsBuilder(ActivityService service) {
-            super(service, new TypeToken<Activity>() {}, URI);
+            super(service, new TypeToken<Activity>() {
+            }, URI);
         }
 
         /**
          * The slug (i.e. the-walking-dead). You can get a show's slug by
          * browsing the website and looking at the URL when on a show summary
-         * page. You can also send a list of titles to get activity for
-         * multiple shows.
+         * page. You can also send a list of titles to get activity for multiple
+         * shows.
          */
         public SeasonsBuilder title(String... titles) {
             this.field(FIELD_TITLE, titles);
@@ -407,16 +427,16 @@ public class ActivityService extends TraktApiService {
         }
 
         /**
-         * Specify the start timestamp in PST. Only activity from this
-         * timestamp forward will be returned.
+         * Specify the start timestamp in PST. Only activity from this timestamp
+         * forward will be returned.
          */
         public SeasonsBuilder timestamp(Date timestamp) {
             return this.timestamp(timestamp.getTime() / MILLISECONDS_IN_SECOND);
         }
 
         /**
-         * Specify the start timestamp in PST. Only activity from this
-         * timestamp forward will be returned.
+         * Specify the start timestamp in PST. Only activity from this timestamp
+         * forward will be returned.
          */
         public SeasonsBuilder timestamp(long timestamp) {
             if (!this.hasField(FIELD_ACTIONS)) {
@@ -426,18 +446,21 @@ public class ActivityService extends TraktApiService {
             return this;
         }
     }
-    public static class ShowsBuilder extends TraktApiBuilder<Activity> {
-        private static final String URI = "/activity/shows.json/" + FIELD_API_KEY + "/" + FIELD_TITLE + "/" + FIELD_ACTIONS + "/" + FIELD_TIMESTAMP;
+
+    public static class ShowsBuilder extends TmdbApiBuilder<Activity> {
+        private static final String URI = "/activity/shows.json/" + FIELD_API_KEY + "/"
+                + FIELD_TITLE + "/" + FIELD_ACTIONS + "/" + FIELD_TIMESTAMP;
 
         private ShowsBuilder(ActivityService service) {
-            super(service, new TypeToken<Activity>() {}, URI);
+            super(service, new TypeToken<Activity>() {
+            }, URI);
         }
 
         /**
          * The slug (i.e. the-walking-dead). You can get a show's slug by
          * browsing the website and looking at the URL when on a show summary
-         * page. You can also send a list of titles to get activity for
-         * multiple shows.
+         * page. You can also send a list of titles to get activity for multiple
+         * shows.
          */
         public ShowsBuilder title(String... titles) {
             this.field(FIELD_TITLE, titles);
@@ -461,16 +484,16 @@ public class ActivityService extends TraktApiService {
         }
 
         /**
-         * Specify the start timestamp in PST. Only activity from this
-         * timestamp forward will be returned.
+         * Specify the start timestamp in PST. Only activity from this timestamp
+         * forward will be returned.
          */
         public ShowsBuilder timestamp(Date timestamp) {
             return this.timestamp(timestamp.getTime() / MILLISECONDS_IN_SECOND);
         }
 
         /**
-         * Specify the start timestamp in PST. Only activity from this
-         * timestamp forward will be returned.
+         * Specify the start timestamp in PST. Only activity from this timestamp
+         * forward will be returned.
          */
         public ShowsBuilder timestamp(long timestamp) {
             if (!this.hasField(FIELD_ACTIONS)) {
@@ -480,17 +503,19 @@ public class ActivityService extends TraktApiService {
             return this;
         }
     }
-    public static class UserBuilder extends TraktApiBuilder<Activity> {
-        private static final String URI = "/activity/user.json/" + FIELD_API_KEY + "/" + FIELD_USERNAME + "/" + FIELD_TYPES + "/" + FIELD_ACTIONS + "/" + FIELD_TIMESTAMP;
+
+    public static class UserBuilder extends TmdbApiBuilder<Activity> {
+        private static final String URI = "/activity/user.json/" + FIELD_API_KEY + "/"
+                + FIELD_USERNAME + "/" + FIELD_TYPES + "/" + FIELD_ACTIONS + "/" + FIELD_TIMESTAMP;
 
         private UserBuilder(ActivityService service) {
-            super(service, new TypeToken<Activity>() {}, URI);
+            super(service, new TypeToken<Activity>() {
+            }, URI);
         }
 
-
         /**
-         * You can get a username by browsing the website and looking at the
-         * URL when on a profile page.
+         * You can get a username by browsing the website and looking at the URL
+         * when on a profile page.
          */
         public UserBuilder username(String username) {
             this.field(FIELD_USERNAME, username, false);
@@ -517,16 +542,16 @@ public class ActivityService extends TraktApiService {
         }
 
         /**
-         * Specify the start timestamp in PST. Only activity from this
-         * timestamp forward will be returned.
+         * Specify the start timestamp in PST. Only activity from this timestamp
+         * forward will be returned.
          */
         public UserBuilder timestamp(Date timestamp) {
             return this.timestamp(timestamp.getTime() / MILLISECONDS_IN_SECOND);
         }
 
         /**
-         * Specify the start timestamp in PST. Only activity from this
-         * timestamp forward will be returned.
+         * Specify the start timestamp in PST. Only activity from this timestamp
+         * forward will be returned.
          */
         public UserBuilder timestamp(long timestamp) {
             if (!this.hasField(FIELD_ACTIONS)) {

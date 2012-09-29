@@ -1,9 +1,10 @@
+
 package com.uwetrottmann.tmdb.services;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import com.uwetrottmann.tmdb.TraktApiBuilder;
+import com.uwetrottmann.tmdb.TmdbApiBuilder;
 import com.uwetrottmann.tmdb.TraktApiService;
 import com.uwetrottmann.tmdb.entities.ListItemsResponse;
 import com.uwetrottmann.tmdb.entities.ListResponse;
@@ -14,7 +15,7 @@ import com.uwetrottmann.tmdb.enumerations.ListPrivacy;
 public class ListService extends TraktApiService {
     /**
      * Add a new custom list.
-     *
+     * 
      * @param name The list name. This must be unique.
      * @param privacy Privacy level.
      * @return Builder instance.
@@ -25,7 +26,7 @@ public class ListService extends TraktApiService {
 
     /**
      * Delete a custom list including all items it contains.
-     *
+     * 
      * @param slug Slug to identify what list is being deleted.
      * @return Builder instance.
      */
@@ -36,7 +37,7 @@ public class ListService extends TraktApiService {
     /**
      * Add one or more items to an existing list. Items can be movies, shows,
      * season, or episodes.
-     *
+     * 
      * @param slug Slug to identify what list is being added to.
      * @return Builder instance.
      */
@@ -47,7 +48,7 @@ public class ListService extends TraktApiService {
     /**
      * Delete one or more items from an existing list. Items can be movies,
      * shows, season, or episodes.
-     *
+     * 
      * @param slug Slug to identify what list is being deleted.
      * @return Builder instance.
      */
@@ -57,7 +58,7 @@ public class ListService extends TraktApiService {
 
     /**
      * Update a custom list.
-     *
+     * 
      * @param slug Slug to identify what list is being updated.
      * @return Builder instance.
      */
@@ -65,8 +66,7 @@ public class ListService extends TraktApiService {
         return new UpdateBuilder(this).slug(slug);
     }
 
-
-    public static final class AddBuilder extends TraktApiBuilder<ListResponse> {
+    public static final class AddBuilder extends TmdbApiBuilder<ListResponse> {
         private static final String POST_NAME = "name";
         private static final String POST_DESCRIPTION = "description";
         private static final String POST_PRIVACY = "privacy";
@@ -74,12 +74,13 @@ public class ListService extends TraktApiService {
         private static final String URI = "/lists/add/" + FIELD_API_KEY;
 
         private AddBuilder(ListService service) {
-            super(service, new TypeToken<ListResponse>() {}, URI, HttpMethod.Post);
+            super(service, new TypeToken<ListResponse>() {
+            }, URI, HttpMethod.Post);
         }
 
         /**
          * The list name. This must be unique.
-         *
+         * 
          * @param name Value.
          * @return Builder instance.
          */
@@ -90,7 +91,7 @@ public class ListService extends TraktApiService {
 
         /**
          * Optional but recommended description of what the list contains.
-         *
+         * 
          * @param description Value.
          * @return Builder instance.
          */
@@ -101,7 +102,7 @@ public class ListService extends TraktApiService {
 
         /**
          * Privacy level.
-         *
+         * 
          * @param privacy Value.
          * @return Builder instance.
          */
@@ -110,18 +111,20 @@ public class ListService extends TraktApiService {
             return this;
         }
     }
-    public static final class DeleteBuilder extends TraktApiBuilder<Response> {
+
+    public static final class DeleteBuilder extends TmdbApiBuilder<Response> {
         private static final String POST_SLUG = "slug";
 
         private static final String URI = "/lists/delete/" + FIELD_API_KEY;
 
         private DeleteBuilder(ListService service) {
-            super(service, new TypeToken<Response>() {}, URI, HttpMethod.Post);
+            super(service, new TypeToken<Response>() {
+            }, URI, HttpMethod.Post);
         }
 
         /**
          * Slug to identify what list is being deleted.
-         *
+         * 
          * @param slug Value.
          * @return Builder instance.
          */
@@ -130,7 +133,8 @@ public class ListService extends TraktApiService {
             return this;
         }
     }
-    public static final class ItemsAddBuilder extends TraktApiBuilder<ListItemsResponse> {
+
+    public static final class ItemsAddBuilder extends TmdbApiBuilder<ListItemsResponse> {
         private static final String POST_SLUG = "slug";
         private static final String POST_ITEMS = "items";
 
@@ -139,12 +143,13 @@ public class ListService extends TraktApiService {
         private final JsonArray items = new JsonArray();
 
         private ItemsAddBuilder(ListService service) {
-            super(service, new TypeToken<ListItemsResponse>() {}, URI, HttpMethod.Post);
+            super(service, new TypeToken<ListItemsResponse>() {
+            }, URI, HttpMethod.Post);
         }
 
         /**
          * Slug to identify what list is being added to.
-         *
+         * 
          * @param slug Value.
          * @return Builder instance.
          */
@@ -156,9 +161,11 @@ public class ListService extends TraktApiService {
         public ItemsAddBuilder addMovie(String imdbId) {
             return this.addMovie(imdbId, null, 0);
         }
+
         public ItemsAddBuilder addMovie(String title, int year) {
             return this.addMovie(null, title, year);
         }
+
         public ItemsAddBuilder addMovie(String imdbId, String title, int year) {
             JsonObject item = new JsonObject();
             item.addProperty("type", ListItemType.Movie.toString());
@@ -174,9 +181,11 @@ public class ListService extends TraktApiService {
             this.items.add(item);
             return this;
         }
+
         public ItemsAddBuilder addShow(String tvdbId) {
             return this.addShow(tvdbId, null);
         }
+
         public ItemsAddBuilder addShow(String tvdbId, String title) {
             JsonObject item = new JsonObject();
             item.addProperty("type", ListItemType.TvShow.toString());
@@ -187,9 +196,11 @@ public class ListService extends TraktApiService {
             this.items.add(item);
             return this;
         }
+
         public ItemsAddBuilder addShowSeason(String tvdbId, int season) {
             return this.addShowSeason(tvdbId, null, season);
         }
+
         public ItemsAddBuilder addShowSeason(String tvdbId, String title, int season) {
             JsonObject item = new JsonObject();
             item.addProperty("type", ListItemType.TvShowSeason.toString());
@@ -201,9 +212,11 @@ public class ListService extends TraktApiService {
             this.items.add(item);
             return this;
         }
+
         public ItemsAddBuilder addShowEpisode(String tvdbId, int season, int episode) {
             return this.addShowEpisode(tvdbId, null, season, episode);
         }
+
         public ItemsAddBuilder addShowEpisode(String tvdbId, String title, int season, int episode) {
             JsonObject item = new JsonObject();
             item.addProperty("type", ListItemType.TvShowEpisode.toString());
@@ -222,7 +235,8 @@ public class ListService extends TraktApiService {
             super.postParameter(POST_ITEMS, this.items);
         }
     }
-    public static final class ItemsDeleteBuilder extends TraktApiBuilder<Response> {
+
+    public static final class ItemsDeleteBuilder extends TmdbApiBuilder<Response> {
         private static final String POST_SLUG = "slug";
         private static final String POST_ITEMS = "items";
 
@@ -231,12 +245,13 @@ public class ListService extends TraktApiService {
         private final JsonArray items = new JsonArray();
 
         private ItemsDeleteBuilder(ListService service) {
-            super(service, new TypeToken<Response>() {}, URI, HttpMethod.Post);
+            super(service, new TypeToken<Response>() {
+            }, URI, HttpMethod.Post);
         }
 
         /**
          * Slug to identify what list is being added to.
-         *
+         * 
          * @param slug Value.
          * @return Builder instance.
          */
@@ -248,9 +263,11 @@ public class ListService extends TraktApiService {
         public ItemsDeleteBuilder addMovie(String imdbId) {
             return this.addMovie(imdbId, null, 0);
         }
+
         public ItemsDeleteBuilder addMovie(String title, int year) {
             return this.addMovie(null, title, year);
         }
+
         public ItemsDeleteBuilder addMovie(String imdbId, String title, int year) {
             JsonObject item = new JsonObject();
             item.addProperty("type", ListItemType.Movie.toString());
@@ -266,9 +283,11 @@ public class ListService extends TraktApiService {
             this.items.add(item);
             return this;
         }
+
         public ItemsDeleteBuilder addShow(String tvdbId) {
             return this.addShow(tvdbId, null);
         }
+
         public ItemsDeleteBuilder addShow(String tvdbId, String title) {
             JsonObject item = new JsonObject();
             item.addProperty("type", ListItemType.TvShow.toString());
@@ -279,9 +298,11 @@ public class ListService extends TraktApiService {
             this.items.add(item);
             return this;
         }
+
         public ItemsDeleteBuilder addShowSeason(String tvdbId, int season) {
             return this.addShowSeason(tvdbId, null, season);
         }
+
         public ItemsDeleteBuilder addShowSeason(String tvdbId, String title, int season) {
             JsonObject item = new JsonObject();
             item.addProperty("type", ListItemType.TvShowSeason.toString());
@@ -293,10 +314,13 @@ public class ListService extends TraktApiService {
             this.items.add(item);
             return this;
         }
+
         public ItemsDeleteBuilder addShowEpisode(String tvdbId, int season, int episode) {
             return this.addShowEpisode(tvdbId, null, season, episode);
         }
-        public ItemsDeleteBuilder addShowEpisode(String tvdbId, String title, int season, int episode) {
+
+        public ItemsDeleteBuilder addShowEpisode(String tvdbId, String title, int season,
+                int episode) {
             JsonObject item = new JsonObject();
             item.addProperty("type", ListItemType.TvShowEpisode.toString());
             item.addProperty("tvdb_id", tvdbId);
@@ -314,7 +338,8 @@ public class ListService extends TraktApiService {
             super.postParameter(POST_ITEMS, this.items);
         }
     }
-    public static final class UpdateBuilder extends TraktApiBuilder<ListResponse> {
+
+    public static final class UpdateBuilder extends TmdbApiBuilder<ListResponse> {
         private static final String POST_SLUG = "slug";
         private static final String POST_NAME = "name";
         private static final String POST_DESCRIPTION = "description";
@@ -323,12 +348,13 @@ public class ListService extends TraktApiService {
         private static final String URI = "/lists/update/" + FIELD_API_KEY;
 
         private UpdateBuilder(ListService service) {
-            super(service, new TypeToken<ListResponse>() {}, URI, HttpMethod.Post);
+            super(service, new TypeToken<ListResponse>() {
+            }, URI, HttpMethod.Post);
         }
 
         /**
          * Slug to identify what list is being updated.
-         *
+         * 
          * @param slug Value.
          * @return Builder instance.
          */
@@ -339,7 +365,7 @@ public class ListService extends TraktApiService {
 
         /**
          * The list name. This must be unique.
-         *
+         * 
          * @param name Value.
          * @return Builder instance.
          */
@@ -350,7 +376,7 @@ public class ListService extends TraktApiService {
 
         /**
          * Optional but recommended description of what the list contains.
-         *
+         * 
          * @param description Value.
          * @return Builder instance.
          */
@@ -361,7 +387,7 @@ public class ListService extends TraktApiService {
 
         /**
          * Privacy level.
-         *
+         * 
          * @param privacy Value.
          * @return Builder instance.
          */

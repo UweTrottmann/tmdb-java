@@ -1,35 +1,39 @@
+
 package com.uwetrottmann.tmdb.entities;
 
-import java.util.Date;
 import com.google.gson.annotations.SerializedName;
-import com.uwetrottmann.tmdb.TraktEntity;
+import com.uwetrottmann.tmdb.Entity;
 import com.uwetrottmann.tmdb.enumerations.ActivityAction;
 import com.uwetrottmann.tmdb.enumerations.ActivityType;
 import com.uwetrottmann.tmdb.enumerations.Rating;
 
+import java.util.Date;
+
 /**
- * Represents a Trakt activity item. See
- * <a href="http://trakt.tv/api-docs/activity-community"> the documentation</a>
- * for a list of {@link #type}s and {@link #action}s and which properties they
+ * Represents a Trakt activity item. See <a
+ * href="http://trakt.tv/api-docs/activity-community"> the documentation</a> for
+ * a list of {@link #type}s and {@link #action}s and which properties they
  * include.
  */
-public class ActivityItemBase implements TraktEntity {
+public class ActivityItemBase implements Entity {
     private static final long serialVersionUID = -7644201423350992899L;
 
-    public static class When implements TraktEntity {
+    public static class When implements Entity {
         private static final long serialVersionUID = 8126529523279348951L;
 
         public String day;
         public String time;
     }
-    public static class Elapsed implements TraktEntity {
+
+    public static class Elapsed implements Entity {
         private static final long serialVersionUID = -6458210319412047876L;
 
         @SerializedName("short")
         public String _short;
         public String full;
     }
-    public static class Shout implements TraktEntity {
+
+    public static class Shout implements Entity {
         private static final long serialVersionUID = 7034369697434197979L;
 
         public String text;

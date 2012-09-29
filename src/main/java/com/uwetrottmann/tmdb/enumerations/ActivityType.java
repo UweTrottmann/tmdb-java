@@ -1,9 +1,10 @@
+
 package com.uwetrottmann.tmdb.enumerations;
+
+import com.uwetrottmann.tmdb.TraktEnumeration;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import com.uwetrottmann.tmdb.TraktEnumeration;
 
 public enum ActivityType implements TraktEnumeration {
     All("all"),

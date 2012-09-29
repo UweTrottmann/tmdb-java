@@ -1,8 +1,9 @@
+
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.TraktEntity;
+import com.uwetrottmann.tmdb.Entity;
 
-public class Genre implements TraktEntity {
+public class Genre implements Entity {
     private static final long serialVersionUID = -7818541411651542895L;
 
     public String name;
@@ -13,6 +14,7 @@ public class Genre implements TraktEntity {
     public String getName() {
         return this.name;
     }
+
     /** @deprecated Use {@link #slug} */
     @Deprecated
     public String getSlug() {

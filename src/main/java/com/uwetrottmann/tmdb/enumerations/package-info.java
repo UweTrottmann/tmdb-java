@@ -14,4 +14,5 @@
  * method defined within the type, by convention,
  * <code>fromString(String)</code>.</p>
  */
+
 package com.uwetrottmann.tmdb.enumerations;
