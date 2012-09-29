@@ -40,7 +40,7 @@ public class MoviesService extends TmdbApiService {
             super(service, new TypeToken<Movie>() {
             }, URI);
 
-            field(FIELD_QUERY, id);
+            field(FIELD_ID, id);
         }
     }
 }

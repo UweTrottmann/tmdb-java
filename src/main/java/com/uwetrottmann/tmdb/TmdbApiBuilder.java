@@ -43,32 +43,6 @@ public abstract class TmdbApiBuilder<T> extends ApiBuilder {
             + API_URL_DELIMITER_END;
 
     protected static final String FIELD_ID = API_URL_DELIMITER_START + "id" + API_URL_DELIMITER_END;
-    protected static final String FIELD_USERNAME = API_URL_DELIMITER_START + "username"
-            + API_URL_DELIMITER_END;
-    protected static final String FIELD_DATE = API_URL_DELIMITER_START + "date"
-            + API_URL_DELIMITER_END;
-    protected static final String FIELD_DAYS = API_URL_DELIMITER_START + "days"
-            + API_URL_DELIMITER_END;
-    protected static final String FIELD_QUERY = API_URL_DELIMITER_START + "query"
-            + API_URL_DELIMITER_END;
-    protected static final String FIELD_SEASON = API_URL_DELIMITER_START + "season"
-            + API_URL_DELIMITER_END;
-    protected static final String FIELD_SLUG = API_URL_DELIMITER_START + "slug"
-            + API_URL_DELIMITER_END;
-    protected static final String FIELD_TITLE = API_URL_DELIMITER_START + "title"
-            + API_URL_DELIMITER_END;
-    protected static final String FIELD_EPISODE = API_URL_DELIMITER_START + "episode"
-            + API_URL_DELIMITER_END;
-    protected static final String FIELD_EXTENDED = API_URL_DELIMITER_START + "extended"
-            + API_URL_DELIMITER_END;
-    protected static final String FIELD_HIDE_WATCHED = API_URL_DELIMITER_START + "hidewatched"
-            + API_URL_DELIMITER_END;
-    protected static final String FIELD_TYPES = API_URL_DELIMITER_START + "types"
-            + API_URL_DELIMITER_END;
-    protected static final String FIELD_ACTIONS = API_URL_DELIMITER_START + "actions"
-            + API_URL_DELIMITER_END;
-    protected static final String FIELD_TIMESTAMP = API_URL_DELIMITER_START + "timestamp"
-            + API_URL_DELIMITER_END;
 
     /** Format for encoding a {@link java.util.Date} in a URL. */
     private static final SimpleDateFormat URL_DATE_FORMAT = new SimpleDateFormat("yyyyMMdd");
