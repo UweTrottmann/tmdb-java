@@ -35,12 +35,6 @@ public abstract class TmdbApiService extends ApiService {
     /** Default read timeout (in milliseconds). */
     private static final int DEFAULT_TIMEOUT_READ = 10 * (int) TmdbApiBuilder.MILLISECONDS_IN_SECOND;
 
-    /** HTTP header name for authorization. */
-    private static final String HEADER_AUTHORIZATION = "Authorization";
-
-    /** HTTP authorization type. */
-    private static final String HEADER_AUTHORIZATION_TYPE = "Basic";
-
     /** Character set used for encoding and decoding transmitted values. */
     private static final Charset UTF_8_CHAR_SET = Charset.forName(ApiService.CONTENT_ENCODING);
 
@@ -87,27 +81,6 @@ public abstract class TmdbApiService extends ApiService {
     public JsonElement post(String url, String postBody) {
         return this.unmarshall(this.executeMethod(url, postBody, null, HTTP_METHOD_POST,
                 HttpURLConnection.HTTP_OK));
-    }
-
-    /**
-     * Set email and password to use for HTTP basic authentication.
-     * 
-     * @param username Username.
-     * @param password_sha Password SHA1.
-     */
-    public void setAuthentication(String username, String password_sha) {
-        if ((username == null) || (username.length() == 0)) {
-            throw new IllegalArgumentException("Username must not be empty.");
-        }
-        if ((password_sha == null) || (password_sha.length() == 0)) {
-            throw new IllegalArgumentException("Password SHA must not be empty.");
-        }
-
-        String source = username + ":" + password_sha;
-        String authentication = HEADER_AUTHORIZATION_TYPE + " "
-                + Base64.encodeBytes(source.getBytes());
-
-        this.addRequestHeader(HEADER_AUTHORIZATION, authentication);
     }
 
     /**
