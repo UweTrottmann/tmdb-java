@@ -20,6 +20,7 @@ package com.uwetrottmann.tmdb.entities;
 import com.uwetrottmann.tmdb.TmdbEntity;
 
 import java.util.Date;
+import java.util.List;
 
 public class Movie implements TmdbEntity {
     private static final long serialVersionUID = 4604935751051141456L;
@@ -30,19 +31,19 @@ public class Movie implements TmdbEntity {
     public String backdrop_path;
     // TODO belongs_to_collection
     public Integer budget;
-    // TODO genres
+    public List<Genre> genres;
     public String homepage;
     public String imdb_id;
     public String original_title;
     public String overview;
     public Double popularity;
     public String poster_path;
-    // TODO production_companies
-    // TODO production_countries
+    public List<ProductionCompany> production_companies;
+    public List<ProductionCountry> production_countries;
     public Date release_date;
     public Integer revenue;
     public Integer runtime;
-    // TODO spoken_languages
+    public List<SpokenLanguage> spoken_languages;
     public String tagline;
     public String title;
     public Double vote_average;
