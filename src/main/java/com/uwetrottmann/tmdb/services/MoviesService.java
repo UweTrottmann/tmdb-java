@@ -21,6 +21,7 @@ import com.google.gson.reflect.TypeToken;
 import com.uwetrottmann.tmdb.TmdbApiBuilder;
 import com.uwetrottmann.tmdb.TmdbApiService;
 import com.uwetrottmann.tmdb.entities.Movie;
+import com.uwetrottmann.tmdb.entities.Trailers;
 
 public class MoviesService extends TmdbApiService {
 
@@ -33,11 +34,31 @@ public class MoviesService extends TmdbApiService {
         return new SummaryBuilder(this, id);
     }
 
+    /**
+     * Get the trailers for a specific movie id.
+     * 
+     * @return Builder instance.
+     */
+    public TrailerBuilder trailers(Integer id) {
+        return new TrailerBuilder(this, id);
+    }
+
     public static final class SummaryBuilder extends TmdbApiBuilder<Movie> {
         private static final String URI = "/movie/" + FIELD_ID + FIELD_API_KEY;
 
         private SummaryBuilder(MoviesService service, Integer id) {
             super(service, new TypeToken<Movie>() {
+            }, URI);
+
+            field(FIELD_ID, id);
+        }
+    }
+
+    public static final class TrailerBuilder extends TmdbApiBuilder<Trailers> {
+        private static final String URI = "/movie/" + FIELD_ID + "/trailers" + FIELD_API_KEY;
+
+        private TrailerBuilder(MoviesService service, Integer id) {
+            super(service, new TypeToken<Trailers>() {
             }, URI);
 
             field(FIELD_ID, id);

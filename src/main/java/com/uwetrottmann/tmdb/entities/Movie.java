@@ -17,11 +17,11 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.Entity;
+import com.uwetrottmann.tmdb.TmdbEntity;
 
 import java.util.Date;
 
-public class Movie implements Entity {
+public class Movie implements TmdbEntity {
     private static final long serialVersionUID = 4604935751051141456L;
 
     public Integer id;

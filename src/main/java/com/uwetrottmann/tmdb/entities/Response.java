@@ -1,9 +1,9 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.Entity;
+import com.uwetrottmann.tmdb.TmdbEntity;
 
-public class Response implements Entity {
+public class Response implements TmdbEntity {
     private static final long serialVersionUID = 5921890886906816035L;
 
     public String status; // TODO: enum
