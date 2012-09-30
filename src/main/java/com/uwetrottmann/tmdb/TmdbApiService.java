@@ -72,6 +72,7 @@ public abstract class TmdbApiService extends ApiService {
         // Setup timeout defaults
         this.setConnectTimeout(DEFAULT_TIMEOUT_CONNECT);
         this.setReadTimeout(DEFAULT_TIMEOUT_READ);
+        this.addRequestHeader("Accept", "application/json");
     }
 
     /**
