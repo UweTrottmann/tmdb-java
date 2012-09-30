@@ -46,7 +46,7 @@ public class ConfigurationService extends TmdbApiService {
     }
 
     public static final class ConfigurationBuilder extends TmdbApiBuilder<Configuration> {
-        private static final String URI = "/configuration" + FIELD_API_KEY;
+        private static final String URI = "/configuration" + PARAMETER_API_KEY;
 
         private ConfigurationBuilder(ConfigurationService service) {
             super(service, new TypeToken<Configuration>() {

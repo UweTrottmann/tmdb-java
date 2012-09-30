@@ -107,7 +107,7 @@ public class MoviesService extends TmdbApiService {
     }
 
     public static final class CastsBuilder extends TmdbApiBuilder<Casts> {
-        private static final String URI = "/movie/" + FIELD_ID + "/casts" + FIELD_API_KEY;
+        private static final String URI = "/movie/" + FIELD_ID + "/casts" + PARAMETER_API_KEY;
 
         private CastsBuilder(MoviesService service, int id) {
             super(service, new TypeToken<Casts>() {
@@ -118,7 +118,7 @@ public class MoviesService extends TmdbApiService {
     }
 
     public static final class SummaryBuilder extends TmdbApiBuilder<Movie> {
-        private static final String URI = "/movie/" + FIELD_ID + FIELD_API_KEY + FIELD_LANGUAGE;
+        private static final String URI = "/movie/" + FIELD_ID + PARAMETER_API_KEY + PARAMETER_LANGUAGE;
 
         private SummaryBuilder(MoviesService service, int id) {
             super(service, new TypeToken<Movie>() {
@@ -134,13 +134,13 @@ public class MoviesService extends TmdbApiService {
          * @param languageCode ISO 639-1 code.
          */
         public SummaryBuilder language(String languageCode) {
-            parameter(FIELD_LANGUAGE, languageCode);
+            parameter(PARAMETER_LANGUAGE, languageCode);
             return this;
         }
     }
 
     public static final class TrailerBuilder extends TmdbApiBuilder<Trailers> {
-        private static final String URI = "/movie/" + FIELD_ID + "/trailers" + FIELD_API_KEY;
+        private static final String URI = "/movie/" + FIELD_ID + "/trailers" + PARAMETER_API_KEY;
 
         private TrailerBuilder(MoviesService service, int id) {
             super(service, new TypeToken<Trailers>() {
@@ -151,8 +151,8 @@ public class MoviesService extends TmdbApiService {
     }
 
     public static final class NowPlayingBuilder extends TmdbApiBuilder<ResultsPage> {
-        private static final String URI = "/movie/now_playing" + FIELD_API_KEY + FIELD_PAGE
-                + FIELD_LANGUAGE;
+        private static final String URI = "/movie/now_playing" + PARAMETER_API_KEY + PARAMETER_PAGE
+                + PARAMETER_LANGUAGE;
 
         private NowPlayingBuilder(MoviesService service) {
             super(service, new TypeToken<ResultsPage>() {
@@ -166,7 +166,7 @@ public class MoviesService extends TmdbApiService {
          * @param languageCode ISO 639-1 code.
          */
         public NowPlayingBuilder language(String languageCode) {
-            parameter(FIELD_LANGUAGE, languageCode);
+            parameter(PARAMETER_LANGUAGE, languageCode);
             return this;
         }
 
@@ -176,14 +176,14 @@ public class MoviesService extends TmdbApiService {
          * @param page Index of the page.
          */
         public NowPlayingBuilder page(int page) {
-            parameter(FIELD_PAGE, page);
+            parameter(PARAMETER_PAGE, page);
             return this;
         }
     }
 
     public static final class PopularBuilder extends TmdbApiBuilder<ResultsPage> {
-        private static final String URI = "/movie/popular" + FIELD_API_KEY + FIELD_PAGE
-                + FIELD_LANGUAGE;
+        private static final String URI = "/movie/popular" + PARAMETER_API_KEY + PARAMETER_PAGE
+                + PARAMETER_LANGUAGE;
 
         private PopularBuilder(MoviesService service) {
             super(service, new TypeToken<ResultsPage>() {
@@ -197,7 +197,7 @@ public class MoviesService extends TmdbApiService {
          * @param languageCode ISO 639-1 code.
          */
         public PopularBuilder language(String languageCode) {
-            parameter(FIELD_LANGUAGE, languageCode);
+            parameter(PARAMETER_LANGUAGE, languageCode);
             return this;
         }
 
@@ -207,16 +207,16 @@ public class MoviesService extends TmdbApiService {
          * @param page Index of the page.
          */
         public PopularBuilder page(int page) {
-            parameter(FIELD_PAGE, page);
+            parameter(PARAMETER_PAGE, page);
             return this;
         }
     }
 
     public static final class SimilarBuilder extends TmdbApiBuilder<ResultsPage> {
         private static final String URI = "/movie/" + FIELD_ID + "/similar_movies"
-                + FIELD_API_KEY
-                + FIELD_PAGE
-                + FIELD_LANGUAGE;
+                + PARAMETER_API_KEY
+                + PARAMETER_PAGE
+                + PARAMETER_LANGUAGE;
 
         private SimilarBuilder(MoviesService service, int id) {
             super(service, new TypeToken<ResultsPage>() {
@@ -232,7 +232,7 @@ public class MoviesService extends TmdbApiService {
          * @param languageCode ISO 639-1 code.
          */
         public SimilarBuilder language(String languageCode) {
-            parameter(FIELD_LANGUAGE, languageCode);
+            parameter(PARAMETER_LANGUAGE, languageCode);
             return this;
         }
 
@@ -242,14 +242,14 @@ public class MoviesService extends TmdbApiService {
          * @param page Index of the page.
          */
         public SimilarBuilder page(int page) {
-            parameter(FIELD_PAGE, page);
+            parameter(PARAMETER_PAGE, page);
             return this;
         }
     }
 
     public static final class TopRatedBuilder extends TmdbApiBuilder<ResultsPage> {
-        private static final String URI = "/movie/top_rated" + FIELD_API_KEY + FIELD_PAGE
-                + FIELD_LANGUAGE;
+        private static final String URI = "/movie/top_rated" + PARAMETER_API_KEY + PARAMETER_PAGE
+                + PARAMETER_LANGUAGE;
 
         private TopRatedBuilder(MoviesService service) {
             super(service, new TypeToken<ResultsPage>() {
@@ -263,7 +263,7 @@ public class MoviesService extends TmdbApiService {
          * @param languageCode ISO 639-1 code.
          */
         public TopRatedBuilder language(String languageCode) {
-            parameter(FIELD_LANGUAGE, languageCode);
+            parameter(PARAMETER_LANGUAGE, languageCode);
             return this;
         }
 
@@ -273,14 +273,14 @@ public class MoviesService extends TmdbApiService {
          * @param page Index of the page.
          */
         public TopRatedBuilder page(int page) {
-            parameter(FIELD_PAGE, page);
+            parameter(PARAMETER_PAGE, page);
             return this;
         }
     }
 
     public static final class UpcomingBuilder extends TmdbApiBuilder<ResultsPage> {
-        private static final String URI = "/movie/upcoming" + FIELD_API_KEY + FIELD_PAGE
-                + FIELD_LANGUAGE;
+        private static final String URI = "/movie/upcoming" + PARAMETER_API_KEY + PARAMETER_PAGE
+                + PARAMETER_LANGUAGE;
 
         private UpcomingBuilder(MoviesService service) {
             super(service, new TypeToken<ResultsPage>() {
@@ -294,7 +294,7 @@ public class MoviesService extends TmdbApiService {
          * @param languageCode ISO 639-1 code.
          */
         public UpcomingBuilder language(String languageCode) {
-            parameter(FIELD_LANGUAGE, languageCode);
+            parameter(PARAMETER_LANGUAGE, languageCode);
             return this;
         }
 
@@ -304,7 +304,7 @@ public class MoviesService extends TmdbApiService {
          * @param page Index of the page.
          */
         public UpcomingBuilder page(int page) {
-            parameter(FIELD_PAGE, page);
+            parameter(PARAMETER_PAGE, page);
             return this;
         }
     }

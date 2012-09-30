@@ -39,14 +39,12 @@ import java.util.List;
  */
 public abstract class TmdbApiBuilder<T> extends ApiBuilder {
     /** API key field name. */
-    protected static final String FIELD_API_KEY = API_URL_DELIMITER_START + "api_key"
-            + API_URL_DELIMITER_END;
+    protected static final String PARAMETER_API_KEY = "api_key";
+
+    protected static final String PARAMETER_PAGE = "page";
+    protected static final String PARAMETER_LANGUAGE = "language";
 
     protected static final String FIELD_ID = API_URL_DELIMITER_START + "id" + API_URL_DELIMITER_END;
-    protected static final String FIELD_PAGE = API_URL_DELIMITER_START + "page"
-            + API_URL_DELIMITER_END;
-    protected static final String FIELD_LANGUAGE = API_URL_DELIMITER_START + "language"
-            + API_URL_DELIMITER_END;
 
     /** Format for encoding a {@link java.util.Date} in a URL. */
     private static final SimpleDateFormat URL_DATE_FORMAT = new SimpleDateFormat("yyyyMMdd");
@@ -106,7 +104,7 @@ public abstract class TmdbApiBuilder<T> extends ApiBuilder {
         this.method = method;
         this.postBody = new JsonObject();
 
-        this.parameter(FIELD_API_KEY, this.service.getApiKey());
+        this.parameter(PARAMETER_API_KEY, this.service.getApiKey());
     }
 
     /**
@@ -233,7 +231,7 @@ public abstract class TmdbApiBuilder<T> extends ApiBuilder {
      * @return Current instance for builder pattern.
      */
     /* package */final ApiBuilder api(String apiKey) {
-        return this.field(FIELD_API_KEY, apiKey);
+        return this.field(PARAMETER_API_KEY, apiKey);
     }
 
     /**
