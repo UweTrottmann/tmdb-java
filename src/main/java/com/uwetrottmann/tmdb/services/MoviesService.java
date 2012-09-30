@@ -107,7 +107,7 @@ public class MoviesService extends TmdbApiService {
     }
 
     public static final class CastsBuilder extends TmdbApiBuilder<Casts> {
-        private static final String URI = "/movie/" + FIELD_ID + "/casts" + PARAMETER_API_KEY;
+        private static final String URI = "/movie/" + FIELD_ID + "/casts";
 
         private CastsBuilder(MoviesService service, int id) {
             super(service, new TypeToken<Casts>() {
@@ -118,7 +118,7 @@ public class MoviesService extends TmdbApiService {
     }
 
     public static final class SummaryBuilder extends TmdbApiBuilder<Movie> {
-        private static final String URI = "/movie/" + FIELD_ID + PARAMETER_API_KEY + PARAMETER_LANGUAGE;
+        private static final String URI = "/movie/" + FIELD_ID;
 
         private SummaryBuilder(MoviesService service, int id) {
             super(service, new TypeToken<Movie>() {
@@ -140,7 +140,7 @@ public class MoviesService extends TmdbApiService {
     }
 
     public static final class TrailerBuilder extends TmdbApiBuilder<Trailers> {
-        private static final String URI = "/movie/" + FIELD_ID + "/trailers" + PARAMETER_API_KEY;
+        private static final String URI = "/movie/" + FIELD_ID + "/trailers";
 
         private TrailerBuilder(MoviesService service, int id) {
             super(service, new TypeToken<Trailers>() {
@@ -151,8 +151,7 @@ public class MoviesService extends TmdbApiService {
     }
 
     public static final class NowPlayingBuilder extends TmdbApiBuilder<ResultsPage> {
-        private static final String URI = "/movie/now_playing" + PARAMETER_API_KEY + PARAMETER_PAGE
-                + PARAMETER_LANGUAGE;
+        private static final String URI = "/movie/now_playing";
 
         private NowPlayingBuilder(MoviesService service) {
             super(service, new TypeToken<ResultsPage>() {
@@ -182,8 +181,7 @@ public class MoviesService extends TmdbApiService {
     }
 
     public static final class PopularBuilder extends TmdbApiBuilder<ResultsPage> {
-        private static final String URI = "/movie/popular" + PARAMETER_API_KEY + PARAMETER_PAGE
-                + PARAMETER_LANGUAGE;
+        private static final String URI = "/movie/popular";
 
         private PopularBuilder(MoviesService service) {
             super(service, new TypeToken<ResultsPage>() {
@@ -213,10 +211,7 @@ public class MoviesService extends TmdbApiService {
     }
 
     public static final class SimilarBuilder extends TmdbApiBuilder<ResultsPage> {
-        private static final String URI = "/movie/" + FIELD_ID + "/similar_movies"
-                + PARAMETER_API_KEY
-                + PARAMETER_PAGE
-                + PARAMETER_LANGUAGE;
+        private static final String URI = "/movie/" + FIELD_ID + "/similar_movies";
 
         private SimilarBuilder(MoviesService service, int id) {
             super(service, new TypeToken<ResultsPage>() {
@@ -248,8 +243,7 @@ public class MoviesService extends TmdbApiService {
     }
 
     public static final class TopRatedBuilder extends TmdbApiBuilder<ResultsPage> {
-        private static final String URI = "/movie/top_rated" + PARAMETER_API_KEY + PARAMETER_PAGE
-                + PARAMETER_LANGUAGE;
+        private static final String URI = "/movie/top_rated";
 
         private TopRatedBuilder(MoviesService service) {
             super(service, new TypeToken<ResultsPage>() {
@@ -279,8 +273,7 @@ public class MoviesService extends TmdbApiService {
     }
 
     public static final class UpcomingBuilder extends TmdbApiBuilder<ResultsPage> {
-        private static final String URI = "/movie/upcoming" + PARAMETER_API_KEY + PARAMETER_PAGE
-                + PARAMETER_LANGUAGE;
+        private static final String URI = "/movie/upcoming";
 
         private UpcomingBuilder(MoviesService service) {
             super(service, new TypeToken<ResultsPage>() {
