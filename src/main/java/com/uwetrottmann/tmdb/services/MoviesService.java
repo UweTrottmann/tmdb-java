@@ -33,7 +33,7 @@ public class MoviesService extends TmdbApiService {
      * @param id TMDb id.
      * @return Builder instance.
      */
-    public CastsBuilder casts(Integer id) {
+    public CastsBuilder casts(int id) {
         return new CastsBuilder(this, id);
     }
 
@@ -43,7 +43,7 @@ public class MoviesService extends TmdbApiService {
      * @param id TMDb id.
      * @return Builder instance.
      */
-    public SummaryBuilder summary(Integer id) {
+    public SummaryBuilder summary(int id) {
         return new SummaryBuilder(this, id);
     }
 
@@ -53,7 +53,7 @@ public class MoviesService extends TmdbApiService {
      * @param id TMDb id.
      * @return Builder instance.
      */
-    public TrailerBuilder trailers(Integer id) {
+    public TrailerBuilder trailers(int id) {
         return new TrailerBuilder(this, id);
     }
 
@@ -82,7 +82,7 @@ public class MoviesService extends TmdbApiService {
      * 
      * @return Builder instance.
      */
-    public SimilarBuilder similarMovies(Integer id) {
+    public SimilarBuilder similarMovies(int id) {
         return new SimilarBuilder(this, id);
     }
 
@@ -109,7 +109,7 @@ public class MoviesService extends TmdbApiService {
     public static final class CastsBuilder extends TmdbApiBuilder<Casts> {
         private static final String URI = "/movie/" + FIELD_ID + "/casts" + FIELD_API_KEY;
 
-        private CastsBuilder(MoviesService service, Integer id) {
+        private CastsBuilder(MoviesService service, int id) {
             super(service, new TypeToken<Casts>() {
             }, URI);
 
@@ -120,7 +120,7 @@ public class MoviesService extends TmdbApiService {
     public static final class SummaryBuilder extends TmdbApiBuilder<Movie> {
         private static final String URI = "/movie/" + FIELD_ID + FIELD_API_KEY + FIELD_LANGUAGE;
 
-        private SummaryBuilder(MoviesService service, Integer id) {
+        private SummaryBuilder(MoviesService service, int id) {
             super(service, new TypeToken<Movie>() {
             }, URI);
 
@@ -142,7 +142,7 @@ public class MoviesService extends TmdbApiService {
     public static final class TrailerBuilder extends TmdbApiBuilder<Trailers> {
         private static final String URI = "/movie/" + FIELD_ID + "/trailers" + FIELD_API_KEY;
 
-        private TrailerBuilder(MoviesService service, Integer id) {
+        private TrailerBuilder(MoviesService service, int id) {
             super(service, new TypeToken<Trailers>() {
             }, URI);
 
@@ -218,7 +218,7 @@ public class MoviesService extends TmdbApiService {
                 + FIELD_PAGE
                 + FIELD_LANGUAGE;
 
-        private SimilarBuilder(MoviesService service, Integer id) {
+        private SimilarBuilder(MoviesService service, int id) {
             super(service, new TypeToken<ResultsPage>() {
             }, URI);
 
