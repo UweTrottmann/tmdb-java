@@ -4,4 +4,6 @@ Change Log
 1.0.0 *(In Development)*
 ------------------------
 
- * Initial version.
+ * Configuration service
+ * Movie service (incomplete)
+ * Search service (incomplete)
