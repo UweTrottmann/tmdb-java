@@ -21,7 +21,6 @@ import com.google.gson.reflect.TypeToken;
 import com.uwetrottmann.tmdb.TmdbApiBuilder;
 import com.uwetrottmann.tmdb.TmdbApiService;
 import com.uwetrottmann.tmdb.entities.ResultsPage;
-import com.uwetrottmann.tmdb.services.MoviesService.PopularBuilder;
 
 public class SearchService extends TmdbApiService {
 

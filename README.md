@@ -28,12 +28,12 @@ originates from [JakeWharton/trakt-java/][2].
 Using with Android
 ============
 
-Because some device manufactures shipped a non-hidden version of GSON you *HAVE* to replace the included GSON jar (see /libs) with a version with the package name customized, to e.g. myjson. For details see this [GSON help page][3].
+Because some device manufactures shipped a non-hidden version of GSON you *HAVE* to replace the included GSON jar (see /libs) with a version with the package name customized, to e.g. myjson. For details see this [GSON help page][3] and the seriesguide branch for an example how to do this.
 
 License
 =======
 
-    Copyright 2012 Uwe Trottmann
+    Copyright 2013 Uwe Trottmann
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
