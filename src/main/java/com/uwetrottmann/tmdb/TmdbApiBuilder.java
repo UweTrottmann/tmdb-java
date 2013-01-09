@@ -43,6 +43,9 @@ public abstract class TmdbApiBuilder<T> extends ApiBuilder {
 
     protected static final String PARAMETER_PAGE = "page";
     protected static final String PARAMETER_LANGUAGE = "language";
+    protected static final String PARAMETER_QUERY = "query";
+    protected static final String PARAMETER_YEAR = "year";
+    protected static final String PARAMETER_INCLUDE_ADULT = "include_adult";
 
     protected static final String FIELD_ID = API_URL_DELIMITER_START + "id" + API_URL_DELIMITER_END;
 

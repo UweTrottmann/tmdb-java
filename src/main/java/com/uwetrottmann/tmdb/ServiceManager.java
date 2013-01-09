@@ -19,6 +19,7 @@ package com.uwetrottmann.tmdb;
 
 import com.uwetrottmann.tmdb.services.ConfigurationService;
 import com.uwetrottmann.tmdb.services.MoviesService;
+import com.uwetrottmann.tmdb.services.SearchService;
 
 /**
  * Class to manage service creation with default settings.
@@ -87,6 +88,12 @@ public class ServiceManager {
 
     public MoviesService moviesService() {
         MoviesService service = new MoviesService();
+        setupService(service);
+        return service;
+    }
+    
+    public SearchService searchService() {
+        SearchService service = new SearchService();
         setupService(service);
         return service;
     }
