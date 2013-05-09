@@ -195,7 +195,7 @@ public abstract class TmdbApiService extends ApiService {
                 try {
                     return JSON_STRING_DATE.parse(json.getAsString());
                 } catch (ParseException e) {
-                    throw new JsonParseException(e);
+                    return null;
                 }
             }
         });
