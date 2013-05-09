@@ -1,3 +1,5 @@
+**Pull requests (e.g. support for more API endpoints, bugfixes) against dev are welcome!**
+
 tmdb-java
 ============
 
