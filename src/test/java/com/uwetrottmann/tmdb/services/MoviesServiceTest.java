@@ -26,7 +26,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertNotNull("Movie overview was null.", movie.overview);
         assertNotNull("Movie poster path was null.", movie.poster_path);
         assertNotNull("Movie release date was null.", movie.release_date);
-        assertEquals("Movie release date does not match.", JSON_STRING_DATE.parse("1999-10-15"),
+        assertEquals("Movie release date does not match.", JSON_STRING_DATE.parse("1999-10-14"),
                 movie.release_date);
         assertNotNull("Movie revenue was null.", movie.revenue);
         assertEquals("Movie revenue does not match.", 100853753, movie.revenue.intValue());

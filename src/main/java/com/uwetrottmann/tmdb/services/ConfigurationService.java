@@ -33,7 +33,7 @@ public class ConfigurationService extends TmdbApiService {
      * <br>
      * To build an image URL, you will need 3 pieces of data. The base_url, size
      * and file_path. Simply combine them all and you will have a fully
-     * qualified URL. Here’s an example URL:<br>
+     * qualified URL. Here is an example URL:<br>
      * <br>
      * <a href=
      * "http://cf2.imgobject.com/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg"

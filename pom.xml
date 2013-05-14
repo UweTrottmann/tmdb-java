@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.uwetrottmann</groupId>
+	<artifactId>tmdb-java</artifactId>
+	<packaging>jar</packaging>
+	<version>0.1</version>
+
+	<name>tmdb-java</name>
+	<description>tmdb-java is a Java/Android library that provides access to the themoviedatabase API v3.</description>
+	<url>https://github.com/UweTrottmann/tmdb-java</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.sourceEncoding>UTF-8</project.reporting.sourceEncoding>
+
+		<!-- Compilation -->
+		<java.version>1.6</java.version>
+
+		<!-- Dependencies -->
+		<apibuilder.version>1.1.1</apibuilder.version>
+		<gson.version>2.2.3</gson.version>
+
+		<!-- Test Dependencies -->
+		<junit.version>4.11</junit.version>
+
+	</properties>
+
+	<scm>
+		<url>https://github.com/UweTrottmann/tmdb-java</url>
+		<connection>scm:git:git://github.com/UweTrottmann/tmdb-java.git</connection>
+		<developerConnection>scm:git:git@github.com:UweTrottmann/tmdb-java.git</developerConnection>
+	</scm>
+
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/UweTrottmann/tmdb-java/issues</url>
+	</issueManagement>
+
+	<licenses>
+		<license>
+			<name>Apache 2.0</name>
+			<url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.jakewharton</groupId>
+			<artifactId>apibuilder</artifactId>
+			<version>${apibuilder.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${gson.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.0</version>
+					<configuration>
+						<source>${java.version}</source>
+						<target>${java.version}</target>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<configuration>
+						<archive>
+							<manifest>
+								<mainClass>fully.qualified.MainClass</mainClass>
+							</manifest>
+						</archive>
+						<descriptorRefs>
+							<descriptorRef>jar-with-dependencies</descriptorRef>
+						</descriptorRefs>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

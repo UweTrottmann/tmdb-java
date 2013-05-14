@@ -161,10 +161,4 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
-
-#############
-## Android
-#############
-# generated files
-bin/
-gen/
+/target
