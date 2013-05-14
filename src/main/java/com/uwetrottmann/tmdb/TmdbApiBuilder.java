@@ -53,7 +53,7 @@ public abstract class TmdbApiBuilder<T> extends ApiBuilder {
     private static final SimpleDateFormat URL_DATE_FORMAT = new SimpleDateFormat("yyyyMMdd");
 
     /** API URL base. */
-    private static final String BASE_URL = "http://private-18ab-themoviedb.apiary.io/3";
+    private static final String BASE_URL = "http://api.themoviedb.org/3";
 
     /** Number of milliseconds in a single second. */
     protected static final long MILLISECONDS_IN_SECOND = 1000;
