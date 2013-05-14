@@ -30,7 +30,7 @@ originates from [JakeWharton/trakt-java/][2].
 Using with Android
 ============
 
-Because some device manufactures shipped a non-hidden version of GSON you *HAVE* to replace the included GSON jar (see /libs) with a version with the package name customized, to e.g. myjson. For details see this [GSON help page][3] and the seriesguide branch for an example how to do this.
+Because some device manufactures shipped a non-hidden version of GSON you *HAVE* to replace the included GSON jar (see /libs) with a version with the package name customized, to e.g. myjson. For details see this [GSON help page][3] and the myjson branch for an example how to do this.
 
 License
 =======
