@@ -65,7 +65,7 @@ public interface MoviesService {
      *
      * @param tmdbId TMDb id.
      */
-    @GET("movie/{id}/trailers")
+    @GET("/movie/{id}/trailers")
     Trailers trailers(
             @Path("id") int tmdbId
     );
@@ -111,6 +111,7 @@ public interface MoviesService {
     /**
      * Get the similar movies for a specific movie id.
      */
+    @GET("/movie/{id}/similar_movies")
     ResultsPage similarMovies(
             @Path("id") int tmdbId
     );
@@ -121,6 +122,7 @@ public interface MoviesService {
      * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
+    @GET("/movie/{id}/similar_movies")
     ResultsPage similarMovies(
             @Path("id") int tmdbId,
             @Query("page") Integer page,
