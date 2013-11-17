@@ -17,64 +17,51 @@
 
 package com.uwetrottmann.tmdb.services;
 
-import com.google.gson.reflect.TypeToken;
-import com.uwetrottmann.tmdb.TmdbApiBuilder;
-import com.uwetrottmann.tmdb.TmdbApiService;
 import com.uwetrottmann.tmdb.entities.ResultsPage;
 
-public class SearchService extends TmdbApiService {
+import retrofit.http.GET;
+import retrofit.http.Query;
+
+public interface SearchService {
 
     /**
      * Search for movies by title.
-     * 
-     * @param query escaped string
-     * @return Builder instance.
+     *
+     * @param query CGI escaped string
      */
-    public MovieSearchBuilder movieSearch(String query) {
-        return new MovieSearchBuilder(this, query);
-    }
+    @GET("/search/movie")
+    ResultsPage movie(
+            @Query("query") String query
+    );
 
-    public static final class MovieSearchBuilder extends TmdbApiBuilder<ResultsPage> {
-        private static final String URI = "/search/movie";
+    /**
+     * Search for movies by title.
+     *
+     * @param query              CGI escaped string
+     * @param page               <em>Optional.</em> Minimum value is 1, expected value is an
+     *                           integer.
+     * @param language           <em>Optional.</em> ISO 639-1 code.
+     * @param includeAdult       <em>Optional.</em> Toggle the inclusion of adult titles. Expected
+     *                           value is: true or false
+     * @param year               <em>Optional.</em> Filter the results release dates to matches that
+     *                           include this value.
+     * @param primaryReleaseYear <em>Optional.</em> Filter the results so that only the primary
+     *                           release dates have this value.
+     * @param searchType         <em>Optional.</em> By default, the search type is 'phrase'. This is
+     *                           almost guaranteed the option you will want. It's a great all
+     *                           purpose search type and by far the most tuned for every day
+     *                           querying. For those wanting more of an "autocomplete" type search,
+     *                           set this option to 'ngram'.
+     */
+    @GET("/search/movie")
+    ResultsPage movie(
+            @Query("query") String query,
+            @Query("page") Integer page,
+            @Query("language") String language,
+            @Query("include_adult") Boolean includeAdult,
+            @Query("year") Integer year,
+            @Query("primary_release_year") Integer primaryReleaseYear,
+            @Query("search_type") String searchType
+    );
 
-        private MovieSearchBuilder(SearchService service, String query) {
-            super(service, new TypeToken<ResultsPage>() {
-            }, URI);
-
-            parameter(PARAMETER_QUERY, query);
-        }
-
-        /**
-         * Set the language (optional). Attention: will not default to English,
-         * but instead will return empty field.
-         * 
-         * @param languageCode ISO 639-1 code.
-         */
-        public MovieSearchBuilder language(String languageCode) {
-            parameter(PARAMETER_LANGUAGE, languageCode);
-            return this;
-        }
-
-        /**
-         * Toggle the inclusion of adult titles.
-         * 
-         * @param page Index of the page.
-         */
-        public MovieSearchBuilder inlcudeAdult(boolean includeAdult) {
-            parameter(PARAMETER_INCLUDE_ADULT, includeAdult);
-            return this;
-        }
-
-        /**
-         * Filter results to only include this value.
-         * 
-         * @param page Index of the page.
-         */
-        public MovieSearchBuilder year(int year) {
-            if (year > 0) {
-                parameter(PARAMETER_YEAR, year);
-            }
-            return this;
-        }
-    }
 }
