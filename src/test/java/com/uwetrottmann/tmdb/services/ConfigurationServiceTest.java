@@ -7,7 +7,7 @@ import com.uwetrottmann.tmdb.entities.Configuration;
 public class ConfigurationServiceTest extends BaseTestCase {
 
     public void test_configuration() {
-        Configuration config = getManager().configurationService().configuration().fire();
+        Configuration config = getManager().configurationService().configuration();
         assertNotNull("Result was null.", config);
         assertNotNull("Config images was null.", config.images);
         assertNotNull("Config base_url was null.", config.images.base_url);

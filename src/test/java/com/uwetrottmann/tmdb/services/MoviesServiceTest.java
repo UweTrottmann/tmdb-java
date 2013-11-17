@@ -12,7 +12,7 @@ public class MoviesServiceTest extends BaseTestCase {
     private static final SimpleDateFormat JSON_STRING_DATE = new SimpleDateFormat("yyy-MM-dd");
 
     public void test_summary() throws ParseException {
-        Movie movie = getManager().moviesService().summary(550).fire();
+        Movie movie = getManager().moviesService().summary(550);
         assertNotNull("Result was null.", movie);
         assertNotNull("Movie Adult was null.", movie.adult);
         assertEquals("Movie Adult does not match.", false, movie.adult.booleanValue());

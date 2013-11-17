@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Uwe Trottmann
+ * Copyright 2013 Uwe Trottmann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,10 +20,15 @@ package com.uwetrottmann.tmdb.entities;
 import com.uwetrottmann.tmdb.TmdbEntity;
 
 public class Trailer implements TmdbEntity {
+
     private static final long serialVersionUID = -4420680473038571645L;
 
     public String name;
+
     public String size;
+
     public String source;
+
+    public String type;
 
 }

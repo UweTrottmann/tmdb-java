@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Uwe Trottmann
+ * Copyright 2013 Uwe Trottmann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,87 +21,102 @@ import com.uwetrottmann.tmdb.services.ConfigurationService;
 import com.uwetrottmann.tmdb.services.MoviesService;
 import com.uwetrottmann.tmdb.services.SearchService;
 
+import retrofit.RequestInterceptor;
+import retrofit.RestAdapter;
+import retrofit.converter.GsonConverter;
+
 /**
  * Class to manage service creation with default settings.
  */
 public class Tmdb {
-    /** API key. */
-    private String apiKeyValue;
-    /** Connection timeout (in milliseconds). */
-    private Integer connectionTimeout;
-    /** Read timeout (in milliseconds). */
-    private Integer readTimeout;
 
-    /** Create a new manager instance. */
+    /**
+     * Tmdb API URL.
+     */
+    private static final String API_URL = "http://api.themoviedb.org/3";
+
+    /**
+     * API key query parameter name.
+     */
+    private static final String PARAM_API_KEY = "api_key";
+
+    /**
+     * API key.
+     */
+    private String mApiKey;
+
+    /**
+     * Whether to return more detailed log output.
+     */
+    private boolean mIsDebug;
+
+    /**
+     * Currently valid instance of RestAdapter.
+     */
+    private RestAdapter mRestAdapter;
+
+    /**
+     * Create a new manager instance.
+     */
     public Tmdb() {
     }
 
     /**
      * Set default API key.
-     * 
+     *
      * @param value API key value.
      * @return Current instance for builder pattern.
      */
     public Tmdb setApiKey(String value) {
-        this.apiKeyValue = value;
+        this.mApiKey = value;
+        mRestAdapter = null;
+        return this;
+    }
+
+    public Tmdb setIsDebug(boolean isDebug) {
+        mIsDebug = isDebug;
+        mRestAdapter = null;
         return this;
     }
 
     /**
-     * Set default connection timeout.
-     * 
-     * @param connectionTimeout Timeout (in milliseconds).
-     * @return Current instance for builder pattern.
+     * If no instance exists yet, builds a new {@link RestAdapter} using the currently set API key
+     * and debug flag.
      */
-    public Tmdb setConnectionTimeout(int connectionTimeout) {
-        this.connectionTimeout = connectionTimeout;
-        return this;
-    }
+    private RestAdapter buildRestAdapter() {
+        if (mRestAdapter == null) {
+            RestAdapter.Builder builder = new RestAdapter.Builder()
+                    .setServer(API_URL)
+                    .setConverter(new GsonConverter(TmdbHelper.getGsonBuilder().create()));
 
-    /**
-     * Set default read timeout.
-     * 
-     * @param readTimeout Timeout (in milliseconds).
-     * @return Current instance for builder pattern.
-     */
-    public Tmdb setReadTimeout(int readTimeout) {
-        this.readTimeout = readTimeout;
-        return this;
-    }
+            // if available, send mUsername and password in header
+            builder.setRequestInterceptor(new RequestInterceptor() {
+                @Override
+                public void intercept(RequestFacade requestFacade) {
+                    requestFacade.addQueryParam(PARAM_API_KEY, mApiKey);
+                }
+            });
 
-    /**
-     * Set up a new service with the defaults.
-     * 
-     * @param service Service to set up.
-     */
-    private void setupService(TmdbApiService service) {
-        if (this.apiKeyValue != null) {
-            service.setApiKey(this.apiKeyValue);
+            if (mIsDebug) {
+                builder.setLogLevel(RestAdapter.LogLevel.FULL);
+            }
+
+            mRestAdapter = builder.build();
         }
-        if (this.connectionTimeout != null) {
-            service.setConnectTimeout(this.connectionTimeout);
-        }
-        if (this.readTimeout != null) {
-            service.setReadTimeout(this.readTimeout);
-        }
+
+        return mRestAdapter;
     }
 
     public MoviesService moviesService() {
-        MoviesService service = new MoviesService();
-        setupService(service);
-        return service;
+        return buildRestAdapter().create(MoviesService.class);
     }
-    
+
     public SearchService searchService() {
-        SearchService service = new SearchService();
-        setupService(service);
-        return service;
+        return buildRestAdapter().create(SearchService.class);
     }
 
     public ConfigurationService configurationService() {
-        ConfigurationService service = new ConfigurationService();
-        setupService(service);
-        return service;
+        return buildRestAdapter().create(ConfigurationService.class);
     }
 
 }
