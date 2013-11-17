@@ -3,15 +3,9 @@
 tmdb-java
 ============
 
-A Java wrapper around the [TMDb v3 API][1], based upon [JakeWharton/trakt-java/][2].
+A Java wrapper around the [TMDb v3 API][1] using [retrofit][2].
 
 For details see http://uwetrottmann.github.io/tmdb-java/.
-
-Based upon
-============
-
-The overall package and class layout as well as most of the code
-originates from [JakeWharton/trakt-java/][2].
 
 License
 =======
@@ -34,4 +28,4 @@ License
 
 
  [1]: http://docs.themoviedb.apiary.io/
- [2]: https://github.com/JakeWharton/trakt-java/
+ [2]: https://github.com/square/retrofit
