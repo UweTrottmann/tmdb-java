@@ -2,17 +2,22 @@
 package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.BaseTestCase;
+import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.Movie;
+import com.uwetrottmann.tmdb.entities.ResultsPage;
+import com.uwetrottmann.tmdb.entities.Trailers;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+
+import static org.fest.assertions.api.Assertions.assertThat;
 
 public class MoviesServiceTest extends BaseTestCase {
 
     private static final SimpleDateFormat JSON_STRING_DATE = new SimpleDateFormat("yyy-MM-dd");
 
     public void test_summary() throws ParseException {
-        Movie movie = getManager().moviesService().summary(550).fire();
+        Movie movie = getManager().moviesService().summary(550, null);
         assertNotNull("Result was null.", movie);
         assertNotNull("Movie Adult was null.", movie.adult);
         assertEquals("Movie Adult does not match.", false, movie.adult.booleanValue());
@@ -36,5 +41,53 @@ public class MoviesServiceTest extends BaseTestCase {
         assertEquals("Move title does not match.", "Fight Club", movie.title);
         assertNotNull("Movie vote_average was null.", movie.vote_average);
         assertNotNull("Movie vote_count was null.", movie.vote_count);
+    }
+
+    public void test_trailers() {
+        Trailers trailers = getManager().moviesService().trailers(550);
+        assertThat(trailers).isNotNull();
+        assertThat(trailers.id).isEqualTo(550);
+        assertThat(trailers.quicktime).isNotNull();
+        assertThat(trailers.youtube).isNotNull();
+    }
+
+    public void test_credits() {
+        Credits credits = getManager().moviesService().credits(550);
+        assertThat(credits).isNotNull();
+        assertThat(credits.id).isEqualTo(550);
+        assertThat(credits.cast).isNotEmpty();
+        assertThat(credits.cast.get(0)).isNotNull();
+        assertThat(credits.cast.get(0).name).isEqualTo("Edward Norton");
+        assertThat(credits.crew).isNotEmpty();
+    }
+
+    public void test_nowPlaying() {
+        ResultsPage page = getManager().moviesService().nowPlaying(null, null);
+        assertThat(page).isNotNull();
+        assertThat(page.results).isNotEmpty();
+    }
+
+    public void test_popular() {
+        ResultsPage page = getManager().moviesService().popular(null, null);
+        assertThat(page).isNotNull();
+        assertThat(page.results).isNotEmpty();
+    }
+
+    public void test_similar() {
+        ResultsPage page = getManager().moviesService().similarMovies(550, null, null);
+        assertThat(page).isNotNull();
+        assertThat(page.results).isNotEmpty();
+    }
+
+    public void test_topRated() {
+        ResultsPage page = getManager().moviesService().topRated(null, null);
+        assertThat(page).isNotNull();
+        assertThat(page.results).isNotEmpty();
+    }
+
+    public void test_upcoming() {
+        ResultsPage page = getManager().moviesService().upcoming(null, null);
+        assertThat(page).isNotNull();
+        assertThat(page.results).isNotEmpty();
     }
 }

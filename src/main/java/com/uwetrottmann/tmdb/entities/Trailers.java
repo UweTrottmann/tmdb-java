@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Uwe Trottmann
+ * Copyright 2013 Uwe Trottmann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,12 @@ import com.uwetrottmann.tmdb.TmdbEntity;
 import java.util.List;
 
 public class Trailers implements TmdbEntity {
+
     private static final long serialVersionUID = 665059823359173539L;
 
     public Integer id;
+
     public List<Trailer> quicktime;
+
     public List<Trailer> youtube;
 }
