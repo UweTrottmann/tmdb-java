@@ -24,7 +24,7 @@ import com.uwetrottmann.tmdb.services.SearchService;
 /**
  * Class to manage service creation with default settings.
  */
-public class ServiceManager {
+public class Tmdb {
     /** API key. */
     private String apiKeyValue;
     /** Connection timeout (in milliseconds). */
@@ -33,7 +33,7 @@ public class ServiceManager {
     private Integer readTimeout;
 
     /** Create a new manager instance. */
-    public ServiceManager() {
+    public Tmdb() {
     }
 
     /**
@@ -42,7 +42,7 @@ public class ServiceManager {
      * @param value API key value.
      * @return Current instance for builder pattern.
      */
-    public ServiceManager setApiKey(String value) {
+    public Tmdb setApiKey(String value) {
         this.apiKeyValue = value;
         return this;
     }
@@ -53,7 +53,7 @@ public class ServiceManager {
      * @param connectionTimeout Timeout (in milliseconds).
      * @return Current instance for builder pattern.
      */
-    public ServiceManager setConnectionTimeout(int connectionTimeout) {
+    public Tmdb setConnectionTimeout(int connectionTimeout) {
         this.connectionTimeout = connectionTimeout;
         return this;
     }
@@ -64,7 +64,7 @@ public class ServiceManager {
      * @param readTimeout Timeout (in milliseconds).
      * @return Current instance for builder pattern.
      */
-    public ServiceManager setReadTimeout(int readTimeout) {
+    public Tmdb setReadTimeout(int readTimeout) {
         this.readTimeout = readTimeout;
         return this;
     }

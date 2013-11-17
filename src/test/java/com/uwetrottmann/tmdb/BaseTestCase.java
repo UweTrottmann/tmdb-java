@@ -1,20 +1,18 @@
 package com.uwetrottmann.tmdb;
 
-import com.uwetrottmann.tmdb.ServiceManager;
-
 import junit.framework.TestCase;
 
 public abstract class BaseTestCase extends TestCase {
 	protected static final String API_KEY = "<FILL-ME-IN>";
 	
-	private final ServiceManager manager = new ServiceManager();
+	private final Tmdb manager = new Tmdb();
 	
 	@Override
 	public void setUp() {
 		manager.setApiKey(API_KEY);
 	}
 	
-	protected final ServiceManager getManager() {
+	protected final Tmdb getManager() {
 		return manager;
 	}
 }
