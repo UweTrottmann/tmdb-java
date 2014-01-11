@@ -19,6 +19,7 @@ package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.Movie;
+import com.uwetrottmann.tmdb.entities.ReleasesResult;
 import com.uwetrottmann.tmdb.entities.ResultsPage;
 import com.uwetrottmann.tmdb.entities.Trailers;
 
@@ -167,6 +168,11 @@ public interface MoviesService {
     ResultsPage upcoming(
             @Query("page") Integer page,
             @Query("language") String language
+    );
+
+    @GET("/movie/{id}/releases")
+    ReleasesResult releases(
+            @Path("id") int tmdbId
     );
 
 }
