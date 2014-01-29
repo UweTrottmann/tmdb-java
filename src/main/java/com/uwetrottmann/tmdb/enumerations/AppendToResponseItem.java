@@ -5,7 +5,8 @@ public enum AppendToResponseItem {
 
     TRAILERS("trailers"),
     RELEASES("releases"),
-    CREDITS("credits");
+    CREDITS("credits"),
+    SIMILAR("similar_movies");
 
     private final String value;
 
