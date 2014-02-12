@@ -2,13 +2,16 @@
 package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.BaseTestCase;
+import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.Movie;
 import com.uwetrottmann.tmdb.entities.ResultsPage;
 import com.uwetrottmann.tmdb.entities.Trailers;
+import com.uwetrottmann.tmdb.enumerations.AppendToResponseItem;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -41,6 +44,46 @@ public class MoviesServiceTest extends BaseTestCase {
         assertEquals("Move title does not match.", "Fight Club", movie.title);
         assertNotNull("Movie vote_average was null.", movie.vote_average);
         assertNotNull("Movie vote_count was null.", movie.vote_count);
+    }
+
+    public void test_summary_append_trailers() {
+        Movie movie = getManager().moviesService().summary(550,
+                null,
+                new AppendToResponse(
+                    AppendToResponseItem.TRAILERS));
+
+        assertNotNull(movie.trailers);
+    }
+
+    public void test_summary_append_credits() {
+        Movie movie = getManager().moviesService().summary(550,
+                null,
+                new AppendToResponse(
+                        AppendToResponseItem.CREDITS));
+
+        assertNotNull(movie.credits);
+    }
+
+    public void test_summary_append_releases() {
+        Movie movie = getManager().moviesService().summary(550,
+                null,
+                new AppendToResponse(
+                        AppendToResponseItem.RELEASES));
+
+        assertNotNull(movie.releases);
+    }
+
+    public void test_summary_append_all() {
+        Movie movie = getManager().moviesService().summary(550,
+                null,
+                new AppendToResponse(
+                        AppendToResponseItem.RELEASES,
+                        AppendToResponseItem.CREDITS,
+                        AppendToResponseItem.TRAILERS));
+
+        assertNotNull(movie.releases);
+        assertNotNull(movie.credits);
+        assertNotNull(movie.trailers);
     }
 
     public void test_trailers() {

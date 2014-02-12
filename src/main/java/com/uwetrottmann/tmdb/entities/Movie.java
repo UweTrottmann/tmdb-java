@@ -48,4 +48,10 @@ public class Movie implements TmdbEntity {
     public String title;
     public Double vote_average;
     public Integer vote_count;
+
+    // Following are used with append_to_response
+    public Trailers trailers;
+    public ReleasesResult releases;
+    public Credits credits;
+    public ResultsPage similar_movies;
 }
