@@ -33,7 +33,7 @@ public class Tmdb {
     /**
      * Tmdb API URL.
      */
-    private static final String API_URL = "http://api.themoviedb.org/3";
+    private static final String API_URL = "https://api.themoviedb.org/3";
 
     /**
      * API key query parameter name.
