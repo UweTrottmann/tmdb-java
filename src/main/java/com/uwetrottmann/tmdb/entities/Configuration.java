@@ -28,6 +28,7 @@ public class Configuration implements TmdbEntity {
         private static final long serialVersionUID = 2793552705485555335L;
 
         public String base_url;
+        public String secure_base_url;
         public List<String> poster_sizes;
         public List<String> backdrop_sizes;
         public List<String> profile_sizes;
@@ -35,4 +36,5 @@ public class Configuration implements TmdbEntity {
     }
 
     public ImagesConfiguration images;
+    public List<String> change_keys;
 }

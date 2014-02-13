@@ -5,12 +5,50 @@ tmdb-java
 
 A Java wrapper around the [TMDb v3 API][1] using [retrofit][2].
 
-For details see http://uwetrottmann.github.io/tmdb-java/.
+Dependencies
+------------
+The [released jar][3] is built without dependencies, add these yourself as you see fit.
+For example for Gradle:
+```
+compile 'com.squareup.retrofit:retrofit:1.4.1'
+compile 'com.squareup.okhttp:okhttp:1.3.0' // not mandatory, but greatly recommended
+```
+
+Or for Maven:
+```
+<dependency>
+    <groupId>com.squareup.retrofit</groupId>
+    <artifactId>retrofit</artifactId>
+    <version>1.4.1</version>
+</dependency>
+<!-- not mandatory, but greatly recommended: -->
+<dependency>
+  <groupId>com.squareup.okhttp</groupId>
+  <artifactId>okhttp</artifactId>
+  <version>1.3.0</version>
+</dependency>
+```
+
+Example
+-------
+```
+// Create an instance of the service you wish to use
+// you can keep this around
+Tmdb tmdb = new Tmdb();
+tmdb.setApiKey("yourapikey");
+MovieService movieService = tmdb.movieService();
+
+// Call any of the available endpoints
+Movie movie = movieService.summary(550);
+Trailers trailers = movieService.trailers(550);
+```
+
+See test cases in `src/test/` for more examples.
 
 License
-=======
+-------
 
-    Copyright 2013 Uwe Trottmann
+    Copyright 2013-2014 Uwe Trottmann
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -29,3 +67,4 @@ License
 
  [1]: http://docs.themoviedb.apiary.io/
  [2]: https://github.com/square/retrofit
+ [3]: https://github.com/UweTrottmann/tmdb-java/releases
