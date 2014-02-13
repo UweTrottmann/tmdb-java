@@ -51,7 +51,7 @@ public class Movie implements TmdbEntity {
 
     // Following are used with append_to_response
     public Trailers trailers;
-    public ReleasesResult releases;
+    public Releases releases;
     public Credits credits;
     public ResultsPage similar_movies;
 }

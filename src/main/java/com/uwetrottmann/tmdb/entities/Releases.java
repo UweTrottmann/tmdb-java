@@ -4,7 +4,7 @@ import com.uwetrottmann.tmdb.TmdbEntity;
 
 import java.util.List;
 
-public class ReleasesResult implements TmdbEntity {
+public class Releases implements TmdbEntity {
 
     public int id;
     public List<CountryRelease> countries;

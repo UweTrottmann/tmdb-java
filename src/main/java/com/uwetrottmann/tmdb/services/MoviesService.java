@@ -20,13 +20,10 @@ package com.uwetrottmann.tmdb.services;
 import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.Movie;
-import com.uwetrottmann.tmdb.entities.ReleasesResult;
+import com.uwetrottmann.tmdb.entities.Releases;
 import com.uwetrottmann.tmdb.entities.ResultsPage;
 import com.uwetrottmann.tmdb.entities.Trailers;
 
-import java.util.List;
-
-import retrofit.http.EncodedQuery;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -189,7 +186,7 @@ public interface MoviesService {
     );
 
     @GET("/movie/{id}/releases")
-    ReleasesResult releases(
+    Releases releases(
             @Path("id") int tmdbId
     );
 
