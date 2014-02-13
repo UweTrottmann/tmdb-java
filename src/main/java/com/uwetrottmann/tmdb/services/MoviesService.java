@@ -17,8 +17,10 @@
 
 package com.uwetrottmann.tmdb.services;
 
+import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.Movie;
+import com.uwetrottmann.tmdb.entities.Releases;
 import com.uwetrottmann.tmdb.entities.ResultsPage;
 import com.uwetrottmann.tmdb.entities.Trailers;
 
@@ -58,6 +60,20 @@ public interface MoviesService {
     Movie summary(
             @Path("id") int tmdbId,
             @Query("language") String language
+    );
+
+    /**
+     * Get the basic movie information for a specific movie id.
+     *
+     * @param tmdbId   TMDb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     * @param appendToResponse extra requests to append to the result.
+     */
+    @GET("/movie/{id}")
+    Movie summary(
+            @Path("id") int tmdbId,
+            @Query("language") String language,
+            @Query("append_to_response") AppendToResponse appendToResponse
     );
 
     /**
@@ -167,6 +183,11 @@ public interface MoviesService {
     ResultsPage upcoming(
             @Query("page") Integer page,
             @Query("language") String language
+    );
+
+    @GET("/movie/{id}/releases")
+    Releases releases(
+            @Path("id") int tmdbId
     );
 
 }
