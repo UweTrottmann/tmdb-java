@@ -33,7 +33,7 @@ public class Tmdb {
     /**
      * Tmdb API URL.
      */
-    private static final String API_URL = "http://api.themoviedb.org/3";
+    private static final String API_URL = "https://api.themoviedb.org/3";
 
     /**
      * API key query parameter name.
@@ -86,7 +86,7 @@ public class Tmdb {
     private RestAdapter buildRestAdapter() {
         if (mRestAdapter == null) {
             RestAdapter.Builder builder = new RestAdapter.Builder()
-                    .setServer(API_URL)
+                    .setEndpoint(API_URL)
                     .setConverter(new GsonConverter(TmdbHelper.getGsonBuilder().create()));
 
             // if available, send mUsername and password in header

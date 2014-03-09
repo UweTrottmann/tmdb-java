@@ -11,7 +11,7 @@ The [released jar][3] is built without dependencies, add these yourself as you s
 For example for Gradle:
 ```
 compile 'com.squareup.retrofit:retrofit:1.4.1'
-compile 'com.squareup.okhttp:okhttp:1.3.0' // not mandatory, but greatly recommended
+compile 'com.squareup.okhttp:okhttp:1.5.0' // not mandatory, but greatly recommended
 ```
 
 Or for Maven:
@@ -25,7 +25,7 @@ Or for Maven:
 <dependency>
   <groupId>com.squareup.okhttp</groupId>
   <artifactId>okhttp</artifactId>
-  <version>1.3.0</version>
+  <version>1.5.0</version>
 </dependency>
 ```
 
