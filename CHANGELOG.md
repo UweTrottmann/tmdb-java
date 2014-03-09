@@ -7,6 +7,10 @@ Supported API calls
  * Movie service (incomplete)
  * Search service (incomplete)
 
+0.4.0 *(2014-03-09)*
+--------------------
+ * Use secure TMDb endpoint (https://api.themoviedb.org/3). If you use tmdb-java on Android with okhttp, you should update okhttp to at least 1.5.0 to avoid SSL context issues.
+
 0.3.0 *(2014-02-13)*
 --------------------
  * Allow `append_to_response` of supported movie endpoints to `MoviesService.summary()`. Thanks @chrisbanes!
