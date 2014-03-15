@@ -7,6 +7,11 @@ Supported API calls
  * Movie service (incomplete)
  * Search service (incomplete)
 
+0.4.1 *(2014-03-15)*
+--------------------
+ * First Maven Central release! See the [README][4] for details.
+ * Limited fest dependency to test scope.
+
 0.4.0 *(2014-03-09)*
 --------------------
  * Use secure TMDb endpoint (https://api.themoviedb.org/3). If you use tmdb-java on Android with okhttp, you should update okhttp to at least 1.5.0 to avoid SSL context issues.
@@ -34,3 +39,4 @@ Supported API calls
   [1]: https://github.com/square/retrofit
   [2]: https://github.com/UweTrottmann/tmdb-java/releases
   [3]: https://github.com/square/retrofit/blob/master/CHANGELOG.md
+  [4]: https://github.com/square/retrofit/blob/master/README.md
