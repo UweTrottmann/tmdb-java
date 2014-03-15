@@ -5,9 +5,25 @@ tmdb-java
 
 A Java wrapper around the [TMDb v3 API][1] using [retrofit][2].
 
+Usage
+-----
+Add the following dependency to your Gradle project:
+```
+compile 'com.uwetrottmann:tmdb-java:0.4.1'
+```
+
+or your Maven project:
+```
+<dependency>
+    <groupId>com.uwetrottmann</groupId>
+    <artifactId>tmdb-java</artifactId>
+    <version>0.4.1</version>
+</dependency>
+```
+
 Dependencies
 ------------
-The [released jar][3] is built without dependencies, add these yourself as you see fit.
+If you rather use the [released jar][3], add dependencies yourself as you see fit.
 For example for Gradle:
 ```
 compile 'com.squareup.retrofit:retrofit:1.4.1'
