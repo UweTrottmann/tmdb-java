@@ -39,4 +39,4 @@ Supported API calls
   [1]: https://github.com/square/retrofit
   [2]: https://github.com/UweTrottmann/tmdb-java/releases
   [3]: https://github.com/square/retrofit/blob/master/CHANGELOG.md
-  [4]: https://github.com/square/retrofit/blob/master/README.md
+  [4]: https://github.com/UweTrottmann/tmdb-java/blob/master/README.md
