@@ -19,6 +19,7 @@ package com.uwetrottmann.tmdb;
 
 import com.uwetrottmann.tmdb.services.ConfigurationService;
 import com.uwetrottmann.tmdb.services.MoviesService;
+import com.uwetrottmann.tmdb.services.PersonService;
 import com.uwetrottmann.tmdb.services.SearchService;
 
 import retrofit.RequestInterceptor;
@@ -117,6 +118,10 @@ public class Tmdb {
 
     public ConfigurationService configurationService() {
         return buildRestAdapter().create(ConfigurationService.class);
+    }
+
+    public PersonService personService() {
+        return buildRestAdapter().create(PersonService.class);
     }
 
 }
