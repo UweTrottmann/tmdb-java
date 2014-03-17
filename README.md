@@ -9,7 +9,7 @@ Usage
 -----
 Add the following dependency to your Gradle project:
 ```
-compile 'com.uwetrottmann:tmdb-java:0.4.1'
+compile 'com.uwetrottmann:tmdb-java:0.5.0'
 ```
 
 or your Maven project:
@@ -17,7 +17,7 @@ or your Maven project:
 <dependency>
     <groupId>com.uwetrottmann</groupId>
     <artifactId>tmdb-java</artifactId>
-    <version>0.4.1</version>
+    <version>0.5.0</version>
 </dependency>
 ```
 
