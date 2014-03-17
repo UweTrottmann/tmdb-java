@@ -5,7 +5,12 @@ Supported API calls
 
  * Configuration service
  * Movie service (incomplete)
+ * Person service (incomplete)
  * Search service (incomplete)
+
+0.5.0 *(2014-03-17)*
+--------------------
+ * Support `/person/{id}`, `/person/{id}/movie_credits`, `/person/{id}/tv_credits` and `/person/{id}/combined_credits`. Thanks @chrisbanes!
 
 0.4.1 *(2014-03-15)*
 --------------------
