@@ -12,27 +12,31 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
+ * 
  */
 
-package com.uwetrottmann.tmdb.enumerations;
+package com.uwetrottmann.tmdb.entities;
 
+import com.uwetrottmann.tmdb.TmdbEntity;
 
-public enum AppendToResponseItem {
+import java.util.Date;
 
-    TRAILERS("trailers"),
-    RELEASES("releases"),
-    CREDITS("credits"),
-    SIMILAR("similar_movies");
+public class Person implements TmdbEntity {
 
-    private final String value;
+    public Integer id;
 
-    private AppendToResponseItem(String value) {
-        this.value = value;
-    }
+    public String name;
 
-    @Override
-    public String toString() {
-        return value;
-    }
+    public String place_of_birth;
+
+    public String profile_path;
+
+    public String homepage;
+
+    public String biography;
+
+    public Date birthday;
+
+    public Date deathday;
+
 }
