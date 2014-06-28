@@ -17,12 +17,11 @@
 
 package com.uwetrottmann.tmdb.services;
 
-import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.Person;
 import com.uwetrottmann.tmdb.entities.PersonCredits;
-
 import retrofit.http.GET;
 import retrofit.http.Path;
+import retrofit.http.Query;
 
 public interface PersonService {
 
@@ -47,6 +46,18 @@ public interface PersonService {
     );
 
     /**
+     * Get the movie credits for a specific person id.
+     *
+     * @param tmdbId   TMDb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("/person/{id}/movie_credits")
+    PersonCredits movieCredits(
+            @Path("id") int tmdbId,
+            @Query("language") String language
+    );
+
+    /**
      * Get the TV credits for a specific person id.
      *
      * @param tmdbId TMDb id.
@@ -57,6 +68,18 @@ public interface PersonService {
     );
 
     /**
+     * Get the TV credits for a specific person id.
+     *
+     * @param tmdbId   TMDb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("/person/{id}/tv_credits")
+    PersonCredits tvCredits(
+            @Path("id") int tmdbId,
+            @Query("language") String language
+    );
+
+    /**
      * Get the movie & TV credits for a specific person id.
      *
      * @param tmdbId TMDb id.
@@ -64,6 +87,18 @@ public interface PersonService {
     @GET("/person/{id}/combined_credits")
     PersonCredits combinedCredits(
             @Path("id") int tmdbId
+    );
+
+    /**
+     * Get the movie & TV credits for a specific person id.
+     *
+     * @param tmdbId   TMDb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("/person/{id}/combined_credits")
+    PersonCredits combinedCredits(
+            @Path("id") int tmdbId,
+            @Query("language") String language
     );
 
 }
