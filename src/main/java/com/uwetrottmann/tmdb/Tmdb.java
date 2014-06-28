@@ -22,6 +22,7 @@ import com.uwetrottmann.tmdb.services.FindService;
 import com.uwetrottmann.tmdb.services.MoviesService;
 import com.uwetrottmann.tmdb.services.PersonService;
 import com.uwetrottmann.tmdb.services.SearchService;
+import com.uwetrottmann.tmdb.services.TvService;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
@@ -126,6 +127,10 @@ public class Tmdb {
 
     public SearchService searchService() {
         return buildRestAdapter().create(SearchService.class);
+    }
+
+    public TvService tvService() {
+        return buildRestAdapter().create(TvService.class);
     }
 
 }
