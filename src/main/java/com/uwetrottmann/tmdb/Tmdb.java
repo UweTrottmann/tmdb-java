@@ -18,10 +18,11 @@
 package com.uwetrottmann.tmdb;
 
 import com.uwetrottmann.tmdb.services.ConfigurationService;
+import com.uwetrottmann.tmdb.services.FindService;
 import com.uwetrottmann.tmdb.services.MoviesService;
 import com.uwetrottmann.tmdb.services.PersonService;
 import com.uwetrottmann.tmdb.services.SearchService;
-
+import com.uwetrottmann.tmdb.services.TvService;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
@@ -108,20 +109,28 @@ public class Tmdb {
         return mRestAdapter;
     }
 
+    public ConfigurationService configurationService() {
+        return buildRestAdapter().create(ConfigurationService.class);
+    }
+
+    public FindService findService() {
+        return buildRestAdapter().create(FindService.class);
+    }
+
     public MoviesService moviesService() {
         return buildRestAdapter().create(MoviesService.class);
+    }
+
+    public PersonService personService() {
+        return buildRestAdapter().create(PersonService.class);
     }
 
     public SearchService searchService() {
         return buildRestAdapter().create(SearchService.class);
     }
 
-    public ConfigurationService configurationService() {
-        return buildRestAdapter().create(ConfigurationService.class);
-    }
-
-    public PersonService personService() {
-        return buildRestAdapter().create(PersonService.class);
+    public TvService tvService() {
+        return buildRestAdapter().create(TvService.class);
     }
 
 }
