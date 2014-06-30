@@ -80,7 +80,7 @@ public interface PersonService {
     );
 
     /**
-     * Get the movie & TV credits for a specific person id.
+     * Get the movie and TV credits for a specific person id.
      *
      * @param tmdbId TMDb id.
      */
@@ -90,7 +90,7 @@ public interface PersonService {
     );
 
     /**
-     * Get the movie & TV credits for a specific person id.
+     * Get the movie and TV credits for a specific person id.
      *
      * @param tmdbId   TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.

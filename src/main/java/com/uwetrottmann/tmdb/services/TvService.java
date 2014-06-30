@@ -8,7 +8,7 @@ import retrofit.http.Query;
 public interface TvService {
 
     /**
-     * Get the cast & crew information about a TV series. Just like the website,
+     * Get the cast and crew information about a TV series. Just like the website,
      * we pull this information from the last season of the series.
      *
      * @param tmdbId
