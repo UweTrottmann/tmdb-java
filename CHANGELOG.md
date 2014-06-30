@@ -4,9 +4,19 @@ Supported API calls
 -------------------
 
  * Configuration service
+ * Find service
  * Movie service (incomplete)
  * Person service (incomplete)
  * Search service (incomplete)
+ * Tv service (incomplete)
+
+0.6.0 *(2014-06-30)*
+--------------------
+ * Support `/find/{id}`.
+ * Support `/tv/{id}/credits`.
+ * Add language support to Person service credit endpoints.
+ * Add special API key for testing, no need to fill in your own any longer. Just run the tests.
+ * Update to [retrofit][3] 1.6.0.
 
 0.5.0 *(2014-03-17)*
 --------------------
