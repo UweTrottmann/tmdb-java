@@ -26,7 +26,7 @@ Dependencies
 If you rather use the [released jar][3], add dependencies yourself as you see fit.
 For example for Gradle:
 ```
-compile 'com.squareup.retrofit:retrofit:1.6.0'
+compile 'com.squareup.retrofit:retrofit:1.6.1'
 compile 'com.squareup.okhttp:okhttp:2.0.0' // not mandatory, but greatly recommended
 compile 'com.squareup.okhttp:okhttp-urlconnection:2.0.0' // not mandatory, but greatly recommended
 ```
@@ -36,7 +36,7 @@ Or for Maven:
 <dependency>
     <groupId>com.squareup.retrofit</groupId>
     <artifactId>retrofit</artifactId>
-    <version>1.6.0</version>
+    <version>1.6.1</version>
 </dependency>
 <!-- not mandatory, but greatly recommended: -->
 <dependency>
