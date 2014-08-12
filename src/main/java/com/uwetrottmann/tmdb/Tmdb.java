@@ -29,13 +29,13 @@ import retrofit.converter.GsonConverter;
 
 /**
  * Helper class for easy usage of the TMDB v3 API using retrofit.
- * <p/>
+ * <p>
  * Create an instance of this class, {@link #setApiKey(String)} and then call any of the service methods.
- * <p/>
+ * <p>
  * The service methods take care of constructing the required {@link retrofit.RestAdapter} and creating the service. You
  * can customize the {@link retrofit.RestAdapter} by overriding {@link #newRestAdapterBuilder()} and setting e.g.
  * your own HTTP client instance or thread executor.
- * <p/>
+ * <p>
  * Only one {@link retrofit.RestAdapter} instance is created upon the first and re-used for any consequent service
  * method call.
  */
@@ -63,7 +63,7 @@ public class Tmdb {
 
     /**
      * Set the TMDB API key.
-     * <p/>
+     * <p>
      * The next service method call will trigger a rebuild of the {@link retrofit.RestAdapter}. If you have cached any
      * service instances, get a new one from its service method.
      *
@@ -101,7 +101,7 @@ public class Tmdb {
     /**
      * Return the current {@link retrofit.RestAdapter} instance. If none exists (first call, API key changed),
      * builds a new one.
-     * <p/>
+     * <p>
      * When building, sets the endpoint, a custom converter ({@link TmdbHelper#getGsonBuilder()})
      * and a {@link retrofit.RequestInterceptor} which adds the API key as query param.
      */
