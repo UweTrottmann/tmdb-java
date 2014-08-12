@@ -13,7 +13,7 @@
     <groupId>com.uwetrottmann</groupId>
     <artifactId>tmdb-java</artifactId>
     <packaging>jar</packaging>
-    <version>0.7.0-SNAPSHOT</version>
+    <version>0.7.0</version>
 
     <name>tmdb-java</name>
     <description>tmdb-java is a Java library that provides access to the themoviedatabase API v3.

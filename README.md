@@ -10,7 +10,7 @@ Usage
 Add the following dependency to your Gradle project:
 
 ```
-compile 'com.uwetrottmann:tmdb-java:0.6.0'
+compile 'com.uwetrottmann:tmdb-java:0.7.0'
 ```
 
 or your Maven project:
@@ -19,7 +19,7 @@ or your Maven project:
 <dependency>
     <groupId>com.uwetrottmann</groupId>
     <artifactId>tmdb-java</artifactId>
-    <version>0.6.0</version>
+    <version>0.7.0</version>
 </dependency>
 ```
 
