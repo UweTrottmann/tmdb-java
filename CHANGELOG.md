@@ -10,6 +10,11 @@ Supported API calls
  * Search service (incomplete)
  * Tv service (incomplete)
 
+0.7.0 *(2014-08-12)*
+--------------------
+ * Easier customization of `RestAdapter`: set your own HTTP client or executor by overriding `newRestAdapterBuilder()`.
+ * Add `okhttp` and `okhttp-urlconnection` 2.0.0 as optional dependencies.
+
 0.6.0 *(2014-06-30)*
 --------------------
  * Support `/find/{id}`.
