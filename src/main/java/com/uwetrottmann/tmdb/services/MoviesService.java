@@ -20,8 +20,8 @@ package com.uwetrottmann.tmdb.services;
 import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.Movie;
+import com.uwetrottmann.tmdb.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb.entities.Releases;
-import com.uwetrottmann.tmdb.entities.ResultsPage;
 import com.uwetrottmann.tmdb.entities.Trailers;
 
 import retrofit.http.GET;
@@ -91,7 +91,7 @@ public interface MoviesService {
      * of items this list will include is 100.
      */
     @GET("/movie/now_playing")
-    ResultsPage nowPlaying();
+    MovieResultsPage nowPlaying();
 
     /**
      * Get the list of movies playing in theaters. This list refreshes every day. The maximum number
@@ -101,7 +101,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/movie/now_playing")
-    ResultsPage nowPlaying(
+    MovieResultsPage nowPlaying(
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -110,7 +110,7 @@ public interface MoviesService {
      * Get the list of popular movies on The Movie Database. This list refreshes every day.
      */
     @GET("/movie/popular")
-    ResultsPage popular();
+    MovieResultsPage popular();
 
     /**
      * Get the list of popular movies on The Movie Database. This list refreshes every day.
@@ -119,7 +119,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/movie/popular")
-    ResultsPage popular(
+    MovieResultsPage popular(
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -128,7 +128,7 @@ public interface MoviesService {
      * Get the similar movies for a specific movie id.
      */
     @GET("/movie/{id}/similar_movies")
-    ResultsPage similarMovies(
+    MovieResultsPage similarMovies(
             @Path("id") int tmdbId
     );
 
@@ -139,7 +139,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/movie/{id}/similar_movies")
-    ResultsPage similarMovies(
+    MovieResultsPage similarMovies(
             @Path("id") int tmdbId,
             @Query("page") Integer page,
             @Query("language") String language
@@ -150,7 +150,7 @@ public interface MoviesService {
      * or more votes. This list refreshes every day.
      */
     @GET("/movie/top_rated")
-    ResultsPage topRated();
+    MovieResultsPage topRated();
 
     /**
      * Get the list of top rated movies. By default, this list will only include movies that have 10
@@ -160,7 +160,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/movie/top_rated")
-    ResultsPage topRated(
+    MovieResultsPage topRated(
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -170,7 +170,7 @@ public interface MoviesService {
      * this list will include is 100.
      */
     @GET("/movie/upcoming")
-    ResultsPage upcoming();
+    MovieResultsPage upcoming();
 
     /**
      * Get the list of upcoming movies. This list refreshes every day. The maximum number of items
@@ -180,7 +180,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/movie/upcoming")
-    ResultsPage upcoming(
+    MovieResultsPage upcoming(
             @Query("page") Integer page,
             @Query("language") String language
     );
