@@ -17,15 +17,10 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.TmdbEntity;
-
 import java.util.List;
 
-public class ResultsPage implements TmdbEntity {
-    private static final long serialVersionUID = -5167211774471598391L;
+public class MovieResultsPage extends BaseResultsPage {
 
-    public Integer page;
     public List<Movie> results;
-    public Integer total_pages;
-    public Integer total_results;
+
 }

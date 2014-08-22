@@ -5,13 +5,12 @@ import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.Movie;
-import com.uwetrottmann.tmdb.entities.ResultsPage;
+import com.uwetrottmann.tmdb.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb.entities.Trailers;
 import com.uwetrottmann.tmdb.enumerations.AppendToResponseItem;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -105,31 +104,31 @@ public class MoviesServiceTest extends BaseTestCase {
     }
 
     public void test_nowPlaying() {
-        ResultsPage page = getManager().moviesService().nowPlaying(null, null);
+        MovieResultsPage page = getManager().moviesService().nowPlaying(null, null);
         assertThat(page).isNotNull();
         assertThat(page.results).isNotEmpty();
     }
 
     public void test_popular() {
-        ResultsPage page = getManager().moviesService().popular(null, null);
+        MovieResultsPage page = getManager().moviesService().popular(null, null);
         assertThat(page).isNotNull();
         assertThat(page.results).isNotEmpty();
     }
 
     public void test_similar() {
-        ResultsPage page = getManager().moviesService().similarMovies(550, null, null);
+        MovieResultsPage page = getManager().moviesService().similarMovies(550, null, null);
         assertThat(page).isNotNull();
         assertThat(page.results).isNotEmpty();
     }
 
     public void test_topRated() {
-        ResultsPage page = getManager().moviesService().topRated(null, null);
+        MovieResultsPage page = getManager().moviesService().topRated(null, null);
         assertThat(page).isNotNull();
         assertThat(page.results).isNotEmpty();
     }
 
     public void test_upcoming() {
-        ResultsPage page = getManager().moviesService().upcoming(null, null);
+        MovieResultsPage page = getManager().moviesService().upcoming(null, null);
         assertThat(page).isNotNull();
         assertThat(page.results).isNotEmpty();
     }

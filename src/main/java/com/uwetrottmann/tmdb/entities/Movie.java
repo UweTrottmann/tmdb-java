@@ -53,5 +53,5 @@ public class Movie implements TmdbEntity {
     public Trailers trailers;
     public Releases releases;
     public Credits credits;
-    public ResultsPage similar_movies;
+    public MovieResultsPage similar_movies;
 }
