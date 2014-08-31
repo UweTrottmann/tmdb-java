@@ -143,10 +143,6 @@ public class Tmdb {
         return getRestAdapter().create(SearchService.class);
     }
 
-    public SearchServiceAsync searchServiceAsync () {
-        return getRestAdapter().create(SearchServiceAsync.class);
-    }
-
     public TvService tvService() {
         return getRestAdapter().create(TvService.class);
     }
