@@ -151,8 +151,4 @@ public class Tmdb {
         return getRestAdapter().create(TvService.class);
     }
 
-    public TvServiceAsync tvServiceAsync () {
-        return getRestAdapter().create(TvServiceAsync.class);
-    }
-
 }
