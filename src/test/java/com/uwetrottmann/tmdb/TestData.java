@@ -18,7 +18,9 @@ package com.uwetrottmann.tmdb;
 
 public interface TestData {
 
-    public int TVSHOW_ID = 1396;
-    public int TVSHOW_TVDB_ID = 81189;
+    String MOVIE_TITLE = "Fight Club";
 
+    String TVSHOW_TITLE = "Breaking Bad";
+    int TVSHOW_ID = 1396;
+    int TVSHOW_TVDB_ID = 81189;
 }
