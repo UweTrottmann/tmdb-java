@@ -19,6 +19,7 @@ package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb.entities.TvResultsPage;
+import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
@@ -79,4 +80,70 @@ public interface SearchService {
             @Query("search_type") String searchType
     );
 
+    /**
+     * Search for movies by title.
+     *
+     * @param query CGI escaped string
+     * @param callback {@link retrofit.Callback}
+     */
+    @GET("/search/movie")
+    void movie(
+            @Query("query") String query,
+            Callback<MovieResultsPage> callback
+    );
+
+    /**
+     * Search for movies by title.
+     *
+     * @param query              CGI escaped string
+     * @param page               <em>Optional.</em> Minimum value is 1, expected value is an
+     *                           integer.
+     * @param language           <em>Optional.</em> ISO 639-1 code.
+     * @param includeAdult       <em>Optional.</em> Toggle the inclusion of adult titles. Expected
+     *                           value is: true or false
+     * @param year               <em>Optional.</em> Filter the results release dates to matches that
+     *                           include this value.
+     * @param primaryReleaseYear <em>Optional.</em> Filter the results so that only the primary
+     *                           release dates have this value.
+     * @param searchType         <em>Optional.</em> By default, the search type is 'phrase'. This is
+     *                           almost guaranteed the option you will want. It's a great all
+     *                           purpose search type and by far the most tuned for every day
+     *                           querying. For those wanting more of an "autocomplete" type search,
+     *                           set this option to 'ngram'.
+     * @param callback {@link retrofit.Callback}
+     */
+    @GET("/search/movie")
+    void movie(
+            @Query("query") String query,
+            @Query("page") Integer page,
+            @Query("language") String language,
+            @Query("include_adult") Boolean includeAdult,
+            @Query("year") Integer year,
+            @Query("primary_release_year") Integer primaryReleaseYear,
+            @Query("search_type") String searchType,
+            Callback<MovieResultsPage> callback
+    );
+
+    /**
+     * Search for TV shows by title.
+     *
+     * @param query CGI escaped string
+     * @param page Minimum 1, maximum 1000.
+     * @param language ISO 639-1 code.
+     * @param firstAirDateYear Filter the results to only match shows that have an air date with this value.
+     * @param searchType By default, the search type is 'phrase'. This is almost guaranteed the option you will want.
+     * It's a great all purpose search type and by far the most tuned for every day querying. For those wanting more of
+     * an "autocomplete" type search, set this option to 'ngram'.
+     * @param callback {@link retrofit.Callback
+     *
+     */
+    @GET("/search/tv")
+    void tv(
+            @Query("query") String query,
+            @Query("page") Integer page,
+            @Query("language") String language,
+            @Query("first_air_date_year") Integer firstAirDateYear,
+            @Query("search_type") String searchType,
+            Callback<TvResultsPage> callback
+    );
 }

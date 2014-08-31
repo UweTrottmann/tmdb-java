@@ -17,12 +17,7 @@
 
 package com.uwetrottmann.tmdb;
 
-import com.uwetrottmann.tmdb.services.ConfigurationService;
-import com.uwetrottmann.tmdb.services.FindService;
-import com.uwetrottmann.tmdb.services.MoviesService;
-import com.uwetrottmann.tmdb.services.PersonService;
-import com.uwetrottmann.tmdb.services.SearchService;
-import com.uwetrottmann.tmdb.services.TvService;
+import com.uwetrottmann.tmdb.services.*;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
