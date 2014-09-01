@@ -19,6 +19,7 @@ package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.entities.Person;
 import com.uwetrottmann.tmdb.entities.PersonCredits;
+import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -36,6 +37,15 @@ public interface PersonService {
     );
 
     /**
+     * Async variant of {@link #summary(int)}
+     */
+    @GET("/person/{id}")
+    void summary(
+            @Path("id") int tmdbId,
+            Callback<Person> callback
+    );
+
+    /**
      * Get the movie credits for a specific person id.
      *
      * @param tmdbId TMDb id.
@@ -43,6 +53,15 @@ public interface PersonService {
     @GET("/person/{id}/movie_credits")
     PersonCredits movieCredits(
             @Path("id") int tmdbId
+    );
+
+    /**
+     * Async variant of {@link #movieCredits(int)}
+     */
+    @GET("/person/{id}/movie_credits")
+    void movieCredits(
+            @Path("id") int tmdbId,
+            Callback<PersonCredits> callback
     );
 
     /**
@@ -55,6 +74,16 @@ public interface PersonService {
     PersonCredits movieCredits(
             @Path("id") int tmdbId,
             @Query("language") String language
+    );
+
+    /**
+     * Async variant of {@link #movieCredits(int, String)}
+     */
+    @GET("/person/{id}/movie_credits")
+    void movieCredits(
+            @Path("id") int tmdbId,
+            @Query("language") String language,
+            Callback<PersonCredits> callback
     );
 
     /**
@@ -68,6 +97,15 @@ public interface PersonService {
     );
 
     /**
+     * Async variant of {@link #tvCredits(int)}
+     */
+    @GET("/person/{id}/tv_credits")
+    void tvCredits(
+            @Path("id") int tmdbId,
+            Callback<PersonCredits> callback
+    );
+
+    /**
      * Get the TV credits for a specific person id.
      *
      * @param tmdbId   TMDb id.
@@ -77,6 +115,16 @@ public interface PersonService {
     PersonCredits tvCredits(
             @Path("id") int tmdbId,
             @Query("language") String language
+    );
+
+    /**
+     * Async variant of {@link #tvCredits(int, String)}
+     */
+    @GET("/person/{id}/tv_credits")
+    void tvCredits(
+            @Path("id") int tmdbId,
+            @Query("language") String language,
+            Callback<PersonCredits> callback
     );
 
     /**
@@ -90,6 +138,15 @@ public interface PersonService {
     );
 
     /**
+     * Async variant of {@link #combinedCredits(int)}
+     */
+    @GET("/person/{id}/combined_credits")
+    void combinedCredits(
+            @Path("id") int tmdbId,
+            Callback<PersonCredits> callback
+    );
+
+    /**
      * Get the movie and TV credits for a specific person id.
      *
      * @param tmdbId   TMDb id.
@@ -99,6 +156,16 @@ public interface PersonService {
     PersonCredits combinedCredits(
             @Path("id") int tmdbId,
             @Query("language") String language
+    );
+
+    /**
+     * Async variant of {@link #combinedCredits(int, String)}
+     */
+    @GET("/person/{id}/combined_credits")
+    void combinedCredits(
+            @Path("id") int tmdbId,
+            @Query("language") String language,
+            Callback<PersonCredits> callback
     );
 
 }
