@@ -19,6 +19,7 @@ package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb.entities.TvResultsPage;
+import retrofit.Callback;
 import retrofit.http.GET;
 import retrofit.http.Query;
 
@@ -32,6 +33,15 @@ public interface SearchService {
     @GET("/search/movie")
     MovieResultsPage movie(
             @Query("query") String query
+    );
+
+    /**
+     * Async variant of {@link #movie(String)}.
+     */
+    @GET("/search/movie")
+    void movie(
+            @Query("query") String query,
+            Callback<MovieResultsPage> callback
     );
 
     /**
@@ -60,6 +70,21 @@ public interface SearchService {
     );
 
     /**
+     * Async variant of {@link #movie(String, Integer, String, Boolean, Integer, Integer, String)}.
+     */
+    @GET("/search/movie")
+    void movie(
+            @Query("query") String query,
+            @Query("page") Integer page,
+            @Query("language") String language,
+            @Query("include_adult") Boolean includeAdult,
+            @Query("year") Integer year,
+            @Query("primary_release_year") Integer primaryReleaseYear,
+            @Query("search_type") String searchType,
+            Callback<MovieResultsPage> callback
+    );
+
+    /**
      * Search for TV shows by title.
      *
      * @param query CGI escaped string
@@ -79,4 +104,17 @@ public interface SearchService {
             @Query("search_type") String searchType
     );
 
+
+    /**
+     * Async variant of {@link #tv(String, Integer, String, Integer, String)}.
+     */
+    @GET("/search/tv")
+    void tv(
+            @Query("query") String query,
+            @Query("page") Integer page,
+            @Query("language") String language,
+            @Query("first_air_date_year") Integer firstAirDateYear,
+            @Query("search_type") String searchType,
+            Callback<TvResultsPage> callback
+    );
 }
