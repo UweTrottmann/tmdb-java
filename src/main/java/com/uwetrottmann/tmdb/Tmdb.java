@@ -22,6 +22,7 @@ import com.uwetrottmann.tmdb.services.FindService;
 import com.uwetrottmann.tmdb.services.MoviesService;
 import com.uwetrottmann.tmdb.services.PersonService;
 import com.uwetrottmann.tmdb.services.SearchService;
+import com.uwetrottmann.tmdb.services.TvSeasonsService;
 import com.uwetrottmann.tmdb.services.TvService;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
@@ -150,6 +151,10 @@ public class Tmdb {
 
     public TvService tvService() {
         return getRestAdapter().create(TvService.class);
+    }
+
+    public TvSeasonsService tvSeasonsService() {
+        return getRestAdapter().create(TvSeasonsService.class);
     }
 
 }
