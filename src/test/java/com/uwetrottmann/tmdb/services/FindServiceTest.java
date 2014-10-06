@@ -5,7 +5,7 @@ import com.uwetrottmann.tmdb.entities.FindResults;
 import com.uwetrottmann.tmdb.entities.Person;
 import com.uwetrottmann.tmdb.enumerations.ExternalSource;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class FindServiceTest extends BaseTestCase {
 

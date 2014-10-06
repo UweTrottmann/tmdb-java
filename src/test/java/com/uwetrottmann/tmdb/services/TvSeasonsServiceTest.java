@@ -21,7 +21,7 @@ import com.uwetrottmann.tmdb.TestData;
 import com.uwetrottmann.tmdb.entities.TvEpisode;
 import com.uwetrottmann.tmdb.entities.TvSeason;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TvSeasonsServiceTest extends BaseTestCase {
 

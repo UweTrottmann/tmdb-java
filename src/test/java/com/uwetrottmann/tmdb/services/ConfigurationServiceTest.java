@@ -4,7 +4,7 @@ package com.uwetrottmann.tmdb.services;
 import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.entities.Configuration;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConfigurationServiceTest extends BaseTestCase {
 

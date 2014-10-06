@@ -13,7 +13,7 @@ import retrofit.client.Response;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TvServiceTest extends BaseTestCase {
 

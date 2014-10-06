@@ -9,7 +9,7 @@ import com.uwetrottmann.tmdb.entities.PersonCrewCredit;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import static org.fest.assertions.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PersonServiceTest extends BaseTestCase {
 
