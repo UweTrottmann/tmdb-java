@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Uwe Trottmann
+ * Copyright 2014 Uwe Trottmann
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,23 +12,30 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
  */
 
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.TmdbEntity;
+import java.util.Date;
 
-import java.util.List;
+public abstract class BasePersonCredit {
 
-public class Credits implements TmdbEntity {
-
-    private static final long serialVersionUID = -7947291466017850804L;
-
+    public String credit_id;
     public Integer id;
+    public String media_type;
 
-    public List<CastMember> cast;
+    // both
+    public String poster_path;
 
-    public List<CrewMember> crew;
+    // movies
+    public Boolean adult;
+    public Date release_date;
+    public String title;
+    public String original_title;
+
+    // tv
+    public Date first_air_date;
+    public String name;
+    public String original_name;
 
 }

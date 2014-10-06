@@ -1,9 +1,10 @@
-
 package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.entities.Person;
+import com.uwetrottmann.tmdb.entities.PersonCastCredit;
 import com.uwetrottmann.tmdb.entities.PersonCredits;
+import com.uwetrottmann.tmdb.entities.PersonCrewCredit;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -29,33 +30,53 @@ public class PersonServiceTest extends BaseTestCase {
     }
 
     public void test_movie_credits() {
-        PersonCredits credits = getManager().personService().movieCredits(287) ;
-        assertThat(credits).isNotNull();
-        assertThat(credits.id).isEqualTo(287);
-        assertThat(credits.cast).isNotEmpty();
-        assertThat(credits.cast.get(0)).isNotNull();
-        assertThat(credits.cast.get(0).title).isNotNull();
-        assertThat(credits.crew).isNotEmpty();
+        PersonCredits credits = getManager().personService().movieCredits(287);
+        assertPersonCredits(credits, false);
+
+        for (PersonCastCredit credit : credits.cast) {
+            assertThat(credit.title).isNotEmpty();
+        }
     }
 
     public void test_tv_credits() {
-        PersonCredits credits = getManager().personService().tvCredits(287) ;
-        assertThat(credits).isNotNull();
-        assertThat(credits.id).isEqualTo(287);
-        assertThat(credits.cast).isNotEmpty();
-        assertThat(credits.cast.get(0)).isNotNull();
-        assertThat(credits.cast.get(0).name).isNotNull();
-        assertThat(credits.crew).isNotEmpty();
+        PersonCredits credits = getManager().personService().tvCredits(287);
+        assertPersonCredits(credits, false);
+
+        for (PersonCastCredit credit : credits.cast) {
+            assertThat(credit.episode_count).isGreaterThanOrEqualTo(0);
+            assertThat(credit.name).isNotEmpty();
+        }
     }
 
     public void test_combined_credits() {
-        PersonCredits credits = getManager().personService().combinedCredits(287) ;
-        assertThat(credits).isNotNull();
+        PersonCredits credits = getManager().personService().combinedCredits(287);
+        assertPersonCredits(credits, true);
+    }
+
+    private void assertPersonCredits(PersonCredits credits, boolean hasMediaType) {
         assertThat(credits.id).isEqualTo(287);
+
+        // assert cast credits
         assertThat(credits.cast).isNotEmpty();
-        assertThat(credits.cast.get(0)).isNotNull();
-            assertThat(credits.cast.get(0).media_type).isNotNull();
+        for (PersonCastCredit credit : credits.cast) {
+            assertThat(credit.character).isNotNull(); // may be empty
+
+            if (hasMediaType) {
+                assertThat(credit.media_type).isNotEmpty();
+            }
+        }
+
+        // assert crew credits
         assertThat(credits.crew).isNotEmpty();
+        for (PersonCrewCredit credit : credits.crew) {
+            // may be empty, but should exist
+            assertThat(credit.department).isNotNull();
+            assertThat(credit.job).isNotNull();
+
+            if (hasMediaType) {
+                assertThat(credit.media_type).isNotEmpty();
+            }
+        }
     }
 
 }

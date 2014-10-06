@@ -2,7 +2,9 @@ package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.TestData;
+import com.uwetrottmann.tmdb.entities.CastMember;
 import com.uwetrottmann.tmdb.entities.Credits;
+import com.uwetrottmann.tmdb.entities.CrewMember;
 import com.uwetrottmann.tmdb.entities.ExternalIds;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -47,14 +49,14 @@ public class TvServiceTest extends BaseTestCase {
         assertThat(credits.id).isEqualTo(TestData.TVSHOW_ID);
         assertThat(credits.cast).isNotEmpty();
 
-        Credits.CastMember bryanCranston = credits.cast.get(0);
+        CastMember bryanCranston = credits.cast.get(0);
         assertThat(bryanCranston).isNotNull();
         assertThat(bryanCranston.id).isEqualTo(17419);
         assertThat(bryanCranston.name).isEqualTo("Bryan Cranston");
         assertThat(bryanCranston.character).isEqualTo("Walter White");
 
         assertThat(credits.crew).isNotEmpty();
-        Credits.CrewMember vinceGilligan = credits.crew.get(0);
+        CrewMember vinceGilligan = credits.crew.get(0);
         assertThat(vinceGilligan).isNotNull();
         assertThat(vinceGilligan.id).isEqualTo(66633);
         assertThat(vinceGilligan.name).isEqualTo("Vince Gilligan");
