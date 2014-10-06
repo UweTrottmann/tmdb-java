@@ -6,6 +6,6 @@ public class FindResults {
 
     public List<Movie> movie_results;
     public List<Person> person_results;
-    public List<TvSeries> tv_results;
+    public List<TvShow> tv_results;
 
 }
