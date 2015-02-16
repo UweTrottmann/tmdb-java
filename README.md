@@ -33,7 +33,6 @@ For example for Gradle:
 ```groovy
 compile 'com.squareup.retrofit:retrofit:1.9.0'
 compile 'com.squareup.okhttp:okhttp:2.2.0' // not mandatory, but greatly recommended
-compile 'com.squareup.okhttp:okhttp-urlconnection:2.2.0' // not mandatory, but greatly recommended
 ```
 
 Or for Maven:
@@ -48,12 +47,6 @@ Or for Maven:
 <dependency>
   <groupId>com.squareup.okhttp</groupId>
   <artifactId>okhttp</artifactId>
-  <version>2.2.0</version>
-</dependency>
-<!-- not mandatory, but greatly recommended: -->
-<dependency>
-  <groupId>com.squareup.okhttp</groupId>
-  <artifactId>okhttp-urlconnection</artifactId>
   <version>2.2.0</version>
 </dependency>
 ```
