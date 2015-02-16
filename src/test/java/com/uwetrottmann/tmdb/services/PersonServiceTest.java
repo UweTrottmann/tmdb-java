@@ -37,7 +37,9 @@ public class PersonServiceTest extends BaseTestCase {
     @Test
     public void test_movie_credits() {
         PersonCredits credits = getManager().personService().movieCredits(287, null);
-        assertPersonCredits(credits, false);
+        assertThat(credits.id).isEqualTo(287);
+        assertCastCredits(credits, false);
+        assertCrewCredits(credits, false);
 
         for (PersonCastCredit credit : credits.cast) {
             assertThat(credit.title).isNotEmpty();
@@ -47,7 +49,8 @@ public class PersonServiceTest extends BaseTestCase {
     @Test
     public void test_tv_credits() {
         PersonCredits credits = getManager().personService().tvCredits(287, null);
-        assertPersonCredits(credits, false);
+        assertThat(credits.id).isEqualTo(287);
+        assertCastCredits(credits, false);
 
         for (PersonCastCredit credit : credits.cast) {
             assertThat(credit.episode_count).isGreaterThanOrEqualTo(0);
@@ -58,12 +61,12 @@ public class PersonServiceTest extends BaseTestCase {
     @Test
     public void test_combined_credits() {
         PersonCredits credits = getManager().personService().combinedCredits(287, null);
-        assertPersonCredits(credits, true);
+        assertThat(credits.id).isEqualTo(287);
+        assertCastCredits(credits, true);
+        assertCrewCredits(credits, true);
     }
 
-    private void assertPersonCredits(PersonCredits credits, boolean hasMediaType) {
-        assertThat(credits.id).isEqualTo(287);
-
+    private void assertCastCredits(PersonCredits credits, boolean hasMediaType) {
         // assert cast credits
         assertThat(credits.cast).isNotEmpty();
         for (PersonCastCredit credit : credits.cast) {
@@ -73,7 +76,9 @@ public class PersonServiceTest extends BaseTestCase {
                 assertThat(credit.media_type).isNotEmpty();
             }
         }
+    }
 
+    private void assertCrewCredits(PersonCredits credits, boolean hasMediaType) {
         // assert crew credits
         assertThat(credits.crew).isNotEmpty();
         for (PersonCrewCredit credit : credits.crew) {
