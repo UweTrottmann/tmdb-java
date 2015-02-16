@@ -6,42 +6,13 @@ import com.uwetrottmann.tmdb.entities.CastMember;
 import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.CrewMember;
 import com.uwetrottmann.tmdb.entities.ExternalIds;
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
-
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TvServiceTest extends BaseTestCase {
 
-    private CountDownLatch lock = new CountDownLatch(1);
-    private Credits credits;
-    private ExternalIds ids;
-
     public void test_credits() {
         Credits credits = getManager().tvService().credits(TestData.TVSHOW_ID, null);
-        assertCredits(credits);
-    }
-
-    public void test_credits_async() throws Exception {
-        getManager().tvService().credits(TestData.TVSHOW_ID, null, new Callback<Credits>() {
-            @Override
-            public void success(Credits credits, Response response) {
-                TvServiceTest.this.credits = credits;
-                lock.countDown();
-            }
-
-            @Override
-            public void failure(RetrofitError retrofitError) {
-
-            }
-        });
-
-        lockAwait();
-
         assertCredits(credits);
     }
 
@@ -68,36 +39,9 @@ public class TvServiceTest extends BaseTestCase {
         assertExternalIds(ids);
     }
 
-    public void test_externalIds_async() throws Exception {
-        getManager().tvService().externalIds(TestData.TVSHOW_ID, null, new Callback<ExternalIds>() {
-            @Override
-            public void success(ExternalIds externalIds, Response response) {
-                ids = externalIds;
-                lock.countDown();
-            }
-
-            @Override
-            public void failure(RetrofitError retrofitError) {
-
-            }
-        });
-
-        lockAwait();
-
-        assertExternalIds(ids);
-    }
-
     private void assertExternalIds(ExternalIds ids) {
         assertThat(ids.id).isEqualTo(TestData.TVSHOW_ID);
         assertThat(ids.tvdb_id).isEqualTo(TestData.TVSHOW_TVDB_ID);
-    }
-
-    private void lockAwait () {
-        try {
-            lock.await(10000, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
 }
