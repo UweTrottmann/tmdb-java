@@ -22,10 +22,8 @@ import com.uwetrottmann.tmdb.TmdbEntity;
 import java.util.List;
 
 public class Configuration implements TmdbEntity {
-    private static final long serialVersionUID = 1527591734693489266L;
 
     public static class ImagesConfiguration implements TmdbEntity {
-        private static final long serialVersionUID = 2793552705485555335L;
 
         public String base_url;
         public String secure_base_url;

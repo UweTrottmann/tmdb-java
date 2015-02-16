@@ -21,8 +21,6 @@ import com.uwetrottmann.tmdb.TmdbEntity;
 
 public class Trailer implements TmdbEntity {
 
-    private static final long serialVersionUID = -4420680473038571645L;
-
     public String name;
 
     public String size;

@@ -23,7 +23,6 @@ import java.util.Date;
 import java.util.List;
 
 public class Movie implements TmdbEntity {
-    private static final long serialVersionUID = 4604935751051141456L;
 
     public Integer id;
 
