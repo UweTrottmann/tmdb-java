@@ -6,11 +6,13 @@ import com.uwetrottmann.tmdb.entities.CastMember;
 import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.CrewMember;
 import com.uwetrottmann.tmdb.entities.ExternalIds;
+import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TvServiceTest extends BaseTestCase {
 
+    @Test
     public void test_credits() {
         Credits credits = getManager().tvService().credits(TestData.TVSHOW_ID, null);
         assertCredits(credits);
@@ -34,6 +36,7 @@ public class TvServiceTest extends BaseTestCase {
         assertThat(vinceGilligan.job).isEqualTo("Executive Producer");
     }
 
+    @Test
     public void test_externalIds() {
         ExternalIds ids = getManager().tvService().externalIds(TestData.TVSHOW_ID, null);
         assertExternalIds(ids);

@@ -5,16 +5,21 @@ import com.uwetrottmann.tmdb.entities.Person;
 import com.uwetrottmann.tmdb.entities.PersonCastCredit;
 import com.uwetrottmann.tmdb.entities.PersonCredits;
 import com.uwetrottmann.tmdb.entities.PersonCrewCredit;
+import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 public class PersonServiceTest extends BaseTestCase {
 
     private static final SimpleDateFormat JSON_STRING_DATE = new SimpleDateFormat("yyy-MM-dd");
 
+    @Test
     public void test_summary() throws ParseException {
         Person person = getManager().personService().summary(287);
         assertNotNull("Result was null.", person);
@@ -29,6 +34,7 @@ public class PersonServiceTest extends BaseTestCase {
         assertNotNull("Movie profile path was null.", person.profile_path);
     }
 
+    @Test
     public void test_movie_credits() {
         PersonCredits credits = getManager().personService().movieCredits(287, null);
         assertPersonCredits(credits, false);
@@ -38,6 +44,7 @@ public class PersonServiceTest extends BaseTestCase {
         }
     }
 
+    @Test
     public void test_tv_credits() {
         PersonCredits credits = getManager().personService().tvCredits(287, null);
         assertPersonCredits(credits, false);
@@ -48,6 +55,7 @@ public class PersonServiceTest extends BaseTestCase {
         }
     }
 
+    @Test
     public void test_combined_credits() {
         PersonCredits credits = getManager().personService().combinedCredits(287, null);
         assertPersonCredits(credits, true);

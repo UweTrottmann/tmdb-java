@@ -8,21 +8,25 @@ import com.uwetrottmann.tmdb.entities.Movie;
 import com.uwetrottmann.tmdb.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb.entities.Trailers;
 import com.uwetrottmann.tmdb.enumerations.AppendToResponseItem;
+import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class MoviesServiceTest extends BaseTestCase {
 
     private static final SimpleDateFormat JSON_STRING_DATE = new SimpleDateFormat("yyy-MM-dd");
 
+    @Test
     public void test_summary() throws ParseException {
         Movie movie = getManager().moviesService().summary(550, null, null);
         assertNotNull("Result was null.", movie);
         assertNotNull("Movie Adult was null.", movie.adult);
-        assertEquals("Movie Adult does not match.", false, movie.adult.booleanValue());
+        assertThat(movie.adult).isFalse();
         assertNotNull("Movie backdrop path was null.", movie.backdrop_path);
         assertNotNull("Movie budget was null.", movie.budget);
         assertEquals("Movie budget does not match.", 63000000, movie.budget.intValue());
@@ -45,15 +49,17 @@ public class MoviesServiceTest extends BaseTestCase {
         assertNotNull("Movie vote_count was null.", movie.vote_count);
     }
 
+    @Test
     public void test_summary_append_trailers() {
         Movie movie = getManager().moviesService().summary(550,
                 null,
                 new AppendToResponse(
-                    AppendToResponseItem.TRAILERS));
+                        AppendToResponseItem.TRAILERS));
 
         assertNotNull(movie.trailers);
     }
 
+    @Test
     public void test_summary_append_credits() {
         Movie movie = getManager().moviesService().summary(550,
                 null,
@@ -63,6 +69,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertNotNull(movie.credits);
     }
 
+    @Test
     public void test_summary_append_releases() {
         Movie movie = getManager().moviesService().summary(550,
                 null,
@@ -72,6 +79,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertNotNull(movie.releases);
     }
 
+    @Test
     public void test_summary_append_all() {
         Movie movie = getManager().moviesService().summary(550,
                 null,
@@ -85,6 +93,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertNotNull(movie.trailers);
     }
 
+    @Test
     public void test_trailers() {
         Trailers trailers = getManager().moviesService().trailers(550);
         assertThat(trailers).isNotNull();
@@ -93,6 +102,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(trailers.youtube).isNotNull();
     }
 
+    @Test
     public void test_credits() {
         Credits credits = getManager().moviesService().credits(550);
         assertThat(credits).isNotNull();
@@ -103,30 +113,35 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(credits.crew).isNotEmpty();
     }
 
+    @Test
     public void test_nowPlaying() {
         MovieResultsPage page = getManager().moviesService().nowPlaying(null, null);
         assertThat(page).isNotNull();
         assertThat(page.results).isNotEmpty();
     }
 
+    @Test
     public void test_popular() {
         MovieResultsPage page = getManager().moviesService().popular(null, null);
         assertThat(page).isNotNull();
         assertThat(page.results).isNotEmpty();
     }
 
+    @Test
     public void test_similar() {
         MovieResultsPage page = getManager().moviesService().similar(550, null, null);
         assertThat(page).isNotNull();
         assertThat(page.results).isNotEmpty();
     }
 
+    @Test
     public void test_topRated() {
         MovieResultsPage page = getManager().moviesService().topRated(null, null);
         assertThat(page).isNotNull();
         assertThat(page.results).isNotEmpty();
     }
 
+    @Test
     public void test_upcoming() {
         MovieResultsPage page = getManager().moviesService().upcoming(null, null);
         assertThat(page).isNotNull();

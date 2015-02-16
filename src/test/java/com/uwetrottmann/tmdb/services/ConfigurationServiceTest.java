@@ -3,11 +3,13 @@ package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.entities.Configuration;
+import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConfigurationServiceTest extends BaseTestCase {
 
+    @Test
     public void test_configuration() {
         Configuration config = getManager().configurationService().configuration();
         assertThat(config).isNotNull();

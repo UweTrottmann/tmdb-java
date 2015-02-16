@@ -20,11 +20,13 @@ import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.TestData;
 import com.uwetrottmann.tmdb.entities.TvEpisode;
 import com.uwetrottmann.tmdb.entities.TvSeason;
+import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TvSeasonsServiceTest extends BaseTestCase {
 
+    @Test
     public void test_season() {
         TvSeason season = getManager().tvSeasonsService().season(TestData.TVSHOW_ID, 1, null);
         assertThat(season.season_number).isEqualTo(1);
