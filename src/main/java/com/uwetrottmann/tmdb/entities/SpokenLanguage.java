@@ -17,9 +17,7 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.TmdbEntity;
-
-public class SpokenLanguage implements TmdbEntity {
+public class SpokenLanguage {
 
     public String iso_639_1;
     public String name;

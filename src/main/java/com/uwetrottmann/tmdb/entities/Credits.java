@@ -17,11 +17,9 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.TmdbEntity;
-
 import java.util.List;
 
-public class Credits implements TmdbEntity {
+public class Credits {
 
     public Integer id;
 

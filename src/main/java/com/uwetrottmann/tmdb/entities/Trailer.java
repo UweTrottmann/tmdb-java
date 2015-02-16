@@ -17,9 +17,7 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.TmdbEntity;
-
-public class Trailer implements TmdbEntity {
+public class Trailer {
 
     public String name;
 

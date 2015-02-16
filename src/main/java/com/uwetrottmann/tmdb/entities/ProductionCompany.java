@@ -17,9 +17,7 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.TmdbEntity;
-
-public class ProductionCompany implements TmdbEntity {
+public class ProductionCompany {
 
     public Integer id;
     public String name;

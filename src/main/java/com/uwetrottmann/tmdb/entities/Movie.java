@@ -17,12 +17,10 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.TmdbEntity;
-
 import java.util.Date;
 import java.util.List;
 
-public class Movie implements TmdbEntity {
+public class Movie {
 
     public Integer id;
 

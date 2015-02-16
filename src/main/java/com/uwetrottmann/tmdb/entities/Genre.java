@@ -17,9 +17,7 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.TmdbEntity;
-
-public class Genre implements TmdbEntity {
+public class Genre {
 
     public Integer id;
     public String name;

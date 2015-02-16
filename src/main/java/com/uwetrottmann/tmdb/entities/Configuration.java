@@ -17,13 +17,11 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.TmdbEntity;
-
 import java.util.List;
 
-public class Configuration implements TmdbEntity {
+public class Configuration {
 
-    public static class ImagesConfiguration implements TmdbEntity {
+    public static class ImagesConfiguration {
 
         public String base_url;
         public String secure_base_url;
