@@ -39,16 +39,6 @@ public interface PersonService {
      * Get the movie credits for a specific person id.
      *
      * @param tmdbId TMDb id.
-     */
-    @GET("/person/{id}/movie_credits")
-    PersonCredits movieCredits(
-            @Path("id") int tmdbId
-    );
-
-    /**
-     * Get the movie credits for a specific person id.
-     *
-     * @param tmdbId   TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/person/{id}/movie_credits")
@@ -61,16 +51,6 @@ public interface PersonService {
      * Get the TV credits for a specific person id.
      *
      * @param tmdbId TMDb id.
-     */
-    @GET("/person/{id}/tv_credits")
-    PersonCredits tvCredits(
-            @Path("id") int tmdbId
-    );
-
-    /**
-     * Get the TV credits for a specific person id.
-     *
-     * @param tmdbId   TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/person/{id}/tv_credits")
@@ -83,16 +63,6 @@ public interface PersonService {
      * Get the movie and TV credits for a specific person id.
      *
      * @param tmdbId TMDb id.
-     */
-    @GET("/person/{id}/combined_credits")
-    PersonCredits combinedCredits(
-            @Path("id") int tmdbId
-    );
-
-    /**
-     * Get the movie and TV credits for a specific person id.
-     *
-     * @param tmdbId   TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/person/{id}/combined_credits")

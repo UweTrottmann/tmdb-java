@@ -13,11 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SearchServiceTest extends BaseTestCase {
 
     public void test_movieSearch() throws ParseException {
-        MovieResultsPage movieResults = getManager().searchService().movie(TestData.MOVIE_TITLE);
-        assertMovieResults(movieResults);
-    }
-
-    public void test_movieSearchWithNullParams() throws ParseException {
         MovieResultsPage movieResults = getManager().searchService().movie(TestData.MOVIE_TITLE, null, null,
                 null, null, null, null);
         assertMovieResults(movieResults);

@@ -19,7 +19,7 @@ public class MoviesServiceTest extends BaseTestCase {
     private static final SimpleDateFormat JSON_STRING_DATE = new SimpleDateFormat("yyy-MM-dd");
 
     public void test_summary() throws ParseException {
-        Movie movie = getManager().moviesService().summary(550, null);
+        Movie movie = getManager().moviesService().summary(550, null, null);
         assertNotNull("Result was null.", movie);
         assertNotNull("Movie Adult was null.", movie.adult);
         assertEquals("Movie Adult does not match.", false, movie.adult.booleanValue());
@@ -116,7 +116,7 @@ public class MoviesServiceTest extends BaseTestCase {
     }
 
     public void test_similar() {
-        MovieResultsPage page = getManager().moviesService().similarMovies(550, null, null);
+        MovieResultsPage page = getManager().moviesService().similar(550, null, null);
         assertThat(page).isNotNull();
         assertThat(page.results).isNotEmpty();
     }

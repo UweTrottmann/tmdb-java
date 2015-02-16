@@ -23,12 +23,25 @@ import com.uwetrottmann.tmdb.entities.Movie;
 import com.uwetrottmann.tmdb.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb.entities.Releases;
 import com.uwetrottmann.tmdb.entities.Trailers;
-
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
 
 public interface MoviesService {
+
+    /**
+     * Get the basic movie information for a specific movie id.
+     *
+     * @param tmdbId TMDb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     * @param appendToResponse extra requests to append to the result.
+     */
+    @GET("/movie/{id}")
+    Movie summary(
+            @Path("id") int tmdbId,
+            @Query("language") String language,
+            @Query("append_to_response") AppendToResponse appendToResponse
+    );
 
     /**
      * Get the cast and crew information for a specific movie id.
@@ -40,40 +53,9 @@ public interface MoviesService {
             @Path("id") int tmdbId
     );
 
-    /**
-     * Get the basic movie information for a specific movie id.
-     *
-     * @param tmdbId TMDb id.
-     */
-    @GET("/movie/{id}")
-    Movie summary(
+    @GET("/movie/{id}/releases")
+    Releases releases(
             @Path("id") int tmdbId
-    );
-
-    /**
-     * Get the basic movie information for a specific movie id.
-     *
-     * @param tmdbId   TMDb id.
-     * @param language <em>Optional.</em> ISO 639-1 code.
-     */
-    @GET("/movie/{id}")
-    Movie summary(
-            @Path("id") int tmdbId,
-            @Query("language") String language
-    );
-
-    /**
-     * Get the basic movie information for a specific movie id.
-     *
-     * @param tmdbId   TMDb id.
-     * @param language <em>Optional.</em> ISO 639-1 code.
-     * @param appendToResponse extra requests to append to the result.
-     */
-    @GET("/movie/{id}")
-    Movie summary(
-            @Path("id") int tmdbId,
-            @Query("language") String language,
-            @Query("append_to_response") AppendToResponse appendToResponse
     );
 
     /**
@@ -87,17 +69,36 @@ public interface MoviesService {
     );
 
     /**
-     * Get the list of movies playing in theaters. This list refreshes every day. The maximum number
-     * of items this list will include is 100.
+     * Get the similar movies for a specific movie id.
+     *
+     * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/movie/now_playing")
-    MovieResultsPage nowPlaying();
+    @GET("/movie/{id}/similar_movies")
+    MovieResultsPage similar(
+            @Path("id") int tmdbId,
+            @Query("page") Integer page,
+            @Query("language") String language
+    );
 
     /**
-     * Get the list of movies playing in theaters. This list refreshes every day. The maximum number
-     * of items this list will include is 100.
+     * Get the list of upcoming movies. This list refreshes every day. The maximum number of items this list will
+     * include is 100.
      *
-     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("/movie/upcoming")
+    MovieResultsPage upcoming(
+            @Query("page") Integer page,
+            @Query("language") String language
+    );
+
+    /**
+     * Get the list of movies playing in theaters. This list refreshes every day. The maximum number of items this list
+     * will include is 100.
+     *
+     * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/movie/now_playing")
@@ -108,14 +109,8 @@ public interface MoviesService {
 
     /**
      * Get the list of popular movies on The Movie Database. This list refreshes every day.
-     */
-    @GET("/movie/popular")
-    MovieResultsPage popular();
-
-    /**
-     * Get the list of popular movies on The Movie Database. This list refreshes every day.
      *
-     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/movie/popular")
@@ -125,69 +120,16 @@ public interface MoviesService {
     );
 
     /**
-     * Get the similar movies for a specific movie id.
-     */
-    @GET("/movie/{id}/similar_movies")
-    MovieResultsPage similarMovies(
-            @Path("id") int tmdbId
-    );
-
-    /**
-     * Get the similar movies for a specific movie id.
+     * Get the list of top rated movies. By default, this list will only include movies that have 10 or more votes. This
+     * list refreshes every day.
      *
-     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
-     * @param language <em>Optional.</em> ISO 639-1 code.
-     */
-    @GET("/movie/{id}/similar_movies")
-    MovieResultsPage similarMovies(
-            @Path("id") int tmdbId,
-            @Query("page") Integer page,
-            @Query("language") String language
-    );
-
-    /**
-     * Get the list of top rated movies. By default, this list will only include movies that have 10
-     * or more votes. This list refreshes every day.
-     */
-    @GET("/movie/top_rated")
-    MovieResultsPage topRated();
-
-    /**
-     * Get the list of top rated movies. By default, this list will only include movies that have 10
-     * or more votes. This list refreshes every day.
-     *
-     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/movie/top_rated")
     MovieResultsPage topRated(
             @Query("page") Integer page,
             @Query("language") String language
-    );
-
-    /**
-     * Get the list of upcoming movies. This list refreshes every day. The maximum number of items
-     * this list will include is 100.
-     */
-    @GET("/movie/upcoming")
-    MovieResultsPage upcoming();
-
-    /**
-     * Get the list of upcoming movies. This list refreshes every day. The maximum number of items
-     * this list will include is 100.
-     *
-     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
-     * @param language <em>Optional.</em> ISO 639-1 code.
-     */
-    @GET("/movie/upcoming")
-    MovieResultsPage upcoming(
-            @Query("page") Integer page,
-            @Query("language") String language
-    );
-
-    @GET("/movie/{id}/releases")
-    Releases releases(
-            @Path("id") int tmdbId
     );
 
 }

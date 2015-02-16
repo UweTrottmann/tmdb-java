@@ -30,7 +30,7 @@ public class PersonServiceTest extends BaseTestCase {
     }
 
     public void test_movie_credits() {
-        PersonCredits credits = getManager().personService().movieCredits(287);
+        PersonCredits credits = getManager().personService().movieCredits(287, null);
         assertPersonCredits(credits, false);
 
         for (PersonCastCredit credit : credits.cast) {
@@ -39,7 +39,7 @@ public class PersonServiceTest extends BaseTestCase {
     }
 
     public void test_tv_credits() {
-        PersonCredits credits = getManager().personService().tvCredits(287);
+        PersonCredits credits = getManager().personService().tvCredits(287, null);
         assertPersonCredits(credits, false);
 
         for (PersonCastCredit credit : credits.cast) {
@@ -49,7 +49,7 @@ public class PersonServiceTest extends BaseTestCase {
     }
 
     public void test_combined_credits() {
-        PersonCredits credits = getManager().personService().combinedCredits(287);
+        PersonCredits credits = getManager().personService().combinedCredits(287, null);
         assertPersonCredits(credits, true);
     }
 

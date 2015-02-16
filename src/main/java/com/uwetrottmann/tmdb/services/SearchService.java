@@ -28,16 +28,6 @@ public interface SearchService {
      * Search for movies by title.
      *
      * @param query CGI escaped string
-     */
-    @GET("/search/movie")
-    MovieResultsPage movie(
-            @Query("query") String query
-    );
-
-    /**
-     * Search for movies by title.
-     *
-     * @param query CGI escaped string
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      * @param includeAdult <em>Optional.</em> Toggle the inclusion of adult titles. Expected value is: true or false
