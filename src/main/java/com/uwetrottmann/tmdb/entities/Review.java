@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Uwe Trottmann
+ * Copyright 2015 Miguel Teixeira
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,11 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import java.util.List;
+public class Review {
 
-public class Trailers {
+    public String id;
+    public String author;
+    public String content;
+    public String url;
 
-    public Integer id;
-
-    public List<Trailer> quicktime;
-
-    public List<Trailer> youtube;
 }
