@@ -20,10 +20,10 @@ package com.uwetrottmann.tmdb.enumerations;
 
 public enum AppendToResponseItem {
 
-    TRAILERS("trailers"),
+    VIDEOS("videos"),
     RELEASES("releases"),
     CREDITS("credits"),
-    SIMILAR("similar_movies");
+    SIMILAR("similar");
 
     private final String value;
 

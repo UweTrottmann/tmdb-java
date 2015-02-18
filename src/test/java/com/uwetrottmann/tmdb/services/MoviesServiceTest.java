@@ -84,13 +84,13 @@ public class MoviesServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void test_summary_append_trailers() {
+    public void test_summary_append_videos() {
         Movie movie = getManager().moviesService().summary(550,
                 null,
                 new AppendToResponse(
-                        AppendToResponseItem.TRAILERS));
+                        AppendToResponseItem.VIDEOS));
 
-        assertNotNull(movie.trailers);
+        assertNotNull(movie.videos);
     }
 
     @Test
@@ -114,13 +114,13 @@ public class MoviesServiceTest extends BaseTestCase {
     }
     
     @Test
-    public void test_summary_append_similar_movies() {
+    public void test_summary_append_similar() {
         Movie movie = getManager().moviesService().summary(550,
                 null,
                 new AppendToResponse(
                         AppendToResponseItem.SIMILAR));
 
-        assertNotNull(movie.similar_movies);
+        assertNotNull(movie.similar);
     }
 
     @Test
@@ -130,13 +130,13 @@ public class MoviesServiceTest extends BaseTestCase {
                 new AppendToResponse(
                         AppendToResponseItem.RELEASES,
                         AppendToResponseItem.CREDITS,
-                        AppendToResponseItem.TRAILERS,
+                        AppendToResponseItem.VIDEOS,
                         AppendToResponseItem.SIMILAR));
 
         assertNotNull(movie.releases);
         assertNotNull(movie.credits);
-        assertNotNull(movie.trailers);
-        assertNotNull(movie.similar_movies);
+        assertNotNull(movie.videos);
+        assertNotNull(movie.similar);
     }
     
     @Test
