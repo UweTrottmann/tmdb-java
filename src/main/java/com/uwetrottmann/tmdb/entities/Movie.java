@@ -47,8 +47,8 @@ public class Movie {
     public Integer vote_count;
 
     // Following are used with append_to_response
-    public Trailers trailers;
+    public Videos videos;
     public Releases releases;
     public Credits credits;
-    public MovieResultsPage similar_movies;
+    public MovieResultsPage similar;
 }

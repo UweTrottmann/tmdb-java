@@ -120,7 +120,7 @@ public interface MoviesService {
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/movie/{id}/similar_movies")
+    @GET("/movie/{id}/similar")
     MovieResultsPage similar(
             @Path("id") int tmdbId,
             @Query("page") Integer page,
