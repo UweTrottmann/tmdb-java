@@ -17,12 +17,18 @@
 
 package com.uwetrottmann.tmdb.services;
 
+import com.uwetrottmann.tmdb.entities.AlternativeTitles;
 import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.Credits;
+import com.uwetrottmann.tmdb.entities.Images;
+import com.uwetrottmann.tmdb.entities.Keywords;
+import com.uwetrottmann.tmdb.entities.ListResultsPage;
 import com.uwetrottmann.tmdb.entities.Movie;
 import com.uwetrottmann.tmdb.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb.entities.Releases;
-import com.uwetrottmann.tmdb.entities.Trailers;
+import com.uwetrottmann.tmdb.entities.ReviewResultsPage;
+import com.uwetrottmann.tmdb.entities.Videos;
+
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -34,13 +40,25 @@ public interface MoviesService {
      *
      * @param tmdbId TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
-     * @param appendToResponse extra requests to append to the result.
+     * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
      */
     @GET("/movie/{id}")
     Movie summary(
             @Path("id") int tmdbId,
             @Query("language") String language,
             @Query("append_to_response") AppendToResponse appendToResponse
+    );
+    
+    /**
+     * Get the alternative titles for a specific movie id.
+     *
+     * @param tmdbId TMDb id.
+     * @param country <em>Optional.</em> ISO 3166-1 code.
+     */
+    @GET("/movie/{id}/alternative_titles")
+    AlternativeTitles alternativeTitles(
+            @Path("id") int tmdbId,
+            @Query("country") String country
     );
 
     /**
@@ -52,25 +70,53 @@ public interface MoviesService {
     Credits credits(
             @Path("id") int tmdbId
     );
-
-    @GET("/movie/{id}/releases")
-    Releases releases(
+    
+    /**
+     * Get the images (posters and backdrops) for a specific movie id.
+     *
+     * @param tmdbId TMDb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("/movie/{id}/images")
+    Images images(
+            @Path("id") int tmdbId,
+            @Query("language") String language
+    );
+    
+    /**
+     * Get the plot keywords for a specific movie id.
+     *
+     * @param tmdbId TMDb id.
+     */
+    @GET("/movie/{id}/keywords")
+    Keywords keywords(
             @Path("id") int tmdbId
     );
 
     /**
-     * Get the trailers for a specific movie id.
+     * Get the release date and certification information by country for a specific movie id.
      *
      * @param tmdbId TMDb id.
      */
-    @GET("/movie/{id}/trailers")
-    Trailers trailers(
+    @GET("/movie/{id}/releases")
+    Releases releases(
+            @Path("id") int tmdbId
+    );
+    
+    /**
+     * Get the videos (trailers, teasers, clips, etc...) for a specific movie id.
+     *
+     * @param tmdbId TMDb id.
+     */
+    @GET("/movie/{id}/videos")
+    Videos videos(
             @Path("id") int tmdbId
     );
 
     /**
      * Get the similar movies for a specific movie id.
      *
+     * @param tmdbId TMDb id.
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
@@ -80,6 +126,40 @@ public interface MoviesService {
             @Query("page") Integer page,
             @Query("language") String language
     );
+    
+    /**
+     * Get the reviews for a particular movie id.
+     * 
+     * @param tmdbId   TMDb id.
+     * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("/movie/{id}/reviews")
+    ReviewResultsPage reviews(
+            @Path("id") int tmdbId,
+            @Query("page") Integer page,
+            @Query("language") String language
+    );
+    
+    /**
+     * Get the lists that the movie belongs to.
+     * 
+     * @param tmdbId   TMDb id.
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("/movie/{id}/lists")
+    ListResultsPage lists(
+            @Path("id") int tmdbId,
+            @Query("page") Integer page,
+            @Query("language") String language
+    );
+    
+    /**
+     * Get the latest movie id.
+     */
+    @GET("/movie/latest")
+    Movie latest();
 
     /**
      * Get the list of upcoming movies. This list refreshes every day. The maximum number of items this list will
