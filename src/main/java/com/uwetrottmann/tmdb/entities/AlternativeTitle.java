@@ -17,12 +17,9 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import java.util.List;
+public class AlternativeTitle {
 
-public class MovieImages {
-    
-    public Integer id;
-    public List<Image> backdrops;
-    public List<Image> posters;
+    public String iso_3166_1;
+    public String title;
 
 }

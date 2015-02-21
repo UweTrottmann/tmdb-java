@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Uwe Trottmann
+ * Copyright 2015 Miguel Teixeira
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,6 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
 
 package com.uwetrottmann.tmdb.entities;
@@ -19,15 +20,24 @@ package com.uwetrottmann.tmdb.entities;
 import java.util.Date;
 import java.util.List;
 
-public class TvSeason {
+public class TvShowComplete extends TvShow {
 
-    public Integer id;
-    public Date air_date;
-    public List<TvEpisode> episodes;
-    public Integer episode_count;
-    public String name;
+    public List<Person> created_by;
+    public List<Network> networks;
+    public List<Integer> episode_run_time;
+    public List<Genre> genres;
+    public String homepage;
+    public boolean in_production;
+    public List<String> languages;
+    public Date last_air_date;
+    public Integer number_of_episodes;
+    public Integer number_of_seasons;
+    public List<String> origin_country;
+    public String original_language;
     public String overview;
-    public String poster_path;
-    public Integer season_number;
+    public List<ProductionCompany> production_companies;
+    public List<TvSeason> seasons;
+    public String status;
+    public String type;
 
 }
