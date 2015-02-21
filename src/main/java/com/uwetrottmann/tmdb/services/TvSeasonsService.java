@@ -16,7 +16,12 @@
 
 package com.uwetrottmann.tmdb.services;
 
+import com.uwetrottmann.tmdb.entities.Credits;
+import com.uwetrottmann.tmdb.entities.ExternalIds;
+import com.uwetrottmann.tmdb.entities.TvImages;
 import com.uwetrottmann.tmdb.entities.TvSeason;
+import com.uwetrottmann.tmdb.entities.Videos;
+
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -29,10 +34,60 @@ public interface TvSeasonsService {
      * @param showId A themoviedb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/tv/{id}/season/{season}")
+    @GET("/tv/{id}/season/{season_number}")
     TvSeason season(
             @Path("id") int showId,
-            @Path("season") int seasonNumber,
+            @Path("season_number") int seasonNumber,
+            @Query("language") String language
+    );
+    
+    /**
+     * Get the cast & crew credits for a TV season by season number.
+     *
+     * @param showId A themoviedb id.
+     */
+    @GET("/tv/{id}/season/{season_number}/credits")
+    Credits credits(
+            @Path("id") int showId,
+            @Path("season_number") int seasonNumber
+    );
+    
+    /**
+     * Get the external ids that we have stored for a TV season by season number.
+     *
+     * @param showId A themoviedb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("/tv/{id}/season/{season_number}/external_ids")
+    ExternalIds externalIds(
+            @Path("id") int showId,
+            @Path("season_number") int seasonNumber,
+            @Query("language") String language
+    );
+    
+    /**
+     * Get the images (posters) that we have stored for a TV season by season number.
+     *
+     * @param showId A themoviedb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("/tv/{id}/season/{season_number}/images")
+    TvImages images(
+            @Path("id") int showId,
+            @Path("season_number") int seasonNumber,
+            @Query("language") String language
+    );
+    
+    /**
+     * Get the videos that have been added to a TV season (trailers, teasers, etc...)
+     *
+     * @param showId A themoviedb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("/tv/{id}/season/{season_number}/videos")
+    Videos videos(
+            @Path("id") int showId,
+            @Path("season_number") int seasonNumber,
             @Query("language") String language
     );
 
