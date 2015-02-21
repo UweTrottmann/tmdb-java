@@ -19,22 +19,8 @@ package com.uwetrottmann.tmdb.entities;
 
 import java.util.List;
 
-public class Images {
+public class CompanyResultsPage extends BaseResultsPage {
 
-    public static class Image {
-
-        public String file_path;
-        public Integer width;
-        public Integer height;
-        public String iso_639_1;
-        public Float aspect_ratio;
-        public Float vote_average;
-        public Integer vote_count;
-        
-    }
-    
-    public Integer id;
-    public List<Image> backdrops;
-    public List<Image> posters;
+    public List<Company> results;
 
 }

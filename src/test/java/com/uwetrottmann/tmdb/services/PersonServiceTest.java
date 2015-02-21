@@ -1,6 +1,7 @@
 package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.BaseTestCase;
+import com.uwetrottmann.tmdb.TestData;
 import com.uwetrottmann.tmdb.entities.Image;
 import com.uwetrottmann.tmdb.entities.Media;
 import com.uwetrottmann.tmdb.entities.Person;
@@ -27,7 +28,7 @@ public class PersonServiceTest extends BaseTestCase {
 
     @Test
     public void test_summary() throws ParseException {
-        Person person = getManager().personService().summary(287);
+        Person person = getManager().personService().summary(TestData.PERSON_ID);
         assertNotNull("Result was null.", person);
         assertEquals("Person name does not match.", "Brad Pitt", person.name);
         assertNotNull("Person homepage was null", person.homepage);
@@ -42,8 +43,8 @@ public class PersonServiceTest extends BaseTestCase {
 
     @Test
     public void test_movie_credits() {
-        PersonCredits credits = getManager().personService().movieCredits(287, null);
-        assertThat(credits.id).isEqualTo(287);
+        PersonCredits credits = getManager().personService().movieCredits(TestData.PERSON_ID, null);
+        assertThat(credits.id).isEqualTo(TestData.PERSON_ID);
         assertCastCredits(credits, false);
         assertCrewCredits(credits, false);
 
@@ -54,8 +55,8 @@ public class PersonServiceTest extends BaseTestCase {
 
     @Test
     public void test_tv_credits() {
-        PersonCredits credits = getManager().personService().tvCredits(287, null);
-        assertThat(credits.id).isEqualTo(287);
+        PersonCredits credits = getManager().personService().tvCredits(TestData.PERSON_ID, null);
+        assertThat(credits.id).isEqualTo(TestData.PERSON_ID);
         assertCastCredits(credits, false);
 
         for (PersonCastCredit credit : credits.cast) {
@@ -66,16 +67,16 @@ public class PersonServiceTest extends BaseTestCase {
 
     @Test
     public void test_combined_credits() {
-        PersonCredits credits = getManager().personService().combinedCredits(287, null);
-        assertThat(credits.id).isEqualTo(287);
+        PersonCredits credits = getManager().personService().combinedCredits(TestData.PERSON_ID, null);
+        assertThat(credits.id).isEqualTo(TestData.PERSON_ID);
         assertCastCredits(credits, true);
         assertCrewCredits(credits, true);
     }
     
     @Test
     public void test_external_ids() {
-        PersonIds ids = getManager().personService().externalIds(287);
-        assertThat(ids.id).isEqualTo(287);
+        PersonIds ids = getManager().personService().externalIds(TestData.PERSON_ID);
+        assertThat(ids.id).isEqualTo(TestData.PERSON_ID);
         assertEquals("Person IMDB ID was null.", "nm0000093", ids.imdb_id);
         assertEquals("Person FREEBASE MID was null.", "/m/0c6qh", ids.freebase_mid);
         assertEquals("Person FREEBASE ID was null.", "/en/brad_pitt", ids.freebase_id);
@@ -84,8 +85,8 @@ public class PersonServiceTest extends BaseTestCase {
     
     @Test
     public void test_images() {
-        PersonImages images = getManager().personService().images(287);
-        assertThat(images.id).isEqualTo(287);
+        PersonImages images = getManager().personService().images(TestData.PERSON_ID);
+        assertThat(images.id).isEqualTo(TestData.PERSON_ID);
         
         for (Image image : images.profiles) {
             assertThat(image.file_path).isNotEmpty();

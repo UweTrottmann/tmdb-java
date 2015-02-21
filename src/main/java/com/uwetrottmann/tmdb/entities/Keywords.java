@@ -20,13 +20,6 @@ package com.uwetrottmann.tmdb.entities;
 import java.util.List;
 
 public class Keywords {
-
-    public static class Keyword {
-
-        public Integer id;
-        public String name;
-        
-    }
     
     public Integer id;
     public List<Keyword> keywords;

@@ -2,6 +2,7 @@
 package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.BaseTestCase;
+import com.uwetrottmann.tmdb.TestData;
 import com.uwetrottmann.tmdb.entities.AlternativeTitles;
 import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.Credits;
@@ -29,7 +30,7 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_summary() throws ParseException {
-        Movie movie = getManager().moviesService().summary(550, null, null);
+        Movie movie = getManager().moviesService().summary(TestData.MOVIE_ID, null, null);
         assertNotNull("Result was null.", movie);
         assertNotNull("Movie Adult was null.", movie.adult);
         assertThat(movie.adult).isFalse();
@@ -37,7 +38,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertNotNull("Movie budget was null.", movie.budget);
         assertEquals("Movie budget does not match.", 63000000, movie.budget.intValue());
         assertNotNull("Movie TMDB ID was null.", movie.id);
-        assertEquals("Movie TMDB ID does not match.", 550, movie.id.intValue());
+        assertEquals("Movie TMDB ID does not match.", TestData.MOVIE_ID, movie.id.intValue());
         assertEquals("Movie IMDB ID does not match.", "tt0137523", movie.imdb_id);
         assertEquals("Move orignal title does not match.", "Fight Club", movie.original_title);
         assertNotNull("Movie overview was null.", movie.overview);
@@ -57,7 +58,7 @@ public class MoviesServiceTest extends BaseTestCase {
     
     @Test
     public void test_summary_language() throws ParseException {
-        Movie movie = getManager().moviesService().summary(550, "pt", null);
+        Movie movie = getManager().moviesService().summary(TestData.MOVIE_ID, "pt", null);
         assertNotNull("Result was null.", movie);
         assertNotNull("Movie Adult was null.", movie.adult);
         assertEquals("Movie Adult does not match.", false, movie.adult.booleanValue());
@@ -65,7 +66,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertNotNull("Movie budget was null.", movie.budget);
         assertEquals("Movie budget does not match.", 63000000, movie.budget.intValue());
         assertNotNull("Movie TMDB ID was null.", movie.id);
-        assertEquals("Movie TMDB ID does not match.", 550, movie.id.intValue());
+        assertEquals("Movie TMDB ID does not match.", TestData.MOVIE_ID, movie.id.intValue());
         assertEquals("Movie IMDB ID does not match.", "tt0137523", movie.imdb_id);
         assertEquals("Move orignal title does not match.", "Fight Club", movie.original_title);
         assertNotNull("Movie overview was null.", movie.overview);
@@ -85,7 +86,7 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_summary_append_videos() {
-        Movie movie = getManager().moviesService().summary(550,
+        Movie movie = getManager().moviesService().summary(TestData.MOVIE_ID,
                 null,
                 new AppendToResponse(
                         AppendToResponseItem.VIDEOS));
@@ -95,7 +96,7 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_summary_append_credits() {
-        Movie movie = getManager().moviesService().summary(550,
+        Movie movie = getManager().moviesService().summary(TestData.MOVIE_ID,
                 null,
                 new AppendToResponse(
                         AppendToResponseItem.CREDITS));
@@ -105,7 +106,7 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_summary_append_releases() {
-        Movie movie = getManager().moviesService().summary(550,
+        Movie movie = getManager().moviesService().summary(TestData.MOVIE_ID,
                 null,
                 new AppendToResponse(
                         AppendToResponseItem.RELEASES));
@@ -115,7 +116,7 @@ public class MoviesServiceTest extends BaseTestCase {
     
     @Test
     public void test_summary_append_similar() {
-        Movie movie = getManager().moviesService().summary(550,
+        Movie movie = getManager().moviesService().summary(TestData.MOVIE_ID,
                 null,
                 new AppendToResponse(
                         AppendToResponseItem.SIMILAR));
@@ -125,7 +126,7 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_summary_append_all() {
-        Movie movie = getManager().moviesService().summary(550,
+        Movie movie = getManager().moviesService().summary(TestData.MOVIE_ID,
                 null,
                 new AppendToResponse(
                         AppendToResponseItem.RELEASES,
@@ -141,9 +142,9 @@ public class MoviesServiceTest extends BaseTestCase {
     
     @Test
     public void test_alternative_titles() {
-        AlternativeTitles titles = getManager().moviesService().alternativeTitles(550, null);
+        AlternativeTitles titles = getManager().moviesService().alternativeTitles(TestData.MOVIE_ID, null);
         assertThat(titles).isNotNull();
-        assertThat(titles.id).isEqualTo(550);
+        assertThat(titles.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(titles.titles).isNotEmpty();
         assertThat(titles.titles.get(0).iso_3166_1).isEqualTo("PL");
         assertThat(titles.titles.get(0).title).isEqualTo("Podziemny krąg");
@@ -151,9 +152,9 @@ public class MoviesServiceTest extends BaseTestCase {
     
     @Test
     public void test_credits() {
-        Credits credits = getManager().moviesService().credits(550);
+        Credits credits = getManager().moviesService().credits(TestData.MOVIE_ID);
         assertThat(credits).isNotNull();
-        assertThat(credits.id).isEqualTo(550);
+        assertThat(credits.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(credits.cast).isNotEmpty();
         assertThat(credits.cast.get(0)).isNotNull();
         assertThat(credits.cast.get(0).name).isEqualTo("Edward Norton");
@@ -162,9 +163,9 @@ public class MoviesServiceTest extends BaseTestCase {
     
     @Test
     public void test_images() {
-        MovieImages images = getManager().moviesService().images(550, null);
+        MovieImages images = getManager().moviesService().images(TestData.MOVIE_ID, null);
         assertThat(images).isNotNull();
-        assertThat(images.id).isEqualTo(550);
+        assertThat(images.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(images.backdrops).isNotEmpty();
         assertThat(images.backdrops.get(0).file_path).isEqualTo("/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg");
         assertThat(images.backdrops.get(0).width).isEqualTo(1280);
@@ -185,18 +186,18 @@ public class MoviesServiceTest extends BaseTestCase {
     
     @Test
     public void test_keywords() {
-        Keywords keywords = getManager().moviesService().keywords(550);
+        Keywords keywords = getManager().moviesService().keywords(TestData.MOVIE_ID);
         assertThat(keywords).isNotNull();
-        assertThat(keywords.id).isEqualTo(550);
+        assertThat(keywords.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(keywords.keywords.get(0).id).isEqualTo(825);
         assertThat(keywords.keywords.get(0).name).isEqualTo("support group");
     }
     
     @Test
     public void test_releases() {
-        Releases releases = getManager().moviesService().releases(550);
+        Releases releases = getManager().moviesService().releases(TestData.MOVIE_ID);
         assertThat(releases).isNotNull();
-        assertThat(releases.id).isEqualTo(550);
+        assertThat(releases.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(releases.countries.get(0).iso_3166_1).isEqualTo("US");
         assertThat(releases.countries.get(0).certification).isEqualTo("R");
         assertThat(releases.countries.get(0).release_date).isEqualTo("1999-10-14");
@@ -204,9 +205,9 @@ public class MoviesServiceTest extends BaseTestCase {
     
     @Test
     public void test_videos() {
-        Videos videos = getManager().moviesService().videos(550);
+        Videos videos = getManager().moviesService().videos(TestData.MOVIE_ID);
         assertThat(videos).isNotNull();
-        assertThat(videos.id).isEqualTo(550);
+        assertThat(videos.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(videos.results.get(0).id).isNotNull();
         assertThat(videos.results.get(0).iso_639_1).isNotNull();
         assertThat(videos.results.get(0).key).isNotNull();
@@ -218,7 +219,7 @@ public class MoviesServiceTest extends BaseTestCase {
     
     @Test
     public void test_similar() {
-        MovieResultsPage results = getManager().moviesService().similar(550, 3, null);
+        MovieResultsPage results = getManager().moviesService().similar(TestData.MOVIE_ID, 3, null);
         assertThat(results).isNotNull();
         assertThat(results.page).isNotNull().isPositive();
         assertThat(results.total_pages).isNotNull().isPositive();
