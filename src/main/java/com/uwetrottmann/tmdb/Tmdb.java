@@ -22,6 +22,7 @@ import com.uwetrottmann.tmdb.services.FindService;
 import com.uwetrottmann.tmdb.services.MoviesService;
 import com.uwetrottmann.tmdb.services.PersonService;
 import com.uwetrottmann.tmdb.services.SearchService;
+import com.uwetrottmann.tmdb.services.TvEpisodesService;
 import com.uwetrottmann.tmdb.services.TvSeasonsService;
 import com.uwetrottmann.tmdb.services.TvService;
 import retrofit.RequestInterceptor;
@@ -113,7 +114,6 @@ public class Tmdb {
             builder.setEndpoint(API_URL);
             builder.setConverter(new GsonConverter(TmdbHelper.getGsonBuilder().create()));
             builder.setRequestInterceptor(new RequestInterceptor() {
-                @Override
                 public void intercept(RequestFacade requestFacade) {
                     requestFacade.addQueryParam(PARAM_API_KEY, apiKey);
                 }
@@ -155,6 +155,10 @@ public class Tmdb {
 
     public TvSeasonsService tvSeasonsService() {
         return getRestAdapter().create(TvSeasonsService.class);
+    }
+    
+    public TvEpisodesService tvEpisodesService() {
+        return getRestAdapter().create(TvEpisodesService.class);
     }
 
 }
