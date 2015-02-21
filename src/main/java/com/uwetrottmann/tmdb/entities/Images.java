@@ -19,9 +19,10 @@ package com.uwetrottmann.tmdb.entities;
 
 import java.util.List;
 
-public class TvImages {
+public class Images {
     
     public Integer id;
+    public List<Image> backdrops;
     public List<Image> posters;
 
 }

@@ -17,18 +17,9 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import java.util.List;
+public class Network {
 
-public class AlternativeTitles {
-
-    public static class AlternativeTitle {
-        
-        public String iso_3166_1;
-        public String title;
-        
-    }
-    
     public Integer id;
-    public List<AlternativeTitle> titles;
+    public String name;
 
 }

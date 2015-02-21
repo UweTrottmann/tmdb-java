@@ -3,11 +3,11 @@ package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.TestData;
-import com.uwetrottmann.tmdb.entities.AlternativeTitles;
+import com.uwetrottmann.tmdb.entities.Images;
+import com.uwetrottmann.tmdb.entities.MovieAlternativeTitles;
 import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.Credits;
-import com.uwetrottmann.tmdb.entities.MovieImages;
-import com.uwetrottmann.tmdb.entities.Keywords;
+import com.uwetrottmann.tmdb.entities.MovieKeywords;
 import com.uwetrottmann.tmdb.entities.ListResultsPage;
 import com.uwetrottmann.tmdb.entities.Movie;
 import com.uwetrottmann.tmdb.entities.MovieResultsPage;
@@ -142,7 +142,7 @@ public class MoviesServiceTest extends BaseTestCase {
     
     @Test
     public void test_alternative_titles() {
-        AlternativeTitles titles = getManager().moviesService().alternativeTitles(TestData.MOVIE_ID, null);
+        MovieAlternativeTitles titles = getManager().moviesService().alternativeTitles(TestData.MOVIE_ID, null);
         assertThat(titles).isNotNull();
         assertThat(titles.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(titles.titles).isNotEmpty();
@@ -163,7 +163,7 @@ public class MoviesServiceTest extends BaseTestCase {
     
     @Test
     public void test_images() {
-        MovieImages images = getManager().moviesService().images(TestData.MOVIE_ID, null);
+        Images images = getManager().moviesService().images(TestData.MOVIE_ID, null);
         assertThat(images).isNotNull();
         assertThat(images.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(images.backdrops).isNotEmpty();
@@ -186,7 +186,7 @@ public class MoviesServiceTest extends BaseTestCase {
     
     @Test
     public void test_keywords() {
-        Keywords keywords = getManager().moviesService().keywords(TestData.MOVIE_ID);
+        MovieKeywords keywords = getManager().moviesService().keywords(TestData.MOVIE_ID);
         assertThat(keywords).isNotNull();
         assertThat(keywords.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(keywords.keywords.get(0).id).isEqualTo(825);

@@ -26,7 +26,7 @@ import com.uwetrottmann.tmdb.entities.CrewMember;
 import com.uwetrottmann.tmdb.entities.ExternalIds;
 import com.uwetrottmann.tmdb.entities.Image;
 import com.uwetrottmann.tmdb.entities.TvEpisode;
-import com.uwetrottmann.tmdb.entities.TvImages;
+import com.uwetrottmann.tmdb.entities.Images;
 import com.uwetrottmann.tmdb.entities.TvSeason;
 import com.uwetrottmann.tmdb.entities.Videos;
 import com.uwetrottmann.tmdb.entities.Videos.Video;
@@ -82,7 +82,7 @@ public class TvSeasonsServiceTest extends BaseTestCase {
     
     @Test
     public void test_images() {
-        TvImages images = getManager().tvSeasonsService().images(TestData.TVSHOW_ID, 1, null);
+        Images images = getManager().tvSeasonsService().images(TestData.TVSHOW_ID, 1, null);
         assertThat(images.id).isNotNull();
         
         for (Image image : images.posters) {

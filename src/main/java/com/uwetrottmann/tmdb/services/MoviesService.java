@@ -17,11 +17,11 @@
 
 package com.uwetrottmann.tmdb.services;
 
-import com.uwetrottmann.tmdb.entities.AlternativeTitles;
+import com.uwetrottmann.tmdb.entities.Images;
+import com.uwetrottmann.tmdb.entities.MovieAlternativeTitles;
 import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.Credits;
-import com.uwetrottmann.tmdb.entities.MovieImages;
-import com.uwetrottmann.tmdb.entities.Keywords;
+import com.uwetrottmann.tmdb.entities.MovieKeywords;
 import com.uwetrottmann.tmdb.entities.ListResultsPage;
 import com.uwetrottmann.tmdb.entities.Movie;
 import com.uwetrottmann.tmdb.entities.MovieResultsPage;
@@ -56,7 +56,7 @@ public interface MoviesService {
      * @param country <em>Optional.</em> ISO 3166-1 code.
      */
     @GET("/movie/{id}/alternative_titles")
-    AlternativeTitles alternativeTitles(
+    MovieAlternativeTitles alternativeTitles(
             @Path("id") int tmdbId,
             @Query("country") String country
     );
@@ -78,7 +78,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/movie/{id}/images")
-    MovieImages images(
+    Images images(
             @Path("id") int tmdbId,
             @Query("language") String language
     );
@@ -89,7 +89,7 @@ public interface MoviesService {
      * @param tmdbId TMDb id.
      */
     @GET("/movie/{id}/keywords")
-    Keywords keywords(
+    MovieKeywords keywords(
             @Path("id") int tmdbId
     );
 

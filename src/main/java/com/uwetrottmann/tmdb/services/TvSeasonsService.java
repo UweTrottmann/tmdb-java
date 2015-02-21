@@ -18,7 +18,7 @@ package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.ExternalIds;
-import com.uwetrottmann.tmdb.entities.TvImages;
+import com.uwetrottmann.tmdb.entities.Images;
 import com.uwetrottmann.tmdb.entities.TvSeason;
 import com.uwetrottmann.tmdb.entities.Videos;
 
@@ -72,7 +72,7 @@ public interface TvSeasonsService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/tv/{id}/season/{season_number}/images")
-    TvImages images(
+    Images images(
             @Path("id") int showId,
             @Path("season_number") int seasonNumber,
             @Query("language") String language
