@@ -18,6 +18,7 @@
 package com.uwetrottmann.tmdb;
 
 import com.uwetrottmann.tmdb.services.ConfigurationService;
+import com.uwetrottmann.tmdb.services.DiscoverService;
 import com.uwetrottmann.tmdb.services.FindService;
 import com.uwetrottmann.tmdb.services.MoviesService;
 import com.uwetrottmann.tmdb.services.PersonService;
@@ -159,6 +160,10 @@ public class Tmdb {
     
     public TvEpisodesService tvEpisodesService() {
         return getRestAdapter().create(TvEpisodesService.class);
+    }
+    
+    public DiscoverService discoverService() {
+        return getRestAdapter().create(DiscoverService.class);
     }
 
 }
