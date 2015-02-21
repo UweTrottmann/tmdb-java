@@ -5,7 +5,7 @@ import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.entities.AlternativeTitles;
 import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.Credits;
-import com.uwetrottmann.tmdb.entities.Images;
+import com.uwetrottmann.tmdb.entities.MovieImages;
 import com.uwetrottmann.tmdb.entities.Keywords;
 import com.uwetrottmann.tmdb.entities.ListResultsPage;
 import com.uwetrottmann.tmdb.entities.Movie;
@@ -162,7 +162,7 @@ public class MoviesServiceTest extends BaseTestCase {
     
     @Test
     public void test_images() {
-        Images images = getManager().moviesService().images(550, null);
+        MovieImages images = getManager().moviesService().images(550, null);
         assertThat(images).isNotNull();
         assertThat(images.id).isEqualTo(550);
         assertThat(images.backdrops).isNotEmpty();

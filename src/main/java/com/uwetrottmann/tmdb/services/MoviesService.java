@@ -20,7 +20,7 @@ package com.uwetrottmann.tmdb.services;
 import com.uwetrottmann.tmdb.entities.AlternativeTitles;
 import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.Credits;
-import com.uwetrottmann.tmdb.entities.Images;
+import com.uwetrottmann.tmdb.entities.MovieImages;
 import com.uwetrottmann.tmdb.entities.Keywords;
 import com.uwetrottmann.tmdb.entities.ListResultsPage;
 import com.uwetrottmann.tmdb.entities.Movie;
@@ -78,7 +78,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/movie/{id}/images")
-    Images images(
+    MovieImages images(
             @Path("id") int tmdbId,
             @Query("language") String language
     );
