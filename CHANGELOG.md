@@ -3,12 +3,27 @@ Change Log
 Supported API calls
 -------------------
 
- * Configuration service
- * Find service
- * Movie service (incomplete)
- * Person service (incomplete)
- * Search service (incomplete)
- * Tv service (incomplete)
+ * [Configuration](http://docs.themoviedb.apiary.io/#reference/configuration)
+ * [Discover](http://docs.themoviedb.apiary.io/#reference/discover)
+ * [Find](http://docs.themoviedb.apiary.io/#reference/find)
+ * [Movies](http://docs.themoviedb.apiary.io/#reference/movies) _incomplete_
+ * [People](http://docs.themoviedb.apiary.io/#reference/people) _incomplete_
+ * [Search](http://docs.themoviedb.apiary.io/#reference/search) _incomplete_
+ * [TV](http://docs.themoviedb.apiary.io/#reference/tv) _incomplete_
+ * [TV Seasons](http://docs.themoviedb.apiary.io/#reference/tv-seasons) _incomplete_
+ * [TV Episodes](http://docs.themoviedb.apiary.io/#reference/tv-episodes) _incomplete_
+
+0.8.0 *(2015-02-23)*
+--------------------
+ * Support more services (Discover, TV seasons and episodes) and methods, thanks to @migueljteixeira!
+ * Drop method variants (e.g. movie summary call with just a TMDb id). Use the full parameter variant and supply `null`
+   for non-required query parameters.
+ * Drop any async variants for methods. They only encourage bad programming (e.g. not using proper background threads).
+ * Renamed `PersonService` to `PeopleService` to be consistent with docs.
+ * Switch to JUnit 4 for testing.
+ * Update `retrofit` to 1.9.0, which allows to drop the `okhttp-urlconnection` dependency.
+ * Update `okhttp` suggested dependency to 2.2.0.
+ * Require Java 1.7.
 
 0.7.0 *(2014-08-12)*
 --------------------
