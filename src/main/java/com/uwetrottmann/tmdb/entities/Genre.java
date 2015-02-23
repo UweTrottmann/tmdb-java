@@ -17,10 +17,7 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.TmdbEntity;
-
-public class Genre implements TmdbEntity {
-    private static final long serialVersionUID = -7195440978851788548L;
+public class Genre {
 
     public Integer id;
     public String name;

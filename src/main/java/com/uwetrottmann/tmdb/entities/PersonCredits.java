@@ -17,75 +17,14 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.TmdbEntity;
-
-import java.util.Date;
 import java.util.List;
 
-public class PersonCredits implements TmdbEntity {
-
-    private static final long serialVersionUID = -7947291466017850804L;
+public class PersonCredits {
 
     public Integer id;
 
-    public List<CastCredit> cast;
+    public List<PersonCastCredit> cast;
 
-    public List<CrewCredit> crew;
-
-    public static class CastCredit implements TmdbEntity {
-
-        private static final long serialVersionUID = -6164786116196155740L;
-
-        public Integer id;
-
-        public String credit_id;
-
-        public String character;
-
-        public String poster_path;
-
-        public String media_type;
-
-        // Movie specific fields
-
-        public String title;
-
-        public Date release_date;
-
-        // TV specific fields
-
-        public String name;
-
-        public Date first_air_date;
-
-        public Integer episode_count;
-    }
-
-    public static class CrewCredit implements TmdbEntity {
-
-        private static final long serialVersionUID = -6267166779666363892L;
-
-        public Integer id;
-
-        public String credit_id;
-
-        public String department;
-
-        public String job;
-
-        public String poster_path;
-
-        public String media_type;
-
-        // Movie specific fields
-
-        public String title;
-
-        public Date release_date;
-
-        // TV specific fields
-
-        public String name;
-    }
+    public List<PersonCrewCredit> crew;
 
 }

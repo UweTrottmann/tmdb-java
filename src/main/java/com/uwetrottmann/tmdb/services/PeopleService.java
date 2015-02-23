@@ -19,11 +19,14 @@ package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.entities.Person;
 import com.uwetrottmann.tmdb.entities.PersonCredits;
+import com.uwetrottmann.tmdb.entities.PersonIds;
+import com.uwetrottmann.tmdb.entities.PersonImages;
+import com.uwetrottmann.tmdb.entities.PersonResultsPage;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
 
-public interface PersonService {
+public interface PeopleService {
 
     /**
      * Get the general person information for a specific id.
@@ -39,16 +42,6 @@ public interface PersonService {
      * Get the movie credits for a specific person id.
      *
      * @param tmdbId TMDb id.
-     */
-    @GET("/person/{id}/movie_credits")
-    PersonCredits movieCredits(
-            @Path("id") int tmdbId
-    );
-
-    /**
-     * Get the movie credits for a specific person id.
-     *
-     * @param tmdbId   TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/person/{id}/movie_credits")
@@ -61,16 +54,6 @@ public interface PersonService {
      * Get the TV credits for a specific person id.
      *
      * @param tmdbId TMDb id.
-     */
-    @GET("/person/{id}/tv_credits")
-    PersonCredits tvCredits(
-            @Path("id") int tmdbId
-    );
-
-    /**
-     * Get the TV credits for a specific person id.
-     *
-     * @param tmdbId   TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/person/{id}/tv_credits")
@@ -83,16 +66,6 @@ public interface PersonService {
      * Get the movie and TV credits for a specific person id.
      *
      * @param tmdbId TMDb id.
-     */
-    @GET("/person/{id}/combined_credits")
-    PersonCredits combinedCredits(
-            @Path("id") int tmdbId
-    );
-
-    /**
-     * Get the movie and TV credits for a specific person id.
-     *
-     * @param tmdbId   TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/person/{id}/combined_credits")
@@ -100,5 +73,35 @@ public interface PersonService {
             @Path("id") int tmdbId,
             @Query("language") String language
     );
+
+    /**
+     * Get the external ids for a specific person id.
+     */
+    @GET("/person/{id}/external_ids")
+    PersonIds externalIds(
+            @Path("id") int tmdbId
+    );
+
+    /**
+     * Get the images for a specific person id.
+     */
+    @GET("/person/{id}/images")
+    PersonImages images(
+            @Path("id") int tmdbId
+    );
+
+    /**
+     * Get the list of popular people on The Movie Database. This list refreshes every day.
+     */
+    @GET("/person/popular")
+    PersonResultsPage popular(
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get the latest person id.
+     */
+    @GET("/person/latest")
+    Person latest();
 
 }

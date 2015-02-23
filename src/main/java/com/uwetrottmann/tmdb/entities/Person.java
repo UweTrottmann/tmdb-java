@@ -17,11 +17,9 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.TmdbEntity;
-
 import java.util.Date;
 
-public class Person implements TmdbEntity {
+public class Person {
 
     public Integer id;
 

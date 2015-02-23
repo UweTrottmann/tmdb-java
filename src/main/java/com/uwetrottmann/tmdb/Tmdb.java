@@ -18,10 +18,13 @@
 package com.uwetrottmann.tmdb;
 
 import com.uwetrottmann.tmdb.services.ConfigurationService;
+import com.uwetrottmann.tmdb.services.DiscoverService;
 import com.uwetrottmann.tmdb.services.FindService;
 import com.uwetrottmann.tmdb.services.MoviesService;
-import com.uwetrottmann.tmdb.services.PersonService;
+import com.uwetrottmann.tmdb.services.PeopleService;
 import com.uwetrottmann.tmdb.services.SearchService;
+import com.uwetrottmann.tmdb.services.TvEpisodesService;
+import com.uwetrottmann.tmdb.services.TvSeasonsService;
 import com.uwetrottmann.tmdb.services.TvService;
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
@@ -112,7 +115,6 @@ public class Tmdb {
             builder.setEndpoint(API_URL);
             builder.setConverter(new GsonConverter(TmdbHelper.getGsonBuilder().create()));
             builder.setRequestInterceptor(new RequestInterceptor() {
-                @Override
                 public void intercept(RequestFacade requestFacade) {
                     requestFacade.addQueryParam(PARAM_API_KEY, apiKey);
                 }
@@ -140,8 +142,8 @@ public class Tmdb {
         return getRestAdapter().create(MoviesService.class);
     }
 
-    public PersonService personService() {
-        return getRestAdapter().create(PersonService.class);
+    public PeopleService personService() {
+        return getRestAdapter().create(PeopleService.class);
     }
 
     public SearchService searchService() {
@@ -150,6 +152,18 @@ public class Tmdb {
 
     public TvService tvService() {
         return getRestAdapter().create(TvService.class);
+    }
+
+    public TvSeasonsService tvSeasonsService() {
+        return getRestAdapter().create(TvSeasonsService.class);
+    }
+    
+    public TvEpisodesService tvEpisodesService() {
+        return getRestAdapter().create(TvEpisodesService.class);
+    }
+    
+    public DiscoverService discoverService() {
+        return getRestAdapter().create(DiscoverService.class);
     }
 
 }

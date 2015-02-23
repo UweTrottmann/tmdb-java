@@ -17,50 +17,14 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.TmdbEntity;
-
 import java.util.List;
 
-public class Credits implements TmdbEntity {
-
-    private static final long serialVersionUID = -7947291466017850804L;
+public class Credits {
 
     public Integer id;
 
     public List<CastMember> cast;
 
     public List<CrewMember> crew;
-
-    public static class CastMember implements TmdbEntity {
-
-        private static final long serialVersionUID = -6164786116196155740L;
-
-        public Integer id;
-
-        public String name;
-
-        public String character;
-
-        public Integer order;
-
-        public Integer cast_id;
-
-        public String profile_path;
-    }
-
-    public static class CrewMember implements TmdbEntity {
-
-        private static final long serialVersionUID = -6267166779666363892L;
-
-        public Integer id;
-
-        public String name;
-
-        public String department;
-
-        public String job;
-
-        public String profile_path;
-    }
 
 }

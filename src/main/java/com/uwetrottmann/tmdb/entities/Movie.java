@@ -17,13 +17,10 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.TmdbEntity;
-
 import java.util.Date;
 import java.util.List;
 
-public class Movie implements TmdbEntity {
-    private static final long serialVersionUID = 4604935751051141456L;
+public class Movie {
 
     public Integer id;
 
@@ -50,8 +47,8 @@ public class Movie implements TmdbEntity {
     public Integer vote_count;
 
     // Following are used with append_to_response
-    public Trailers trailers;
+    public Videos videos;
     public Releases releases;
     public Credits credits;
-    public ResultsPage similar_movies;
+    public MovieResultsPage similar;
 }

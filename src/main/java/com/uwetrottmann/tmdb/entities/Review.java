@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Uwe Trottmann
+ * Copyright 2015 Miguel Teixeira
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,15 +17,11 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-import com.uwetrottmann.tmdb.TmdbEntity;
+public class Review {
 
-import java.util.List;
+    public String id;
+    public String author;
+    public String content;
+    public String url;
 
-public class ResultsPage implements TmdbEntity {
-    private static final long serialVersionUID = -5167211774471598391L;
-
-    public Integer page;
-    public List<Movie> results;
-    public Integer total_pages;
-    public Integer total_results;
 }

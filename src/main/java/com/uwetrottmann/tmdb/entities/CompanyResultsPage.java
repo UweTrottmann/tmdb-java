@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Uwe Trottmann
+ * Copyright 2015 Miguel Teixeira
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,12 @@
  * 
  */
 
-package com.uwetrottmann.tmdb;
+package com.uwetrottmann.tmdb.entities;
 
-import java.io.Serializable;
+import java.util.List;
 
-public interface TmdbEntity extends Serializable {
+public class CompanyResultsPage extends BaseResultsPage {
+
+    public List<Company> results;
+
 }
