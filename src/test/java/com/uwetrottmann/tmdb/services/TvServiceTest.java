@@ -125,7 +125,10 @@ public class TvServiceTest extends BaseTestCase {
     @Test
     public void test_latest() {
         TvShowComplete show = getManager().tvService().latest();
-        assertTvShow(show);
+        // Latest show might not have a complete TMDb entry, but at should least some basic properties.
+        assertThat(show).isNotNull();
+        assertThat(show.id).isPositive();
+        assertThat(show.name).isNotEmpty();
     }
     
     @Test

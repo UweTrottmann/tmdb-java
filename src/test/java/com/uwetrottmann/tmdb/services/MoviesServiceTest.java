@@ -272,8 +272,11 @@ public class MoviesServiceTest extends BaseTestCase {
     
     @Test
     public void test_latest() {
-        Movie page = getManager().moviesService().latest();
-        assertThat(page).isNotNull();
+        Movie movie = getManager().moviesService().latest();
+        // Latest movie might not have a complete TMDb entry, but should at least some basic properties.
+        assertThat(movie).isNotNull();
+        assertThat(movie.id).isPositive();
+        assertThat(movie.title).isNotEmpty();
     }
     
     @Test

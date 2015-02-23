@@ -124,7 +124,8 @@ public class PeopleServiceTest extends BaseTestCase {
     @Test
     public void test_latest() throws ParseException {
         Person person = getManager().personService().latest();
-        assertNotNull("Result was null.", person);
+        // Latest person might not have a complete TMDb entry, but at should least some basic properties.
+        assertThat(person).isNotNull();
         assertThat(person.name).isNotNull();
         assertThat(person.id).isNotNull();
     }
