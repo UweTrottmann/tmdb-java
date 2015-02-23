@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Uwe Trottmann
+ * Copyright 2015 Miguel Teixeira
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,8 +26,7 @@ import com.uwetrottmann.tmdb.entities.CrewMember;
 import com.uwetrottmann.tmdb.entities.ExternalIds;
 import com.uwetrottmann.tmdb.entities.Image;
 import com.uwetrottmann.tmdb.entities.TvEpisode;
-import com.uwetrottmann.tmdb.entities.Images;
-import com.uwetrottmann.tmdb.entities.TvSeason;
+import com.uwetrottmann.tmdb.entities.TvEpisodeImages;
 import com.uwetrottmann.tmdb.entities.Videos;
 import com.uwetrottmann.tmdb.entities.Videos.Video;
 
@@ -35,37 +34,25 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TvSeasonsServiceTest extends BaseTestCase {
+public class TvEpisodesServiceTest extends BaseTestCase {
 
     @Test
-    public void test_season() {
-        TvSeason season = getManager().tvSeasonsService().season(TestData.TVSHOW_ID, 1, null);
-        assertThat(season.air_date).isNotNull();
-        assertThat(season.name).isEqualTo("Season 1");
-        assertThat(season.overview).isNotNull();
-        assertThat(season.id).isNotNull();
-        assertThat(season.poster_path).isNotEmpty();
-        assertThat(season.season_number).isEqualTo(1);
-        assertThat(season.episodes).isNotEmpty();
-        
-        for (TvEpisode episode : season.episodes) {
-            assertCrewCredits(episode.crew);
-            assertCastCredits(episode.guest_stars);
-            assertThat(episode.air_date).isNotNull();
-            assertThat(episode.episode_number).isPositive();
-            assertThat(episode.name).isNotNull();
-            assertThat(episode.overview).isNotNull();
-            assertThat(episode.id).isNotNull();
-            assertThat(episode.season_number).isEqualTo(1);
-            assertThat(episode.still_path).isNotNull();
-            assertThat(episode.vote_average).isGreaterThanOrEqualTo(0);
-            assertThat(episode.vote_count).isGreaterThanOrEqualTo(0);
-        }
+    public void test_episode() {
+        TvEpisode episode = getManager().tvEpisodesService().episode(TestData.TVSHOW_ID, 1, 1, null);
+        assertThat(episode.air_date).isNotNull();
+        assertThat(episode.episode_number).isPositive();
+        assertThat(episode.name).isNotNull();
+        assertThat(episode.overview).isNotNull();
+        assertThat(episode.id).isNotNull();
+        assertThat(episode.season_number).isEqualTo(1);
+        assertThat(episode.still_path).isNotNull();
+        assertThat(episode.vote_average).isGreaterThanOrEqualTo(0);
+        assertThat(episode.vote_count).isGreaterThanOrEqualTo(0);
     }
     
     @Test
     public void test_credits() {
-        Credits credits = getManager().tvSeasonsService().credits(TestData.TVSHOW_ID, 1);
+        Credits credits = getManager().tvEpisodesService().credits(TestData.TVSHOW_ID, 1, 1);
         assertThat(credits.id).isNotNull();
         assertCrewCredits(credits.crew);
         assertCastCredits(credits.cast);
@@ -73,19 +60,21 @@ public class TvSeasonsServiceTest extends BaseTestCase {
     
     @Test
     public void test_externalIds() {
-        ExternalIds ids = getManager().tvSeasonsService().externalIds(TestData.TVSHOW_ID, 1, null);
+        ExternalIds ids = getManager().tvEpisodesService().externalIds(TestData.TVSHOW_ID, 1, 1);
         assertThat(ids.id).isNotNull();
         assertThat(ids.freebase_id).isNotNull();
         assertThat(ids.freebase_mid).isNotNull();
         assertThat(ids.tvdb_id).isNotNull();
+        assertThat(ids.imdb_id).isNotNull();
+        assertThat(ids.tvrage_id).isNotNull();
     }
     
     @Test
     public void test_images() {
-        Images images = getManager().tvSeasonsService().images(TestData.TVSHOW_ID, 1, null);
+        TvEpisodeImages images = getManager().tvEpisodesService().images(TestData.TVSHOW_ID, 1, 1);
         assertThat(images.id).isNotNull();
         
-        for (Image image : images.posters) {
+        for (Image image : images.stills) {
             assertThat(image.file_path).isNotEmpty();
             assertThat(image.width).isNotNull();
             assertThat(image.height).isNotNull();
@@ -97,7 +86,7 @@ public class TvSeasonsServiceTest extends BaseTestCase {
     
     @Test
     public void test_videos() {
-        Videos videos = getManager().tvSeasonsService().videos(TestData.TVSHOW_ID, 1, null);
+        Videos videos = getManager().tvEpisodesService().videos(TestData.TVSHOW_ID, 1, 1);
         assertThat(videos.id).isNotNull();
         
         for (Video video : videos.results) {

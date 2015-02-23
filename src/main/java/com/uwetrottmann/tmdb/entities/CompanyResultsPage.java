@@ -1,5 +1,5 @@
 /*
- * Copyright 2013 Uwe Trottmann
+ * Copyright 2015 Miguel Teixeira
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,14 +17,10 @@
 
 package com.uwetrottmann.tmdb.entities;
 
-public class Trailer {
+import java.util.List;
 
-    public String name;
+public class CompanyResultsPage extends BaseResultsPage {
 
-    public String size;
-
-    public String source;
-
-    public String type;
+    public List<Company> results;
 
 }

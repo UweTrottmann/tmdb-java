@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Uwe Trottmann
+ * Copyright 2015 Miguel Teixeira
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,17 +12,19 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ * 
  */
 
-package com.uwetrottmann.tmdb;
+package com.uwetrottmann.tmdb.entities;
 
-public interface TestData {
+public class List {
 
-    String MOVIE_TITLE = "Fight Club";
-    String PERSON_NAME = "Brad Pitt";
-    String TVSHOW_TITLE = "Breaking Bad";
-    int TVSHOW_ID = 1396;
-    int TVSHOW_TVDB_ID = 81189;
-    int PERSON_ID = 287;
-    int MOVIE_ID = 550;
+    public String id;
+    public String description;
+    public Integer favorite_count;
+    public Integer item_count;
+    public String iso_639_1;
+    public String name;
+    public String poster_path;
+
 }

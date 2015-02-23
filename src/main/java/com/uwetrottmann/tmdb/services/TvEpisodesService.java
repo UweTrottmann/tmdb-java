@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Uwe Trottmann
+ * Copyright 2015 Miguel Teixeira
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,77 +18,77 @@ package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.ExternalIds;
-import com.uwetrottmann.tmdb.entities.Images;
-import com.uwetrottmann.tmdb.entities.TvSeason;
+import com.uwetrottmann.tmdb.entities.TvEpisode;
+import com.uwetrottmann.tmdb.entities.TvEpisodeImages;
 import com.uwetrottmann.tmdb.entities.Videos;
 
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
 
-public interface TvSeasonsService {
+public interface TvEpisodesService {
 
     /**
-     * Get the primary information about a TV season by its season number.
+     * Get the primary information about a TV episode by combination of a season and episode number.
      *
      * @param showId A themoviedb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/tv/{id}/season/{season_number}")
-    TvSeason season(
+    @GET("/tv/{id}/season/{season_number}/episode/{episode_number}")
+    TvEpisode episode(
             @Path("id") int showId,
             @Path("season_number") int seasonNumber,
+            @Path("episode_number") int episodeNumber,
             @Query("language") String language
     );
     
     /**
-     * Get the cast & crew credits for a TV season by season number.
+     * Get the TV episode credits by combination of season and episode number.
      *
      * @param showId A themoviedb id.
      */
-    @GET("/tv/{id}/season/{season_number}/credits")
+    @GET("/tv/{id}/season/{season_number}/episode/{episode_number}/credits")
     Credits credits(
             @Path("id") int showId,
-            @Path("season_number") int seasonNumber
+            @Path("season_number") int seasonNumber,
+            @Path("episode_number") int episodeNumber
     );
     
     /**
-     * Get the external ids that we have stored for a TV season by season number.
+     * Get the external ids for a TV episode by combination of a season and episode number.
      *
      * @param showId A themoviedb id.
-     * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/tv/{id}/season/{season_number}/external_ids")
+    @GET("/tv/{id}/season/{season_number}/episode/{episode_number}/external_ids")
     ExternalIds externalIds(
             @Path("id") int showId,
             @Path("season_number") int seasonNumber,
-            @Query("language") String language
+            @Path("episode_number") int episodeNumber
     );
     
     /**
-     * Get the images (posters) that we have stored for a TV season by season number.
+     * Get the images (episode stills) for a TV episode by combination of a season and episode number.
+     * Since episode stills don't have a language, this call will always return all images.
      *
      * @param showId A themoviedb id.
-     * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/tv/{id}/season/{season_number}/images")
-    Images images(
+    @GET("/tv/{id}/season/{season_number}/episode/{episode_number}/images")
+    TvEpisodeImages images(
             @Path("id") int showId,
             @Path("season_number") int seasonNumber,
-            @Query("language") String language
+            @Path("episode_number") int episodeNumber
     );
     
     /**
-     * Get the videos that have been added to a TV season (trailers, teasers, etc...)
+     * Get the videos that have been added to a TV episode (teasers, clips, etc...)
      *
      * @param showId A themoviedb id.
-     * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/tv/{id}/season/{season_number}/videos")
+    @GET("/tv/{id}/season/{season_number}/episode/{episode_number}/videos")
     Videos videos(
             @Path("id") int showId,
             @Path("season_number") int seasonNumber,
-            @Query("language") String language
+            @Path("episode_number") int episodeNumber
     );
 
 }

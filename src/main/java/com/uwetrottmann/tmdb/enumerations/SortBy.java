@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Chris Banes
+ * Copyright 2015 Miguel Teixeira
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,22 +12,30 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
  */
 
 package com.uwetrottmann.tmdb.enumerations;
 
+public enum SortBy {
 
-public enum AppendToResponseItem {
-
-    VIDEOS("videos"),
-    RELEASES("releases"),
-    CREDITS("credits"),
-    SIMILAR("similar");
+    POPULARITY_ASC("popularity.asc"),
+    POPULARITY_DESC("popularity.desc"),
+    RELEASE_DATE_ASC("release_date.asc"),
+    RELEASE_DATE_DESC("release_date.desc"),
+    REVENUE_ASC("revenue.asc"),
+    REVENUE_DESC("revenue.desc"),
+    PRIMARY_RELEASE_DATE_ASC("primary_release_date.asc"),
+    PRIMARY_RELEASE_DATE_DESC("primary_release_date.desc"),
+    ORIGINAL_TITLE_ASC("original_title.asc"),
+    ORIGINAL_TITLE_DESC("original_title.desc"),
+    VOTE_AVERAGE_ASC("vote_average.asc"),
+    VOTE_AVERAGE_DESC("vote_average.desc"),
+    VOTE_COUNT_ASC("vote_count.asc"),
+    VOTE_COUNT_DESC("vote_count.desc");
 
     private final String value;
 
-    private AppendToResponseItem(String value) {
+    private SortBy(String value) {
         this.value = value;
     }
 

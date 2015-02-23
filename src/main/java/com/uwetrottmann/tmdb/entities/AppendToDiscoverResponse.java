@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 Chris Banes
+ * Copyright 2015 Miguel Teixeira
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,24 +15,31 @@
  *
  */
 
-package com.uwetrottmann.tmdb.enumerations;
+package com.uwetrottmann.tmdb.entities;
 
+public class AppendToDiscoverResponse {
 
-public enum AppendToResponseItem {
+    private final Integer[] items;
 
-    VIDEOS("videos"),
-    RELEASES("releases"),
-    CREDITS("credits"),
-    SIMILAR("similar");
-
-    private final String value;
-
-    private AppendToResponseItem(String value) {
-        this.value = value;
+    public AppendToDiscoverResponse(Integer... items) {
+        this.items = items;
     }
 
     @Override
     public String toString() {
-        return value;
+        if (items != null && items.length > 0) {
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < items.length ; i++) {
+                sb.append(items[i]);
+
+                if (i < items.length - 1) {
+                    sb.append(',');
+                }
+            }
+
+            return sb.toString();
+        }
+
+        return null;
     }
 }
