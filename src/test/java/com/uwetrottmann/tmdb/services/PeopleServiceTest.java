@@ -22,7 +22,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
-public class PersonServiceTest extends BaseTestCase {
+public class PeopleServiceTest extends BaseTestCase {
 
     private static final SimpleDateFormat JSON_STRING_DATE = new SimpleDateFormat("yyy-MM-dd");
 
@@ -98,7 +98,7 @@ public class PersonServiceTest extends BaseTestCase {
     
     @Test
     public void test_popular() {
-        PersonResultsPage popular = getManager().personService().popular();
+        PersonResultsPage popular = getManager().personService().popular(null);
         
         assertThat(popular.results.get(0).id).isNotNull();
         assertThat(popular.results.get(0).name).isNotNull();

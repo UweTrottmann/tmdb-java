@@ -21,7 +21,7 @@ import com.uwetrottmann.tmdb.services.ConfigurationService;
 import com.uwetrottmann.tmdb.services.DiscoverService;
 import com.uwetrottmann.tmdb.services.FindService;
 import com.uwetrottmann.tmdb.services.MoviesService;
-import com.uwetrottmann.tmdb.services.PersonService;
+import com.uwetrottmann.tmdb.services.PeopleService;
 import com.uwetrottmann.tmdb.services.SearchService;
 import com.uwetrottmann.tmdb.services.TvEpisodesService;
 import com.uwetrottmann.tmdb.services.TvSeasonsService;
@@ -142,8 +142,8 @@ public class Tmdb {
         return getRestAdapter().create(MoviesService.class);
     }
 
-    public PersonService personService() {
-        return getRestAdapter().create(PersonService.class);
+    public PeopleService personService() {
+        return getRestAdapter().create(PeopleService.class);
     }
 
     public SearchService searchService() {
