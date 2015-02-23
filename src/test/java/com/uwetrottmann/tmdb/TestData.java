@@ -18,11 +18,13 @@ package com.uwetrottmann.tmdb;
 
 public interface TestData {
 
+    int MOVIE_ID = 550;
     String MOVIE_TITLE = "Fight Club";
+    String MOVIE_IMDB = "tt0137523";
+
     String PERSON_NAME = "Brad Pitt";
     String TVSHOW_TITLE = "Breaking Bad";
     int TVSHOW_ID = 1396;
     int TVSHOW_TVDB_ID = 81189;
     int PERSON_ID = 287;
-    int MOVIE_ID = 550;
 }

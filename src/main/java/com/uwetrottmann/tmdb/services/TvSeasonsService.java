@@ -42,7 +42,7 @@ public interface TvSeasonsService {
     );
     
     /**
-     * Get the cast & crew credits for a TV season by season number.
+     * Get the cast and crew credits for a TV season by season number.
      *
      * @param showId A themoviedb id.
      */

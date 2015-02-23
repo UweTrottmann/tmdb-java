@@ -17,18 +17,17 @@
 
 package com.uwetrottmann.tmdb.services;
 
-import com.uwetrottmann.tmdb.entities.Images;
-import com.uwetrottmann.tmdb.entities.MovieAlternativeTitles;
 import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.Credits;
-import com.uwetrottmann.tmdb.entities.MovieKeywords;
+import com.uwetrottmann.tmdb.entities.Images;
 import com.uwetrottmann.tmdb.entities.ListResultsPage;
 import com.uwetrottmann.tmdb.entities.Movie;
+import com.uwetrottmann.tmdb.entities.MovieAlternativeTitles;
+import com.uwetrottmann.tmdb.entities.MovieKeywords;
 import com.uwetrottmann.tmdb.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb.entities.Releases;
 import com.uwetrottmann.tmdb.entities.ReviewResultsPage;
 import com.uwetrottmann.tmdb.entities.Videos;
-
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -48,7 +47,7 @@ public interface MoviesService {
             @Query("language") String language,
             @Query("append_to_response") AppendToResponse appendToResponse
     );
-    
+
     /**
      * Get the alternative titles for a specific movie id.
      *
@@ -70,7 +69,7 @@ public interface MoviesService {
     Credits credits(
             @Path("id") int tmdbId
     );
-    
+
     /**
      * Get the images (posters and backdrops) for a specific movie id.
      *
@@ -82,7 +81,7 @@ public interface MoviesService {
             @Path("id") int tmdbId,
             @Query("language") String language
     );
-    
+
     /**
      * Get the plot keywords for a specific movie id.
      *
@@ -102,15 +101,17 @@ public interface MoviesService {
     Releases releases(
             @Path("id") int tmdbId
     );
-    
+
     /**
      * Get the videos (trailers, teasers, clips, etc...) for a specific movie id.
      *
      * @param tmdbId TMDb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/movie/{id}/videos")
     Videos videos(
-            @Path("id") int tmdbId
+            @Path("id") int tmdbId,
+            @Query("language") String language
     );
 
     /**
@@ -126,11 +127,11 @@ public interface MoviesService {
             @Query("page") Integer page,
             @Query("language") String language
     );
-    
+
     /**
      * Get the reviews for a particular movie id.
-     * 
-     * @param tmdbId   TMDb id.
+     *
+     * @param tmdbId TMDb id.
      * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
@@ -140,12 +141,12 @@ public interface MoviesService {
             @Query("page") Integer page,
             @Query("language") String language
     );
-    
+
     /**
      * Get the lists that the movie belongs to.
-     * 
-     * @param tmdbId   TMDb id.
-     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     *
+     * @param tmdbId TMDb id.
+     * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("/movie/{id}/lists")
@@ -154,7 +155,7 @@ public interface MoviesService {
             @Query("page") Integer page,
             @Query("language") String language
     );
-    
+
     /**
      * Get the latest movie id.
      */
