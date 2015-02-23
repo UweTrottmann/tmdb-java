@@ -177,7 +177,7 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_videos() {
-        Videos videos = getManager().moviesService().videos(TestData.MOVIE_ID);
+        Videos videos = getManager().moviesService().videos(TestData.MOVIE_ID, null);
         assertThat(videos).isNotNull();
         assertThat(videos.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(videos.results.get(0).id).isNotNull();
