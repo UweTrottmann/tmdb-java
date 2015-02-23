@@ -3,13 +3,13 @@ package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.TestData;
-import com.uwetrottmann.tmdb.entities.Images;
-import com.uwetrottmann.tmdb.entities.MovieAlternativeTitles;
 import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.Credits;
-import com.uwetrottmann.tmdb.entities.MovieKeywords;
+import com.uwetrottmann.tmdb.entities.Images;
 import com.uwetrottmann.tmdb.entities.ListResultsPage;
 import com.uwetrottmann.tmdb.entities.Movie;
+import com.uwetrottmann.tmdb.entities.MovieAlternativeTitles;
+import com.uwetrottmann.tmdb.entities.MovieKeywords;
 import com.uwetrottmann.tmdb.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb.entities.Releases;
 import com.uwetrottmann.tmdb.entities.ReviewResultsPage;
@@ -18,70 +18,42 @@ import com.uwetrottmann.tmdb.enumerations.AppendToResponseItem;
 import org.junit.Test;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class MoviesServiceTest extends BaseTestCase {
 
-    private static final SimpleDateFormat JSON_STRING_DATE = new SimpleDateFormat("yyy-MM-dd");
-
     @Test
     public void test_summary() throws ParseException {
         Movie movie = getManager().moviesService().summary(TestData.MOVIE_ID, null, null);
-        assertNotNull("Result was null.", movie);
-        assertNotNull("Movie Adult was null.", movie.adult);
-        assertThat(movie.adult).isFalse();
-        assertNotNull("Movie backdrop path was null.", movie.backdrop_path);
-        assertNotNull("Movie budget was null.", movie.budget);
-        assertEquals("Movie budget does not match.", 63000000, movie.budget.intValue());
-        assertNotNull("Movie TMDB ID was null.", movie.id);
-        assertEquals("Movie TMDB ID does not match.", TestData.MOVIE_ID, movie.id.intValue());
-        assertEquals("Movie IMDB ID does not match.", "tt0137523", movie.imdb_id);
-        assertEquals("Move orignal title does not match.", "Fight Club", movie.original_title);
-        assertNotNull("Movie overview was null.", movie.overview);
-        assertNotNull("Movie poster path was null.", movie.poster_path);
-        assertNotNull("Movie release date was null.", movie.release_date);
-        assertEquals("Movie release date does not match.", JSON_STRING_DATE.parse("1999-10-14"),
-                movie.release_date);
-        assertNotNull("Movie revenue was null.", movie.revenue);
-        assertEquals("Movie revenue does not match.", 100853753, movie.revenue.intValue());
-        assertNotNull("Movie runtime was null.", movie.runtime);
-        assertEquals("Movie runtime does not match.", 139, movie.runtime.intValue());
-        assertNotNull("Movie tagline was null.", movie.tagline);
-        assertEquals("Move title does not match.", "Fight Club", movie.title);
-        assertNotNull("Movie vote_average was null.", movie.vote_average);
-        assertNotNull("Movie vote_count was null.", movie.vote_count);
+        assertMovie(movie);
+        assertThat(movie.original_title).isEqualTo(TestData.MOVIE_TITLE);
     }
-    
+
     @Test
     public void test_summary_language() throws ParseException {
         Movie movie = getManager().moviesService().summary(TestData.MOVIE_ID, "pt", null);
-        assertNotNull("Result was null.", movie);
-        assertNotNull("Movie Adult was null.", movie.adult);
-        assertEquals("Movie Adult does not match.", false, movie.adult.booleanValue());
-        assertNotNull("Movie backdrop path was null.", movie.backdrop_path);
-        assertNotNull("Movie budget was null.", movie.budget);
-        assertEquals("Movie budget does not match.", 63000000, movie.budget.intValue());
-        assertNotNull("Movie TMDB ID was null.", movie.id);
-        assertEquals("Movie TMDB ID does not match.", TestData.MOVIE_ID, movie.id.intValue());
-        assertEquals("Movie IMDB ID does not match.", "tt0137523", movie.imdb_id);
-        assertEquals("Move orignal title does not match.", "Fight Club", movie.original_title);
-        assertNotNull("Movie overview was null.", movie.overview);
-        assertNotNull("Movie poster path was null.", movie.poster_path);
-        assertNotNull("Movie release date was null.", movie.release_date);
-        assertEquals("Movie release date does not match.", JSON_STRING_DATE.parse("1999-10-14"),
-                movie.release_date);
-        assertNotNull("Movie revenue was null.", movie.revenue);
-        assertEquals("Movie revenue does not match.", 100853753, movie.revenue.intValue());
-        assertNotNull("Movie runtime was null.", movie.runtime);
-        assertEquals("Movie runtime does not match.", 139, movie.runtime.intValue());
-        assertNotNull("Movie tagline was null.", movie.tagline);
-        assertEquals("Move title does not match.", "Clube da Luta", movie.title);
-        assertNotNull("Movie vote_average was null.", movie.vote_average);
-        assertNotNull("Movie vote_count was null.", movie.vote_count);
+        assertThat(movie).isNotNull();
+        assertThat(movie.title).isEqualTo("Clube da Luta");
+    }
+
+    private void assertMovie(Movie movie) {
+        assertThat(movie).isNotNull();
+        assertThat(movie.id).isEqualTo(TestData.MOVIE_ID);
+        assertThat(movie.title).isEqualTo(TestData.MOVIE_TITLE);
+        assertThat(movie.overview).isNotEmpty();
+        assertThat(movie.tagline).isNotEmpty();
+        assertThat(movie.adult).isFalse();
+        assertThat(movie.backdrop_path).isNotEmpty();
+        assertThat(movie.budget).isEqualTo(63000000);
+        assertThat(movie.imdb_id).isEqualTo(TestData.MOVIE_IMDB);
+        assertThat(movie.poster_path).isNotEmpty();
+        assertThat(movie.release_date).isEqualTo("1999-10-14");
+        assertThat(movie.revenue).isEqualTo(100853753);
+        assertThat(movie.runtime).isEqualTo(139);
+        assertThat(movie.vote_average).isPositive();
+        assertThat(movie.vote_count).isPositive();
     }
 
     @Test
@@ -113,7 +85,7 @@ public class MoviesServiceTest extends BaseTestCase {
 
         assertNotNull(movie.releases);
     }
-    
+
     @Test
     public void test_summary_append_similar() {
         Movie movie = getManager().moviesService().summary(TestData.MOVIE_ID,
@@ -139,7 +111,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertNotNull(movie.videos);
         assertNotNull(movie.similar);
     }
-    
+
     @Test
     public void test_alternative_titles() {
         MovieAlternativeTitles titles = getManager().moviesService().alternativeTitles(TestData.MOVIE_ID, null);
@@ -149,7 +121,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(titles.titles.get(0).iso_3166_1).isEqualTo("PL");
         assertThat(titles.titles.get(0).title).isEqualTo("Podziemny krąg");
     }
-    
+
     @Test
     public void test_credits() {
         Credits credits = getManager().moviesService().credits(TestData.MOVIE_ID);
@@ -160,7 +132,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(credits.cast.get(0).name).isEqualTo("Edward Norton");
         assertThat(credits.crew).isNotEmpty();
     }
-    
+
     @Test
     public void test_images() {
         Images images = getManager().moviesService().images(TestData.MOVIE_ID, null);
@@ -183,7 +155,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(images.posters.get(0).vote_average).isPositive();
         assertThat(images.posters.get(0).vote_count).isPositive();
     }
-    
+
     @Test
     public void test_keywords() {
         MovieKeywords keywords = getManager().moviesService().keywords(TestData.MOVIE_ID);
@@ -192,7 +164,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(keywords.keywords.get(0).id).isEqualTo(825);
         assertThat(keywords.keywords.get(0).name).isEqualTo("support group");
     }
-    
+
     @Test
     public void test_releases() {
         Releases releases = getManager().moviesService().releases(TestData.MOVIE_ID);
@@ -202,7 +174,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(releases.countries.get(0).certification).isEqualTo("R");
         assertThat(releases.countries.get(0).release_date).isEqualTo("1999-10-14");
     }
-    
+
     @Test
     public void test_videos() {
         Videos videos = getManager().moviesService().videos(TestData.MOVIE_ID);
@@ -216,7 +188,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(videos.results.get(0).size).isNotNull();
         assertThat(videos.results.get(0).type).isEqualTo("Trailer");
     }
-    
+
     @Test
     public void test_similar() {
         MovieResultsPage results = getManager().moviesService().similar(TestData.MOVIE_ID, 3, null);
@@ -236,7 +208,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(results.results.get(0).vote_average).isNotNull().isPositive();
         assertThat(results.results.get(0).vote_count).isNotNull().isPositive();
     }
-    
+
     @Test
     public void test_reviews() {
         ReviewResultsPage results = getManager().moviesService().reviews(49026, 1, null);
@@ -251,7 +223,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(results.results.get(0).content).isNotNull();
         assertThat(results.results.get(0).url).isNotNull();
     }
-    
+
     @Test
     public void test_lists() {
         ListResultsPage results = getManager().moviesService().lists(49026, 1, null);
@@ -269,7 +241,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(results.results.get(0).name).isNotNull();
         assertThat(results.results.get(0).poster_path).isNotNull();
     }
-    
+
     @Test
     public void test_latest() {
         Movie movie = getManager().moviesService().latest();
@@ -278,7 +250,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(movie.id).isPositive();
         assertThat(movie.title).isNotEmpty();
     }
-    
+
     @Test
     public void test_upcoming() {
         MovieResultsPage page = getManager().moviesService().upcoming(null, null);
@@ -306,5 +278,5 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(page).isNotNull();
         assertThat(page.results).isNotEmpty();
     }
-    
+
 }
