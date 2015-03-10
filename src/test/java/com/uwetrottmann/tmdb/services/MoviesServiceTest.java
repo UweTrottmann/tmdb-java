@@ -38,6 +38,15 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(movie.title).isEqualTo("Clube da Luta");
     }
 
+    @Test
+    public void test_summary_with_collection() throws ParseException {
+        Movie movie = this.getManager().moviesService().summary(TestData.MOVIE_WITH_COLLECTION_ID, null, null);
+        assertThat(movie.title).isEqualTo(TestData.MOVIE_WITH_COLLECTION_TITLE);
+        assertThat(movie.belongs_to_collection).isNotNull();
+        assertThat(movie.belongs_to_collection.id).isEqualTo(1241);
+        assertThat(movie.belongs_to_collection.name).isEqualTo("Harry Potter Collection");
+    }
+
     private void assertMovie(Movie movie) {
         assertThat(movie).isNotNull();
         assertThat(movie.id).isEqualTo(TestData.MOVIE_ID);
