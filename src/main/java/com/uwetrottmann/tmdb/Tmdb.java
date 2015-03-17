@@ -17,6 +17,7 @@
 
 package com.uwetrottmann.tmdb;
 
+import com.uwetrottmann.tmdb.services.CollectionService;
 import com.uwetrottmann.tmdb.services.ConfigurationService;
 import com.uwetrottmann.tmdb.services.DiscoverService;
 import com.uwetrottmann.tmdb.services.FindService;
@@ -26,6 +27,7 @@ import com.uwetrottmann.tmdb.services.SearchService;
 import com.uwetrottmann.tmdb.services.TvEpisodesService;
 import com.uwetrottmann.tmdb.services.TvSeasonsService;
 import com.uwetrottmann.tmdb.services.TvService;
+
 import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.converter.GsonConverter;
@@ -166,4 +168,7 @@ public class Tmdb {
         return getRestAdapter().create(DiscoverService.class);
     }
 
+    public CollectionService collectionService() {
+        return getRestAdapter().create(CollectionService.class);
+    }
 }

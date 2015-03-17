@@ -22,6 +22,12 @@ public interface TestData {
     String MOVIE_TITLE = "Fight Club";
     String MOVIE_IMDB = "tt0137523";
 
+    int MOVIE_WITH_COLLECTION_ID = 671;
+    String MOVIE_WITH_COLLECTION_TITLE = "Harry Potter and the Philosopher\'s Stone";
+
+    int MOVIE_COLLECTION_ID = 1241;
+    String MOVIE_COLLECTION_TITLE = "Harry Potter Collection";
+
     String PERSON_NAME = "Brad Pitt";
     String TVSHOW_TITLE = "Breaking Bad";
     int TVSHOW_ID = 1396;
