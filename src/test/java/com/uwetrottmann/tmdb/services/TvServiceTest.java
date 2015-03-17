@@ -1,9 +1,8 @@
 package com.uwetrottmann.tmdb.services;
 
-import java.util.List;
-
 import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.TestData;
+import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.CastMember;
 import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.CrewMember;
@@ -16,8 +15,10 @@ import com.uwetrottmann.tmdb.entities.TvResultsPage;
 import com.uwetrottmann.tmdb.entities.TvSeason;
 import com.uwetrottmann.tmdb.entities.TvShowComplete;
 import com.uwetrottmann.tmdb.entities.Videos;
-
+import com.uwetrottmann.tmdb.enumerations.AppendToResponseItem;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,8 +26,46 @@ public class TvServiceTest extends BaseTestCase {
 
     @Test
     public void test_tvshow() {
-        TvShowComplete show = getManager().tvService().tv(TestData.TVSHOW_ID, null);
+        TvShowComplete show = getManager().tvService().tv(TestData.TVSHOW_ID, null, null);
         assertTvShow(show);
+    }
+
+    @Test
+    public void test_tvshow_with_append_to_response() {
+        TvShowComplete show = getManager().tvService().tv(TestData.TVSHOW_ID, null,
+                new AppendToResponse(AppendToResponseItem.CREDITS, AppendToResponseItem.EXTERNAL_IDS, AppendToResponseItem.IMAGES));
+        assertTvShow(show);
+
+        // credits
+        assertThat(show.credits).isNotNull();
+        assertCrewCredits(show.credits.crew);
+        assertCastCredits(show.credits.cast);
+
+        // images
+        assertThat(show.images).isNotNull();
+        assertThat(show.images.backdrops).isNotEmpty();
+        assertThat(show.images.backdrops.get(0).file_path).isNotNull();
+        assertThat(show.images.backdrops.get(0).width).isNotNull();
+        assertThat(show.images.backdrops.get(0).height).isNotNull();
+        assertThat(show.images.backdrops.get(0).aspect_ratio).isGreaterThan(1.7f);
+        assertThat(show.images.backdrops.get(0).vote_average).isPositive();
+        assertThat(show.images.backdrops.get(0).vote_count).isPositive();
+        assertThat(show.images.posters).isNotEmpty();
+        assertThat(show.images.posters.get(0).file_path).isNotNull();
+        assertThat(show.images.posters.get(0).width).isEqualTo(1000);
+        assertThat(show.images.posters.get(0).height).isEqualTo(1500);
+        assertThat(show.images.posters.get(0).iso_639_1).isEqualTo("en");
+        assertThat(show.images.posters.get(0).aspect_ratio).isGreaterThan(0.6f);
+        assertThat(show.images.posters.get(0).vote_average).isPositive();
+        assertThat(show.images.posters.get(0).vote_count).isPositive();
+
+        // external ids
+        assertThat(show.external_ids).isNotNull();
+        assertThat(show.external_ids.freebase_id).isNotNull();
+        assertThat(show.external_ids.freebase_mid).isNotNull();
+        assertThat(show.external_ids.tvdb_id).isNotNull();
+        assertThat(show.external_ids.imdb_id).isNotNull();
+        assertThat(show.external_ids.tvrage_id).isNotNull();
     }
     
     @Test

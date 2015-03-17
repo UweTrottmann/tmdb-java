@@ -16,21 +16,22 @@
 
 package com.uwetrottmann.tmdb.services;
 
-import java.util.List;
-
 import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.TestData;
+import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.CastMember;
 import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.CrewMember;
 import com.uwetrottmann.tmdb.entities.ExternalIds;
 import com.uwetrottmann.tmdb.entities.Image;
 import com.uwetrottmann.tmdb.entities.TvEpisode;
-import com.uwetrottmann.tmdb.entities.TvEpisodeImages;
+import com.uwetrottmann.tmdb.entities.Images;
 import com.uwetrottmann.tmdb.entities.Videos;
 import com.uwetrottmann.tmdb.entities.Videos.Video;
-
+import com.uwetrottmann.tmdb.enumerations.AppendToResponseItem;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -38,7 +39,7 @@ public class TvEpisodesServiceTest extends BaseTestCase {
 
     @Test
     public void test_episode() {
-        TvEpisode episode = getManager().tvEpisodesService().episode(TestData.TVSHOW_ID, 1, 1, null);
+        TvEpisode episode = getManager().tvEpisodesService().episode(TestData.TVSHOW_ID, 1, 1, null, null);
         assertThat(episode.air_date).isNotNull();
         assertThat(episode.episode_number).isPositive();
         assertThat(episode.name).isNotNull();
@@ -49,7 +50,52 @@ public class TvEpisodesServiceTest extends BaseTestCase {
         assertThat(episode.vote_average).isGreaterThanOrEqualTo(0);
         assertThat(episode.vote_count).isGreaterThanOrEqualTo(0);
     }
-    
+
+    @Test
+    public void test_episode_with_append_to_response() {
+        TvEpisode episode = getManager().tvEpisodesService().episode(TestData.TVSHOW_ID, 1, 1, null,
+                new AppendToResponse(AppendToResponseItem.IMAGES, AppendToResponseItem.EXTERNAL_IDS, AppendToResponseItem.CREDITS));
+        assertThat(episode.air_date).isNotNull();
+        assertThat(episode.episode_number).isPositive();
+        assertThat(episode.name).isNotNull();
+        assertThat(episode.overview).isNotNull();
+        assertThat(episode.id).isNotNull();
+        assertThat(episode.season_number).isEqualTo(1);
+        assertThat(episode.still_path).isNotNull();
+        assertThat(episode.vote_average).isGreaterThanOrEqualTo(0);
+        assertThat(episode.vote_count).isGreaterThanOrEqualTo(0);
+
+        // credits
+        assertThat(episode.credits).isNotNull();
+        assertCrewCredits(episode.credits.crew);
+        assertCastCredits(episode.credits.guest_stars);
+        assertCastCredits(episode.credits.cast);
+
+        assertThat(episode.crew).isNotNull();
+        assertThat(episode.guest_stars).isNotNull();
+        assertCrewCredits(episode.crew);
+        assertCastCredits(episode.guest_stars);
+
+        // images
+        assertThat(episode.images).isNotNull();
+        assertThat(episode.images.stills).isNotNull();
+        for (Image image : episode.images.stills) {
+            assertThat(image.file_path).isNotEmpty();
+            assertThat(image.width).isNotNull();
+            assertThat(image.height).isNotNull();
+            assertThat(image.aspect_ratio).isGreaterThan(0);
+            assertThat(image.vote_average).isGreaterThanOrEqualTo(0);
+            assertThat(image.vote_count).isGreaterThanOrEqualTo(0);
+        }
+
+        // external ids
+        assertThat(episode.external_ids.freebase_id).isNotNull();
+        assertThat(episode.external_ids.freebase_mid).isNotNull();
+        assertThat(episode.external_ids.tvdb_id).isNotNull();
+        assertThat(episode.external_ids.imdb_id).isNotNull();
+        assertThat(episode.external_ids.tvrage_id).isNotNull();
+    }
+
     @Test
     public void test_credits() {
         Credits credits = getManager().tvEpisodesService().credits(TestData.TVSHOW_ID, 1, 1);
@@ -57,7 +103,7 @@ public class TvEpisodesServiceTest extends BaseTestCase {
         assertCrewCredits(credits.crew);
         assertCastCredits(credits.cast);
     }
-    
+
     @Test
     public void test_externalIds() {
         ExternalIds ids = getManager().tvEpisodesService().externalIds(TestData.TVSHOW_ID, 1, 1);
@@ -68,12 +114,12 @@ public class TvEpisodesServiceTest extends BaseTestCase {
         assertThat(ids.imdb_id).isNotNull();
         assertThat(ids.tvrage_id).isNotNull();
     }
-    
+
     @Test
     public void test_images() {
-        TvEpisodeImages images = getManager().tvEpisodesService().images(TestData.TVSHOW_ID, 1, 1);
+        Images images = getManager().tvEpisodesService().images(TestData.TVSHOW_ID, 1, 1);
         assertThat(images.id).isNotNull();
-        
+
         for (Image image : images.stills) {
             assertThat(image.file_path).isNotEmpty();
             assertThat(image.width).isNotNull();
@@ -83,12 +129,12 @@ public class TvEpisodesServiceTest extends BaseTestCase {
             assertThat(image.vote_count).isGreaterThanOrEqualTo(0);
         }
     }
-    
+
     @Test
     public void test_videos() {
         Videos videos = getManager().tvEpisodesService().videos(TestData.TVSHOW_ID, 1, 1);
         assertThat(videos.id).isNotNull();
-        
+
         for (Video video : videos.results) {
             assertThat(video).isNotNull();
             assertThat(video.id).isNotNull();
@@ -100,10 +146,10 @@ public class TvEpisodesServiceTest extends BaseTestCase {
             assertThat(video.type).isNotNull();
         }
     }
-    
+
     private void assertCrewCredits(List<CrewMember> crew) {
         assertThat(crew).isNotEmpty();
-        
+
         for (CrewMember member : crew) {
             assertThat(member.id).isNotNull();
             assertThat(member.credit_id).isNotNull();
@@ -112,10 +158,10 @@ public class TvEpisodesServiceTest extends BaseTestCase {
             assertThat(member.job).isNotNull();
         }
     }
-    
+
     private void assertCastCredits(List<CastMember> cast) {
         assertThat(cast).isNotEmpty();
-        
+
         for (CastMember member : cast) {
             assertThat(member.id).isNotNull();
             assertThat(member.credit_id).isNotNull();
@@ -124,5 +170,4 @@ public class TvEpisodesServiceTest extends BaseTestCase {
             assertThat(member.order).isNotNull();
         }
     }
-
 }

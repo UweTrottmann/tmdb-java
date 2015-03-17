@@ -39,5 +39,7 @@ public class TvShowComplete extends TvShow {
     public List<TvSeason> seasons;
     public String status;
     public String type;
-
+    public Images images;
+    public Credits credits;
+    public ExternalIds external_ids;
 }

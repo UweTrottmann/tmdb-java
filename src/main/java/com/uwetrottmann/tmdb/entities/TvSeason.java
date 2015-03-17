@@ -29,5 +29,8 @@ public class TvSeason {
     public String overview;
     public String poster_path;
     public Integer season_number;
+    public Credits credits;
+    public Images images;
+    public ExternalIds external_ids;
 
 }
