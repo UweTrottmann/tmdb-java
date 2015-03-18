@@ -40,30 +40,14 @@ public class TvEpisodesServiceTest extends BaseTestCase {
     @Test
     public void test_episode() {
         TvEpisode episode = getManager().tvEpisodesService().episode(TestData.TVSHOW_ID, 1, 1, null, null);
-        assertThat(episode.air_date).isNotNull();
-        assertThat(episode.episode_number).isPositive();
-        assertThat(episode.name).isNotNull();
-        assertThat(episode.overview).isNotNull();
-        assertThat(episode.id).isNotNull();
-        assertThat(episode.season_number).isEqualTo(1);
-        assertThat(episode.still_path).isNotNull();
-        assertThat(episode.vote_average).isGreaterThanOrEqualTo(0);
-        assertThat(episode.vote_count).isGreaterThanOrEqualTo(0);
+        assertTvEpisode(episode);
     }
 
     @Test
     public void test_episode_with_append_to_response() {
         TvEpisode episode = getManager().tvEpisodesService().episode(TestData.TVSHOW_ID, 1, 1, null,
                 new AppendToResponse(AppendToResponseItem.IMAGES, AppendToResponseItem.EXTERNAL_IDS, AppendToResponseItem.CREDITS));
-        assertThat(episode.air_date).isNotNull();
-        assertThat(episode.episode_number).isPositive();
-        assertThat(episode.name).isNotNull();
-        assertThat(episode.overview).isNotNull();
-        assertThat(episode.id).isNotNull();
-        assertThat(episode.season_number).isEqualTo(1);
-        assertThat(episode.still_path).isNotNull();
-        assertThat(episode.vote_average).isGreaterThanOrEqualTo(0);
-        assertThat(episode.vote_count).isGreaterThanOrEqualTo(0);
+        assertTvEpisode(episode);
 
         // credits
         assertThat(episode.credits).isNotNull();
@@ -78,15 +62,7 @@ public class TvEpisodesServiceTest extends BaseTestCase {
 
         // images
         assertThat(episode.images).isNotNull();
-        assertThat(episode.images.stills).isNotNull();
-        for (Image image : episode.images.stills) {
-            assertThat(image.file_path).isNotEmpty();
-            assertThat(image.width).isNotNull();
-            assertThat(image.height).isNotNull();
-            assertThat(image.aspect_ratio).isGreaterThan(0);
-            assertThat(image.vote_average).isGreaterThanOrEqualTo(0);
-            assertThat(image.vote_count).isGreaterThanOrEqualTo(0);
-        }
+        assertImages(episode.images.stills);
 
         // external ids
         assertThat(episode.external_ids.freebase_id).isNotNull();
@@ -102,6 +78,7 @@ public class TvEpisodesServiceTest extends BaseTestCase {
         assertThat(credits.id).isNotNull();
         assertCrewCredits(credits.crew);
         assertCastCredits(credits.cast);
+        assertCastCredits(credits.guest_stars);
     }
 
     @Test
@@ -119,15 +96,7 @@ public class TvEpisodesServiceTest extends BaseTestCase {
     public void test_images() {
         Images images = getManager().tvEpisodesService().images(TestData.TVSHOW_ID, 1, 1);
         assertThat(images.id).isNotNull();
-
-        for (Image image : images.stills) {
-            assertThat(image.file_path).isNotEmpty();
-            assertThat(image.width).isNotNull();
-            assertThat(image.height).isNotNull();
-            assertThat(image.aspect_ratio).isGreaterThan(0);
-            assertThat(image.vote_average).isGreaterThanOrEqualTo(0);
-            assertThat(image.vote_count).isGreaterThanOrEqualTo(0);
-        }
+        assertImages(images.stills);
     }
 
     @Test
@@ -147,7 +116,20 @@ public class TvEpisodesServiceTest extends BaseTestCase {
         }
     }
 
+    private void assertTvEpisode(TvEpisode episode) {
+        assertThat(episode.air_date).isNotNull();
+        assertThat(episode.episode_number).isPositive();
+        assertThat(episode.name).isNotNull();
+        assertThat(episode.overview).isNotNull();
+        assertThat(episode.id).isNotNull();
+        assertThat(episode.season_number).isEqualTo(1);
+        assertThat(episode.still_path).isNotNull();
+        assertThat(episode.vote_average).isGreaterThanOrEqualTo(0);
+        assertThat(episode.vote_count).isGreaterThanOrEqualTo(0);
+    }
+
     private void assertCrewCredits(List<CrewMember> crew) {
+        assertThat(crew).isNotNull();
         assertThat(crew).isNotEmpty();
 
         for (CrewMember member : crew) {
@@ -160,6 +142,7 @@ public class TvEpisodesServiceTest extends BaseTestCase {
     }
 
     private void assertCastCredits(List<CastMember> cast) {
+        assertThat(cast).isNotNull();
         assertThat(cast).isNotEmpty();
 
         for (CastMember member : cast) {
@@ -168,6 +151,20 @@ public class TvEpisodesServiceTest extends BaseTestCase {
             assertThat(member.name).isNotNull();
             assertThat(member.character).isNotNull();
             assertThat(member.order).isNotNull();
+        }
+    }
+
+    private void assertImages(List<Image> images){
+        assertThat(images).isNotNull();
+        assertThat(images).isNotEmpty();
+
+        for (Image image : images) {
+            assertThat(image.file_path).isNotEmpty();
+            assertThat(image.width).isNotNull();
+            assertThat(image.height).isNotNull();
+            assertThat(image.aspect_ratio).isGreaterThan(0);
+            assertThat(image.vote_average).isGreaterThanOrEqualTo(0);
+            assertThat(image.vote_count).isGreaterThanOrEqualTo(0);
         }
     }
 }

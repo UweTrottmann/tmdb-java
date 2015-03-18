@@ -7,6 +7,7 @@ import com.uwetrottmann.tmdb.entities.CastMember;
 import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.CrewMember;
 import com.uwetrottmann.tmdb.entities.ExternalIds;
+import com.uwetrottmann.tmdb.entities.Image;
 import com.uwetrottmann.tmdb.entities.Images;
 import com.uwetrottmann.tmdb.entities.Person;
 import com.uwetrottmann.tmdb.entities.TvAlternativeTitles;
@@ -43,21 +44,8 @@ public class TvServiceTest extends BaseTestCase {
 
         // images
         assertThat(show.images).isNotNull();
-        assertThat(show.images.backdrops).isNotEmpty();
-        assertThat(show.images.backdrops.get(0).file_path).isNotNull();
-        assertThat(show.images.backdrops.get(0).width).isNotNull();
-        assertThat(show.images.backdrops.get(0).height).isNotNull();
-        assertThat(show.images.backdrops.get(0).aspect_ratio).isGreaterThan(1.7f);
-        assertThat(show.images.backdrops.get(0).vote_average).isPositive();
-        assertThat(show.images.backdrops.get(0).vote_count).isPositive();
-        assertThat(show.images.posters).isNotEmpty();
-        assertThat(show.images.posters.get(0).file_path).isNotNull();
-        assertThat(show.images.posters.get(0).width).isEqualTo(1000);
-        assertThat(show.images.posters.get(0).height).isEqualTo(1500);
-        assertThat(show.images.posters.get(0).iso_639_1).isEqualTo("en");
-        assertThat(show.images.posters.get(0).aspect_ratio).isGreaterThan(0.6f);
-        assertThat(show.images.posters.get(0).vote_average).isPositive();
-        assertThat(show.images.posters.get(0).vote_count).isPositive();
+        assertImages(show.images.backdrops);
+        assertImages(show.images.posters);
 
         // external ids
         assertThat(show.external_ids).isNotNull();
@@ -102,21 +90,8 @@ public class TvServiceTest extends BaseTestCase {
         Images images = getManager().tvService().images(TestData.TVSHOW_ID, null);
         assertThat(images).isNotNull();
         assertThat(images.id).isEqualTo(TestData.TVSHOW_ID);
-        assertThat(images.backdrops).isNotEmpty();
-        assertThat(images.backdrops.get(0).file_path).isNotNull();
-        assertThat(images.backdrops.get(0).width).isNotNull();
-        assertThat(images.backdrops.get(0).height).isNotNull();
-        assertThat(images.backdrops.get(0).aspect_ratio).isGreaterThan(1.7f);
-        assertThat(images.backdrops.get(0).vote_average).isPositive();
-        assertThat(images.backdrops.get(0).vote_count).isPositive();
-        assertThat(images.posters).isNotEmpty();
-        assertThat(images.posters.get(0).file_path).isNotNull();
-        assertThat(images.posters.get(0).width).isEqualTo(1000);
-        assertThat(images.posters.get(0).height).isEqualTo(1500);
-        assertThat(images.posters.get(0).iso_639_1).isEqualTo("en");
-        assertThat(images.posters.get(0).aspect_ratio).isGreaterThan(0.6f);
-        assertThat(images.posters.get(0).vote_average).isPositive();
-        assertThat(images.posters.get(0).vote_count).isPositive();
+        assertImages(images.backdrops);
+        assertImages(images.posters);
     }
     
     @Test
@@ -235,6 +210,7 @@ public class TvServiceTest extends BaseTestCase {
     }
 
     private void assertCrewCredits(List<CrewMember> crew) {
+        assertThat(crew).isNotNull();
         assertThat(crew).isNotEmpty();
         
         for (CrewMember member : crew) {
@@ -247,6 +223,7 @@ public class TvServiceTest extends BaseTestCase {
     }
     
     private void assertCastCredits(List<CastMember> cast) {
+        assertThat(cast).isNotNull();
         assertThat(cast).isNotEmpty();
         
         for (CastMember member : cast) {
@@ -255,6 +232,20 @@ public class TvServiceTest extends BaseTestCase {
             assertThat(member.name).isNotNull();
             assertThat(member.character).isNotNull();
             assertThat(member.order).isNotNull();
+        }
+    }
+
+    private void assertImages(List<Image> images){
+        assertThat(images).isNotNull();
+        assertThat(images).isNotEmpty();
+
+        for(Image image : images) {
+          assertThat(image.file_path).isNotNull();
+          assertThat(image.width).isNotNull();
+          assertThat(image.height).isNotNull();
+          assertThat(image.aspect_ratio).isGreaterThan(0);
+          assertThat(image.vote_average).isGreaterThanOrEqualTo(0);
+          assertThat(image.vote_count).isGreaterThanOrEqualTo(0);
         }
     }
 
