@@ -16,10 +16,11 @@
 
 package com.uwetrottmann.tmdb.services;
 
+import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.ExternalIds;
 import com.uwetrottmann.tmdb.entities.TvEpisode;
-import com.uwetrottmann.tmdb.entities.TvEpisodeImages;
+import com.uwetrottmann.tmdb.entities.Images;
 import com.uwetrottmann.tmdb.entities.Videos;
 
 import retrofit.http.GET;
@@ -33,13 +34,15 @@ public interface TvEpisodesService {
      *
      * @param showId A themoviedb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
+     * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
      */
     @GET("/tv/{id}/season/{season_number}/episode/{episode_number}")
     TvEpisode episode(
             @Path("id") int showId,
             @Path("season_number") int seasonNumber,
             @Path("episode_number") int episodeNumber,
-            @Query("language") String language
+            @Query("language") String language,
+            @Query("append_to_response") AppendToResponse appendToResponse
     );
     
     /**
@@ -73,7 +76,7 @@ public interface TvEpisodesService {
      * @param showId A themoviedb id.
      */
     @GET("/tv/{id}/season/{season_number}/episode/{episode_number}/images")
-    TvEpisodeImages images(
+    Images images(
             @Path("id") int showId,
             @Path("season_number") int seasonNumber,
             @Path("episode_number") int episodeNumber

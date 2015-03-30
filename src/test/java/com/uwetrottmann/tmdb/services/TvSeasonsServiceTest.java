@@ -16,22 +16,23 @@
 
 package com.uwetrottmann.tmdb.services;
 
-import java.util.List;
-
 import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.TestData;
+import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.CastMember;
 import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.CrewMember;
 import com.uwetrottmann.tmdb.entities.ExternalIds;
 import com.uwetrottmann.tmdb.entities.Image;
-import com.uwetrottmann.tmdb.entities.TvEpisode;
 import com.uwetrottmann.tmdb.entities.Images;
+import com.uwetrottmann.tmdb.entities.TvEpisode;
 import com.uwetrottmann.tmdb.entities.TvSeason;
 import com.uwetrottmann.tmdb.entities.Videos;
 import com.uwetrottmann.tmdb.entities.Videos.Video;
-
+import com.uwetrottmann.tmdb.enumerations.AppendToResponseItem;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -39,28 +40,30 @@ public class TvSeasonsServiceTest extends BaseTestCase {
 
     @Test
     public void test_season() {
-        TvSeason season = getManager().tvSeasonsService().season(TestData.TVSHOW_ID, 1, null);
-        assertThat(season.air_date).isNotNull();
-        assertThat(season.name).isEqualTo("Season 1");
-        assertThat(season.overview).isNotNull();
-        assertThat(season.id).isNotNull();
-        assertThat(season.poster_path).isNotEmpty();
-        assertThat(season.season_number).isEqualTo(1);
-        assertThat(season.episodes).isNotEmpty();
-        
-        for (TvEpisode episode : season.episodes) {
-            assertCrewCredits(episode.crew);
-            assertCastCredits(episode.guest_stars);
-            assertThat(episode.air_date).isNotNull();
-            assertThat(episode.episode_number).isPositive();
-            assertThat(episode.name).isNotNull();
-            assertThat(episode.overview).isNotNull();
-            assertThat(episode.id).isNotNull();
-            assertThat(episode.season_number).isEqualTo(1);
-            assertThat(episode.still_path).isNotNull();
-            assertThat(episode.vote_average).isGreaterThanOrEqualTo(0);
-            assertThat(episode.vote_count).isGreaterThanOrEqualTo(0);
-        }
+        TvSeason season = getManager().tvSeasonsService().season(TestData.TVSHOW_ID, 1, null, null);
+        assertTvSeason(season);
+    }
+
+    @Test
+    public void test_season_with_append_to_response() {
+        TvSeason season = getManager().tvSeasonsService().season(TestData.TVSHOW_ID, 1, null,
+                new AppendToResponse(AppendToResponseItem.IMAGES, AppendToResponseItem.EXTERNAL_IDS, AppendToResponseItem.CREDITS));
+        assertTvSeason(season);
+
+        // credits
+        assertThat(season.credits).isNotNull();
+        assertCrewCredits(season.credits.crew);
+        assertCastCredits(season.credits.cast);
+
+        // images
+        assertThat(season.images).isNotNull();
+        assertImages(season.images.posters);
+
+        // external ids
+        assertThat(season.external_ids).isNotNull();
+        assertThat(season.external_ids.freebase_id).isNotNull();
+        assertThat(season.external_ids.freebase_mid).isNotNull();
+        assertThat(season.external_ids.tvdb_id).isNotNull();
     }
     
     @Test
@@ -84,15 +87,7 @@ public class TvSeasonsServiceTest extends BaseTestCase {
     public void test_images() {
         Images images = getManager().tvSeasonsService().images(TestData.TVSHOW_ID, 1, null);
         assertThat(images.id).isNotNull();
-        
-        for (Image image : images.posters) {
-            assertThat(image.file_path).isNotEmpty();
-            assertThat(image.width).isNotNull();
-            assertThat(image.height).isNotNull();
-            assertThat(image.aspect_ratio).isGreaterThan(0);
-            assertThat(image.vote_average).isGreaterThanOrEqualTo(0);
-            assertThat(image.vote_count).isGreaterThanOrEqualTo(0);
-        }
+        assertImages(images.posters);
     }
     
     @Test
@@ -109,6 +104,30 @@ public class TvSeasonsServiceTest extends BaseTestCase {
             assertThat(video.site).isNotNull();
             assertThat(video.size).isNotNull();
             assertThat(video.type).isNotNull();
+        }
+    }
+
+    private void assertTvSeason(TvSeason season) {
+        assertThat(season.air_date).isNotNull();
+        assertThat(season.name).isEqualTo("Season 1");
+        assertThat(season.overview).isNotNull();
+        assertThat(season.id).isNotNull();
+        assertThat(season.poster_path).isNotEmpty();
+        assertThat(season.season_number).isEqualTo(1);
+        assertThat(season.episodes).isNotEmpty();
+
+        for (TvEpisode episode : season.episodes) {
+            assertCrewCredits(episode.crew);
+            assertCastCredits(episode.guest_stars);
+            assertThat(episode.air_date).isNotNull();
+            assertThat(episode.episode_number).isPositive();
+            assertThat(episode.name).isNotNull();
+            assertThat(episode.overview).isNotNull();
+            assertThat(episode.id).isNotNull();
+            assertThat(episode.season_number).isEqualTo(1);
+            assertThat(episode.still_path).isNotNull();
+            assertThat(episode.vote_average).isGreaterThanOrEqualTo(0);
+            assertThat(episode.vote_count).isGreaterThanOrEqualTo(0);
         }
     }
     
@@ -133,6 +152,20 @@ public class TvSeasonsServiceTest extends BaseTestCase {
             assertThat(member.name).isNotNull();
             assertThat(member.character).isNotNull();
             assertThat(member.order).isNotNull();
+        }
+    }
+
+    private void assertImages(List<Image> images){
+        assertThat(images).isNotNull();
+        assertThat(images).isNotEmpty();
+
+        for(Image image : images) {
+            assertThat(image.file_path).isNotNull();
+            assertThat(image.width).isNotNull();
+            assertThat(image.height).isNotNull();
+            assertThat(image.aspect_ratio).isGreaterThan(0);
+            assertThat(image.vote_average).isGreaterThanOrEqualTo(0);
+            assertThat(image.vote_count).isGreaterThanOrEqualTo(0);
         }
     }
 

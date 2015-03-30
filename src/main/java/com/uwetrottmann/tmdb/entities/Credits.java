@@ -27,4 +27,6 @@ public class Credits {
 
     public List<CrewMember> crew;
 
+    public List<CastMember> guest_stars;
+
 }

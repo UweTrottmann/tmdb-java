@@ -34,5 +34,8 @@ public class TvEpisode {
     public String still_path;
     public Double vote_average;
     public Integer vote_count;
+    public Images images;
+    public ExternalIds external_ids;
+    public Credits credits;
 
 }
