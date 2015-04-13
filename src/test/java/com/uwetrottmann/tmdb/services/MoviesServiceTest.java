@@ -3,6 +3,7 @@ package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.TestData;
+
 import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.Images;
@@ -14,6 +15,7 @@ import com.uwetrottmann.tmdb.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb.entities.Releases;
 import com.uwetrottmann.tmdb.entities.ReviewResultsPage;
 import com.uwetrottmann.tmdb.entities.Videos;
+import com.uwetrottmann.tmdb.entities.Translations;
 import com.uwetrottmann.tmdb.enumerations.AppendToResponseItem;
 import org.junit.Test;
 
@@ -196,6 +198,18 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(videos.results.get(0).site).isEqualTo("YouTube");
         assertThat(videos.results.get(0).size).isNotNull();
         assertThat(videos.results.get(0).type).isEqualTo("Trailer");
+    }
+
+    @Test
+    public void test_translations() {
+        Translations translations = getManager().moviesService().translations(TestData.MOVIE_ID, null);
+        assertThat(translations).isNotNull();
+        assertThat(translations.id).isEqualTo(TestData.MOVIE_ID);
+        for (Translations.Translation translation : translations.translations) {
+            assertThat(translation.name).isNotNull();
+            assertThat(translation.iso_639_1).isNotNull();
+            assertThat(translation.english_name).isNotNull();
+        }
     }
 
     @Test
