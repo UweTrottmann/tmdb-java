@@ -17,17 +17,7 @@
 
 package com.uwetrottmann.tmdb.services;
 
-import com.uwetrottmann.tmdb.entities.AppendToResponse;
-import com.uwetrottmann.tmdb.entities.Credits;
-import com.uwetrottmann.tmdb.entities.Images;
-import com.uwetrottmann.tmdb.entities.ListResultsPage;
-import com.uwetrottmann.tmdb.entities.Movie;
-import com.uwetrottmann.tmdb.entities.MovieAlternativeTitles;
-import com.uwetrottmann.tmdb.entities.MovieKeywords;
-import com.uwetrottmann.tmdb.entities.MovieResultsPage;
-import com.uwetrottmann.tmdb.entities.Releases;
-import com.uwetrottmann.tmdb.entities.ReviewResultsPage;
-import com.uwetrottmann.tmdb.entities.Videos;
+import com.uwetrottmann.tmdb.entities.*;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -112,6 +102,19 @@ public interface MoviesService {
     Videos videos(
             @Path("id") int tmdbId,
             @Query("language") String language
+    );
+
+    /**
+     * Get the translations for a specific movie id.
+     *
+     * @param tmdbId TMDb id.
+     * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
+     * @return
+     */
+    @GET("/movie/{id}/translations")
+    Translations translations(
+            @Path("id") int tmdbId,
+            @Query("append_to_response") AppendToResponse appendToResponse
     );
 
     /**
