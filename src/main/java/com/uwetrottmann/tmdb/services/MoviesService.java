@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 
 package com.uwetrottmann.tmdb.services;
@@ -28,6 +28,7 @@ import com.uwetrottmann.tmdb.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb.entities.Releases;
 import com.uwetrottmann.tmdb.entities.ReviewResultsPage;
 import com.uwetrottmann.tmdb.entities.Videos;
+import com.uwetrottmann.tmdb.entities.Translations;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -112,6 +113,19 @@ public interface MoviesService {
     Videos videos(
             @Path("id") int tmdbId,
             @Query("language") String language
+    );
+
+    /**
+     * Get the translations for a specific movie id.
+     *
+     * @param tmdbId TMDb id.
+     * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
+     * @return
+     */
+    @GET("/movie/{id}/translations")
+    Translations translations(
+            @Path("id") int tmdbId,
+            @Query("append_to_response") AppendToResponse appendToResponse
     );
 
     /**
