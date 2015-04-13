@@ -205,9 +205,11 @@ public class MoviesServiceTest extends BaseTestCase {
         Translations translations = getManager().moviesService().translations(TestData.MOVIE_ID, null);
         assertThat(translations).isNotNull();
         assertThat(translations.id).isEqualTo(TestData.MOVIE_ID);
-        assertThat(translations.translations.get(0).name).isNotNull();
-        assertThat(translations.translations.get(0).iso_639_1).isNotNull();
-        assertThat(translations.translations.get(0).english_name).isNotNull();
+        for (Translations.Translation translation : translations.translations) {
+            assertThat(translation.name).isNotNull();
+            assertThat(translation.iso_639_1).isNotNull();
+            assertThat(translation.english_name).isNotNull();
+        }
     }
 
     @Test
