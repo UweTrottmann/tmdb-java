@@ -150,7 +150,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(images).isNotNull();
         assertThat(images.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(images.backdrops).isNotEmpty();
-        assertThat(images.backdrops.get(0).file_path).isEqualTo("/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg");
+        assertThat(images.backdrops.get(0).file_path).isNotEmpty();
         assertThat(images.backdrops.get(0).width).isEqualTo(1280);
         assertThat(images.backdrops.get(0).height).isEqualTo(720);
         assertThat(images.backdrops.get(0).iso_639_1).isEqualTo("en");
@@ -158,10 +158,10 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(images.backdrops.get(0).vote_average).isPositive();
         assertThat(images.backdrops.get(0).vote_count).isPositive();
         assertThat(images.posters).isNotEmpty();
-        assertThat(images.posters.get(0).file_path).isEqualTo("/2lECpi35Hnbpa4y46JX0aY3AWTy.jpg");
+        assertThat(images.posters.get(0).file_path).isNotEmpty();
         assertThat(images.posters.get(0).width).isEqualTo(1000);
         assertThat(images.posters.get(0).height).isEqualTo(1500);
-        assertThat(images.posters.get(0).iso_639_1).isEqualTo("en");
+        assertThat(images.posters.get(0).iso_639_1).hasSize(2);
         assertThat(images.posters.get(0).aspect_ratio).isGreaterThan(0.6f);
         assertThat(images.posters.get(0).vote_average).isPositive();
         assertThat(images.posters.get(0).vote_count).isPositive();
