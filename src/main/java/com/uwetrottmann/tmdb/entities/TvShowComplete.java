@@ -32,12 +32,13 @@ public class TvShowComplete extends TvShow {
     public Date last_air_date;
     public Integer number_of_episodes;
     public Integer number_of_seasons;
-    public List<String> origin_country;
     public String original_language;
     public String overview;
     public List<ProductionCompany> production_companies;
     public List<TvSeason> seasons;
     public String status;
     public String type;
-
+    public Images images;
+    public Credits credits;
+    public ExternalIds external_ids;
 }

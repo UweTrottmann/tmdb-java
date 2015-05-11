@@ -17,11 +17,15 @@
 
 package com.uwetrottmann.tmdb.entities;
 
+import java.util.List;
+
 public class Collection {
 
     public Integer id;
     public String backdrop_path;
     public String name;
     public String poster_path;
+    public List<Part> parts;
+    public String overview;
 
 }

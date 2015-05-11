@@ -26,7 +26,7 @@ public class Movie {
 
     public Boolean adult;
     public String backdrop_path;
-    // TODO belongs_to_collection
+    public Collection belongs_to_collection;
     public Integer budget;
     public List<Genre> genres;
     public String homepage;

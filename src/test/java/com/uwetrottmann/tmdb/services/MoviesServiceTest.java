@@ -3,6 +3,7 @@ package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.TestData;
+
 import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.Images;
@@ -14,6 +15,7 @@ import com.uwetrottmann.tmdb.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb.entities.Releases;
 import com.uwetrottmann.tmdb.entities.ReviewResultsPage;
 import com.uwetrottmann.tmdb.entities.Videos;
+import com.uwetrottmann.tmdb.entities.Translations;
 import com.uwetrottmann.tmdb.enumerations.AppendToResponseItem;
 import org.junit.Test;
 
@@ -36,6 +38,15 @@ public class MoviesServiceTest extends BaseTestCase {
         Movie movie = getManager().moviesService().summary(TestData.MOVIE_ID, "pt", null);
         assertThat(movie).isNotNull();
         assertThat(movie.title).isEqualTo("Clube da Luta");
+    }
+
+    @Test
+    public void test_summary_with_collection() throws ParseException {
+        Movie movie = this.getManager().moviesService().summary(TestData.MOVIE_WITH_COLLECTION_ID, null, null);
+        assertThat(movie.title).isEqualTo(TestData.MOVIE_WITH_COLLECTION_TITLE);
+        assertThat(movie.belongs_to_collection).isNotNull();
+        assertThat(movie.belongs_to_collection.id).isEqualTo(1241);
+        assertThat(movie.belongs_to_collection.name).isEqualTo("Harry Potter Collection");
     }
 
     private void assertMovie(Movie movie) {
@@ -139,7 +150,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(images).isNotNull();
         assertThat(images.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(images.backdrops).isNotEmpty();
-        assertThat(images.backdrops.get(0).file_path).isEqualTo("/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg");
+        assertThat(images.backdrops.get(0).file_path).isNotEmpty();
         assertThat(images.backdrops.get(0).width).isEqualTo(1280);
         assertThat(images.backdrops.get(0).height).isEqualTo(720);
         assertThat(images.backdrops.get(0).iso_639_1).isEqualTo("en");
@@ -147,10 +158,10 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(images.backdrops.get(0).vote_average).isPositive();
         assertThat(images.backdrops.get(0).vote_count).isPositive();
         assertThat(images.posters).isNotEmpty();
-        assertThat(images.posters.get(0).file_path).isEqualTo("/2lECpi35Hnbpa4y46JX0aY3AWTy.jpg");
+        assertThat(images.posters.get(0).file_path).isNotEmpty();
         assertThat(images.posters.get(0).width).isEqualTo(1000);
         assertThat(images.posters.get(0).height).isEqualTo(1500);
-        assertThat(images.posters.get(0).iso_639_1).isEqualTo("en");
+        assertThat(images.posters.get(0).iso_639_1).hasSize(2);
         assertThat(images.posters.get(0).aspect_ratio).isGreaterThan(0.6f);
         assertThat(images.posters.get(0).vote_average).isPositive();
         assertThat(images.posters.get(0).vote_count).isPositive();
@@ -187,6 +198,18 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(videos.results.get(0).site).isEqualTo("YouTube");
         assertThat(videos.results.get(0).size).isNotNull();
         assertThat(videos.results.get(0).type).isEqualTo("Trailer");
+    }
+
+    @Test
+    public void test_translations() {
+        Translations translations = getManager().moviesService().translations(TestData.MOVIE_ID, null);
+        assertThat(translations).isNotNull();
+        assertThat(translations.id).isEqualTo(TestData.MOVIE_ID);
+        for (Translations.Translation translation : translations.translations) {
+            assertThat(translation.name).isNotNull();
+            assertThat(translation.iso_639_1).isNotNull();
+            assertThat(translation.english_name).isNotNull();
+        }
     }
 
     @Test

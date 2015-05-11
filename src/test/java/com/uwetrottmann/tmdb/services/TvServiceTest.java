@@ -1,13 +1,13 @@
 package com.uwetrottmann.tmdb.services;
 
-import java.util.List;
-
 import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.TestData;
+import com.uwetrottmann.tmdb.entities.AppendToResponse;
 import com.uwetrottmann.tmdb.entities.CastMember;
 import com.uwetrottmann.tmdb.entities.Credits;
 import com.uwetrottmann.tmdb.entities.CrewMember;
 import com.uwetrottmann.tmdb.entities.ExternalIds;
+import com.uwetrottmann.tmdb.entities.Image;
 import com.uwetrottmann.tmdb.entities.Images;
 import com.uwetrottmann.tmdb.entities.Person;
 import com.uwetrottmann.tmdb.entities.TvAlternativeTitles;
@@ -16,8 +16,10 @@ import com.uwetrottmann.tmdb.entities.TvResultsPage;
 import com.uwetrottmann.tmdb.entities.TvSeason;
 import com.uwetrottmann.tmdb.entities.TvShowComplete;
 import com.uwetrottmann.tmdb.entities.Videos;
-
+import com.uwetrottmann.tmdb.enumerations.AppendToResponseItem;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,8 +27,33 @@ public class TvServiceTest extends BaseTestCase {
 
     @Test
     public void test_tvshow() {
-        TvShowComplete show = getManager().tvService().tv(TestData.TVSHOW_ID, null);
+        TvShowComplete show = getManager().tvService().tv(TestData.TVSHOW_ID, null, null);
         assertTvShow(show);
+    }
+
+    @Test
+    public void test_tvshow_with_append_to_response() {
+        TvShowComplete show = getManager().tvService().tv(TestData.TVSHOW_ID, null,
+                new AppendToResponse(AppendToResponseItem.CREDITS, AppendToResponseItem.EXTERNAL_IDS, AppendToResponseItem.IMAGES));
+        assertTvShow(show);
+
+        // credits
+        assertThat(show.credits).isNotNull();
+        assertCrewCredits(show.credits.crew);
+        assertCastCredits(show.credits.cast);
+
+        // images
+        assertThat(show.images).isNotNull();
+        assertImages(show.images.backdrops);
+        assertImages(show.images.posters);
+
+        // external ids
+        assertThat(show.external_ids).isNotNull();
+        assertThat(show.external_ids.freebase_id).isNotNull();
+        assertThat(show.external_ids.freebase_mid).isNotNull();
+        assertThat(show.external_ids.tvdb_id).isNotNull();
+        assertThat(show.external_ids.imdb_id).isNotNull();
+        assertThat(show.external_ids.tvrage_id).isNotNull();
     }
     
     @Test
@@ -63,21 +90,8 @@ public class TvServiceTest extends BaseTestCase {
         Images images = getManager().tvService().images(TestData.TVSHOW_ID, null);
         assertThat(images).isNotNull();
         assertThat(images.id).isEqualTo(TestData.TVSHOW_ID);
-        assertThat(images.backdrops).isNotEmpty();
-        assertThat(images.backdrops.get(0).file_path).isNotNull();
-        assertThat(images.backdrops.get(0).width).isNotNull();
-        assertThat(images.backdrops.get(0).height).isNotNull();
-        assertThat(images.backdrops.get(0).aspect_ratio).isGreaterThan(1.7f);
-        assertThat(images.backdrops.get(0).vote_average).isPositive();
-        assertThat(images.backdrops.get(0).vote_count).isPositive();
-        assertThat(images.posters).isNotEmpty();
-        assertThat(images.posters.get(0).file_path).isNotNull();
-        assertThat(images.posters.get(0).width).isEqualTo(1000);
-        assertThat(images.posters.get(0).height).isEqualTo(1500);
-        assertThat(images.posters.get(0).iso_639_1).isEqualTo("en");
-        assertThat(images.posters.get(0).aspect_ratio).isGreaterThan(0.6f);
-        assertThat(images.posters.get(0).vote_average).isPositive();
-        assertThat(images.posters.get(0).vote_count).isPositive();
+        assertImages(images.backdrops);
+        assertImages(images.posters);
     }
     
     @Test
@@ -196,6 +210,7 @@ public class TvServiceTest extends BaseTestCase {
     }
 
     private void assertCrewCredits(List<CrewMember> crew) {
+        assertThat(crew).isNotNull();
         assertThat(crew).isNotEmpty();
         
         for (CrewMember member : crew) {
@@ -208,6 +223,7 @@ public class TvServiceTest extends BaseTestCase {
     }
     
     private void assertCastCredits(List<CastMember> cast) {
+        assertThat(cast).isNotNull();
         assertThat(cast).isNotEmpty();
         
         for (CastMember member : cast) {
@@ -216,6 +232,20 @@ public class TvServiceTest extends BaseTestCase {
             assertThat(member.name).isNotNull();
             assertThat(member.character).isNotNull();
             assertThat(member.order).isNotNull();
+        }
+    }
+
+    private void assertImages(List<Image> images){
+        assertThat(images).isNotNull();
+        assertThat(images).isNotEmpty();
+
+        for(Image image : images) {
+          assertThat(image.file_path).isNotNull();
+          assertThat(image.width).isNotNull();
+          assertThat(image.height).isNotNull();
+          assertThat(image.aspect_ratio).isGreaterThan(0);
+          assertThat(image.vote_average).isGreaterThanOrEqualTo(0);
+          assertThat(image.vote_count).isGreaterThanOrEqualTo(0);
         }
     }
 

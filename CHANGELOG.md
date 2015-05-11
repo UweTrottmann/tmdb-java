@@ -4,6 +4,7 @@ Supported API calls
 -------------------
 
  * [Configuration](http://docs.themoviedb.apiary.io/#reference/configuration)
+ * [Collections](http://docs.themoviedb.apiary.io/#reference/collections)
  * [Discover](http://docs.themoviedb.apiary.io/#reference/discover)
  * [Find](http://docs.themoviedb.apiary.io/#reference/find)
  * [Movies](http://docs.themoviedb.apiary.io/#reference/movies) _incomplete_
@@ -12,6 +13,14 @@ Supported API calls
  * [TV](http://docs.themoviedb.apiary.io/#reference/tv) _incomplete_
  * [TV Seasons](http://docs.themoviedb.apiary.io/#reference/tv-seasons) _incomplete_
  * [TV Episodes](http://docs.themoviedb.apiary.io/#reference/tv-episodes) _incomplete_
+
+0.9.0 *(2015-05-11)*
+--------------------
+ * Support Collections service. Thanks to @mlaggner!
+ * Support `/movie/{id}/tranlations`. Thanks to @ssouris!
+ * Using `Images` instead of `TvEpisodeImages`, adds `stills`. Thanks to @mlaggner!    
+ * `TvService.tv()`, `TvSeasonsService.season()`, `TvEpisodesService.episode()` have a new append-to-response parameter. Thanks to @mlaggner!
+ * Add origin_country to TV show search results.
 
 0.8.0 *(2015-02-23)*
 --------------------
