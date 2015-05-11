@@ -12,7 +12,7 @@ Usage
 Add the following dependency to your Gradle project:
 
 ```groovy
-compile 'com.uwetrottmann:tmdb-java:0.8.0'
+compile 'com.uwetrottmann:tmdb-java:0.9.0'
 ```
 
 or your Maven project:
@@ -21,7 +21,7 @@ or your Maven project:
 <dependency>
     <groupId>com.uwetrottmann</groupId>
     <artifactId>tmdb-java</artifactId>
-    <version>0.8.0</version>
+    <version>0.9.0</version>
 </dependency>
 ```
 
@@ -32,7 +32,7 @@ For example for Gradle:
 
 ```groovy
 compile 'com.squareup.retrofit:retrofit:1.9.0'
-compile 'com.squareup.okhttp:okhttp:2.2.0' // not mandatory, but greatly recommended
+compile 'com.squareup.okhttp:okhttp:2.3.0' // not mandatory, but greatly recommended
 ```
 
 Or for Maven:
@@ -47,7 +47,7 @@ Or for Maven:
 <dependency>
   <groupId>com.squareup.okhttp</groupId>
   <artifactId>okhttp</artifactId>
-  <version>2.2.0</version>
+  <version>2.3.0</version>
 </dependency>
 ```
 
@@ -71,7 +71,7 @@ See test cases in `src/test/` for more examples.
 License
 -------
 
-    Copyright 2013-2014 Uwe Trottmann
+    Copyright 2013-2015 Uwe Trottmann
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
