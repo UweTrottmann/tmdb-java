@@ -68,6 +68,11 @@ Trailers trailers = movieService.trailers(550);
 
 See test cases in `src/test/` for more examples.
 
+Related projects
+----------------
+
+[tmdb-rx-java](https://github.com/migueljteixeira/tmdb-rx-java) - adds RxAndroid support
+
 License
 -------
 
