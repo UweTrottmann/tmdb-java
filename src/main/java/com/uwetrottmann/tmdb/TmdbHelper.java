@@ -30,12 +30,12 @@ import java.util.Date;
 
 public class TmdbHelper {
 
-    /** Format for decoding JSON dates in string format. */
-    private static final SimpleDateFormat JSON_STRING_DATE = new SimpleDateFormat("yyy-MM-dd");
+    public static final String TMDB_DATE_PATTERN = "yyyy-MM-dd";
+    private static final SimpleDateFormat TMDB_DATE_FORMAT = new SimpleDateFormat(TMDB_DATE_PATTERN);
 
     /**
-     * Create a {@link com.google.gson.GsonBuilder} and register all of the custom types needed in
-     * order to properly deserialize complex TMDb-specific types.
+     * Create a {@link com.google.gson.GsonBuilder} and register all of the custom types needed in order to properly
+     * deserialize complex TMDb-specific types.
      *
      * @return Assembled GSON builder instance.
      */
@@ -47,21 +47,19 @@ public class TmdbHelper {
             @Override
             public Integer deserialize(JsonElement json, Type typeOfT,
                     JsonDeserializationContext context) throws JsonParseException {
-                try {
-                    return Integer.valueOf(json.getAsInt());
-                } catch (NumberFormatException e) {
-                    return null;
-                }
+                return json.getAsInt();
             }
         });
+
         builder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
             @Override
             public Date deserialize(JsonElement json, Type typeOfT,
                     JsonDeserializationContext context) throws JsonParseException {
 
                 try {
-                    return JSON_STRING_DATE.parse(json.getAsString());
+                    return TMDB_DATE_FORMAT.parse(json.getAsString());
                 } catch (ParseException e) {
+                    // return null instead of failing (like default parser would)
                     return null;
                 }
             }
