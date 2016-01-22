@@ -52,7 +52,7 @@ public class CollectionServiceTest extends BaseTestCase {
     Assertions.assertThat(images.backdrops.get(0).file_path).isNotEmpty();
     Assertions.assertThat(images.backdrops.get(0).width).isEqualTo(1920);
     Assertions.assertThat(images.backdrops.get(0).height).isEqualTo(1080);
-    Assertions.assertThat(images.backdrops.get(0).iso_639_1).isNull();
+    Assertions.assertThat(images.backdrops.get(0).iso_639_1).hasSize(2);
     Assertions.assertThat(images.backdrops.get(0).aspect_ratio).isGreaterThan(1.7F);
     Assertions.assertThat(images.backdrops.get(0).vote_average).isPositive();
     Assertions.assertThat(images.backdrops.get(0).vote_count).isPositive();
