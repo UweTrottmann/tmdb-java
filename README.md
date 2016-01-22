@@ -1,4 +1,4 @@
-**Pull requests (e.g. support for more API endpoints, bugfixes) against dev are welcome!**
+**Pull requests (e.g. support for more API endpoints, bugfixes) are welcome!**
 
 tmdb-java
 ============
@@ -28,28 +28,7 @@ or your Maven project:
 Dependencies
 ------------
 If you rather use the [released jar][3], add dependencies yourself as you see fit.
-For example for Gradle:
-
-```groovy
-compile 'com.squareup.retrofit:retrofit:1.9.0'
-compile 'com.squareup.okhttp:okhttp:2.3.0' // not mandatory, but greatly recommended
-```
-
-Or for Maven:
-
-```xml
-<dependency>
-    <groupId>com.squareup.retrofit</groupId>
-    <artifactId>retrofit</artifactId>
-    <version>1.9.0</version>
-</dependency>
-<!-- not mandatory, but greatly recommended: -->
-<dependency>
-  <groupId>com.squareup.okhttp</groupId>
-  <artifactId>okhttp</artifactId>
-  <version>2.3.0</version>
-</dependency>
-```
+You can find the required dependencies in [pom.xml][4].
 
 Example
 -------
@@ -76,7 +55,7 @@ Related projects
 License
 -------
 
-    Copyright 2013-2015 Uwe Trottmann
+    Copyright 2013-2016 Uwe Trottmann
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -96,3 +75,4 @@ License
  [1]: http://docs.themoviedb.apiary.io/
  [2]: https://github.com/square/retrofit
  [3]: https://github.com/UweTrottmann/tmdb-java/releases
+ [4]: https://github.com/UweTrottmann/tmdb-java/blob/master/pom.xml
