@@ -12,7 +12,7 @@ Usage
 Add the following dependency to your Gradle project:
 
 ```groovy
-compile 'com.uwetrottmann:tmdb-java:0.9.0'
+compile 'com.uwetrottmann:tmdb-java:0.9.1'
 ```
 
 or your Maven project:
@@ -21,7 +21,7 @@ or your Maven project:
 <dependency>
     <groupId>com.uwetrottmann</groupId>
     <artifactId>tmdb-java</artifactId>
-    <version>0.9.0</version>
+    <version>0.9.1</version>
 </dependency>
 ```
 
