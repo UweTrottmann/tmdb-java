@@ -11,6 +11,7 @@ import com.uwetrottmann.tmdb.entities.PersonCrewCredit;
 import com.uwetrottmann.tmdb.entities.PersonIds;
 import com.uwetrottmann.tmdb.entities.PersonImages;
 import com.uwetrottmann.tmdb.entities.PersonResultsPage;
+import com.uwetrottmann.tmdb.entities.TaggedImagesResultsPage;
 
 import org.junit.Test;
 
@@ -82,17 +83,36 @@ public class PeopleServiceTest extends BaseTestCase {
         assertEquals("Person FREEBASE ID was null.", "/en/brad_pitt", ids.freebase_id);
         assertThat(ids.tvrage_id).isEqualTo(59436);
     }
-    
+
     @Test
     public void test_images() {
         PersonImages images = getManager().personService().images(TestData.PERSON_ID);
         assertThat(images.id).isEqualTo(TestData.PERSON_ID);
-        
+
         for (Image image : images.profiles) {
             assertThat(image.file_path).isNotEmpty();
             assertThat(image.width).isNotNull();
             assertThat(image.height).isNotNull();
             assertThat(image.aspect_ratio).isGreaterThan(0);
+        }
+    }
+
+    @Test
+    public void test_tagged_images() {
+        TaggedImagesResultsPage images = getManager().personService().taggedImages(TestData.PERSON_ID, null, null);
+        assertThat(images.id).isEqualTo(TestData.PERSON_ID);
+
+        for (TaggedImagesResultsPage.TaggedImage image : images.results) {
+            assertThat(image.file_path).isNotEmpty();
+            assertThat(image.width).isNotNull();
+            assertThat(image.width).isGreaterThan(0);
+            assertThat(image.height).isNotNull();
+            assertThat(image.height).isGreaterThan(0);
+            assertThat(image.aspect_ratio).isGreaterThan(0);
+            assertThat(image.media).isNotNull();
+            assertThat(image.id).isNotNull();
+            assertThat(image.media_type).isNotNull();
+            assertThat(image.image_type).isNotNull();
         }
     }
     
