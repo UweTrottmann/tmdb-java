@@ -2,9 +2,6 @@ package com.uwetrottmann.tmdb.entities;
 
 import java.util.List;
 
-/**
- * Creado por jcvallejo en 26/2/16.
- */
 public class TaggedImagesResultsPage {
     public class TaggedImage extends Image {
         public String id;
