@@ -28,7 +28,7 @@ public class Media {
     public Date first_air_date;
     public List<Integer> genre_ids;
     public String name;
-    public List<String> original_country;
+    public List<String> origin_country;
     public String original_language;
     public String original_name;
     public String original_title;
