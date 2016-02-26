@@ -96,7 +96,7 @@ public interface PeopleService {
 
     /**
      * Get the images that have been tagged with a specific person id.
-     * Return all of the image results with a @Media object mapped for each image.
+     * Return all of the image results with a {@link com.uwetrottmann.tmdb.entities.Media} object mapped for each image.
      *
      * @param tmdbId TMDb id.
      * @param page <em>Optional.</em> Minimum value is 1, maximum 1000, expected value is an integer.
