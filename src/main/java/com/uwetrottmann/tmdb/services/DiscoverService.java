@@ -18,6 +18,7 @@ package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.entities.AppendToDiscoverResponse;
 import com.uwetrottmann.tmdb.entities.MovieResultsPage;
+import com.uwetrottmann.tmdb.entities.TmdbDate;
 import com.uwetrottmann.tmdb.entities.TvResultsPage;
 import com.uwetrottmann.tmdb.enumerations.SortBy;
 import retrofit.http.GET;
@@ -79,10 +80,10 @@ public interface DiscoverService {
             @Query("language") String language,
             @Query("page") Integer page,
             @Query("primary_release_year") String primaryReleaseYear,
-            @Query("primary_release_date.gte") Date primaryReleaseYearGte,
-            @Query("primary_release_date.lte") Date primaryReleaseYearLte,
-            @Query("release_date.gte") Date releaseDateGte,
-            @Query("release_date.lte") Date releaseDateLte,
+            @Query("primary_release_date.gte") TmdbDate primaryReleaseYearGte,
+            @Query("primary_release_date.lte") TmdbDate primaryReleaseYearLte,
+            @Query("release_date.gte") TmdbDate releaseDateGte,
+            @Query("release_date.lte") TmdbDate releaseDateLte,
             @Query("sort_by") SortBy sortBy,
             @Query("vote_count.gte") Integer voteCountGte,
             @Query("vote_count.lte") Integer voteCountLte,
@@ -129,8 +130,8 @@ public interface DiscoverService {
             @Query("vote_average.gte") Float voteAverageGte,
             @Query("with_genres") AppendToDiscoverResponse withGenres,
             @Query("with_networks") AppendToDiscoverResponse withNetworks,
-            @Query("first_air_date.gte") Date firstAirDateGte,
-            @Query("first_air_date.lte") Date firstAirDateLte
+            @Query("first_air_date.gte") TmdbDate firstAirDateGte,
+            @Query("first_air_date.lte") TmdbDate firstAirDateLte
     );
 
 }

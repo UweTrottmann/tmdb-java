@@ -4,16 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>7</version>
-    </parent>
-
     <groupId>com.uwetrottmann</groupId>
     <artifactId>tmdb-java</artifactId>
     <packaging>jar</packaging>
-    <version>0.9.0</version>
+    <version>0.9.1</version>
 
     <name>tmdb-java</name>
     <description>tmdb-java is a Java library that provides access to the themoviedatabase API v3.</description>
@@ -25,17 +19,6 @@
         <project.reporting.sourceEncoding>UTF-8</project.reporting.sourceEncoding>
     </properties>
 
-    <scm>
-        <url>https://github.com/UweTrottmann/tmdb-java</url>
-        <connection>scm:git:git://github.com/UweTrottmann/tmdb-java.git</connection>
-        <developerConnection>scm:git:git@github.com:UweTrottmann/tmdb-java.git</developerConnection>
-    </scm>
-
-    <issueManagement>
-        <system>GitHub Issues</system>
-        <url>https://github.com/UweTrottmann/tmdb-java/issues</url>
-    </issueManagement>
-
     <licenses>
         <license>
             <name>Apache 2.0</name>
@@ -43,16 +26,30 @@
         </license>
     </licenses>
 
+    <developers>
+        <developer>
+            <name>Uwe Trottmann</name>
+            <url>http://uwetrottmann.com</url>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/UweTrottmann/tmdb-java</url>
+        <connection>scm:git:git://github.com/UweTrottmann/tmdb-java.git</connection>
+        <developerConnection>scm:git:git@github.com:UweTrottmann/tmdb-java.git</developerConnection>
+    </scm>
+
     <dependencies>
         <dependency>
             <groupId>com.squareup.retrofit</groupId>
             <artifactId>retrofit</artifactId>
             <version>1.9.0</version>
         </dependency>
+        <!-- https://github.com/square/okhttp/blob/master/CHANGELOG.md -->
         <dependency>
             <groupId>com.squareup.okhttp</groupId>
             <artifactId>okhttp</artifactId>
-            <version>2.3.0</version>
+            <version>2.7.2</version>
             <optional>true</optional>
         </dependency>
 
@@ -70,6 +67,12 @@
         </dependency>
     </dependencies>
 
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
     <build>
         <pluginManagement>
             <plugins>
@@ -95,6 +98,68 @@
                 <artifactId>versions-maven-plugin</artifactId>
                 <version>2.1</version>
             </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.3</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.5</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>2.9.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>2.2.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar-no-fork</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 </project>

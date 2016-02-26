@@ -27,7 +27,7 @@ public class FindServiceTest extends BaseTestCase {
         assertThat(movie.backdrop_path).isNotNull();
         assertThat(movie.id).isNotNull();
         assertThat(movie.original_title).isEqualTo("Inglourious Basterds");
-        assertThat(movie.release_date).isEqualTo("2009-08-21");
+        assertThat(movie.release_date).isEqualTo("2009-08-19");
         assertThat(movie.poster_path).isNotNull();
         assertThat(movie.popularity).isNotNull();
         assertThat(movie.title).isEqualTo("Inglourious Basterds");
