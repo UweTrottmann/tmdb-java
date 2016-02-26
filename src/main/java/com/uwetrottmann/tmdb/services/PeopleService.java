@@ -22,6 +22,8 @@ import com.uwetrottmann.tmdb.entities.PersonCredits;
 import com.uwetrottmann.tmdb.entities.PersonIds;
 import com.uwetrottmann.tmdb.entities.PersonImages;
 import com.uwetrottmann.tmdb.entities.PersonResultsPage;
+import com.uwetrottmann.tmdb.entities.TaggedImagesResultsPage;
+
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -76,6 +78,8 @@ public interface PeopleService {
 
     /**
      * Get the external ids for a specific person id.
+     *
+     * @param tmdbId TMDb id.
      */
     @GET("/person/{id}/external_ids")
     PersonIds externalIds(
@@ -88,6 +92,19 @@ public interface PeopleService {
     @GET("/person/{id}/images")
     PersonImages images(
             @Path("id") int tmdbId
+    );
+
+    /**
+     * Get the images that have been tagged with a specific person id.
+     * Return all of the image results with a @Media object mapped for each image.
+     *
+     * @param tmdbId TMDb id.
+     * @param page <em>Optional.</em> Minimum value is 1, maximum 1000, expected value is an integer.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("/person/{id}/tagged_images")
+    TaggedImagesResultsPage taggedImages(
+            @Path("id") int tmdbId, @Query("page") Integer page, @Query("language") String language
     );
 
     /**
