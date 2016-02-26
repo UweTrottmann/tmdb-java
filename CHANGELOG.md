@@ -14,6 +14,12 @@ Supported API calls
  * [TV Seasons](http://docs.themoviedb.apiary.io/#reference/tv-seasons) _incomplete_
  * [TV Episodes](http://docs.themoviedb.apiary.io/#reference/tv-episodes) _incomplete_
 
+0.9.2 *(2016-02-26)*
+--------------------
+
+ * Add `/person/{id}/tagged_images` thanks to @urizev.
+ * Add some missing fields to `Media` thanks to @urizev.
+
 0.9.1 *(2016-01-22)*
 --------------------
 
