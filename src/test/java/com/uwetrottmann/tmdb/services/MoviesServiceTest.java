@@ -194,20 +194,23 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(results.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(results.results).isNotNull();
         assertThat(results.results.isEmpty()).isFalse();
+
         ReleaseDatesResult usResult = null;
         for (ReleaseDatesResult result : results.results) {
             assertThat(result.iso_3166_1).isNotNull();
             if (result.iso_3166_1.equals("US")) {
                 usResult = result;
-                break;
             }
         }
+
         assertThat(usResult).isNotNull();
         assertThat(usResult.release_dates).isNotNull();
         assertThat(usResult.release_dates.isEmpty()).isFalse();
         assertThat(usResult.release_dates.get(0).iso_639_1).isNotNull();
         assertThat(usResult.release_dates.get(0).certification).isEqualTo("R");
         assertThat(usResult.release_dates.get(0).release_date).isEqualTo("1999-10-14T00:00:00.000Z");
+        assertThat(usResult.release_dates.get(0).note).isNotNull();
+        assertThat(usResult.release_dates.get(0).type).isBetween(1, 6);
     }
 
     @Test
