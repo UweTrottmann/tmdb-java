@@ -2,9 +2,6 @@ package com.uwetrottmann.tmdb.entities;
 
 import java.util.Date;
 
-/**
- * Created by Urizev on 3/3/16.
- */
 public class ReleaseDate {
     public static int TYPE_PREMIERE           = 1;
     public static int TYPE_THEATRICAL_LIMITED = 2;
