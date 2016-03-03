@@ -22,6 +22,7 @@ public enum AppendToResponseItem {
 
     VIDEOS("videos"),
     RELEASES("releases"),
+    RELEASE_DATES("release_dates"),
     CREDITS("credits"),
     SIMILAR("similar"),
     IMAGES("images"),

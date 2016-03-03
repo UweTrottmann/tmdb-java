@@ -87,6 +87,16 @@ public class MoviesServiceTest extends BaseTestCase {
     }
 
     @Test
+    public void test_summary_append_release_dates() {
+        Movie movie = getManager().moviesService().summary(TestData.MOVIE_ID,
+                null,
+                new AppendToResponse(
+                        AppendToResponseItem.RELEASE_DATES));
+
+        assertNotNull(movie.release_dates);
+    }
+
+    @Test
     public void test_summary_append_similar() {
         Movie movie = getManager().moviesService().summary(TestData.MOVIE_ID,
                 null,
@@ -102,11 +112,13 @@ public class MoviesServiceTest extends BaseTestCase {
                 null,
                 new AppendToResponse(
                         AppendToResponseItem.RELEASES,
+                        AppendToResponseItem.RELEASE_DATES,
                         AppendToResponseItem.CREDITS,
                         AppendToResponseItem.VIDEOS,
                         AppendToResponseItem.SIMILAR));
 
         assertNotNull(movie.releases);
+        assertNotNull(movie.release_dates);
         assertNotNull(movie.credits);
         assertNotNull(movie.videos);
         assertNotNull(movie.similar);
