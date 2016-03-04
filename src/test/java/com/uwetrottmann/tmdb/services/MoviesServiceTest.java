@@ -4,18 +4,7 @@ package com.uwetrottmann.tmdb.services;
 import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.TestData;
 
-import com.uwetrottmann.tmdb.entities.AppendToResponse;
-import com.uwetrottmann.tmdb.entities.Credits;
-import com.uwetrottmann.tmdb.entities.Images;
-import com.uwetrottmann.tmdb.entities.ListResultsPage;
-import com.uwetrottmann.tmdb.entities.Movie;
-import com.uwetrottmann.tmdb.entities.MovieAlternativeTitles;
-import com.uwetrottmann.tmdb.entities.MovieKeywords;
-import com.uwetrottmann.tmdb.entities.MovieResultsPage;
-import com.uwetrottmann.tmdb.entities.Releases;
-import com.uwetrottmann.tmdb.entities.ReviewResultsPage;
-import com.uwetrottmann.tmdb.entities.Videos;
-import com.uwetrottmann.tmdb.entities.Translations;
+import com.uwetrottmann.tmdb.entities.*;
 import com.uwetrottmann.tmdb.enumerations.AppendToResponseItem;
 import org.junit.Test;
 
@@ -98,6 +87,16 @@ public class MoviesServiceTest extends BaseTestCase {
     }
 
     @Test
+    public void test_summary_append_release_dates() {
+        Movie movie = getManager().moviesService().summary(TestData.MOVIE_ID,
+                null,
+                new AppendToResponse(
+                        AppendToResponseItem.RELEASE_DATES));
+
+        assertNotNull(movie.release_dates);
+    }
+
+    @Test
     public void test_summary_append_similar() {
         Movie movie = getManager().moviesService().summary(TestData.MOVIE_ID,
                 null,
@@ -113,11 +112,13 @@ public class MoviesServiceTest extends BaseTestCase {
                 null,
                 new AppendToResponse(
                         AppendToResponseItem.RELEASES,
+                        AppendToResponseItem.RELEASE_DATES,
                         AppendToResponseItem.CREDITS,
                         AppendToResponseItem.VIDEOS,
                         AppendToResponseItem.SIMILAR));
 
         assertNotNull(movie.releases);
+        assertNotNull(movie.release_dates);
         assertNotNull(movie.credits);
         assertNotNull(movie.videos);
         assertNotNull(movie.similar);
@@ -184,6 +185,32 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(releases.countries.get(0).iso_3166_1).isEqualTo("US");
         assertThat(releases.countries.get(0).certification).isEqualTo("R");
         assertThat(releases.countries.get(0).release_date).isEqualTo("1999-10-14");
+    }
+
+    @Test
+    public void test_release_dates() {
+        ReleaseDatesResults results = getManager().moviesService().releaseDates(TestData.MOVIE_ID);
+        assertThat(results).isNotNull();
+        assertThat(results.id).isEqualTo(TestData.MOVIE_ID);
+        assertThat(results.results).isNotNull();
+        assertThat(results.results.isEmpty()).isFalse();
+
+        ReleaseDatesResult usResult = null;
+        for (ReleaseDatesResult result : results.results) {
+            assertThat(result.iso_3166_1).isNotNull();
+            if (result.iso_3166_1.equals("US")) {
+                usResult = result;
+            }
+        }
+
+        assertThat(usResult).isNotNull();
+        assertThat(usResult.release_dates).isNotNull();
+        assertThat(usResult.release_dates.isEmpty()).isFalse();
+        assertThat(usResult.release_dates.get(0).iso_639_1).isNotNull();
+        assertThat(usResult.release_dates.get(0).certification).isEqualTo("R");
+        assertThat(usResult.release_dates.get(0).release_date).isEqualTo("1999-10-14T00:00:00.000Z");
+        assertThat(usResult.release_dates.get(0).note).isNotNull();
+        assertThat(usResult.release_dates.get(0).type).isBetween(1, 6);
     }
 
     @Test
