@@ -7,7 +7,7 @@ A Java wrapper around the [TMDb v3 API][1] using [retrofit][2].
 
 Usage
 -----
-![Maven Central version](https://img.shields.io/maven-central/v/com.uwetrottmann/tmdb-java.svg?style=flat-square)
+<a href="https://search.maven.org/#search%7Cga%7C1%7Ctmdb-java"><img src="https://img.shields.io/maven-central/v/com.uwetrottmann/tmdb-java.svg?style=flat-square"></a>
 
 Add the following dependency to your Gradle project:
 
