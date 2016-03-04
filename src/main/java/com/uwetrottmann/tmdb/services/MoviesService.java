@@ -99,6 +99,7 @@ public interface MoviesService {
      * Get the release date and certification information by country for a specific movie id.
      *
      * @param tmdbId TMDb id.
+     * @deprecated Use {@link #releaseDates(int)} instead.
      */
     @GET("/movie/{id}/releases")
     Releases releases(
