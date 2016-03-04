@@ -137,7 +137,6 @@ public interface MoviesService {
      *
      * @param tmdbId TMDb id.
      * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
-     * @return
      */
     @GET("/movie/{id}/translations")
     Translations translations(
