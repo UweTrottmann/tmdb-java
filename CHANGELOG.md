@@ -14,6 +14,12 @@ Supported API calls
  * [TV Seasons](http://docs.themoviedb.apiary.io/#reference/tv-seasons) _incomplete_
  * [TV Episodes](http://docs.themoviedb.apiary.io/#reference/tv-episodes) _incomplete_
 
+0.10.0 *(2016-03-04)*
+--------------------
+
+ * Add `/movie/{id}/release_dates` thanks to @urizev.
+ * Deprecate `/movie/{id}/releases`, see [update post](https://plus.google.com/+TravisBellTMDb/posts/4uNG5uSwtfe).
+
 0.9.2 *(2016-02-26)*
 --------------------
 
