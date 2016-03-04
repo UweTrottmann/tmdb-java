@@ -3,8 +3,20 @@ package com.uwetrottmann.tmdb.services;
 
 import com.uwetrottmann.tmdb.BaseTestCase;
 import com.uwetrottmann.tmdb.TestData;
-
-import com.uwetrottmann.tmdb.entities.*;
+import com.uwetrottmann.tmdb.entities.AppendToResponse;
+import com.uwetrottmann.tmdb.entities.Credits;
+import com.uwetrottmann.tmdb.entities.Images;
+import com.uwetrottmann.tmdb.entities.ListResultsPage;
+import com.uwetrottmann.tmdb.entities.Movie;
+import com.uwetrottmann.tmdb.entities.MovieAlternativeTitles;
+import com.uwetrottmann.tmdb.entities.MovieKeywords;
+import com.uwetrottmann.tmdb.entities.MovieResultsPage;
+import com.uwetrottmann.tmdb.entities.ReleaseDatesResult;
+import com.uwetrottmann.tmdb.entities.ReleaseDatesResults;
+import com.uwetrottmann.tmdb.entities.Releases;
+import com.uwetrottmann.tmdb.entities.ReviewResultsPage;
+import com.uwetrottmann.tmdb.entities.Translations;
+import com.uwetrottmann.tmdb.entities.Videos;
 import com.uwetrottmann.tmdb.enumerations.AppendToResponseItem;
 import org.junit.Test;
 

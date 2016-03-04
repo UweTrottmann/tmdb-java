@@ -17,7 +17,20 @@
 
 package com.uwetrottmann.tmdb.services;
 
-import com.uwetrottmann.tmdb.entities.*;
+import com.uwetrottmann.tmdb.entities.AppendToResponse;
+import com.uwetrottmann.tmdb.entities.Credits;
+import com.uwetrottmann.tmdb.entities.Images;
+import com.uwetrottmann.tmdb.entities.ListResultsPage;
+import com.uwetrottmann.tmdb.entities.Movie;
+import com.uwetrottmann.tmdb.entities.MovieAlternativeTitles;
+import com.uwetrottmann.tmdb.entities.MovieKeywords;
+import com.uwetrottmann.tmdb.entities.MovieResultsPage;
+import com.uwetrottmann.tmdb.entities.ReleaseDate;
+import com.uwetrottmann.tmdb.entities.ReleaseDatesResults;
+import com.uwetrottmann.tmdb.entities.Releases;
+import com.uwetrottmann.tmdb.entities.ReviewResultsPage;
+import com.uwetrottmann.tmdb.entities.Translations;
+import com.uwetrottmann.tmdb.entities.Videos;
 import retrofit.http.GET;
 import retrofit.http.Path;
 import retrofit.http.Query;
@@ -96,7 +109,9 @@ public interface MoviesService {
      * Get the release dates, certifications and related information by country for a specific movie id.
      *
      * The results are keyed by iso_3166_1 code and contain a type value which on our system, maps to:
-     * TYPE_PREMIERE, TYPE_THEATRICAL_LIMITED, TYPE_THEATRICAL, TYPE_DIGITAL, TYPE_PHYSICAL, TYPE_TV
+     * {@link ReleaseDate#TYPE_PREMIERE}, {@link ReleaseDate#TYPE_THEATRICAL_LIMITED},
+     * {@link ReleaseDate#TYPE_THEATRICAL}, {@link ReleaseDate#TYPE_DIGITAL}, {@link ReleaseDate#TYPE_PHYSICAL},
+     * {@link ReleaseDate#TYPE_TV}
      *
      * @param tmdbId TMDb id.
      */
