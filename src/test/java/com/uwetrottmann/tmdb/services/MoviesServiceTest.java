@@ -131,6 +131,8 @@ public class MoviesServiceTest extends BaseTestCase {
 
         assertNotNull(movie.releases);
         assertNotNull(movie.release_dates);
+        assertNotNull(movie.release_dates.results);
+        assertThat(movie.release_dates.results).isNotEmpty();
         assertNotNull(movie.credits);
         assertNotNull(movie.videos);
         assertNotNull(movie.similar);
