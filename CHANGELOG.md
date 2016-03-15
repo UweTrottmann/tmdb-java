@@ -14,6 +14,11 @@ Supported API calls
  * [TV Seasons](http://docs.themoviedb.apiary.io/#reference/tv-seasons) _incomplete_
  * [TV Episodes](http://docs.themoviedb.apiary.io/#reference/tv-episodes) _incomplete_
 
+0.10.1 *(2016-03-15)*
+--------------------
+
+ * Use `ReleaseDatesResults` when using `append_to_response` to get movie information. Thanks to @urizev.
+
 0.10.0 *(2016-03-04)*
 --------------------
 
