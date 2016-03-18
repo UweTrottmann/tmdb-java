@@ -27,38 +27,44 @@ import com.uwetrottmann.tmdb2.services.SearchService;
 import com.uwetrottmann.tmdb2.services.TvEpisodesService;
 import com.uwetrottmann.tmdb2.services.TvSeasonsService;
 import com.uwetrottmann.tmdb2.services.TvService;
+import okhttp3.HttpUrl;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-import retrofit.RequestInterceptor;
-import retrofit.RestAdapter;
-import retrofit.converter.GsonConverter;
+import java.io.IOException;
 
 /**
  * Helper class for easy usage of the TMDB v3 API using retrofit.
- * <p>
- * Create an instance of this class, {@link #setApiKey(String)} and then call any of the service methods.
- * <p>
- * The service methods take care of constructing the required {@link retrofit.RestAdapter} and creating the service. You
- * can customize the {@link retrofit.RestAdapter} by overriding {@link #newRestAdapterBuilder()} and setting e.g.
- * your own HTTP client instance or thread executor.
- * <p>
- * Only one {@link retrofit.RestAdapter} instance is created upon the first and re-used for any consequent service
- * method call.
+ *
+ * <p>Create an instance of this class, {@link #setApiKey(String)} and then call any of the service methods.
+ *
+ * <p>The service methods take care of constructing the required {@link Retrofit} instance and creating the service. You
+ * can customize by overriding {@link #retrofitBuilder()} and {@link #okHttpClientBuilder()}
+ *
+ * <p>Only one {@link Retrofit} instance is created upon the first and re-used for any consequent service method call.
  */
 public class Tmdb {
 
     /**
      * Tmdb API URL.
      */
-    public static final String API_URL = "https://api.themoviedb.org/3";
+    public static final String API_URL = "https://api.themoviedb.org/3/";
 
     /**
      * API key query parameter name.
      */
     public static final String PARAM_API_KEY = "api_key";
 
-    private String apiKey;
+    private Retrofit retrofit;
+    private HttpLoggingInterceptor logging;
+
     private boolean isDebug;
-    private RestAdapter restAdapter;
+    private String apiKey;
 
     /**
      * Create a new manager instance.
@@ -67,108 +73,124 @@ public class Tmdb {
     }
 
     /**
-     * Set the TMDB API key.
-     * <p>
-     * The next service method call will trigger a rebuild of the {@link retrofit.RestAdapter}. If you have cached any
-     * service instances, get a new one from its service method.
+     * Set the TMDB API key. <p> The next service method call will trigger a rebuild of the {@link Retrofit} instance.
+     * If you have cached any service instances, get a new one from its service method.
      *
      * @param value Your TMDB API key.
      */
     public Tmdb setApiKey(String value) {
         this.apiKey = value;
-        restAdapter = null;
+        retrofit = null;
         return this;
     }
 
     /**
-     * Set the {@link retrofit.RestAdapter} log level.
+     * Set the default logging interceptors log level.
      *
-     * @param isDebug If true, the log level is set to {@link retrofit.RestAdapter.LogLevel#FULL}.
-     *                Otherwise {@link retrofit.RestAdapter.LogLevel#NONE}.
+     * @param isDebug If true, the log level is set to {@link HttpLoggingInterceptor.Level#BODY}. Otherwise {@link
+     * HttpLoggingInterceptor.Level#NONE}.
+     * @see #okHttpClientBuilder()
      */
     public Tmdb setIsDebug(boolean isDebug) {
         this.isDebug = isDebug;
-        if (restAdapter != null) {
-            restAdapter.setLogLevel(isDebug ? RestAdapter.LogLevel.FULL : RestAdapter.LogLevel.NONE);
+        if (logging != null) {
+            logging.setLevel(isDebug ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
         }
         return this;
     }
 
     /**
-     * Create a new {@link retrofit.RestAdapter.Builder}. Override this to e.g. set your own client or executor.
+     * Creates a {@link Retrofit.Builder} that sets the base URL, adds a Gson converter and sets {@link
+     * #okHttpClientBuilder()} as its client. <p> Override this to for example set your own call executor.
      *
-     * @return A {@link retrofit.RestAdapter.Builder} with no modifications.
+     * @see #okHttpClientBuilder()
      */
-    protected RestAdapter.Builder newRestAdapterBuilder() {
-        return new RestAdapter.Builder();
+    protected Retrofit.Builder retrofitBuilder() {
+        return new Retrofit.Builder()
+                .baseUrl(API_URL)
+                .addConverterFactory(GsonConverterFactory.create(TmdbHelper.getGsonBuilder().create()))
+                .client(okHttpClientBuilder().build());
     }
 
     /**
-     * Return the current {@link retrofit.RestAdapter} instance. If none exists (first call, API key changed),
-     * builds a new one.
-     * <p>
-     * When building, sets the endpoint, a custom converter ({@link TmdbHelper#getGsonBuilder()})
-     * and a {@link retrofit.RequestInterceptor} which adds the API key as query param.
+     * Creates a {@link OkHttpClient.Builder} for usage with {@link #retrofitBuilder()}. Adds interceptors to add auth
+     * headers and to log requests. <p> Override this to for example add your own interceptors.
+     *
+     * @see #retrofitBuilder()
      */
-    protected RestAdapter getRestAdapter() {
-        if (restAdapter == null) {
-            RestAdapter.Builder builder = newRestAdapterBuilder();
+    protected OkHttpClient.Builder okHttpClientBuilder() {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.addInterceptor(new Interceptor() {
+            @Override
+            public Response intercept(Chain chain) throws IOException {
+                Request request = chain.request();
 
-            builder.setEndpoint(API_URL);
-            builder.setConverter(new GsonConverter(TmdbHelper.getGsonBuilder().create()));
-            builder.setRequestInterceptor(new RequestInterceptor() {
-                public void intercept(RequestFacade requestFacade) {
-                    requestFacade.addQueryParam(PARAM_API_KEY, apiKey);
-                }
-            });
+                HttpUrl.Builder urlBuilder = request.url().newBuilder();
+                urlBuilder.addEncodedQueryParameter(PARAM_API_KEY, apiKey);
 
-            if (isDebug) {
-                builder.setLogLevel(RestAdapter.LogLevel.FULL);
+                Request.Builder builder = request.newBuilder();
+                builder.url(urlBuilder.build());
+
+                return chain.proceed(builder.build());
             }
-
-            restAdapter = builder.build();
+        });
+        if (isDebug) {
+            logging = new HttpLoggingInterceptor();
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+            builder.addInterceptor(logging);
         }
+        return builder;
+    }
 
-        return restAdapter;
+    /**
+     * Return the current {@link Retrofit} instance. If none exists (first call, auth changed), builds a new one. <p/>
+     * <p>When building, sets the base url and a custom client with an {@link Interceptor} which supplies authentication
+     * data.
+     */
+    protected Retrofit getRetrofit() {
+        if (retrofit == null) {
+            retrofit = retrofitBuilder().build();
+        }
+        return retrofit;
     }
 
     public ConfigurationService configurationService() {
-        return getRestAdapter().create(ConfigurationService.class);
+        return getRetrofit().create(ConfigurationService.class);
     }
 
     public FindService findService() {
-        return getRestAdapter().create(FindService.class);
+        return getRetrofit().create(FindService.class);
     }
 
     public MoviesService moviesService() {
-        return getRestAdapter().create(MoviesService.class);
+        return getRetrofit().create(MoviesService.class);
     }
 
     public PeopleService personService() {
-        return getRestAdapter().create(PeopleService.class);
+        return getRetrofit().create(PeopleService.class);
     }
 
     public SearchService searchService() {
-        return getRestAdapter().create(SearchService.class);
+        return getRetrofit().create(SearchService.class);
     }
 
     public TvService tvService() {
-        return getRestAdapter().create(TvService.class);
+        return getRetrofit().create(TvService.class);
     }
 
     public TvSeasonsService tvSeasonsService() {
-        return getRestAdapter().create(TvSeasonsService.class);
+        return getRetrofit().create(TvSeasonsService.class);
     }
-    
+
     public TvEpisodesService tvEpisodesService() {
-        return getRestAdapter().create(TvEpisodesService.class);
+        return getRetrofit().create(TvEpisodesService.class);
     }
-    
+
     public DiscoverService discoverService() {
-        return getRestAdapter().create(DiscoverService.class);
+        return getRetrofit().create(DiscoverService.class);
     }
 
     public CollectionService collectionService() {
-        return getRestAdapter().create(CollectionService.class);
+        return getRetrofit().create(CollectionService.class);
     }
 }
