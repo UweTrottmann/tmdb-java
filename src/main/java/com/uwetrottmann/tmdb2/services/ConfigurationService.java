@@ -18,8 +18,8 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.entities.Configuration;
-
-import retrofit.http.GET;
+import retrofit2.Call;
+import retrofit2.http.GET;
 
 public interface ConfigurationService {
 
@@ -33,7 +33,7 @@ public interface ConfigurationService {
      * "http://cf2.imgobject.com/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg"
      * >http://cf2.imgobject.com/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg</a>
      */
-    @GET("/configuration")
-    Configuration configuration();
+    @GET("configuration")
+    Call<Configuration> configuration();
 
 }

@@ -21,7 +21,9 @@ import com.uwetrottmann.tmdb2.entities.Collection;
 import com.uwetrottmann.tmdb2.entities.Images;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import retrofit2.Call;
 
+import java.io.IOException;
 import java.text.ParseException;
 
 public class CollectionServiceTest extends BaseTestCase {
@@ -29,8 +31,9 @@ public class CollectionServiceTest extends BaseTestCase {
   }
 
   @Test
-  public void test_summary() throws ParseException {
-    Collection collection = this.getManager().collectionService().summary(TestData.MOVIE_COLLECTION_ID, null, null);
+  public void test_summary() throws IOException {
+    Call<Collection> call = this.getManager().collectionService().summary(TestData.MOVIE_COLLECTION_ID, null, null);
+    Collection collection = call.execute().body();
     Assertions.assertThat(collection).isNotNull();
     Assertions.assertThat(collection.name).isEqualTo(TestData.MOVIE_COLLECTION_TITLE);
     Assertions.assertThat(collection.id).isEqualTo(1241);
@@ -44,8 +47,9 @@ public class CollectionServiceTest extends BaseTestCase {
   }
 
   @Test
-  public void test_images() {
-    Images images = this.getManager().collectionService().images(TestData.MOVIE_COLLECTION_ID, null);
+  public void test_images() throws IOException {
+    Call<Images> call = this.getManager().collectionService().images(TestData.MOVIE_COLLECTION_ID, null);
+    Images images = call.execute().body();
     Assertions.assertThat(images).isNotNull();
     Assertions.assertThat(images.id).isEqualTo(1241);
     Assertions.assertThat(images.backdrops).isNotEmpty();
