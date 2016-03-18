@@ -13,7 +13,6 @@ import com.uwetrottmann.tmdb2.entities.MovieKeywords;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.ReleaseDatesResult;
 import com.uwetrottmann.tmdb2.entities.ReleaseDatesResults;
-import com.uwetrottmann.tmdb2.entities.Releases;
 import com.uwetrottmann.tmdb2.entities.ReviewResultsPage;
 import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.Videos;
@@ -204,17 +203,6 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(keywords.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(keywords.keywords.get(0).id).isEqualTo(825);
         assertThat(keywords.keywords.get(0).name).isEqualTo("support group");
-    }
-
-    @Test
-    public void test_releases() throws IOException {
-        Call<Releases> call = getManager().moviesService().releases(TestData.MOVIE_ID);
-        Releases releases = call.execute().body();
-        assertThat(releases).isNotNull();
-        assertThat(releases.id).isEqualTo(TestData.MOVIE_ID);
-        assertThat(releases.countries.get(0).iso_3166_1).isEqualTo("US");
-        assertThat(releases.countries.get(0).certification).isEqualTo("R");
-        assertThat(releases.countries.get(0).release_date).isEqualTo("1999-10-14");
     }
 
     @Test

@@ -97,17 +97,6 @@ public interface MoviesService {
     );
 
     /**
-     * Get the release date and certification information by country for a specific movie id.
-     *
-     * @param tmdbId TMDb id.
-     * @deprecated Use {@link #releaseDates(int)} instead.
-     */
-    @GET("movie/{id}/releases")
-    Call<Releases> releases(
-            @Path("id") int tmdbId
-    );
-
-    /**
      * Get the release dates, certifications and related information by country for a specific movie id.
      *
      * The results are keyed by iso_3166_1 code and contain a type value which on our system, maps to:
