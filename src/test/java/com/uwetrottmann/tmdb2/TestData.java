@@ -33,4 +33,5 @@ public interface TestData {
     int TVSHOW_TVDB_ID = 81189;
     int PERSON_ID = 1;
     String PERSON_NAME = "George Lucas";
+    String PERSON_IMDB_ID = "nm0000184";
 }

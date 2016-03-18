@@ -67,11 +67,7 @@ public class TvEpisodesServiceTest extends BaseTestCase {
         assertImages(episode.images.stills);
 
         // external ids
-        assertThat(episode.external_ids.freebase_id).isNotNull();
-        assertThat(episode.external_ids.freebase_mid).isNotNull();
-        assertThat(episode.external_ids.tvdb_id).isNotNull();
-        assertThat(episode.external_ids.imdb_id).isNotNull();
-        assertThat(episode.external_ids.tvrage_id).isNotNull();
+        assertIds(episode.external_ids);
     }
 
     @Test
@@ -89,11 +85,7 @@ public class TvEpisodesServiceTest extends BaseTestCase {
         Call<ExternalIds> call = getManager().tvEpisodesService().externalIds(TestData.TVSHOW_ID, 1, 1);
         ExternalIds ids = call.execute().body();
         assertThat(ids.id).isNotNull();
-        assertThat(ids.freebase_id).isNotNull();
-        assertThat(ids.freebase_mid).isNotNull();
-        assertThat(ids.tvdb_id).isNotNull();
-        assertThat(ids.imdb_id).isNotNull();
-        assertThat(ids.tvrage_id).isNotNull();
+        assertIds(ids);
     }
 
     @Test
@@ -109,6 +101,14 @@ public class TvEpisodesServiceTest extends BaseTestCase {
         Call<Videos> call = getManager().tvEpisodesService().videos(TestData.TVSHOW_ID, 1, 1);
         Videos videos = call.execute().body();
         assertVideos(videos);
+    }
+
+    private void assertIds(ExternalIds ids) {
+        assertThat(ids.freebase_id).isNull();
+        assertThat(ids.freebase_mid).isNotNull();
+        assertThat(ids.tvdb_id).isNotNull();
+        assertThat(ids.imdb_id).isNotNull();
+        assertThat(ids.tvrage_id).isNotNull();
     }
 
     private void assertTvEpisode(TvEpisode episode) {

@@ -41,7 +41,7 @@ public class CollectionServiceTest extends BaseTestCase {
     Assertions.assertThat(collection.backdrop_path).isNotEmpty();
     Assertions.assertThat(collection.poster_path).isNotEmpty();
     Assertions.assertThat(collection.parts).isNotEmpty();
-    Assertions.assertThat(collection.parts.size()).isEqualTo(8);
+    Assertions.assertThat(collection.parts.size()).isPositive();
     Assertions.assertThat(collection.parts.get(0).id).isEqualTo(671);
     Assertions.assertThat(collection.parts.get(1).id).isEqualTo(672);
   }

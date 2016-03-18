@@ -31,7 +31,7 @@ public class FindServiceTest extends BaseTestCase {
         assertThat(movie.backdrop_path).isNotNull();
         assertThat(movie.id).isNotNull();
         assertThat(movie.original_title).isEqualTo("Inglourious Basterds");
-        assertThat(movie.release_date).isEqualTo("2009-08-19");
+        assertThat(movie.release_date).isEqualTo("2009-08-18");
         assertThat(movie.poster_path).isNotNull();
         assertThat(movie.popularity).isNotNull();
         assertThat(movie.title).isEqualTo("Inglourious Basterds");
@@ -41,7 +41,7 @@ public class FindServiceTest extends BaseTestCase {
 
     @Test
     public void test_find_people() throws IOException {
-        Call<FindResults> call = getManager().findService().find("nm0000093", ExternalSource.IMDB_ID, null);
+        Call<FindResults> call = getManager().findService().find(TestData.PERSON_IMDB_ID, ExternalSource.IMDB_ID, null);
         FindResults results = call.execute().body();
         assertThat(results).isNotNull();
         assertThat(results.person_results).isNotEmpty();
