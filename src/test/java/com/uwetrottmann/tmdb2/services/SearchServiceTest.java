@@ -11,29 +11,32 @@ import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.PersonResultsPage;
 import com.uwetrottmann.tmdb2.entities.TvResultsPage;
 import org.junit.Test;
+import retrofit2.Call;
 
-import java.text.ParseException;
+import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SearchServiceTest extends BaseTestCase {
 
     @Test
-    public void test_companySearch() throws ParseException {
-        CompanyResultsPage companyResults = getManager().searchService().company("Sony Pictures", null);
-        
+    public void test_companySearch() throws IOException {
+        Call<CompanyResultsPage> call = getManager().searchService().company("Sony Pictures", null);
+        CompanyResultsPage companyResults = call.execute().body();
+
         assertResultsPage(companyResults);
         assertThat(companyResults.results).isNotEmpty();
         assertThat(companyResults.results.get(0).id).isNotNull();
         assertThat(companyResults.results.get(0)).isNotNull();
         assertThat(companyResults.results.get(0).logo_path).isNotNull();
     }
-    
+
     @Test
-    public void test_collectionSearch() throws ParseException {
-        CollectionResultsPage collectionResults = getManager().searchService().collection("The Avengers Collection",
-                null, null);
-        
+    public void test_collectionSearch() throws IOException {
+        Call<CollectionResultsPage> call = getManager().searchService().collection("The Avengers Collection", null,
+                null);
+        CollectionResultsPage collectionResults = call.execute().body();
+
         assertResultsPage(collectionResults);
         assertThat(collectionResults.results).isNotEmpty();
         assertThat(collectionResults.results.get(0).id).isNotNull();
@@ -41,58 +44,48 @@ public class SearchServiceTest extends BaseTestCase {
         assertThat(collectionResults.results.get(0).name).isNotNull();
         assertThat(collectionResults.results.get(0).poster_path).isNotNull();
     }
-    
+
     @Test
-    public void test_keywordSearch() throws ParseException {
-        KeywordResultsPage keywordResults = getManager().searchService().keyword("fight", null);
-        
+    public void test_keywordSearch() throws IOException {
+        Call<KeywordResultsPage> call = getManager().searchService().keyword("fight", null);
+        KeywordResultsPage keywordResults = call.execute().body();
+
         assertResultsPage(keywordResults);
         assertThat(keywordResults.results).isNotEmpty();
         assertThat(keywordResults.results.get(0).id).isNotNull();
         assertThat(keywordResults.results.get(0).name).isNotNull();
     }
-    
+
     @Test
-    public void test_movieSearch() throws ParseException {
-        MovieResultsPage movieResults = getManager().searchService().movie(TestData.MOVIE_TITLE, null, null,
-                null, null, null, null);
-        
+    public void test_movieSearch() throws IOException {
+        Call<MovieResultsPage> call = getManager().searchService().movie(TestData.MOVIE_TITLE, null, null, null, null,
+                null, null);
+        MovieResultsPage movieResults = call.execute().body();
+
         assertResultsPage(movieResults);
         assertThat(movieResults.results).isNotEmpty();
     }
-    
+
     @Test
-    public void test_personSearch() throws ParseException {
-        PersonResultsPage movieResults = getManager().searchService().person(TestData.PERSON_NAME, null, null, null);
-        
+    public void test_personSearch() throws IOException {
+        Call<PersonResultsPage> call = getManager().searchService().person(TestData.PERSON_NAME, null, null, null);
+        PersonResultsPage movieResults = call.execute().body();
+
         assertResultsPage(movieResults);
         assertThat(movieResults.results.get(0).id).isNotNull();
         assertThat(movieResults.results.get(0).name).isNotNull();
         assertThat(movieResults.results.get(0).popularity).isNotNull();
         assertThat(movieResults.results.get(0).profile_path).isNotNull();
         assertThat(movieResults.results.get(0).adult).isNotNull();
-        
-        for (Media media : movieResults.results.get(0).known_for) {
-            assertThat(media.adult).isNotNull();
-            assertThat(media.backdrop_path).isNotNull();
-            assertThat(media.id).isNotNull();
-            assertThat(media.original_title).isNotNull();
-            assertThat(media.release_date).isNotNull();
-            assertThat(media.poster_path).isNotNull();
-            assertThat(media.popularity).isNotNull().isGreaterThan(0);
-            assertThat(media.title).isNotNull();
-            assertThat(media.vote_average).isNotNull().isGreaterThan(0);
-            assertThat(media.vote_count).isNotNull().isGreaterThan(0);
-            assertThat(media.media_type).isNotNull();
-        }
-        
+        assertMedia(movieResults.results.get(0).known_for);
     }
 
     @Test
-    public void test_tv() {
-        TvResultsPage tvResults = getManager().searchService().tv(TestData.TVSHOW_TITLE, null, null, null, null);
-        
-        assertResultsPage(tvResults);        
+    public void test_tv() throws IOException {
+        Call<TvResultsPage> call = getManager().searchService().tv(TestData.TVSHOW_TITLE, null, null, null, null);
+        TvResultsPage tvResults = call.execute().body();
+
+        assertResultsPage(tvResults);
         assertThat(tvResults.results).isNotEmpty();
         assertThat(tvResults.results.get(0).name).isEqualTo(TestData.TVSHOW_TITLE);
     }

@@ -19,13 +19,13 @@ package com.uwetrottmann.tmdb2.services;
 import com.uwetrottmann.tmdb2.entities.AppendToResponse;
 import com.uwetrottmann.tmdb2.entities.Credits;
 import com.uwetrottmann.tmdb2.entities.ExternalIds;
-import com.uwetrottmann.tmdb2.entities.TvEpisode;
 import com.uwetrottmann.tmdb2.entities.Images;
+import com.uwetrottmann.tmdb2.entities.TvEpisode;
 import com.uwetrottmann.tmdb2.entities.Videos;
-
-import retrofit.http.GET;
-import retrofit.http.Path;
-import retrofit.http.Query;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface TvEpisodesService {
 
@@ -36,59 +36,59 @@ public interface TvEpisodesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
      */
-    @GET("/tv/{id}/season/{season_number}/episode/{episode_number}")
-    TvEpisode episode(
+    @GET("tv/{id}/season/{season_number}/episode/{episode_number}")
+    Call<TvEpisode> episode(
             @Path("id") int showId,
             @Path("season_number") int seasonNumber,
             @Path("episode_number") int episodeNumber,
             @Query("language") String language,
             @Query("append_to_response") AppendToResponse appendToResponse
     );
-    
+
     /**
      * Get the TV episode credits by combination of season and episode number.
      *
      * @param showId A themoviedb id.
      */
-    @GET("/tv/{id}/season/{season_number}/episode/{episode_number}/credits")
-    Credits credits(
+    @GET("tv/{id}/season/{season_number}/episode/{episode_number}/credits")
+    Call<Credits> credits(
             @Path("id") int showId,
             @Path("season_number") int seasonNumber,
             @Path("episode_number") int episodeNumber
     );
-    
+
     /**
      * Get the external ids for a TV episode by combination of a season and episode number.
      *
      * @param showId A themoviedb id.
      */
-    @GET("/tv/{id}/season/{season_number}/episode/{episode_number}/external_ids")
-    ExternalIds externalIds(
+    @GET("tv/{id}/season/{season_number}/episode/{episode_number}/external_ids")
+    Call<ExternalIds> externalIds(
             @Path("id") int showId,
             @Path("season_number") int seasonNumber,
             @Path("episode_number") int episodeNumber
     );
-    
+
     /**
-     * Get the images (episode stills) for a TV episode by combination of a season and episode number.
-     * Since episode stills don't have a language, this call will always return all images.
+     * Get the images (episode stills) for a TV episode by combination of a season and episode number. Since episode
+     * stills don't have a language, this call will always return all images.
      *
      * @param showId A themoviedb id.
      */
-    @GET("/tv/{id}/season/{season_number}/episode/{episode_number}/images")
-    Images images(
+    @GET("tv/{id}/season/{season_number}/episode/{episode_number}/images")
+    Call<Images> images(
             @Path("id") int showId,
             @Path("season_number") int seasonNumber,
             @Path("episode_number") int episodeNumber
     );
-    
+
     /**
      * Get the videos that have been added to a TV episode (teasers, clips, etc...)
      *
      * @param showId A themoviedb id.
      */
-    @GET("/tv/{id}/season/{season_number}/episode/{episode_number}/videos")
-    Videos videos(
+    @GET("tv/{id}/season/{season_number}/episode/{episode_number}/videos")
+    Call<Videos> videos(
             @Path("id") int showId,
             @Path("season_number") int seasonNumber,
             @Path("episode_number") int episodeNumber

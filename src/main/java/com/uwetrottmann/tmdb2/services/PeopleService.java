@@ -23,10 +23,10 @@ import com.uwetrottmann.tmdb2.entities.PersonIds;
 import com.uwetrottmann.tmdb2.entities.PersonImages;
 import com.uwetrottmann.tmdb2.entities.PersonResultsPage;
 import com.uwetrottmann.tmdb2.entities.TaggedImagesResultsPage;
-
-import retrofit.http.GET;
-import retrofit.http.Path;
-import retrofit.http.Query;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface PeopleService {
 
@@ -35,8 +35,8 @@ public interface PeopleService {
      *
      * @param tmdbId TMDb id.
      */
-    @GET("/person/{id}")
-    Person summary(
+    @GET("person/{id}")
+    Call<Person> summary(
             @Path("id") int tmdbId
     );
 
@@ -46,8 +46,8 @@ public interface PeopleService {
      * @param tmdbId TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/person/{id}/movie_credits")
-    PersonCredits movieCredits(
+    @GET("person/{id}/movie_credits")
+    Call<PersonCredits> movieCredits(
             @Path("id") int tmdbId,
             @Query("language") String language
     );
@@ -58,8 +58,8 @@ public interface PeopleService {
      * @param tmdbId TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/person/{id}/tv_credits")
-    PersonCredits tvCredits(
+    @GET("person/{id}/tv_credits")
+    Call<PersonCredits> tvCredits(
             @Path("id") int tmdbId,
             @Query("language") String language
     );
@@ -70,8 +70,8 @@ public interface PeopleService {
      * @param tmdbId TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/person/{id}/combined_credits")
-    PersonCredits combinedCredits(
+    @GET("person/{id}/combined_credits")
+    Call<PersonCredits> combinedCredits(
             @Path("id") int tmdbId,
             @Query("language") String language
     );
@@ -81,44 +81,44 @@ public interface PeopleService {
      *
      * @param tmdbId TMDb id.
      */
-    @GET("/person/{id}/external_ids")
-    PersonIds externalIds(
+    @GET("person/{id}/external_ids")
+    Call<PersonIds> externalIds(
             @Path("id") int tmdbId
     );
 
     /**
      * Get the images for a specific person id.
      */
-    @GET("/person/{id}/images")
-    PersonImages images(
+    @GET("person/{id}/images")
+    Call<PersonImages> images(
             @Path("id") int tmdbId
     );
 
     /**
-     * Get the images that have been tagged with a specific person id.
-     * Return all of the image results with a {@link com.uwetrottmann.tmdb2.entities.Media} object mapped for each image.
+     * Get the images that have been tagged with a specific person id. Return all of the image results with a {@link
+     * com.uwetrottmann.tmdb2.entities.Media} object mapped for each image.
      *
      * @param tmdbId TMDb id.
      * @param page <em>Optional.</em> Minimum value is 1, maximum 1000, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
-    @GET("/person/{id}/tagged_images")
-    TaggedImagesResultsPage taggedImages(
+    @GET("person/{id}/tagged_images")
+    Call<TaggedImagesResultsPage> taggedImages(
             @Path("id") int tmdbId, @Query("page") Integer page, @Query("language") String language
     );
 
     /**
      * Get the list of popular people on The Movie Database. This list refreshes every day.
      */
-    @GET("/person/popular")
-    PersonResultsPage popular(
+    @GET("person/popular")
+    Call<PersonResultsPage> popular(
             @Query("page") Integer page
     );
 
     /**
      * Get the latest person id.
      */
-    @GET("/person/latest")
-    Person latest();
+    @GET("person/latest")
+    Call<Person> latest();
 
 }

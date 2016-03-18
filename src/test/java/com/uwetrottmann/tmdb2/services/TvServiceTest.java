@@ -3,11 +3,8 @@ package com.uwetrottmann.tmdb2.services;
 import com.uwetrottmann.tmdb2.BaseTestCase;
 import com.uwetrottmann.tmdb2.TestData;
 import com.uwetrottmann.tmdb2.entities.AppendToResponse;
-import com.uwetrottmann.tmdb2.entities.CastMember;
 import com.uwetrottmann.tmdb2.entities.Credits;
-import com.uwetrottmann.tmdb2.entities.CrewMember;
 import com.uwetrottmann.tmdb2.entities.ExternalIds;
-import com.uwetrottmann.tmdb2.entities.Image;
 import com.uwetrottmann.tmdb2.entities.Images;
 import com.uwetrottmann.tmdb2.entities.Person;
 import com.uwetrottmann.tmdb2.entities.TvAlternativeTitles;
@@ -18,23 +15,29 @@ import com.uwetrottmann.tmdb2.entities.TvShowComplete;
 import com.uwetrottmann.tmdb2.entities.Videos;
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
 import org.junit.Test;
+import retrofit2.Call;
 
-import java.util.List;
+import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TvServiceTest extends BaseTestCase {
 
     @Test
-    public void test_tvshow() {
-        TvShowComplete show = getManager().tvService().tv(TestData.TVSHOW_ID, null, null);
+    public void test_tvshow() throws IOException {
+        Call<TvShowComplete> call = getManager().tvService().tv(TestData.TVSHOW_ID, null, null);
+        TvShowComplete show = call.execute().body();
         assertTvShow(show);
     }
 
     @Test
-    public void test_tvshow_with_append_to_response() {
-        TvShowComplete show = getManager().tvService().tv(TestData.TVSHOW_ID, null,
-                new AppendToResponse(AppendToResponseItem.CREDITS, AppendToResponseItem.EXTERNAL_IDS, AppendToResponseItem.IMAGES));
+    public void test_tvshow_with_append_to_response() throws IOException {
+        Call<TvShowComplete> call = getManager().tvService().tv(
+                TestData.TVSHOW_ID, null,
+                new AppendToResponse(AppendToResponseItem.CREDITS, AppendToResponseItem.EXTERNAL_IDS,
+                        AppendToResponseItem.IMAGES)
+        );
+        TvShowComplete show = call.execute().body();
         assertTvShow(show);
 
         // credits
@@ -55,28 +58,31 @@ public class TvServiceTest extends BaseTestCase {
         assertThat(show.external_ids.imdb_id).isNotNull();
         assertThat(show.external_ids.tvrage_id).isNotNull();
     }
-    
+
     @Test
-    public void test_alternative_titles() {
-        TvAlternativeTitles titles = getManager().tvService().alternativeTitles(TestData.TVSHOW_ID);
+    public void test_alternative_titles() throws IOException {
+        Call<TvAlternativeTitles> call = getManager().tvService().alternativeTitles(TestData.TVSHOW_ID);
+        TvAlternativeTitles titles = call.execute().body();
         assertThat(titles).isNotNull();
         assertThat(titles.id).isEqualTo(TestData.TVSHOW_ID);
         assertThat(titles.results).isNotEmpty();
         assertThat(titles.results.get(0).iso_3166_1).isNotNull();
         assertThat(titles.results.get(0).title).isNotNull();
     }
-    
+
     @Test
-    public void test_credits() {
-        Credits credits = getManager().tvService().credits(TestData.TVSHOW_ID, null);
+    public void test_credits() throws IOException {
+        Call<Credits> call = getManager().tvService().credits(TestData.TVSHOW_ID, null);
+        Credits credits = call.execute().body();
         assertThat(credits.id).isNotNull();
         assertCrewCredits(credits.crew);
         assertCastCredits(credits.cast);
     }
-    
+
     @Test
-    public void test_externalIds() {
-        ExternalIds ids = getManager().tvService().externalIds(TestData.TVSHOW_ID, null);
+    public void test_externalIds() throws IOException {
+        Call<ExternalIds> call = getManager().tvService().externalIds(TestData.TVSHOW_ID, null);
+        ExternalIds ids = call.execute().body();
         assertThat(ids.id).isNotNull();
         assertThat(ids.freebase_id).isNotNull();
         assertThat(ids.freebase_mid).isNotNull();
@@ -84,28 +90,31 @@ public class TvServiceTest extends BaseTestCase {
         assertThat(ids.imdb_id).isNotNull();
         assertThat(ids.tvrage_id).isNotNull();
     }
-    
+
     @Test
-    public void test_images() {
-        Images images = getManager().tvService().images(TestData.TVSHOW_ID, null);
+    public void test_images() throws IOException {
+        Call<Images> call = getManager().tvService().images(TestData.TVSHOW_ID, null);
+        Images images = call.execute().body();
         assertThat(images).isNotNull();
         assertThat(images.id).isEqualTo(TestData.TVSHOW_ID);
         assertImages(images.backdrops);
         assertImages(images.posters);
     }
-    
+
     @Test
-    public void test_keywords() {
-        TvKeywords keywords = getManager().tvService().keywords(TestData.TVSHOW_ID);
+    public void test_keywords() throws IOException {
+        Call<TvKeywords> call = getManager().tvService().keywords(TestData.TVSHOW_ID);
+        TvKeywords keywords = call.execute().body();
         assertThat(keywords).isNotNull();
         assertThat(keywords.id).isEqualTo(TestData.TVSHOW_ID);
         assertThat(keywords.results.get(0).id).isNotNull();
         assertThat(keywords.results.get(0).name).isNotNull();
     }
-    
+
     @Test
-    public void test_similar() {
-        TvResultsPage results = getManager().tvService().similar(TestData.TVSHOW_ID, 1, null);
+    public void test_similar() throws IOException {
+        Call<TvResultsPage> call = getManager().tvService().similar(TestData.TVSHOW_ID, 1, null);
+        TvResultsPage results = call.execute().body();
         assertThat(results).isNotNull();
         assertThat(results.page).isNotNull().isPositive();
         assertThat(results.total_pages).isNotNull().isPositive();
@@ -121,10 +130,11 @@ public class TvServiceTest extends BaseTestCase {
         assertThat(results.results.get(0).vote_average).isNotNull().isPositive();
         assertThat(results.results.get(0).vote_count).isNotNull().isPositive();
     }
-    
+
     @Test
-    public void test_videos() {
-        Videos videos = getManager().tvService().videos(TestData.TVSHOW_ID, null);
+    public void test_videos() throws IOException {
+        Call<Videos> call = getManager().tvService().videos(TestData.TVSHOW_ID, null);
+        Videos videos = call.execute().body();
         assertThat(videos).isNotNull();
         assertThat(videos.id).isEqualTo(TestData.TVSHOW_ID);
         assertThat(videos.results.get(0).id).isNotNull();
@@ -135,44 +145,49 @@ public class TvServiceTest extends BaseTestCase {
         assertThat(videos.results.get(0).size).isNotNull();
         assertThat(videos.results.get(0).type).isEqualTo("Opening Credits");
     }
-    
+
     @Test
-    public void test_latest() {
-        TvShowComplete show = getManager().tvService().latest();
+    public void test_latest() throws IOException {
+        Call<TvShowComplete> call = getManager().tvService().latest();
+        TvShowComplete show = call.execute().body();
         // Latest show might not have a complete TMDb entry, but at should least some basic properties.
         assertThat(show).isNotNull();
         assertThat(show.id).isPositive();
         assertThat(show.name).isNotEmpty();
     }
-    
+
     @Test
-    public void test_onTheAir() {
-        TvResultsPage results = getManager().tvService().onTheAir(null, null);
+    public void test_onTheAir() throws IOException {
+        Call<TvResultsPage> call = getManager().tvService().onTheAir(null, null);
+        TvResultsPage results = call.execute().body();
         assertThat(results).isNotNull();
         assertThat(results.results).isNotEmpty();
     }
-    
+
     @Test
-    public void test_airingToday() {
-        TvResultsPage results = getManager().tvService().airingToday(null, null);
+    public void test_airingToday() throws IOException {
+        Call<TvResultsPage> call = getManager().tvService().airingToday(null, null);
+        TvResultsPage results = call.execute().body();
         assertThat(results).isNotNull();
         assertThat(results.results).isNotEmpty();
     }
-    
+
     @Test
-    public void test_topRated() {
-        TvResultsPage results = getManager().tvService().topRated(null, null);
+    public void test_topRated() throws IOException {
+        Call<TvResultsPage> call = getManager().tvService().topRated(null, null);
+        TvResultsPage results = call.execute().body();
         assertThat(results).isNotNull();
         assertThat(results.results).isNotEmpty();
     }
-    
+
     @Test
-    public void test_popular() {
-        TvResultsPage results = getManager().tvService().popular(null, null);
+    public void test_popular() throws IOException {
+        Call<TvResultsPage> call = getManager().tvService().popular(null, null);
+        TvResultsPage results = call.execute().body();
         assertThat(results).isNotNull();
         assertThat(results.results).isNotEmpty();
     }
-    
+
     private void assertTvShow(TvShowComplete show) {
         assertThat(show.first_air_date).isNotNull();
         assertThat(show.homepage).isNotNull();
@@ -193,60 +208,20 @@ public class TvServiceTest extends BaseTestCase {
         assertThat(show.vote_count).isNotNull().isGreaterThanOrEqualTo(0);
 
         assertThat(show.created_by).isNotEmpty();
-        for(Person person : show.created_by) {
+        for (Person person : show.created_by) {
             assertThat(person.id).isNotNull();
             assertThat(person.name).isNotNull();
             assertThat(person.profile_path).isNotNull();
         }
-        
+
         assertThat(show.seasons).isNotEmpty();
-        for(TvSeason company : show.seasons) {
+        for (TvSeason company : show.seasons) {
             assertThat(company.id).isNotNull();
             assertThat(company.air_date).isNotNull();
             assertThat(company.episode_count).isNotNull();
             assertThat(company.season_number).isNotNull();
         }
-        
-    }
 
-    private void assertCrewCredits(List<CrewMember> crew) {
-        assertThat(crew).isNotNull();
-        assertThat(crew).isNotEmpty();
-        
-        for (CrewMember member : crew) {
-            assertThat(member.id).isNotNull();
-            assertThat(member.credit_id).isNotNull();
-            assertThat(member.name).isNotNull();
-            assertThat(member.department).isNotNull();
-            assertThat(member.job).isNotNull();
-        }
-    }
-    
-    private void assertCastCredits(List<CastMember> cast) {
-        assertThat(cast).isNotNull();
-        assertThat(cast).isNotEmpty();
-        
-        for (CastMember member : cast) {
-            assertThat(member.id).isNotNull();
-            assertThat(member.credit_id).isNotNull();
-            assertThat(member.name).isNotNull();
-            assertThat(member.character).isNotNull();
-            assertThat(member.order).isNotNull();
-        }
-    }
-
-    private void assertImages(List<Image> images){
-        assertThat(images).isNotNull();
-        assertThat(images).isNotEmpty();
-
-        for(Image image : images) {
-          assertThat(image.file_path).isNotNull();
-          assertThat(image.width).isNotNull();
-          assertThat(image.height).isNotNull();
-          assertThat(image.aspect_ratio).isGreaterThan(0);
-          assertThat(image.vote_average).isGreaterThanOrEqualTo(0);
-          assertThat(image.vote_count).isGreaterThanOrEqualTo(0);
-        }
     }
 
 }

@@ -3,7 +3,6 @@ package com.uwetrottmann.tmdb2.services;
 import com.uwetrottmann.tmdb2.BaseTestCase;
 import com.uwetrottmann.tmdb2.TestData;
 import com.uwetrottmann.tmdb2.entities.Image;
-import com.uwetrottmann.tmdb2.entities.Media;
 import com.uwetrottmann.tmdb2.entities.Person;
 import com.uwetrottmann.tmdb2.entities.PersonCastCredit;
 import com.uwetrottmann.tmdb2.entities.PersonCredits;
@@ -13,7 +12,9 @@ import com.uwetrottmann.tmdb2.entities.PersonImages;
 import com.uwetrottmann.tmdb2.entities.PersonResultsPage;
 import com.uwetrottmann.tmdb2.entities.TaggedImagesResultsPage;
 import org.junit.Test;
+import retrofit2.Call;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -24,8 +25,9 @@ public class PeopleServiceTest extends BaseTestCase {
     private static final SimpleDateFormat JSON_STRING_DATE = new SimpleDateFormat("yyy-MM-dd");
 
     @Test
-    public void test_summary() throws ParseException {
-        Person person = getManager().personService().summary(TestData.PERSON_ID);
+    public void test_summary() throws IOException, ParseException {
+        Call<Person> call = getManager().personService().summary(TestData.PERSON_ID);
+        Person person = call.execute().body();
         assertThat(person).isNotNull();
         assertThat(person.id).isEqualTo(TestData.PERSON_ID);
         assertThat(TestData.PERSON_NAME).isEqualTo(TestData.PERSON_NAME);
@@ -36,8 +38,9 @@ public class PeopleServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void test_movie_credits() {
-        PersonCredits credits = getManager().personService().movieCredits(TestData.PERSON_ID, null);
+    public void test_movie_credits() throws IOException {
+        Call<PersonCredits> call = getManager().personService().movieCredits(TestData.PERSON_ID, null);
+        PersonCredits credits = call.execute().body();
         assertThat(credits.id).isEqualTo(TestData.PERSON_ID);
         assertCastCredits(credits, false);
         assertCrewCredits(credits, false);
@@ -48,8 +51,9 @@ public class PeopleServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void test_tv_credits() {
-        PersonCredits credits = getManager().personService().tvCredits(TestData.PERSON_ID, null);
+    public void test_tv_credits() throws IOException {
+        Call<PersonCredits> call = getManager().personService().tvCredits(TestData.PERSON_ID, null);
+        PersonCredits credits = call.execute().body();
         assertThat(credits.id).isEqualTo(TestData.PERSON_ID);
         assertCastCredits(credits, false);
 
@@ -60,16 +64,18 @@ public class PeopleServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void test_combined_credits() {
-        PersonCredits credits = getManager().personService().combinedCredits(TestData.PERSON_ID, null);
+    public void test_combined_credits() throws IOException {
+        Call<PersonCredits> call = getManager().personService().combinedCredits(TestData.PERSON_ID, null);
+        PersonCredits credits = call.execute().body();
         assertThat(credits.id).isEqualTo(TestData.PERSON_ID);
         assertCastCredits(credits, true);
         assertCrewCredits(credits, true);
     }
 
     @Test
-    public void test_external_ids() {
-        PersonIds ids = getManager().personService().externalIds(TestData.PERSON_ID);
+    public void test_external_ids() throws IOException {
+        Call<PersonIds> call = getManager().personService().externalIds(TestData.PERSON_ID);
+        PersonIds ids = call.execute().body();
         assertThat(ids.id).isEqualTo(TestData.PERSON_ID);
         assertThat(ids.imdb_id).isEqualTo("nm0000184");
         assertThat(ids.freebase_id).isEqualTo("/en/george_lucas");
@@ -78,8 +84,9 @@ public class PeopleServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void test_images() {
-        PersonImages images = getManager().personService().images(TestData.PERSON_ID);
+    public void test_images() throws IOException {
+        Call<PersonImages> call = getManager().personService().images(TestData.PERSON_ID);
+        PersonImages images = call.execute().body();
         assertThat(images.id).isEqualTo(TestData.PERSON_ID);
 
         for (Image image : images.profiles) {
@@ -91,8 +98,9 @@ public class PeopleServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void test_tagged_images() {
-        TaggedImagesResultsPage images = getManager().personService().taggedImages(TestData.PERSON_ID, null, null);
+    public void test_tagged_images() throws IOException {
+        Call<TaggedImagesResultsPage> call = getManager().personService().taggedImages(TestData.PERSON_ID, null, null);
+        TaggedImagesResultsPage images = call.execute().body();
         assertThat(images.id).isEqualTo(TestData.PERSON_ID);
 
         for (TaggedImagesResultsPage.TaggedImage image : images.results) {
@@ -110,33 +118,22 @@ public class PeopleServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void test_popular() {
-        PersonResultsPage popular = getManager().personService().popular(null);
+    public void test_popular() throws IOException {
+        Call<PersonResultsPage> call = getManager().personService().popular(null);
+        PersonResultsPage popular = call.execute().body();
 
         assertThat(popular.results.get(0).id).isNotNull();
         assertThat(popular.results.get(0).name).isNotNull();
         assertThat(popular.results.get(0).popularity).isPositive();
         assertThat(popular.results.get(0).profile_path).isNotEmpty();
         assertThat(popular.results.get(0).adult).isNotNull();
-
-        for (Media media : popular.results.get(0).known_for) {
-            assertThat(media.adult).isNotNull();
-            assertThat(media.backdrop_path).isNotNull();
-            assertThat(media.id).isNotNull();
-            assertThat(media.original_title).isNotNull();
-            assertThat(media.release_date).isNotNull();
-            assertThat(media.poster_path).isNotNull();
-            assertThat(media.popularity).isNotNull().isGreaterThan(0);
-            assertThat(media.title).isNotNull();
-            assertThat(media.vote_average).isNotNull().isGreaterThan(0);
-            assertThat(media.vote_count).isNotNull().isGreaterThan(0);
-            assertThat(media.media_type).isNotNull();
-        }
+        assertMedia(popular.results.get(0).known_for);
     }
 
     @Test
-    public void test_latest() throws ParseException {
-        Person person = getManager().personService().latest();
+    public void test_latest() throws IOException {
+        Call<Person> call = getManager().personService().latest();
+        Person person = call.execute().body();
         // Latest person might not have a complete TMDb entry, but at should least some basic properties.
         assertThat(person).isNotNull();
         assertThat(person.name).isNotEmpty();
