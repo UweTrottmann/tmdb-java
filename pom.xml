@@ -10,7 +10,7 @@
     <version>2.0.0-SNAPSHOT</version>
 
     <name>tmdb-java</name>
-    <description>tmdb-java is a Java library that provides access to the themoviedatabase API v3.</description>
+    <description>tmdb-java is a retrofit2 based wrapper around the themoviedb.org API v3.</description>
     <url>https://github.com/UweTrottmann/tmdb-java</url>
     <inceptionYear>2013</inceptionYear>
 
