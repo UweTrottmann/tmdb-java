@@ -48,6 +48,7 @@ import java.io.IOException;
  *
  * <p>Only one {@link Retrofit} instance is created upon the first and re-used for any consequent service method call.
  */
+@SuppressWarnings("WeakerAccess")
 public class Tmdb {
 
     /**
