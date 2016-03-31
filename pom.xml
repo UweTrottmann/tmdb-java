@@ -44,18 +44,6 @@
     </prerequisites>
 
     <dependencies>
-        <dependency>
-            <groupId>com.squareup.retrofit</groupId>
-            <artifactId>retrofit</artifactId>
-            <version>1.9.0</version>
-        </dependency>
-        <!-- https://github.com/square/okhttp/blob/master/CHANGELOG.md -->
-        <dependency>
-            <groupId>com.squareup.okhttp</groupId>
-            <artifactId>okhttp</artifactId>
-            <version>2.7.5</version>
-            <optional>true</optional>
-        </dependency>
         <!-- https://github.com/square/retrofit/blob/master/CHANGELOG.md -->
         <dependency>
             <groupId>com.squareup.retrofit2</groupId>
