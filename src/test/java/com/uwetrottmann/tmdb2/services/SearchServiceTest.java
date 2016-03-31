@@ -6,7 +6,6 @@ import com.uwetrottmann.tmdb2.entities.BaseResultsPage;
 import com.uwetrottmann.tmdb2.entities.CollectionResultsPage;
 import com.uwetrottmann.tmdb2.entities.CompanyResultsPage;
 import com.uwetrottmann.tmdb2.entities.KeywordResultsPage;
-import com.uwetrottmann.tmdb2.entities.Media;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.PersonResultsPage;
 import com.uwetrottmann.tmdb2.entities.TvResultsPage;

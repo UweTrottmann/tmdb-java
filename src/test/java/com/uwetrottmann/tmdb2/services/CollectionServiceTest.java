@@ -24,7 +24,6 @@ import org.junit.Test;
 import retrofit2.Call;
 
 import java.io.IOException;
-import java.text.ParseException;
 
 public class CollectionServiceTest extends BaseTestCase {
   public CollectionServiceTest() {
