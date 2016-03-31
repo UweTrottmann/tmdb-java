@@ -27,7 +27,6 @@ import com.uwetrottmann.tmdb2.entities.MovieKeywords;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.ReleaseDate;
 import com.uwetrottmann.tmdb2.entities.ReleaseDatesResults;
-import com.uwetrottmann.tmdb2.entities.Releases;
 import com.uwetrottmann.tmdb2.entities.ReviewResultsPage;
 import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.Videos;

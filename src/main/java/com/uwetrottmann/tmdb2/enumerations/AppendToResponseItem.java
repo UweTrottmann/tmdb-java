@@ -21,7 +21,6 @@ package com.uwetrottmann.tmdb2.enumerations;
 public enum AppendToResponseItem {
 
     VIDEOS("videos"),
-    RELEASES("releases"),
     RELEASE_DATES("release_dates"),
     CREDITS("credits"),
     SIMILAR("similar"),
@@ -30,7 +29,7 @@ public enum AppendToResponseItem {
 
     private final String value;
 
-    private AppendToResponseItem(String value) {
+    AppendToResponseItem(String value) {
         this.value = value;
     }
 

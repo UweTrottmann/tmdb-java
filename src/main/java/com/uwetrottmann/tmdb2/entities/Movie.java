@@ -48,7 +48,6 @@ public class Movie {
 
     // Following are used with append_to_response
     public Videos videos;
-    public Releases releases;
     public ReleaseDatesResults release_dates;
     public Credits credits;
     public MovieResultsPage similar;
