@@ -38,7 +38,7 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_summary_language() throws ParseException, IOException {
-        Call<Movie> call = getManager().moviesService().summary(TestData.MOVIE_ID, "pt", null);
+        Call<Movie> call = getManager().moviesService().summary(TestData.MOVIE_ID, "pt-BR", null);
         Movie movie = call.execute().body();
         assertThat(movie).isNotNull();
         assertThat(movie.title).isEqualTo("Clube da Luta");
