@@ -143,7 +143,7 @@ public class Tmdb {
     }
 
     /**
-     * Return the current {@link Retrofit} instance. If none exists (first call, auth changed), builds a new one. <p/>
+     * Return the current {@link Retrofit} instance. If none exists (first call, auth changed), builds a new one.
      * <p>When building, sets the base url and a custom client with an {@link Interceptor} which supplies authentication
      * data.
      */
