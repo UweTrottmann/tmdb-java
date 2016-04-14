@@ -34,7 +34,11 @@ public class TvServiceTest extends BaseTestCase {
     public void test_tvshow_with_append_to_response() throws IOException {
         Call<TvShowComplete> call = getManager().tvService().tv(
                 TestData.TVSHOW_ID, null,
-                new AppendToResponse(AppendToResponseItem.CREDITS, AppendToResponseItem.EXTERNAL_IDS,
+                new AppendToResponse(AppendToResponseItem.CREDITS,
+                        AppendToResponseItem.VIDEOS,
+                        AppendToResponseItem.ALTERNATIVE_TITLES,
+                        AppendToResponseItem.SIMILAR,
+                        AppendToResponseItem.EXTERNAL_IDS,
                         AppendToResponseItem.IMAGES)
         );
         TvShowComplete show = call.execute().body();
@@ -57,6 +61,21 @@ public class TvServiceTest extends BaseTestCase {
         assertThat(show.external_ids.tvdb_id).isNotNull();
         assertThat(show.external_ids.imdb_id).isNotNull();
         assertThat(show.external_ids.tvrage_id).isNotNull();
+
+        // similar
+        assertThat(show.similar).isNotNull();
+        assertThat(show.similar.results).isNotNull();
+        assertThat(show.similar.results).isNotEmpty();
+
+        // videos
+        assertThat(show.videos).isNotNull();
+        assertThat(show.videos.results).isNotNull();
+        assertThat(show.videos.results).isNotEmpty();
+
+        // alternative_titles
+        assertThat(show.alternative_titles).isNotNull();
+        assertThat(show.alternative_titles.results).isNotNull();
+        assertThat(show.alternative_titles.results).isNotEmpty();
     }
 
     @Test

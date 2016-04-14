@@ -3,7 +3,7 @@
 tmdb-java
 ============
 
-A Java wrapper around the [TMDb v3 API][1] using [retrofit][2].
+A Java wrapper around the [TMDb v3 API][1] using [retrofit 2][2].
 
 Usage
 -----
@@ -41,8 +41,10 @@ tmdb.setApiKey("yourapikey");
 MovieService movieService = tmdb.movieService();
 //
 // Call any of the available endpoints
-Movie movie = movieService.summary(550);
-Trailers trailers = movieService.trailers(550);
+Call<Movie> call = movieService.summary(550);
+Movie movie = call.execute().body();
+Call<Trailers> callTrailers = movieService.trailers(550);
+Trailers trailers = callTrailers.execute().body();
 ```
 
 See test cases in `src/test/` for more examples.
