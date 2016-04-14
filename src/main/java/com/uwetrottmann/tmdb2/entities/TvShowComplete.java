@@ -41,4 +41,9 @@ public class TvShowComplete extends TvShow {
     public Images images;
     public Credits credits;
     public ExternalIds external_ids;
+
+    // Following are used with append_to_response
+    public TvAlternativeTitles alternative_titles;
+    public TvResultsPage similar;
+    public Videos videos;
 }
