@@ -18,12 +18,11 @@ public abstract class BaseTestCase {
 
     private static final boolean DEBUG = true;
 
-    private static final Tmdb manager = new Tmdb();
+    private static final Tmdb manager = new Tmdb(API_KEY);
 
     @BeforeClass
     public static void setUpOnce() {
-        manager.setApiKey(API_KEY);
-        manager.setIsDebug(DEBUG);
+        manager.enableDebugLogging(DEBUG);
     }
 
     protected final Tmdb getManager() {
