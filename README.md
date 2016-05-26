@@ -7,28 +7,23 @@ A Java wrapper around the [TMDb v3 API][1] using [retrofit 2][2].
 
 Usage
 -----
-<a href="https://search.maven.org/#search%7Cga%7C1%7Ctmdb-java"><img src="https://img.shields.io/maven-central/v/com.uwetrottmann/tmdb-java.svg?style=flat-square"></a>
+<a href="https://search.maven.org/#search%7Cga%7C1%7Ctmdb-java"><img src="https://img.shields.io/maven-central/v/com.uwetrottmann.tmdb2/tmdb-java.svg?style=flat-square"></a>
 
 Add the following dependency to your Gradle project:
 
 ```groovy
-compile 'com.uwetrottmann:tmdb-java:0.10.1'
+compile 'com.uwetrottmann.tmdb2:tmdb-java:1.0.0'
 ```
 
 or your Maven project:
 
 ```xml
 <dependency>
-    <groupId>com.uwetrottmann</groupId>
+    <groupId>com.uwetrottmann.tmdb2</groupId>
     <artifactId>tmdb-java</artifactId>
-    <version>0.10.1</version>
+    <version>1.0.0</version>
 </dependency>
 ```
-
-Dependencies
-------------
-If you rather use the [released jar][3], add dependencies yourself as you see fit.
-You can find the required dependencies in [pom.xml][4].
 
 Example
 -------
@@ -47,17 +42,12 @@ Call<Trailers> callTrailers = movieService.trailers(550);
 Trailers trailers = callTrailers.execute().body();
 ```
 
-See test cases in `src/test/` for more examples.
-
-Related projects
-----------------
-
-[tmdb-rx-java](https://github.com/migueljteixeira/tmdb-rx-java) - adds RxAndroid support
+See test cases in `src/test/` for more examples and the [retrofit website][2] for configuration options.
 
 License
 -------
 
-    Copyright 2013-2016 Uwe Trottmann
+    Copyright 2013 Uwe Trottmann
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -72,9 +62,5 @@ License
     limitations under the License.
 
 
-
-
  [1]: http://docs.themoviedb.apiary.io/
- [2]: https://github.com/square/retrofit
- [3]: https://github.com/UweTrottmann/tmdb-java/releases
- [4]: https://github.com/UweTrottmann/tmdb-java/blob/master/pom.xml
+ [2]: http://square.github.io/retrofit/

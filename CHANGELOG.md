@@ -14,6 +14,13 @@ Supported API calls
  * [TV Seasons](http://docs.themoviedb.apiary.io/#reference/tv-seasons) _incomplete_
  * [TV Episodes](http://docs.themoviedb.apiary.io/#reference/tv-episodes) _incomplete_
 
+## 1.0.0
+_2016-05-26_
+
+* Update to `retrofit2`. Read about the most [notable changes and benefits](https://github.com/square/retrofit/blob/master/CHANGELOG.md#version-200-2016-03-11).
+ You will have to make changes to your app, see the [README][4] for an example of the new code flow.
+* Package name changed to `com.uwetrottmann.tmdb2`. So you can keep using the old version while updating your code.
+
 0.10.1 *(2016-03-15)*
 --------------------
 
