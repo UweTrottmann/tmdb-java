@@ -18,9 +18,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FindServiceTest extends BaseTestCase {
 
+    private static final String MOVIE2_IMDB_ID = "tt0361748";
+    private static final String MOVIE_TITLE = "Inglourious Basterds";
+
     @Test
     public void test_find_movie() throws IOException {
-        Call<FindResults> call = getManager().findService().find("tt0361748", ExternalSource.IMDB_ID, null);
+        Call<FindResults> call = getManager().findService().find(MOVIE2_IMDB_ID, ExternalSource.IMDB_ID, null);
         FindResults results = call.execute().body();
         assertThat(results).isNotNull();
         assertThat(results.movie_results).isNotEmpty();
@@ -30,11 +33,11 @@ public class FindServiceTest extends BaseTestCase {
         assertThat(movie.adult).isFalse();
         assertThat(movie.backdrop_path).isNotNull();
         assertThat(movie.id).isNotNull();
-        assertThat(movie.original_title).isEqualTo("Inglourious Basterds");
+        assertThat(movie.original_title).isEqualTo(MOVIE_TITLE);
         assertThat(movie.release_date).isEqualTo("2009-08-18");
         assertThat(movie.poster_path).isNotNull();
         assertThat(movie.popularity).isNotNull();
-        assertThat(movie.title).isEqualTo("Inglourious Basterds");
+        assertThat(movie.title).isEqualTo(MOVIE_TITLE);
         assertThat(movie.vote_average).isGreaterThanOrEqualTo(0);
         assertThat(movie.vote_average).isGreaterThanOrEqualTo(0);
     }
@@ -55,7 +58,7 @@ public class FindServiceTest extends BaseTestCase {
 
     @Test
     public void test_find_tv_show() throws IOException {
-        Call<FindResults> call = getManager().findService().find("tt0903747", ExternalSource.IMDB_ID, null);
+        Call<FindResults> call = getManager().findService().find(TestData.TVSHOW_IMDB_ID, ExternalSource.IMDB_ID, null);
         FindResults results = call.execute().body();
         assertThat(results).isNotNull();
         assertThat(results.tv_results).isNotEmpty();
@@ -75,7 +78,8 @@ public class FindServiceTest extends BaseTestCase {
 
     @Test
     public void test_find_tv_season() throws IOException {
-        Call<FindResults> call = getManager().findService().find("30272", ExternalSource.TVDB_ID, null);
+        Call<FindResults> call = getManager().findService().find(String.valueOf(TestData.TVSHOW_SEASON1_ID),
+                ExternalSource.TVDB_ID, null);
         FindResults results = call.execute().body();
         assertThat(results).isNotNull();
         assertThat(results.tv_season_results).isNotEmpty();
@@ -83,7 +87,7 @@ public class FindServiceTest extends BaseTestCase {
         TvSeason season = results.tv_season_results.get(0);
         assertThat(season).isNotNull();
         assertThat(season.air_date).isNotNull();
-        assertThat(season.name).isEqualTo("Season 1");
+        assertThat(season.name).isNotNull();
         assertThat(season.id).isNotNull();
         assertThat(season.poster_path).isNotEmpty();
         assertThat(season.season_number).isEqualTo(1);
@@ -91,7 +95,7 @@ public class FindServiceTest extends BaseTestCase {
 
     @Test
     public void test_find_tv_episode() throws IOException {
-        Call<FindResults> call = getManager().findService().find("tt0959621", ExternalSource.IMDB_ID, null);
+        Call<FindResults> call = getManager().findService().find(TestData.EPISODE_IDMB_ID, ExternalSource.IMDB_ID, null);
         FindResults results = call.execute().body();
         assertThat(results).isNotNull();
         assertThat(results.tv_episode_results).isNotEmpty();

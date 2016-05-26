@@ -30,7 +30,9 @@ public interface TestData {
 
     String TVSHOW_TITLE = "Breaking Bad";
     int TVSHOW_ID = 1396;
-    int TVSHOW_TVDB_ID = 81189;
+    String TVSHOW_IMDB_ID = "tt0903747";
+    int TVSHOW_SEASON1_ID = 30272;
+    String EPISODE_IDMB_ID = "tt0959621";
     int PERSON_ID = 1;
     String PERSON_NAME = "George Lucas";
     String PERSON_IMDB_ID = "nm0000184";
