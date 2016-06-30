@@ -31,8 +31,7 @@ Example
 ```java
 // Create an instance of the service you wish to use
 // you can keep this around
-Tmdb tmdb = new Tmdb();
-tmdb.setApiKey("yourapikey");
+Tmdb tmdb = new Tmdb("yourapikey");
 MovieService movieService = tmdb.movieService();
 //
 // Call any of the available endpoints
