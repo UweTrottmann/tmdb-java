@@ -70,6 +70,10 @@ public class Tmdb {
         this.apiKey = apiKey;
     }
 
+    public void apiKey(String apiKey) {
+        this.apiKey = apiKey;
+    }
+
     public String apiKey() {
         return apiKey;
     }
