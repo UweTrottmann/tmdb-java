@@ -8,6 +8,7 @@ import com.uwetrottmann.tmdb2.entities.ExternalIds;
 import com.uwetrottmann.tmdb2.entities.Images;
 import com.uwetrottmann.tmdb2.entities.Person;
 import com.uwetrottmann.tmdb2.entities.TvAlternativeTitles;
+import com.uwetrottmann.tmdb2.entities.TvContentRatings;
 import com.uwetrottmann.tmdb2.entities.TvKeywords;
 import com.uwetrottmann.tmdb2.entities.TvResultsPage;
 import com.uwetrottmann.tmdb2.entities.TvSeason;
@@ -35,7 +36,7 @@ public class TvServiceTest extends BaseTestCase {
         Call<TvShowComplete> call = getManager().tvService().tv(
                 TestData.TVSHOW_ID, null,
                 new AppendToResponse(AppendToResponseItem.CREDITS, AppendToResponseItem.EXTERNAL_IDS,
-                        AppendToResponseItem.IMAGES)
+                        AppendToResponseItem.IMAGES, AppendToResponseItem.CONTENT_RATINGS)
         );
         TvShowComplete show = call.execute().body();
         assertTvShow(show);
@@ -57,6 +58,23 @@ public class TvServiceTest extends BaseTestCase {
         assertThat(show.external_ids.tvdb_id).isNotNull();
         assertThat(show.external_ids.imdb_id).isNotNull();
         assertThat(show.external_ids.tvrage_id).isNotNull();
+
+        // content ratings
+        assertThat(show.content_ratings).isNotNull();
+        assertThat(show.content_ratings.results).isNotEmpty();
+        assertThat(show.content_ratings.results.get(0).iso_3166_1).isNotNull();
+        assertThat(show.content_ratings.results.get(0).rating).isNotNull();
+    }
+
+    @Test
+    public void test_content_ratings() throws IOException {
+        Call<TvContentRatings> call = getManager().tvService().content_ratings(TestData.TVSHOW_ID);
+        TvContentRatings ratings = call.execute().body();
+        assertThat(ratings).isNotNull();
+        assertThat(ratings.id).isEqualTo(TestData.TVSHOW_ID);
+        assertThat(ratings.results).isNotEmpty();
+        assertThat(ratings.results.get(0).iso_3166_1).isNotNull();
+        assertThat(ratings.results.get(0).rating).isNotNull();
     }
 
     @Test

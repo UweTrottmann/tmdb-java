@@ -1,6 +1,7 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.entities.AppendToResponse;
+import com.uwetrottmann.tmdb2.entities.TvContentRatings;
 import com.uwetrottmann.tmdb2.entities.Credits;
 import com.uwetrottmann.tmdb2.entities.ExternalIds;
 import com.uwetrottmann.tmdb2.entities.Images;
@@ -51,6 +52,16 @@ public interface TvService {
     Call<Credits> credits(
             @Path("id") int tmdbId,
             @Query("language") String language
+    );
+
+    /**
+     * Get the content ratings for a specific TV show.
+     *
+     * @param tmbdId A themoviedb id
+     */
+    @GET("tv/{id}/content_ratings")
+    Call<TvContentRatings> content_ratings(
+            @Path("id") int tmbdId
     );
 
     /**
