@@ -143,7 +143,7 @@ public class TvServiceTest extends BaseTestCase {
         assertThat(videos.results.get(0).name).isNotNull();
         assertThat(videos.results.get(0).site).isEqualTo("YouTube");
         assertThat(videos.results.get(0).size).isNotNull();
-        assertThat(videos.results.get(0).type).isEqualTo("Opening Credits");
+        assertThat(videos.results.get(0).type).isEqualTo("Trailer");
     }
 
     @Test
