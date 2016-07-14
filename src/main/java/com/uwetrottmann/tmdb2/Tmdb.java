@@ -12,7 +12,6 @@ import com.uwetrottmann.tmdb2.services.TvSeasonsService;
 import com.uwetrottmann.tmdb2.services.TvService;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -39,9 +38,7 @@ public class Tmdb {
 
     private OkHttpClient okHttpClient;
     private Retrofit retrofit;
-    private HttpLoggingInterceptor logging;
 
-    private boolean enableDebugLogging;
     private String apiKey;
 
     /**
@@ -59,20 +56,6 @@ public class Tmdb {
 
     public String apiKey() {
         return apiKey;
-    }
-
-    /**
-     * Enable debug log output.
-     *
-     * @param enable If true, the log level is set to {@link HttpLoggingInterceptor.Level#BODY}. Otherwise {@link
-     * HttpLoggingInterceptor.Level#NONE}.
-     */
-    public Tmdb enableDebugLogging(boolean enable) {
-        this.enableDebugLogging = enable;
-        if (logging != null) {
-            logging.setLevel(enable ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.NONE);
-        }
-        return this;
     }
 
     /**
@@ -109,11 +92,6 @@ public class Tmdb {
      */
     protected void setOkHttpClientDefaults(OkHttpClient.Builder builder) {
         builder.addInterceptor(new TmdbInterceptor(this));
-        if (enableDebugLogging) {
-            logging = new HttpLoggingInterceptor();
-            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-            builder.addInterceptor(logging);
-        }
     }
 
     /**
