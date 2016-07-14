@@ -14,6 +14,13 @@ Supported API calls
  * [TV Seasons](http://docs.themoviedb.apiary.io/#reference/tv-seasons) _incomplete_
  * [TV Episodes](http://docs.themoviedb.apiary.io/#reference/tv-episodes) _incomplete_
 
+## 1.1.0
+_2016-07-14_
+
+* Removed built-in logging support. Simply subclass `Tmdb` and add your own logger by overriding `setOkHttpClientDefaults()`.
+* Support for TV content ratings. Thanks @davidsben!
+* Additional `append_to_response` fields for movies and shows. Thanks @urizev!
+
 ## 1.0.0
 _2016-05-26_
 
