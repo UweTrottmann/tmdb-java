@@ -40,6 +40,11 @@ public class TvShowComplete extends TvShow {
     public String type;
     public Images images;
     public Credits credits;
+
+    // Following are used with append_to_response
     public ExternalIds external_ids;
+    public TvAlternativeTitles alternative_titles;
     public TvContentRatings content_ratings;
+    public TvResultsPage similar;
+    public Videos videos;
 }
