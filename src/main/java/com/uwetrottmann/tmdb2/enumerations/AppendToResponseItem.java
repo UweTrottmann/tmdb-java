@@ -25,7 +25,8 @@ public enum AppendToResponseItem {
     CREDITS("credits"),
     SIMILAR("similar"),
     IMAGES("images"),
-    EXTERNAL_IDS("external_ids");
+    EXTERNAL_IDS("external_ids"),
+    CONTENT_RATINGS("content_ratings");
 
     private final String value;
 

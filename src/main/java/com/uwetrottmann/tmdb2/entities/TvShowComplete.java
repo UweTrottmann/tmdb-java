@@ -41,4 +41,5 @@ public class TvShowComplete extends TvShow {
     public Images images;
     public Credits credits;
     public ExternalIds external_ids;
+    public TvContentRatings content_ratings;
 }
