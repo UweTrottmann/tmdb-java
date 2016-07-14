@@ -1,6 +1,15 @@
 Contributing
 ============
 
+**Note:** This project is in the [public domain](UNLICENSE). If you contribute any [non-trivial][8]
+patches you agree with the following:
+
+    I dedicate any and all copyright interest in this software to the
+    public domain. I make this dedication for the benefit of the public at
+    large and to the detriment of my heirs and successors. I intend this
+    dedication to be an overt act of relinquishment in perpetuity of all
+    present and future rights to this software under copyright law.
+
 #### Would you like to contribute code?
 
 1. [Fork tmdb-java][1].
@@ -23,3 +32,4 @@ This project is built with [Maven][7], see the `pom.xml` in the root folder.
  [5]: https://github.com/UweTrottmann/tmdb-java/issues/new
  [6]: https://github.com/UweTrottmann/tmdb-java/releases
  [7]: https://maven.apache.org/
+ [8]: http://www.gnu.org/prep/maintain/maintain.html#Legally-Significant
