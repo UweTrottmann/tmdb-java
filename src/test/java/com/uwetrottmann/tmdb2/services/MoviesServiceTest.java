@@ -84,6 +84,17 @@ public class MoviesServiceTest extends BaseTestCase {
     }
 
     @Test
+    public void test_summary_append_alternative_titles() throws IOException {
+        Call<Movie> call = getManager().moviesService().summary(TestData.MOVIE_ID,
+                null,
+                new AppendToResponse(
+                        AppendToResponseItem.ALTERNATIVE_TITLES));
+        Movie movie = call.execute().body();
+
+        assertNotNull(movie.alternative_titles);
+    }
+
+    @Test
     public void test_summary_append_credits() throws IOException {
         Call<Movie> call = getManager().moviesService().summary(TestData.MOVIE_ID,
                 null,
@@ -124,6 +135,7 @@ public class MoviesServiceTest extends BaseTestCase {
                         AppendToResponseItem.RELEASE_DATES,
                         AppendToResponseItem.CREDITS,
                         AppendToResponseItem.VIDEOS,
+                        AppendToResponseItem.ALTERNATIVE_TITLES,
                         AppendToResponseItem.SIMILAR));
         Movie movie = call.execute().body();
 
@@ -133,6 +145,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertNotNull(movie.credits);
         assertNotNull(movie.videos);
         assertNotNull(movie.similar);
+        assertNotNull(movie.alternative_titles);
     }
 
     @Test

@@ -5,7 +5,8 @@ import com.uwetrottmann.tmdb2.entities.CrewMember;
 import com.uwetrottmann.tmdb2.entities.Image;
 import com.uwetrottmann.tmdb2.entities.Media;
 import com.uwetrottmann.tmdb2.entities.Videos;
-import org.junit.BeforeClass;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 import java.util.List;
 
@@ -18,12 +19,30 @@ public abstract class BaseTestCase {
 
     private static final boolean DEBUG = true;
 
-    private static final Tmdb manager = new Tmdb();
+    private static final Tmdb manager = new TestTmdb(API_KEY);
 
-    @BeforeClass
-    public static void setUpOnce() {
-        manager.setApiKey(API_KEY);
-        manager.setIsDebug(DEBUG);
+    static class TestTmdb extends Tmdb {
+
+        public TestTmdb(String apiKey) {
+            super(apiKey);
+        }
+
+        @Override
+        protected void setOkHttpClientDefaults(OkHttpClient.Builder builder) {
+            super.setOkHttpClientDefaults(builder);
+            if (DEBUG) {
+                // add logging
+                HttpLoggingInterceptor logging = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+                    @Override
+                    public void log(String s) {
+                        // standard output is easier to read
+                        System.out.println(s);
+                    }
+                });
+                logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+                builder.addInterceptor(logging);
+            }
+        }
     }
 
     protected final Tmdb getManager() {
