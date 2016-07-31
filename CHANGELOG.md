@@ -7,12 +7,18 @@ Supported API calls
  * [Collections](http://docs.themoviedb.apiary.io/#reference/collections)
  * [Discover](http://docs.themoviedb.apiary.io/#reference/discover)
  * [Find](http://docs.themoviedb.apiary.io/#reference/find)
+ * [Genres](http://docs.themoviedb.apiary.io/#reference/genres)
  * [Movies](http://docs.themoviedb.apiary.io/#reference/movies) _incomplete_
  * [People](http://docs.themoviedb.apiary.io/#reference/people) _incomplete_
  * [Search](http://docs.themoviedb.apiary.io/#reference/search) _incomplete_
  * [TV](http://docs.themoviedb.apiary.io/#reference/tv) _incomplete_
  * [TV Seasons](http://docs.themoviedb.apiary.io/#reference/tv-seasons) _incomplete_
  * [TV Episodes](http://docs.themoviedb.apiary.io/#reference/tv-episodes) _incomplete_
+
+## 1.2.0
+_2016-07-31_
+
+* Added movie and TV genre methods. Thanks @jackwakefield!
 
 ## 1.1.0
 _2016-07-14_
