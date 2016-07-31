@@ -4,6 +4,7 @@ import com.uwetrottmann.tmdb2.services.CollectionService;
 import com.uwetrottmann.tmdb2.services.ConfigurationService;
 import com.uwetrottmann.tmdb2.services.DiscoverService;
 import com.uwetrottmann.tmdb2.services.FindService;
+import com.uwetrottmann.tmdb2.services.GenreService;
 import com.uwetrottmann.tmdb2.services.MoviesService;
 import com.uwetrottmann.tmdb2.services.PeopleService;
 import com.uwetrottmann.tmdb2.services.SearchService;
@@ -144,5 +145,9 @@ public class Tmdb {
 
     public CollectionService collectionService() {
         return getRetrofit().create(CollectionService.class);
+    }
+
+    public GenreService genreService() {
+        return getRetrofit().create(GenreService.class);
     }
 }
