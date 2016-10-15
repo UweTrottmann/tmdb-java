@@ -15,6 +15,11 @@ Supported API calls
  * [TV Seasons](http://docs.themoviedb.apiary.io/#reference/tv-seasons) _incomplete_
  * [TV Episodes](http://docs.themoviedb.apiary.io/#reference/tv-episodes) _incomplete_
 
+## 1.3.0
+_2016-10-15_
+
+* Add `still_sizes` to `ImagesConfiguration` (used by TV episode stills). Thanks @SimonVT! 
+
 ## 1.2.0
 _2016-07-31_
 
