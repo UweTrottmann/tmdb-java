@@ -24,6 +24,7 @@ public class ConfigurationServiceTest extends BaseTestCase {
         assertThat(config.images.backdrop_sizes).isNotEmpty();
         assertThat(config.images.profile_sizes).isNotEmpty();
         assertThat(config.images.logo_sizes).isNotEmpty();
+        assertThat(config.images.still_sizes).isNotEmpty();
         assertThat(config.change_keys).isNotEmpty();
     }
 }
