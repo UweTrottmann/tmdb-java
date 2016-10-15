@@ -309,8 +309,9 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(results.results).isNotEmpty();
         assertThat(results.results.get(0).id).isNotNull();
         assertThat(results.results.get(0).description).isNotNull();
-        assertThat(results.results.get(0).favorite_count).isNotNull().isPositive();
-        assertThat(results.results.get(0).item_count).isNotNull().isPositive();
+        assertThat(results.results.get(0).favorite_count).isNotNull().isGreaterThanOrEqualTo(0);
+        // ut: this might be null all the time, if so should probably be removed?
+        assertThat(results.results.get(0).item_count).isNull();
         assertThat(results.results.get(0).iso_639_1).isNotNull();
         assertThat(results.results.get(0).name).isNotNull();
         assertThat(results.results.get(0).poster_path).isNotNull();
