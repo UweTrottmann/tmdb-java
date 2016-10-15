@@ -12,6 +12,7 @@ public class Configuration {
         public List<String> backdrop_sizes;
         public List<String> profile_sizes;
         public List<String> logo_sizes;
+        public List<String> still_sizes;
     }
 
     public ImagesConfiguration images;
