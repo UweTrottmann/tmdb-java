@@ -70,6 +70,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(movie.runtime).isEqualTo(139);
         assertThat(movie.vote_average).isPositive();
         assertThat(movie.vote_count).isPositive();
+        assertThat(movie.status).isEqualTo(TestData.STATUS);
     }
 
     @Test

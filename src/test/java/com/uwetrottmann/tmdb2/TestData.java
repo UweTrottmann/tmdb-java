@@ -5,6 +5,7 @@ public interface TestData {
     int MOVIE_ID = 550;
     String MOVIE_TITLE = "Fight Club";
     String MOVIE_IMDB = "tt0137523";
+    String STATUS = "Released";
 
     int MOVIE_WITH_COLLECTION_ID = 671;
     String MOVIE_WITH_COLLECTION_TITLE = "Harry Potter and the Philosopher\'s Stone";
