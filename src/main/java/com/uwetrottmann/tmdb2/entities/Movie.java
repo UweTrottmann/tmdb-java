@@ -1,5 +1,7 @@
 package com.uwetrottmann.tmdb2.entities;
 
+import com.uwetrottmann.tmdb2.enumerations.Status;
+
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class Movie {
     public Integer revenue;
     public Integer runtime;
     public List<SpokenLanguage> spoken_languages;
-    public String status;
+    public Status status;
     public String tagline;
     public String title;
     public Double vote_average;

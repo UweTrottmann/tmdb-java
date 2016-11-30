@@ -5,6 +5,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
+import com.uwetrottmann.tmdb2.enumerations.Status;
 
 import java.lang.reflect.Type;
 import java.text.ParseException;
@@ -43,6 +44,19 @@ public class TmdbHelper {
                     return TMDB_DATE_FORMAT.parse(json.getAsString());
                 } catch (ParseException e) {
                     // return null instead of failing (like default parser would)
+                    return null;
+                }
+            }
+        });
+
+        builder.registerTypeAdapter(Status.class, new JsonDeserializer<Status>() {
+            @Override
+            public Status deserialize(JsonElement jsonElement, Type type,
+                    JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
+                String value = jsonElement.getAsString();
+                if (value != null) {
+                    return Status.fromValue(value);
+                } else {
                     return null;
                 }
             }

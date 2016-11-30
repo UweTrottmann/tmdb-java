@@ -1,11 +1,13 @@
 package com.uwetrottmann.tmdb2;
 
+import com.uwetrottmann.tmdb2.enumerations.Status;
+
 public interface TestData {
 
     int MOVIE_ID = 550;
     String MOVIE_TITLE = "Fight Club";
     String MOVIE_IMDB = "tt0137523";
-    String STATUS = "Released";
+    Status STATUS = Status.RELEASED;
 
     int MOVIE_WITH_COLLECTION_ID = 671;
     String MOVIE_WITH_COLLECTION_TITLE = "Harry Potter and the Philosopher\'s Stone";
