@@ -28,6 +28,7 @@ public class Movie {
     public String title;
     public Double vote_average;
     public Integer vote_count;
+    public String status;
 
     // Following are used with append_to_response
     public MovieAlternativeTitles alternative_titles;
