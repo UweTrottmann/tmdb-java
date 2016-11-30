@@ -15,6 +15,11 @@ Supported API calls
  * [TV Seasons](http://docs.themoviedb.apiary.io/#reference/tv-seasons) _incomplete_
  * [TV Episodes](http://docs.themoviedb.apiary.io/#reference/tv-episodes) _incomplete_
 
+## 1.4.0
+_2016-11-30_
+
+* Add `status` to movie, add `Status` enum. Thanks @cicoub13! 
+
 ## 1.3.0
 _2016-10-15_
 
