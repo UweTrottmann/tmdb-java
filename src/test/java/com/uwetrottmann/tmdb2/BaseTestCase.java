@@ -91,14 +91,16 @@ public abstract class BaseTestCase {
 
     public static void assertMedia(List<Media> list) {
         for (Media media : list) {
-            assertThat(media.adult).isNotNull();
+            if ("movie".equals(media.media_type)) {
+                assertThat(media.adult).isNotNull();
+                assertThat(media.release_date).isNotNull();
+                assertThat(media.original_title).isNotNull();
+                assertThat(media.title).isNotNull();
+            }
             assertThat(media.backdrop_path).isNotNull();
             assertThat(media.id).isNotNull();
-            assertThat(media.original_title).isNotNull();
-            assertThat(media.release_date).isNotNull();
             assertThat(media.poster_path).isNotNull();
             assertThat(media.popularity).isNotNull().isGreaterThan(0);
-            assertThat(media.title).isNotNull();
             assertThat(media.vote_average).isNotNull().isGreaterThan(0);
             assertThat(media.vote_count).isNotNull().isGreaterThan(0);
             assertThat(media.media_type).isNotNull();

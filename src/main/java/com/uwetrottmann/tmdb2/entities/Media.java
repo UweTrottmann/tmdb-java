@@ -23,6 +23,7 @@ import java.util.List;
 public class Media {
 
     public Integer id;
+    /** Only for movies. */
     public Boolean adult;
     public String backdrop_path;
     public Date first_air_date;
@@ -31,11 +32,14 @@ public class Media {
     public List<String> origin_country;
     public String original_language;
     public String original_name;
+    /** Only for movies. */
     public String original_title;
     public String overview;
+    /** Only for movies. */
     public Date release_date;
     public String poster_path;
     public Double popularity;
+    /** Only for movies. */
     public String title;
     public Double vote_average;
     public Integer vote_count;
