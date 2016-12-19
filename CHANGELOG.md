@@ -15,6 +15,11 @@ Supported API calls
  * [TV Seasons](http://docs.themoviedb.apiary.io/#reference/tv-seasons) _incomplete_
  * [TV Episodes](http://docs.themoviedb.apiary.io/#reference/tv-episodes) _incomplete_
 
+## 1.5.0
+_2016-12-19_
+
+* Add `review/{review_id}` with new `ReviewsService`. Thanks @MostafaMatar! 
+
 ## 1.4.0
 _2016-11-30_
 
