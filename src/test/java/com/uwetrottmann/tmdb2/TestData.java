@@ -8,6 +8,16 @@ public interface TestData {
     String MOVIE_TITLE = "Fight Club";
     String MOVIE_IMDB = "tt0137523";
     Status STATUS = Status.RELEASED;
+    
+    //Test Data for ReviewsService
+    String REVIEW_ID = "581bbdbbc3a36805c60001f1";
+    String REVIEW_AUTHOR = "iheardthatmoviewas";
+    String REVIEW_URL = "https://www.themoviedb.org/review/581bbdbbc3a36805c60001f1";
+    String REVIEW_ISO_639_1 = "en";
+    Integer REVIEW_MEDIA_ID = 284052;
+    String REVIEW_MEDIA_TITLE = "Doctor Strange";
+    String REVIEW_MEDIA_TYPE = "Movie";
+    
 
     int MOVIE_WITH_COLLECTION_ID = 671;
     String MOVIE_WITH_COLLECTION_TITLE = "Harry Potter and the Philosopher\'s Stone";

@@ -7,6 +7,7 @@ import com.uwetrottmann.tmdb2.services.FindService;
 import com.uwetrottmann.tmdb2.services.GenreService;
 import com.uwetrottmann.tmdb2.services.MoviesService;
 import com.uwetrottmann.tmdb2.services.PeopleService;
+import com.uwetrottmann.tmdb2.services.ReviewsService;
 import com.uwetrottmann.tmdb2.services.SearchService;
 import com.uwetrottmann.tmdb2.services.TvEpisodesService;
 import com.uwetrottmann.tmdb2.services.TvSeasonsService;
@@ -149,5 +150,9 @@ public class Tmdb {
 
     public GenreService genreService() {
         return getRetrofit().create(GenreService.class);
+    }
+    
+    public ReviewsService reviewsService() {
+        return getRetrofit().create(ReviewsService.class);
     }
 }
