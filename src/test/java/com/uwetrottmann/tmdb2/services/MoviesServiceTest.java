@@ -180,9 +180,11 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(images.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(images.backdrops).isNotEmpty();
         assertThat(images.backdrops.get(0).file_path).isNotEmpty();
-        assertThat(images.backdrops.get(0).width).isEqualTo(1280);
-        assertThat(images.backdrops.get(0).height).isEqualTo(720);
-        assertThat(images.backdrops.get(0).iso_639_1).isEqualTo("en");
+        assertThat(images.backdrops.get(0).width).isGreaterThanOrEqualTo(1280);
+        assertThat(images.backdrops.get(0).height).isGreaterThanOrEqualTo(720);
+        if (images.backdrops.get(0).iso_639_1 != null) {
+            assertThat(images.backdrops.get(0).iso_639_1).hasSize(2);
+        }
         assertThat(images.backdrops.get(0).aspect_ratio).isGreaterThan(1.7f);
         assertThat(images.backdrops.get(0).vote_average).isPositive();
         assertThat(images.backdrops.get(0).vote_count).isPositive();
