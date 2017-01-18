@@ -51,5 +51,5 @@ Except where noted otherwise, released into the [public domain](UNLICENSE).
 Do not just copy, make it better.
 
 
- [1]: http://docs.themoviedb.apiary.io/
- [2]: http://square.github.io/retrofit/
+ [1]: https://developers.themoviedb.org/3
+ [2]: https://square.github.io/retrofit/
