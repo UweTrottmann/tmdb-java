@@ -3,17 +3,22 @@ Change Log
 Supported API calls
 -------------------
 
- * [Configuration](http://docs.themoviedb.apiary.io/#reference/configuration)
- * [Collections](http://docs.themoviedb.apiary.io/#reference/collections)
- * [Discover](http://docs.themoviedb.apiary.io/#reference/discover)
- * [Find](http://docs.themoviedb.apiary.io/#reference/find)
- * [Genres](http://docs.themoviedb.apiary.io/#reference/genres)
- * [Movies](http://docs.themoviedb.apiary.io/#reference/movies) _incomplete_
- * [People](http://docs.themoviedb.apiary.io/#reference/people) _incomplete_
- * [Search](http://docs.themoviedb.apiary.io/#reference/search) _incomplete_
- * [TV](http://docs.themoviedb.apiary.io/#reference/tv) _incomplete_
- * [TV Seasons](http://docs.themoviedb.apiary.io/#reference/tv-seasons) _incomplete_
- * [TV Episodes](http://docs.themoviedb.apiary.io/#reference/tv-episodes) _incomplete_
+ * [Configuration](https://developers.themoviedb.org/3/configuration)
+ * [Collections](https://developers.themoviedb.org/3/collections)
+ * [Discover](https://developers.themoviedb.org/3/discover)
+ * [Find](https://developers.themoviedb.org/3/find)
+ * [Genres](https://developers.themoviedb.org/3/genres)
+ * [Movies](https://developers.themoviedb.org/3/movies) _incomplete_
+ * [People](https://developers.themoviedb.org/3/people) _incomplete_
+ * [Search](https://developers.themoviedb.org/3/search) _incomplete_
+ * [TV](https://developers.themoviedb.org/3/tv) _incomplete_
+ * [TV Seasons](https://developers.themoviedb.org/3/tv-seasons) _incomplete_
+ * [TV Episodes](https://developers.themoviedb.org/3/tv-episodes) _incomplete_
+
+## 1.6.0
+_2017-01-18_
+
+* Update `discover` methods, add helper builders`tmdb.discoverMovie()` and `tmdb.discoverTv()`. 
 
 ## 1.5.0
 _2016-12-19_
