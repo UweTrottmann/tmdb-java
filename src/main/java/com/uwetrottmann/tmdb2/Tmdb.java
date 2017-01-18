@@ -159,4 +159,8 @@ public class Tmdb {
     public DiscoverMovieBuilder discoverMovie() {
         return new DiscoverMovieBuilder(discoverService());
     }
+
+    public DiscoverTvBuilder discoverTv() {
+        return new DiscoverTvBuilder(discoverService());
+    }
 }

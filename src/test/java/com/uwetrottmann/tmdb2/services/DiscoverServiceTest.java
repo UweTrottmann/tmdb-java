@@ -2,8 +2,8 @@ package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
 import com.uwetrottmann.tmdb2.TestData;
-import com.uwetrottmann.tmdb2.entities.DiscoverFilter;
 import com.uwetrottmann.tmdb2.entities.BaseResultsPage;
+import com.uwetrottmann.tmdb2.entities.DiscoverFilter;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.TvResultsPage;
@@ -37,13 +37,13 @@ public class DiscoverServiceTest extends BaseTestCase {
 
     @Test
     public void test_discover_tv() throws IOException {
-        Call<TvResultsPage> call = getManager().discoverService().discoverTv(null, null,
-                SortBy.VOTE_AVERAGE_DESC,
-                null, null, null,
-                new DiscoverFilter(TestData.GENRE_ID_DRAMA, TestData.GENRE_ID_SCIFI),
-                new DiscoverFilter(TestData.NETWORK_ID_HBO),
-                new TmdbDate("2010-01-01"),
-                new TmdbDate("2014-01-01"));
+        Call<TvResultsPage> call = getManager().discoverTv()
+                .sort_by(SortBy.VOTE_AVERAGE_DESC)
+                .with_genres(new DiscoverFilter(TestData.GENRE_ID_DRAMA, TestData.GENRE_ID_SCIFI))
+                .with_networks(new DiscoverFilter(TestData.NETWORK_ID_HBO))
+                .first_air_date_gte(new TmdbDate("2010-01-01"))
+                .first_air_date_lte(new TmdbDate("2017-01-01"))
+                .build();
         TvResultsPage results = call.execute().body();
         assertResultsPage(results);
         assertThat(results.results).isNotEmpty();
