@@ -155,4 +155,8 @@ public class Tmdb {
     public ReviewsService reviewsService() {
         return getRetrofit().create(ReviewsService.class);
     }
+
+    public DiscoverMovieBuilder discoverMovie() {
+        return new DiscoverMovieBuilder(discoverService());
+    }
 }

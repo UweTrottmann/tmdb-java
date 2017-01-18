@@ -16,7 +16,7 @@
 
 package com.uwetrottmann.tmdb2.services;
 
-import com.uwetrottmann.tmdb2.entities.AppendToDiscoverResponse;
+import com.uwetrottmann.tmdb2.entities.DiscoverFilter;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.TvResultsPage;
@@ -28,73 +28,41 @@ import retrofit2.http.Query;
 public interface DiscoverService {
 
     /**
-     * Discover movies by different types of data like average rating, number of votes and genres.
-     *
-     * @param includeAdult <em>Optional.</em> Toggle the inclusion of adult titles. Expected value is a boolean, true or
-     * false. Default is false.
-     * @param includeVideo <em>Optional.</em> Toggle the inclusion of items marked as a video. Expected value is a
-     * boolean, true or false. Default is true.
-     * @param language <em>Optional.</em> ISO 639-1 code.
-     * @param page <em>Optional.</em> Minimum 1, maximum 1000.
-     * @param primaryReleaseYear <em>Optional.</em> Filter the results so that only the primary release date year has
-     * this value. Expected value is a year.
-     * @param primaryReleaseYearGte <em>Optional.</em> Filter by the primary release date and only include those which
-     * are greater than or equal to the specified value. Expected format is YYYY-MM-DD.
-     * @param primaryReleaseYearLte <em>Optional.</em> Filter by the primary release date and only include those which
-     * are less or equal to the specified value. Expected format is YYYY-MM-DD.
-     * @param releaseDateGte <em>Optional.</em> Filter by all available release dates and only include those which are
-     * greater or equal to the specified value. Expected format is YYYY-MM-DD.
-     * @param releaseDateLte <em>Optional.</em> Filter by all available release dates and only include those which are
-     * less or equal to the specified value. Expected format is YYYY-MM-DD.
-     * @param sortBy <em>Optional.</em> Available options are: popularity.asc, popularity.desc, release_date.asc,
-     * release_date.desc, revenue.asc, revenue.desc, primary_release_date.asc, primary_release_date.desc,
-     * original_title.asc, original_title.desc, vote_average.asc, vote_average.desc, vote_count.asc, vote_count.desc
-     * @param voteCountGte <em>Optional.</em> Filter movies by their vote count and only include movies that have a vote
-     * count that is equal to or lower than the specified value.
-     * @param voteCountLte <em>Optional.</em> Filter movies by their vote count and only include movies that have a vote
-     * count that is equal to or lower than the specified value. Expected value is an integer.
-     * @param voteAverageGte <em>Optional.</em> Filter movies by their vote average and only include those that have an
-     * average rating that is equal to or higher than the specified value. Expected value is a float.
-     * @param voteAverageLte <em>Optional.</em> Filter movies by their vote average and only include those that have an
-     * average rating that is equal to or lower than the specified value. Expected value is a float.
-     * @param withCast <em>Optional.</em> Only include movies that have this person id added as a cast member. Expected
-     * value is an integer (the id of a person).
-     * @param withCrew <em>Optional.</em> Only include movies that have this person id added as a crew member. Expected
-     * value is an integer (the id of a person).
-     * @param withCompanies <em>Optional.</em> Filter movies to include a specific company. Expected value is an integer
-     * (the id of a company).
-     * @param withGenres <em>Optional.</em> Only include movies with the specified genres. Expected value is an integer
-     * (the id of a genre). Multiple values can be specified.
-     * @param withKeywords <em>Optional.</em> Only include movies with the specified genres. Expected value is an
-     * integer (the id of a genre). Multiple values can be specified.
-     * @param withPeople <em>Optional.</em> Only include movies that have these person id's added as a cast or crew
-     * member. Expected value is an integer (the id or ids of a person).
-     * @param year <em>Optional.</em> Filter the results by all available release dates that have the specified value
-     * added as a year. Expected value is an integer (year).
+     * Discover movies by different types of data like average rating, number of votes, genres and certifications.
+     * @see <a href="https://developers.themoviedb.org/3/discover/movie-discover">Movie Discover</a>
      */
     @GET("discover/movie")
     Call<MovieResultsPage> discoverMovie(
-            @Query("include_adult") boolean includeAdult,
-            @Query("include_video") boolean includeVideo,
             @Query("language") String language,
+            @Query("region") String region,
+            @Query("sort_by") SortBy sort_by,
+            @Query("certification_country") String certification_country,
+            @Query("certification") String certification,
+            @Query("certification_lte") String certification_lte,
+            @Query("include_adult") Boolean include_adult,
+            @Query("include_video") Boolean include_video,
             @Query("page") Integer page,
-            @Query("primary_release_year") String primaryReleaseYear,
-            @Query("primary_release_date.gte") TmdbDate primaryReleaseYearGte,
-            @Query("primary_release_date.lte") TmdbDate primaryReleaseYearLte,
-            @Query("release_date.gte") TmdbDate releaseDateGte,
-            @Query("release_date.lte") TmdbDate releaseDateLte,
-            @Query("sort_by") SortBy sortBy,
-            @Query("vote_count.gte") Integer voteCountGte,
-            @Query("vote_count.lte") Integer voteCountLte,
-            @Query("vote_average.gte") Float voteAverageGte,
-            @Query("vote_average.lte") Float voteAverageLte,
-            @Query("with_cast") AppendToDiscoverResponse withCast,
-            @Query("with_crew") AppendToDiscoverResponse withCrew,
-            @Query("with_companies") AppendToDiscoverResponse withCompanies,
-            @Query("with_genres") AppendToDiscoverResponse withGenres,
-            @Query("with_keywords") AppendToDiscoverResponse withKeywords,
-            @Query("with_people") AppendToDiscoverResponse withPeople,
-            @Query("year") Integer year
+            @Query("primary_release_year") Integer primary_release_year,
+            @Query("primary_release_date.gte") TmdbDate primary_release_date_gte,
+            @Query("primary_release_date.lte") TmdbDate primary_release_date_lte,
+            @Query("release_date.gte") TmdbDate release_date_gte,
+            @Query("release_date.lte") TmdbDate release_date_lte,
+            @Query("vote_count.gte") Integer vote_count_gte,
+            @Query("vote_count.lte") Integer vote_count_lte,
+            @Query("vote_average.gte") Float vote_average_gte,
+            @Query("vote_average.lte") Float vote_average_lte,
+            @Query("with_cast") DiscoverFilter with_cast,
+            @Query("with_crew") DiscoverFilter with_crew,
+            @Query("with_companies") DiscoverFilter with_companies,
+            @Query("with_genres") DiscoverFilter with_genres,
+            @Query("with_keywords") DiscoverFilter with_keywords,
+            @Query("with_people") DiscoverFilter with_people,
+            @Query("year") Integer year,
+            @Query("without_genres") DiscoverFilter without_genres,
+            @Query("with_runtime.gte") Integer with_runtime_gte,
+            @Query("with_runtime.lte") Integer with_runtime_lte,
+            @Query("with_release_type") DiscoverFilter with_release_type,
+            @Query("with_original_language") String with_original_language
     );
 
     /**
@@ -127,8 +95,8 @@ public interface DiscoverService {
             @Query("first_air_date_year") String firstAirDateYear,
             @Query("vote_count.gte") Integer voteCountGte,
             @Query("vote_average.gte") Float voteAverageGte,
-            @Query("with_genres") AppendToDiscoverResponse withGenres,
-            @Query("with_networks") AppendToDiscoverResponse withNetworks,
+            @Query("with_genres") DiscoverFilter withGenres,
+            @Query("with_networks") DiscoverFilter withNetworks,
             @Query("first_air_date.gte") TmdbDate firstAirDateGte,
             @Query("first_air_date.lte") TmdbDate firstAirDateLte
     );

@@ -8,7 +8,16 @@ public interface TestData {
     String MOVIE_TITLE = "Fight Club";
     String MOVIE_IMDB = "tt0137523";
     Status STATUS = Status.RELEASED;
-    
+
+    int GENRE_ID_DRAMA = 18;
+    int GENRE_ID_ROMANCE = 10749;
+    int GENRE_ID_SCIFI = 10765;
+
+    int NETWORK_ID_HBO = 49;
+
+    int PERSON_ID_BRAD_PITT = 287;
+    int PERSON_ID_DAVID_FINCHER = 7467;
+
     //Test Data for ReviewsService
     String REVIEW_ID = "581bbdbbc3a36805c60001f1";
     String REVIEW_AUTHOR = "iheardthatmoviewas";
@@ -17,7 +26,6 @@ public interface TestData {
     Integer REVIEW_MEDIA_ID = 284052;
     String REVIEW_MEDIA_TITLE = "Doctor Strange";
     String REVIEW_MEDIA_TYPE = "Movie";
-    
 
     int MOVIE_WITH_COLLECTION_ID = 671;
     String MOVIE_WITH_COLLECTION_TITLE = "Harry Potter and the Philosopher\'s Stone";
