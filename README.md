@@ -1,12 +1,10 @@
 **Pull requests (e.g. support for more API endpoints, bugfixes) are welcome!**
 
-tmdb-java
-============
+# tmdb-java
 
-A Java wrapper around the [TMDb v3 API][1] using [retrofit 2][2].
+A Java wrapper around the [TMDb v3 API](https://developers.themoviedb.org/3) using [retrofit 2][1].
 
-Usage
------
+## Usage
 <a href="https://search.maven.org/#search%7Cga%7C1%7Ctmdb-java"><img src="https://img.shields.io/maven-central/v/com.uwetrottmann.tmdb2/tmdb-java.svg?style=flat-square"></a>
 
 Add the following dependency to your Gradle project:
@@ -25,8 +23,7 @@ or your Maven project:
 </dependency>
 ```
 
-Example
--------
+Use like any other retrofit2 based service. For example:
 
 ```java
 // Create an instance of the service you wish to use
@@ -41,15 +38,17 @@ Call<Trailers> callTrailers = movieService.trailers(550);
 Trailers trailers = callTrailers.execute().body();
 ```
 
-See test cases in `src/test/` for more examples and the [retrofit website][2] for configuration options.
+See test cases in `src/test/` for more examples and the [retrofit website][1] for configuration options.
 
-License
--------
+## Use Proguard!
+You likely will not use every method in this library, so it is probably useful to strip unused ones with Proguard.
+Just apply the [Proguard rules for retrofit](https://square.github.io/retrofit/#download).
+
+## License
 
 Created by [Uwe Trottmann](https://uwetrottmann.com).
 Except where noted otherwise, released into the [public domain](UNLICENSE).
 Do not just copy, make it better.
 
 
- [1]: https://developers.themoviedb.org/3
- [2]: https://square.github.io/retrofit/
+ [1]: https://square.github.io/retrofit/
