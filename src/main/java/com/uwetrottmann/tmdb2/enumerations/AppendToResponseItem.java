@@ -27,7 +27,8 @@ public enum AppendToResponseItem {
     IMAGES("images"),
     ALTERNATIVE_TITLES("alternative_titles"),
     EXTERNAL_IDS("external_ids"),
-    CONTENT_RATINGS("content_ratings");
+    CONTENT_RATINGS("content_ratings"),
+    TRANSLATIONS("translations");
 
     private final String value;
 

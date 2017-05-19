@@ -17,6 +17,7 @@ public class Movie {
     public String homepage;
     public String imdb_id;
     public String original_title;
+    public String original_language;
     public String overview;
     public Double popularity;
     public String poster_path;
@@ -34,6 +35,7 @@ public class Movie {
 
     // Following are used with append_to_response
     public MovieAlternativeTitles alternative_titles;
+    public Translations translations;
     public Credits credits;
     public ReleaseDatesResults release_dates;
     public MovieResultsPage similar;
