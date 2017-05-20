@@ -15,6 +15,13 @@ Supported API calls
  * [TV Seasons](https://developers.themoviedb.org/3/tv-seasons) _incomplete_
  * [TV Episodes](https://developers.themoviedb.org/3/tv-episodes) _incomplete_
 
+## 1.7.0
+_2017-05-20_
+
+* Add `original_language` to `Movie`. Thanks @ProIcons!
+* Support appending translations to movie response. Thanks @ProIcons!
+* Update [retrofit to 2.3.0][3].
+
 ## 1.6.0
 _2017-01-18_
 
