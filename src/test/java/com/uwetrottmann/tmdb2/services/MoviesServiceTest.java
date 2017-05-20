@@ -11,6 +11,7 @@ import com.uwetrottmann.tmdb2.entities.Movie;
 import com.uwetrottmann.tmdb2.entities.MovieAlternativeTitles;
 import com.uwetrottmann.tmdb2.entities.MovieKeywords;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
+import com.uwetrottmann.tmdb2.entities.ReleaseDate;
 import com.uwetrottmann.tmdb2.entities.ReleaseDatesResult;
 import com.uwetrottmann.tmdb2.entities.ReleaseDatesResults;
 import com.uwetrottmann.tmdb2.entities.ReviewResultsPage;
@@ -58,6 +59,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(movie).isNotNull();
         assertThat(movie.id).isEqualTo(TestData.MOVIE_ID);
         assertThat(movie.title).isEqualTo(TestData.MOVIE_TITLE);
+        assertThat(movie.original_language).isNotEmpty();
         assertThat(movie.overview).isNotEmpty();
         assertThat(movie.tagline).isNotEmpty();
         assertThat(movie.adult).isFalse();
@@ -65,7 +67,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(movie.budget).isEqualTo(63000000);
         assertThat(movie.imdb_id).isEqualTo(TestData.MOVIE_IMDB);
         assertThat(movie.poster_path).isNotEmpty();
-        assertThat(movie.release_date).isEqualTo("1999-10-14");
+        assertThat(movie.release_date).isEqualTo("1999-10-15");
         assertThat(movie.revenue).isEqualTo(100853753);
         assertThat(movie.runtime).isEqualTo(139);
         assertThat(movie.vote_average).isPositive();
@@ -93,6 +95,17 @@ public class MoviesServiceTest extends BaseTestCase {
         Movie movie = call.execute().body();
 
         assertNotNull(movie.alternative_titles);
+    }
+
+    @Test
+    public void test_summary_append_translations() throws IOException {
+        Call<Movie> call = getManager().moviesService().summary(TestData.MOVIE_ID,
+                null,
+                new AppendToResponse(
+                        AppendToResponseItem.TRANSLATIONS));
+        Movie movie = call.execute().body();
+
+        assertNotNull(movie.translations);
     }
 
     @Test
@@ -228,11 +241,26 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(usResult).isNotNull();
         assertThat(usResult.release_dates).isNotNull();
         assertThat(usResult.release_dates.isEmpty()).isFalse();
-        assertThat(usResult.release_dates.get(0).iso_639_1).isNotNull();
-        assertThat(usResult.release_dates.get(0).certification).isEqualTo("R");
-        assertThat(usResult.release_dates.get(0).release_date).isEqualTo("1999-10-14T00:00:00.000Z");
+
+
+
         assertThat(usResult.release_dates.get(0).note).isNotNull();
         assertThat(usResult.release_dates.get(0).type).isBetween(1, 6);
+        assertThat(usResult.release_dates.get(0).iso_639_1).isNotNull();
+
+        boolean found = false;
+        for (ReleaseDate rDate : usResult.release_dates) {
+            if (rDate.type == 3) {
+
+                assertThat(rDate.certification).isEqualTo("R");
+                assertThat(rDate.release_date).isEqualTo("1999-10-15T00:00:00.000Z");
+
+                found = true;
+                break;
+            }
+        }
+        assertThat(found).isTrue();
+
     }
 
     @Test
