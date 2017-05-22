@@ -1,3 +1,20 @@
+/*
+ * Modifications Copyright 2017 Nikolas Mavropoylos
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ */
+
 package com.uwetrottmann.tmdb2;
 
 import com.uwetrottmann.tmdb2.entities.DiscoverFilter;
@@ -29,6 +46,7 @@ public class DiscoverTvBuilder {
     private Integer with_runtime_lte;
     private Boolean include_null_first_air_dates;
     private String with_original_language;
+    private DiscoverFilter without_keywords;
 
     public DiscoverTvBuilder(DiscoverService discoverService) {
         this.discoverService = discoverService;
@@ -143,7 +161,8 @@ public class DiscoverTvBuilder {
                 with_runtime_gte,
                 with_runtime_lte,
                 include_null_first_air_dates,
-                with_original_language
+                with_original_language,
+                without_keywords
         );
     }
 

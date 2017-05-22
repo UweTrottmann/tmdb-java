@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Miguel Teixeira
+ * Copyright 2017 Nikolas Mavropoylos
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,16 +12,24 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 
-package com.uwetrottmann.tmdb2.entities;
+package com.uwetrottmann.tmdb2.enumerations;
 
-import java.util.List;
+public enum MediaType {
+    MOVIE("movie"),
+    TV("tv");
 
-public class MovieKeywords {
-    
-    public Integer id;
-    public List<Keyword> keywords;
+    private final String value;
+
+    MediaType(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
 
 }

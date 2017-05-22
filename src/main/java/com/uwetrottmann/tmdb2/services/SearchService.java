@@ -2,7 +2,7 @@ package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.entities.CollectionResultsPage;
 import com.uwetrottmann.tmdb2.entities.CompanyResultsPage;
-import com.uwetrottmann.tmdb2.entities.KeywordResultsPage;
+import com.uwetrottmann.tmdb2.entities.SearchKeywordResultsPage;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.PersonResultsPage;
 import com.uwetrottmann.tmdb2.entities.TvResultsPage;
@@ -16,7 +16,7 @@ public interface SearchService {
      * Search for companies by name.
      *
      * @param query CGI escaped string
-     * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param page  <em>Optional.</em> Minimum value is 1, expected value is an integer.
      */
     @GET("search/company")
     Call<CompanyResultsPage> company(
@@ -27,8 +27,8 @@ public interface SearchService {
     /**
      * Search for collections by name.
      *
-     * @param query CGI escaped string
-     * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param query    CGI escaped string
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("search/collection")
@@ -42,10 +42,10 @@ public interface SearchService {
      * Search for keywords by name.
      *
      * @param query CGI escaped string
-     * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param page  <em>Optional.</em> Minimum value is 1, expected value is an integer.
      */
-    @GET("search/collection")
-    Call<KeywordResultsPage> keyword(
+    @GET("search/keyword")
+    Call<SearchKeywordResultsPage> keyword(
             @Query("query") String query,
             @Query("page") Integer page
     );
@@ -53,16 +53,16 @@ public interface SearchService {
     /**
      * Search for movies by title.
      *
-     * @param query CGI escaped string
-     * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
-     * @param language <em>Optional.</em> ISO 639-1 code.
-     * @param includeAdult <em>Optional.</em> Toggle the inclusion of adult titles. Expected value is: true or false
-     * @param year <em>Optional.</em> Filter the results release dates to matches that include this value.
+     * @param query              CGI escaped string
+     * @param page               <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language           <em>Optional.</em> ISO 639-1 code.
+     * @param includeAdult       <em>Optional.</em> Toggle the inclusion of adult titles. Expected value is: true or false
+     * @param year               <em>Optional.</em> Filter the results release dates to matches that include this value.
      * @param primaryReleaseYear <em>Optional.</em> Filter the results so that only the primary release dates have this
-     * value.
-     * @param searchType <em>Optional.</em> By default, the search type is 'phrase'. This is almost guaranteed the
-     * option you will want. It's a great all purpose search type and by far the most tuned for every day querying. For
-     * those wanting more of an "autocomplete" type search, set this option to 'ngram'.
+     *                           value.
+     * @param searchType         <em>Optional.</em> By default, the search type is 'phrase'. This is almost guaranteed the
+     *                           option you will want. It's a great all purpose search type and by far the most tuned for every day querying. For
+     *                           those wanting more of an "autocomplete" type search, set this option to 'ngram'.
      */
     @GET("search/movie")
     Call<MovieResultsPage> movie(
@@ -78,12 +78,12 @@ public interface SearchService {
     /**
      * Search for people by name.
      *
-     * @param query CGI escaped string
-     * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param query        CGI escaped string
+     * @param page         <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param includeAdult <em>Optional.</em> Toggle the inclusion of adult titles. Expected value is: true or false
-     * @param searchType <em>Optional.</em> By default, the search type is 'phrase'. This is almost guaranteed the
-     * option you will want. It's a great all purpose search type and by far the most tuned for every day querying. For
-     * those wanting more of an "autocomplete" type search, set this option to 'ngram'.
+     * @param searchType   <em>Optional.</em> By default, the search type is 'phrase'. This is almost guaranteed the
+     *                     option you will want. It's a great all purpose search type and by far the most tuned for every day querying. For
+     *                     those wanting more of an "autocomplete" type search, set this option to 'ngram'.
      */
     @GET("search/person")
     Call<PersonResultsPage> person(
@@ -96,13 +96,13 @@ public interface SearchService {
     /**
      * Search for TV shows by title.
      *
-     * @param query CGI escaped string
-     * @param page Minimum 1, maximum 1000.
-     * @param language ISO 639-1 code.
+     * @param query            CGI escaped string
+     * @param page             Minimum 1, maximum 1000.
+     * @param language         ISO 639-1 code.
      * @param firstAirDateYear Filter the results to only match shows that have an air date with this value.
-     * @param searchType By default, the search type is 'phrase'. This is almost guaranteed the option you will want.
-     * It's a great all purpose search type and by far the most tuned for every day querying. For those wanting more of
-     * an "autocomplete" type search, set this option to 'ngram'.
+     * @param searchType       By default, the search type is 'phrase'. This is almost guaranteed the option you will want.
+     *                         It's a great all purpose search type and by far the most tuned for every day querying. For those wanting more of
+     *                         an "autocomplete" type search, set this option to 'ngram'.
      */
     @GET("search/tv")
     Call<TvResultsPage> tv(

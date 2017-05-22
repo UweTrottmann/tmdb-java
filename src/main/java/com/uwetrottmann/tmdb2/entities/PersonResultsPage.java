@@ -1,6 +1,8 @@
 /*
  * Copyright 2015 Miguel Teixeira
  *
+ * Modifications Copyright 2017 Nikolas Mavropoylos
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -21,17 +23,6 @@ import java.util.List;
 
 public class PersonResultsPage extends BaseResultsPage {
 
-    public static class ResultsPage {
-        
-        public Integer id;
-        public Boolean adult;
-        public String name;
-        public Double popularity;
-        public String profile_path;
-        public List<Media> known_for;
-        
-    }
-    
-    public List<ResultsPage> results;
+    public List<BasePerson> results;
 
 }

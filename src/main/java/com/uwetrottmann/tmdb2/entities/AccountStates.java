@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 Miguel Teixeira
+ * Copyright 2017 Nikolas Mavropoylos
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,15 +12,14 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- * 
+ *
  */
 
 package com.uwetrottmann.tmdb2.entities;
 
-import java.util.List;
-
-public class KeywordResultsPage extends BaseResultsPage {
-
-    public List<Keyword> results;
-
+public class AccountStates {
+    public Integer id;
+    public Boolean favorite;
+    public Boolean rated;
+    public Boolean watchlist;
 }

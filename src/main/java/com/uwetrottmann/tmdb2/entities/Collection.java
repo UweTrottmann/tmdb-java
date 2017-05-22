@@ -1,6 +1,8 @@
 /*
  * Copyright 2015 Miguel Teixeira
  *
+ * Modifications Copyright 2017 Nikolas Mavropoylos
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -25,7 +27,9 @@ public class Collection {
     public String backdrop_path;
     public String name;
     public String poster_path;
-    public List<Part> parts;
+    public List<BaseMovie> parts;
     public String overview;
+
+    public Images images;
 
 }
