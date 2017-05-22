@@ -110,7 +110,7 @@ public interface TvEpisodesService {
      */
     @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}/credits")
     Call<TvEpisodeChanges> changes(
-            @Path("id") int tvShowId,
+            @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber,
             @Query("start_date") TmdbDate start_date,
@@ -127,7 +127,7 @@ public interface TvEpisodesService {
      */
     @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}/credits")
     Call<Credits> credits(
-            @Path("id") int tvShowId,
+            @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber
     );
