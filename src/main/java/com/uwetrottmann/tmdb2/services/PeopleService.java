@@ -19,7 +19,15 @@
 
 package com.uwetrottmann.tmdb2.services;
 
-import com.uwetrottmann.tmdb2.entities.*;
+import com.uwetrottmann.tmdb2.entities.AppendToResponse;
+import com.uwetrottmann.tmdb2.entities.Person;
+import com.uwetrottmann.tmdb2.entities.PersonChanges;
+import com.uwetrottmann.tmdb2.entities.PersonCredits;
+import com.uwetrottmann.tmdb2.entities.PersonIds;
+import com.uwetrottmann.tmdb2.entities.PersonImages;
+import com.uwetrottmann.tmdb2.entities.PersonResultsPage;
+import com.uwetrottmann.tmdb2.entities.TaggedImagesResultsPage;
+import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

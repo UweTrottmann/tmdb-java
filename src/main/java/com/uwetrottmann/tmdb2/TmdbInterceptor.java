@@ -19,8 +19,18 @@ package com.uwetrottmann.tmdb2;
 
 import com.google.common.util.concurrent.RateLimiter;
 import com.uwetrottmann.tmdb2.entities.Status;
-import com.uwetrottmann.tmdb2.exceptions.*;
-import okhttp3.*;
+import com.uwetrottmann.tmdb2.exceptions.TmdbAuthenticaitonFailedException;
+import com.uwetrottmann.tmdb2.exceptions.TmdbDuplicateEntryException;
+import com.uwetrottmann.tmdb2.exceptions.TmdbInvalidAcceptHeaderException;
+import com.uwetrottmann.tmdb2.exceptions.TmdbInvalidParametersException;
+import com.uwetrottmann.tmdb2.exceptions.TmdbNotFoundException;
+import com.uwetrottmann.tmdb2.exceptions.TmdbServiceErrorException;
+import com.uwetrottmann.tmdb2.exceptions.TmdbUnathorizedException;
+import okhttp3.HttpUrl;
+import okhttp3.Interceptor;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 import java.io.IOException;
 

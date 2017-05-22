@@ -18,6 +18,7 @@
 package com.uwetrottmann.tmdb2.entities;
 
 import com.google.gson.JsonObject;
+
 import java.util.List;
 
 public class PersonChanges {

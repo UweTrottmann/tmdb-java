@@ -17,9 +17,19 @@
 
 package com.uwetrottmann.tmdb2.services;
 
-import com.uwetrottmann.tmdb2.entities.*;
+import com.uwetrottmann.tmdb2.entities.List;
+import com.uwetrottmann.tmdb2.entities.ListCreateRequest;
+import com.uwetrottmann.tmdb2.entities.ListCreateResponse;
+import com.uwetrottmann.tmdb2.entities.ListItemStatus;
+import com.uwetrottmann.tmdb2.entities.ListOperation;
+import com.uwetrottmann.tmdb2.entities.Status;
 import retrofit2.Call;
-import retrofit2.http.*;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ListsService {
 

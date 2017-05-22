@@ -17,9 +17,9 @@
 
 package com.uwetrottmann.tmdb2.services;
 
+import com.uwetrottmann.tmdb2.entities.Certifications;
 import retrofit2.Call;
 import retrofit2.http.GET;
-import com.uwetrottmann.tmdb2.entities.Certifications;
 
 
 public interface CertificationsService {

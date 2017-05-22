@@ -2,9 +2,9 @@ package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.entities.CollectionResultsPage;
 import com.uwetrottmann.tmdb2.entities.CompanyResultsPage;
-import com.uwetrottmann.tmdb2.entities.SearchKeywordResultsPage;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.PersonResultsPage;
+import com.uwetrottmann.tmdb2.entities.SearchKeywordResultsPage;
 import com.uwetrottmann.tmdb2.entities.TvResultsPage;
 import retrofit2.Call;
 import retrofit2.http.GET;

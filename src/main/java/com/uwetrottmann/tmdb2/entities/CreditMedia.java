@@ -17,8 +17,9 @@
 
 package com.uwetrottmann.tmdb2.entities;
 
-import java.util.List;
 import com.google.gson.JsonObject;
+
+import java.util.List;
 
 public class CreditMedia {
     public Integer id;

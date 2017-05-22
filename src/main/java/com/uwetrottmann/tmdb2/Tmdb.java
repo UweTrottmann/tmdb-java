@@ -22,7 +22,30 @@ import com.uwetrottmann.tmdb2.entities.RequestToken;
 import com.uwetrottmann.tmdb2.entities.Session;
 import com.uwetrottmann.tmdb2.exceptions.TmdbException;
 import com.uwetrottmann.tmdb2.exceptions.TmdbServiceErrorException;
-import com.uwetrottmann.tmdb2.services.*;
+import com.uwetrottmann.tmdb2.services.AccountService;
+import com.uwetrottmann.tmdb2.services.AuthenticationService;
+import com.uwetrottmann.tmdb2.services.CertificationsService;
+import com.uwetrottmann.tmdb2.services.ChangesService;
+import com.uwetrottmann.tmdb2.services.CollectionService;
+import com.uwetrottmann.tmdb2.services.CompaniesService;
+import com.uwetrottmann.tmdb2.services.ConfigurationService;
+import com.uwetrottmann.tmdb2.services.CreditsService;
+import com.uwetrottmann.tmdb2.services.DiscoverService;
+import com.uwetrottmann.tmdb2.services.FindService;
+import com.uwetrottmann.tmdb2.services.GenreService;
+import com.uwetrottmann.tmdb2.services.GuestSessionService;
+import com.uwetrottmann.tmdb2.services.JobsService;
+import com.uwetrottmann.tmdb2.services.KeywordsService;
+import com.uwetrottmann.tmdb2.services.ListsService;
+import com.uwetrottmann.tmdb2.services.MoviesService;
+import com.uwetrottmann.tmdb2.services.NetworksService;
+import com.uwetrottmann.tmdb2.services.PeopleService;
+import com.uwetrottmann.tmdb2.services.ReviewsService;
+import com.uwetrottmann.tmdb2.services.SearchService;
+import com.uwetrottmann.tmdb2.services.TimezonesService;
+import com.uwetrottmann.tmdb2.services.TvEpisodesService;
+import com.uwetrottmann.tmdb2.services.TvSeasonsService;
+import com.uwetrottmann.tmdb2.services.TvService;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -185,26 +208,87 @@ public class Tmdb {
         }
         return retrofit;
     }
+    public AccountService accountService() {
+        return getRetrofit().create(AccountService.class);
+    }
+
+    public AuthenticationService authenticationService() {
+        return getRetrofit().create(AuthenticationService.class);
+    }
+
+    public CertificationsService certificationsService() {
+        return getRetrofit().create(CertificationsService.class);
+    }
+
+    public ChangesService changesService() {
+        return getRetrofit().create(ChangesService.class);
+    }
+
+    public CollectionService collectionService() {
+        return getRetrofit().create(CollectionService.class);
+    }
+
+    public CompaniesService companiesService() {
+        return getRetrofit().create(CompaniesService.class);
+    }
 
     public ConfigurationService configurationService() {
         return getRetrofit().create(ConfigurationService.class);
+    }
+
+    public CreditsService creditsService() {
+        return getRetrofit().create(CreditsService.class);
+    }
+
+    public DiscoverService discoverService() {
+        return getRetrofit().create(DiscoverService.class);
     }
 
     public FindService findService() {
         return getRetrofit().create(FindService.class);
     }
 
+    public GenreService genreService() {
+        return getRetrofit().create(GenreService.class);
+    }
+
+    public GuestSessionService guestSessionService() {
+        return getRetrofit().create(GuestSessionService.class);
+    }
+
+    public JobsService jobsService() {
+        return getRetrofit().create(JobsService.class);
+    }
+
+    public KeywordsService keywordsService() {
+        return getRetrofit().create(KeywordsService.class);
+    }
+
+    public ListsService listsService() {
+        return getRetrofit().create(ListsService.class);
+    }
+
     public MoviesService moviesService() {
         return getRetrofit().create(MoviesService.class);
+    }
+
+    public NetworksService networksService() {
+        return getRetrofit().create(NetworksService.class);
     }
 
     public PeopleService personService() {
         return getRetrofit().create(PeopleService.class);
     }
 
+    public ReviewsService reviewsService() {
+        return getRetrofit().create(ReviewsService.class);
+    }
+
     public SearchService searchService() {
         return getRetrofit().create(SearchService.class);
     }
+
+    public TimezonesService timezonesService() { return getRetrofit().create(TimezonesService.class); }
 
     public TvService tvService() {
         return getRetrofit().create(TvService.class);
@@ -218,21 +302,8 @@ public class Tmdb {
         return getRetrofit().create(TvEpisodesService.class);
     }
 
-    public DiscoverService discoverService() {
-        return getRetrofit().create(DiscoverService.class);
-    }
 
-    public CollectionService collectionService() {
-        return getRetrofit().create(CollectionService.class);
-    }
 
-    public GenreService genreService() {
-        return getRetrofit().create(GenreService.class);
-    }
-
-    public ReviewsService reviewsService() {
-        return getRetrofit().create(ReviewsService.class);
-    }
 
     public DiscoverMovieBuilder discoverMovie() {
         return new DiscoverMovieBuilder(discoverService());
@@ -241,4 +312,5 @@ public class Tmdb {
     public DiscoverTvBuilder discoverTv() {
         return new DiscoverTvBuilder(discoverService());
     }
+
 }

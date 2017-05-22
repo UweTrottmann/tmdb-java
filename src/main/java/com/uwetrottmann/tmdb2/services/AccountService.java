@@ -17,10 +17,21 @@
 
 package com.uwetrottmann.tmdb2.services;
 
-import com.uwetrottmann.tmdb2.entities.*;
+import com.uwetrottmann.tmdb2.entities.Account;
+import com.uwetrottmann.tmdb2.entities.FavoriteMedia;
+import com.uwetrottmann.tmdb2.entities.ListResultsPage;
+import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
+import com.uwetrottmann.tmdb2.entities.Status;
+import com.uwetrottmann.tmdb2.entities.TvEpisodesResultsPage;
+import com.uwetrottmann.tmdb2.entities.TvResultsPage;
+import com.uwetrottmann.tmdb2.entities.WatchlistMedia;
 import com.uwetrottmann.tmdb2.enumerations.SortBy;
 import retrofit2.Call;
-import retrofit2.http.*;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface AccountService {
 

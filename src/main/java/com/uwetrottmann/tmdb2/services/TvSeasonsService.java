@@ -17,7 +17,15 @@
 
 package com.uwetrottmann.tmdb2.services;
 
-import com.uwetrottmann.tmdb2.entities.*;
+import com.uwetrottmann.tmdb2.entities.AccountStates;
+import com.uwetrottmann.tmdb2.entities.AppendToResponse;
+import com.uwetrottmann.tmdb2.entities.Credits;
+import com.uwetrottmann.tmdb2.entities.ExternalIds;
+import com.uwetrottmann.tmdb2.entities.Images;
+import com.uwetrottmann.tmdb2.entities.TmdbDate;
+import com.uwetrottmann.tmdb2.entities.TvSeason;
+import com.uwetrottmann.tmdb2.entities.TvSeasonChanges;
+import com.uwetrottmann.tmdb2.entities.Videos;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;

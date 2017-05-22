@@ -19,7 +19,6 @@ package com.uwetrottmann.tmdb2.entities;
 
 import com.uwetrottmann.tmdb2.enumerations.Status;
 
-import java.util.Date;
 import java.util.List;
 
 public class Movie extends BaseMovie {

@@ -17,8 +17,12 @@
 
 package com.uwetrottmann.tmdb2.services;
 
-import com.uwetrottmann.tmdb2.entities.*;
-import com.uwetrottmann.tmdb2.enumerations.*;
+import com.uwetrottmann.tmdb2.entities.AppendToResponse;
+import com.uwetrottmann.tmdb2.entities.Company;
+import com.uwetrottmann.tmdb2.entities.DiscoverFilter;
+import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
+import com.uwetrottmann.tmdb2.entities.TmdbDate;
+import com.uwetrottmann.tmdb2.enumerations.SortBy;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
