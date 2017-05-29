@@ -1,6 +1,8 @@
 /*
  * Copyright 2015 Miguel Teixeira
  *
+ * Modifications Copyright 2017 Nikolas Mavropoylos
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -17,7 +19,13 @@
 
 package com.uwetrottmann.tmdb2.entities;
 
-public class Company extends ProductionCompany {
+public class Company extends BaseCompany {
 
-    public String logo_path;
+    public String description;
+    public String headquarters;
+    public String homepage;
+    public Company parent_company;
+
+    public MovieResultsPage movies;
+
 }

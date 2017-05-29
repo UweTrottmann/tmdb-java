@@ -1,20 +1,18 @@
 package com.uwetrottmann.tmdb2.entities;
 
-import java.util.Date;
 import java.util.List;
 
-public class TvSeason {
+public class TvSeason extends BaseTvSeason {
 
-    public Integer id;
-    public Date air_date;
+    public String _id;
+
     public List<TvEpisode> episodes;
-    public Integer episode_count;
     public String name;
     public String overview;
-    public String poster_path;
-    public Integer season_number;
+
     public Credits credits;
     public Images images;
-    public ExternalIds external_ids;
+    public Videos videos;
+    public TvSeasonExternalIds external_ids;
 
 }

@@ -14,7 +14,7 @@ public class ConfigurationServiceTest extends BaseTestCase {
 
     @Test
     public void test_configuration() throws IOException {
-        Call<Configuration> call = getManager().configurationService().configuration();
+        Call<Configuration> call = getUnauthenticatedInstance().configurationService().configuration();
         Configuration config = call.execute().body();
         assertThat(config).isNotNull();
         assertThat(config.images).isNotNull();
