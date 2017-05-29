@@ -1,123 +1,117 @@
 package com.uwetrottmann.tmdb2;
 
-import com.uwetrottmann.tmdb2.entities.CastMember;
-import com.uwetrottmann.tmdb2.entities.CrewMember;
-import com.uwetrottmann.tmdb2.entities.Image;
-import com.uwetrottmann.tmdb2.entities.Media;
-import com.uwetrottmann.tmdb2.entities.Videos;
+import com.google.common.util.concurrent.RateLimiter;
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-import java.util.List;
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.text.ParseException;
+import java.util.Vector;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.uwetrottmann.tmdb2.TmdbTestSuite.authenticatedInstance;
+import static com.uwetrottmann.tmdb2.TmdbTestSuite.initialized;
+import static com.uwetrottmann.tmdb2.TmdbTestSuite.suiteRunning;
+import static com.uwetrottmann.tmdb2.TmdbTestSuite.unauthenticatedInstance;
+import static com.uwetrottmann.tmdb2.TmdbTestSuite.DEBUG;
 
 public abstract class BaseTestCase {
 
-    // Do NOT use this API key in your application, it is solely for testing tmdb-java!
-    private static final String API_KEY = "25da90e9f8f0b3892d8bdeb6c3d6267d";
+    protected final Tmdb getUnauthenticatedInstance() {
+        return unauthenticatedInstance;
+    }
 
-    private static final boolean DEBUG = true;
+    protected final Tmdb getAuthenticatedInstance() {
+        return authenticatedInstance;
+    }
 
-    private static final Tmdb manager = new TestTmdb(API_KEY);
+    private static int testClassToRun = 0;
 
-    static class TestTmdb extends Tmdb {
+    @BeforeClass
+    public static void ensureEnvironmentIsSet() throws IOException, ParseException {
+        if (suiteRunning)
+            return;
 
+        if (initialized)
+            return;
+
+        try {
+            Field field = ClassLoader.class.getDeclaredField("classes");
+            field.setAccessible(true);
+
+            System.out.println("Tests Running Standalone.");
+
+            System.out.println("Test Classes To Run:");
+
+            @SuppressWarnings({ "unchecked", "rawtypes" })
+            Vector<Class> classes = (Vector<Class>) field.get(BaseTestCase.class.getClassLoader());
+            for (Class<?> clazz : classes) {
+                if (!clazz.getSimpleName().equals("Test") && clazz.getName().endsWith("Test")) {
+                    System.out.println("\t"+clazz.getSimpleName());
+                    System.out.println("\t\tTests:");
+                    for (Method method : clazz.getDeclaredMethods()) {
+                        if (method.isAnnotationPresent(Test.class)) {
+                            System.out.println("\t\t\t"+method.getName());
+                        }
+                    }
+                    testClassToRun++;
+                }
+            }
+        } catch (Exception ignore) {
+        }
+
+        TmdbTestSuite.initializeEnvironment();
+    }
+
+    @AfterClass
+    public static void ensureEnvironmentDestruct() throws IOException {
+        if (suiteRunning)
+            return;
+
+        if (--testClassToRun != 0)
+            return;
+
+        TmdbTestSuite.destructEnvironment();
+    }
+
+    protected static class TestTmdb extends Tmdb {
         public TestTmdb(String apiKey) {
             super(apiKey);
         }
 
         @Override
         protected void setOkHttpClientDefaults(OkHttpClient.Builder builder) {
-            super.setOkHttpClientDefaults(builder);
+            //super.setOkHttpClientDefaults(builder);
+            final Tmdb instance = this;
+            builder.addInterceptor(new Interceptor() {
+                @Override
+                public okhttp3.Response intercept(Chain chain) throws IOException {
+                    rateLimiter.acquire();
+                    return TmdbInterceptor.handleIntercept(chain, instance);
+                }
+            });
             if (DEBUG) {
                 // add logging
                 HttpLoggingInterceptor logging = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
                     @Override
                     public void log(String s) {
                         // standard output is easier to read
+
                         System.out.println(s);
                     }
                 });
                 logging.setLevel(HttpLoggingInterceptor.Level.BODY);
                 builder.addInterceptor(logging);
+                builder.authenticator(new TmdbAuthenticator(instance));
             }
         }
     }
 
-    protected final Tmdb getManager() {
-        return manager;
-    }
+    private static final RateLimiter rateLimiter = RateLimiter.create(3.5);
 
-    protected static void assertCrewCredits(List<CrewMember> crew) {
-        assertThat(crew).isNotNull();
-        assertThat(crew).isNotEmpty();
-
-        for (CrewMember member : crew) {
-            assertThat(member.id).isNotNull();
-            assertThat(member.credit_id).isNotNull();
-            assertThat(member.name).isNotNull();
-            assertThat(member.department).isNotNull();
-            assertThat(member.job).isNotNull();
-        }
-    }
-
-    protected static void assertCastCredits(List<CastMember> cast) {
-        assertThat(cast).isNotNull();
-        assertThat(cast).isNotEmpty();
-
-        for (CastMember member : cast) {
-            assertThat(member.id).isNotNull();
-            assertThat(member.credit_id).isNotNull();
-            assertThat(member.name).isNotNull();
-            assertThat(member.character).isNotNull();
-            assertThat(member.order).isNotNull();
-        }
-    }
-
-    protected static void assertImages(List<Image> images){
-        assertThat(images).isNotNull();
-        assertThat(images).isNotEmpty();
-
-        for(Image image : images) {
-            assertThat(image.file_path).isNotNull();
-            assertThat(image.width).isNotNull();
-            assertThat(image.height).isNotNull();
-            assertThat(image.aspect_ratio).isGreaterThan(0);
-            assertThat(image.vote_average).isGreaterThanOrEqualTo(0);
-            assertThat(image.vote_count).isGreaterThanOrEqualTo(0);
-        }
-    }
-
-    public static void assertMedia(List<Media> list) {
-        for (Media media : list) {
-            if ("movie".equals(media.media_type)) {
-                assertThat(media.adult).isNotNull();
-                assertThat(media.release_date).isNotNull();
-                assertThat(media.original_title).isNotNull();
-                assertThat(media.title).isNotNull();
-            }
-            assertThat(media.backdrop_path).isNotNull();
-            assertThat(media.id).isNotNull();
-            assertThat(media.poster_path).isNotNull();
-            assertThat(media.popularity).isNotNull().isGreaterThan(0);
-            assertThat(media.vote_average).isNotNull().isGreaterThan(0);
-            assertThat(media.vote_count).isNotNull().isGreaterThan(0);
-            assertThat(media.media_type).isNotNull();
-        }
-    }
-
-    protected static void assertVideos(Videos videos) {
-        assertThat(videos.id).isNotNull();
-        for (Videos.Video video : videos.results) {
-            assertThat(video).isNotNull();
-            assertThat(video.id).isNotNull();
-            assertThat(video.iso_639_1).isNotNull();
-            assertThat(video.key).isNotNull();
-            assertThat(video.name).isNotNull();
-            assertThat(video.site).isNotNull();
-            assertThat(video.size).isNotNull();
-            assertThat(video.type).isNotNull();
-        }
-    }
 }

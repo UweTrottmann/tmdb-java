@@ -41,6 +41,7 @@ public class DiscoverMovieBuilder {
     private Integer with_runtime_lte;
     private DiscoverFilter with_release_type;
     private String with_original_language;
+    private DiscoverFilter without_keywords;
 
     public DiscoverMovieBuilder(DiscoverService discoverService) {
         this.discoverService = discoverService;
@@ -227,7 +228,8 @@ public class DiscoverMovieBuilder {
                 with_runtime_gte,
                 with_runtime_lte,
                 with_release_type,
-                with_original_language
+                with_original_language,
+                without_keywords
         );
     }
 
