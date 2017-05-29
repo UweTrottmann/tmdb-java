@@ -1,38 +1,17 @@
-/*
- * Modifications Copyright 2017 Nikolas Mavropoylos
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 package com.uwetrottmann.tmdb2;
 
-import com.uwetrottmann.tmdb2.entities.GuestSession;
-import com.uwetrottmann.tmdb2.entities.RequestToken;
-import com.uwetrottmann.tmdb2.entities.Session;
-import com.uwetrottmann.tmdb2.exceptions.TmdbException;
-import com.uwetrottmann.tmdb2.exceptions.TmdbServiceErrorException;
+import com.uwetrottmann.tmdb2.exceptions.TmdbInvalidParametersException;
 import com.uwetrottmann.tmdb2.services.AccountService;
 import com.uwetrottmann.tmdb2.services.AuthenticationService;
 import com.uwetrottmann.tmdb2.services.CertificationsService;
 import com.uwetrottmann.tmdb2.services.ChangesService;
-import com.uwetrottmann.tmdb2.services.CollectionService;
+import com.uwetrottmann.tmdb2.services.CollectionsService;
 import com.uwetrottmann.tmdb2.services.CompaniesService;
 import com.uwetrottmann.tmdb2.services.ConfigurationService;
 import com.uwetrottmann.tmdb2.services.CreditsService;
 import com.uwetrottmann.tmdb2.services.DiscoverService;
 import com.uwetrottmann.tmdb2.services.FindService;
-import com.uwetrottmann.tmdb2.services.GenreService;
+import com.uwetrottmann.tmdb2.services.GenresService;
 import com.uwetrottmann.tmdb2.services.GuestSessionService;
 import com.uwetrottmann.tmdb2.services.JobsService;
 import com.uwetrottmann.tmdb2.services.KeywordsService;
@@ -45,13 +24,11 @@ import com.uwetrottmann.tmdb2.services.SearchService;
 import com.uwetrottmann.tmdb2.services.TimezonesService;
 import com.uwetrottmann.tmdb2.services.TvEpisodesService;
 import com.uwetrottmann.tmdb2.services.TvSeasonsService;
-import com.uwetrottmann.tmdb2.services.TvService;
+import com.uwetrottmann.tmdb2.services.TvShowService;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-
-import java.io.IOException;
 
 /**
  * Helper class for easy usage of the TMDB v3 API using retrofit.
@@ -65,29 +42,39 @@ import java.io.IOException;
  */
 public class Tmdb {
 
+    /**
+     * API Related Information
+     */
     public static final String API_HOST = "api.themoviedb.org";
     public static final String API_VERSION = "3";
     public static final String API_URL = "https://" + API_HOST + "/" + API_VERSION + "/";
 
     /**
-     * API key query parameter name.
+     * API key, Session and Guest Session query parameter names.
      */
     public static final String PARAM_API_KEY = "api_key";
     public static final String PARAM_SESSION_ID = "session_id";
     public static final String PARAM_GUEST_SESSION_ID = "guest_session_id";
+
+    /**
+     * Authentication and Guest Session end point paths.
+     */
+    public static final String PATH_AUTHENTICATION = "authentication";
 
     private OkHttpClient okHttpClient;
     private Retrofit retrofit;
 
     private String apiKey;
 
-    private String sessionId;
-    private String guestSessionId;
-
-    private Boolean isLoggedIn = false;
     private Boolean hasGuestSession = false;
     private Boolean hasAccountSession = false;
 
+    Boolean isLoggedIn = false;
+
+    String username;
+    String password;
+    String sessionId;
+    String guestSessionId;
 
     /**
      * Create a new manager instance.
@@ -98,39 +85,17 @@ public class Tmdb {
         this.apiKey = apiKey;
     }
 
-    /**
-     * Create a new authenticated manager instance for post/delete operations.
-     *
-     * @param apiKey Your TMDB API key.
-     */
-    public Tmdb(String apiKey, String username, String password) throws IOException, TmdbException {
-        this.apiKey = apiKey;
-        authenticate(username, password);
-    }
+    public void accountSession(String username, String password) throws TmdbInvalidParametersException {
+        if (username == null || password==null)
+            throw new TmdbInvalidParametersException(401,"Username and Password may not be null");
 
-
-    public void authenticateAnonymously() throws IOException, TmdbServiceErrorException {
-        AuthenticationService authService = getRetrofit().create(AuthenticationService.class);
-        GuestSession session = authService.createGuestSession().execute().body();
-
-        guestSessionId = session.guest_session_id;
-        isLoggedIn = true;
-        hasGuestSession = true;
-    }
-
-    public void authenticate(String username, String password) throws IOException, TmdbException {
-        AuthenticationService authService = getRetrofit().create(AuthenticationService.class);
-
-        RequestToken token = authService.requestToken().execute().body();
-
-        token = authService.validateToken(username, password, token.request_token).execute().body();
-
-        Session session = authService.createSession(token.request_token).execute().body();
-
-        sessionId = session.session_id;
-        isLoggedIn = true;
+        this.username = username;
+        this.password = password;
         hasAccountSession = true;
+    }
 
+    public void guestSession() {
+        hasGuestSession = true;
     }
 
     public String getSessionId() {
@@ -194,7 +159,7 @@ public class Tmdb {
      * Adds an interceptor to add the api key query parameter and to log requests.
      */
     protected void setOkHttpClientDefaults(OkHttpClient.Builder builder) {
-        builder.addInterceptor(new TmdbInterceptor(this));
+        builder.addInterceptor(new TmdbInterceptor(this)).authenticator(new TmdbAuthenticator(this));
     }
 
     /**
@@ -224,8 +189,8 @@ public class Tmdb {
         return getRetrofit().create(ChangesService.class);
     }
 
-    public CollectionService collectionService() {
-        return getRetrofit().create(CollectionService.class);
+    public CollectionsService collectionService() {
+        return getRetrofit().create(CollectionsService.class);
     }
 
     public CompaniesService companiesService() {
@@ -248,8 +213,8 @@ public class Tmdb {
         return getRetrofit().create(FindService.class);
     }
 
-    public GenreService genreService() {
-        return getRetrofit().create(GenreService.class);
+    public GenresService genreService() {
+        return getRetrofit().create(GenresService.class);
     }
 
     public GuestSessionService guestSessionService() {
@@ -290,8 +255,8 @@ public class Tmdb {
 
     public TimezonesService timezonesService() { return getRetrofit().create(TimezonesService.class); }
 
-    public TvService tvService() {
-        return getRetrofit().create(TvService.class);
+    public TvShowService tvService() {
+        return getRetrofit().create(TvShowService.class);
     }
 
     public TvSeasonsService tvSeasonsService() {

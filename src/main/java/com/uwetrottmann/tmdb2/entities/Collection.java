@@ -21,12 +21,8 @@ package com.uwetrottmann.tmdb2.entities;
 
 import java.util.List;
 
-public class Collection {
+public class Collection extends BaseCollection {
 
-    public Integer id;
-    public String backdrop_path;
-    public String name;
-    public String poster_path;
     public List<BaseMovie> parts;
     public String overview;
 

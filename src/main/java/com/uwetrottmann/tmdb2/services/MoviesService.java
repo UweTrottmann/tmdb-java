@@ -1,31 +1,14 @@
-/*
- * Modifications Copyright 2017 Nikolas Mavropoylos
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.entities.AccountStates;
+import com.uwetrottmann.tmdb2.entities.AlternativeTitles;
 import com.uwetrottmann.tmdb2.entities.AppendToResponse;
 import com.uwetrottmann.tmdb2.entities.Credits;
 import com.uwetrottmann.tmdb2.entities.Images;
-import com.uwetrottmann.tmdb2.entities.KeywordsResultPage;
+import com.uwetrottmann.tmdb2.entities.Keywords;
+import com.uwetrottmann.tmdb2.entities.ListResultsPage;
 import com.uwetrottmann.tmdb2.entities.Movie;
-import com.uwetrottmann.tmdb2.entities.MovieAlternativeTitles;
-import com.uwetrottmann.tmdb2.entities.MovieChanges;
-import com.uwetrottmann.tmdb2.entities.MovieListResultsPage;
+import com.uwetrottmann.tmdb2.entities.Changes;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.RatingObject;
 import com.uwetrottmann.tmdb2.entities.ReleaseDate;
@@ -35,6 +18,7 @@ import com.uwetrottmann.tmdb2.entities.Status;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.Videos;
+import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -63,6 +47,16 @@ public interface MoviesService {
     /**
      * Get the basic movie information for a specific movie id.
      *
+     * @param movieId A Movie TMDb id.
+     */
+    @GET("movie/{movie_id}")
+    Call<Movie> summary(
+            @Path("movie_id") int movieId
+    );
+
+    /**
+     * Get the basic movie information for a specific movie id.
+     *
      * @param movieId          A Movie TMDb id.
      * @param language         <em>Optional.</em> ISO 639-1 code.
      * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Values:</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
@@ -71,6 +65,18 @@ public interface MoviesService {
     Call<Movie> summary(
             @Path("movie_id") int movieId,
             @Query("language") String language,
+            @Query("append_to_response") AppendToResponse appendToResponse
+    );
+
+    /**
+     * Get the basic movie information for a specific movie id.
+     *
+     * @param movieId          A Movie TMDb id.
+     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Values:</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
+     */
+    @GET("movie/{movie_id}")
+    Call<Movie> summary(
+            @Path("movie_id") int movieId,
             @Query("append_to_response") AppendToResponse appendToResponse
     );
 
@@ -91,12 +97,26 @@ public interface MoviesService {
     );
 
     /**
+     * Get the basic movie information for a specific movie id.
+     *
+     * @param movieId          A Movie TMDb id.
+     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Value(s):</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
+     * @param options          <em>Optional.</em> parameters for the appended extra results.
+     */
+    @GET("movie/{movie_id}")
+    Call<Movie> summary(
+            @Path("movie_id") int movieId,
+            @Query("append_to_response") AppendToResponse appendToResponse,
+            @QueryMap Map<String, String> options
+    );
+
+    /**
      * Grab the following account states for a session:
-     * <p>
-     * * Movie rating <br>
-     * * If it belongs to your watchlist <br>
-     * * If it belongs to your favourite list <br>
-     * <p>
+     *
+     * * Movie rating
+     * * If it belongs to your watchlist
+     * * If it belongs to your favorite list
+     *
      * <b>Requires an active Session.</b>
      *
      * @param movieId A Movie TMDb id.
@@ -113,7 +133,7 @@ public interface MoviesService {
      * @param country <em>Optional.</em> ISO 3166-1 code.
      */
     @GET("movie/{movie_id}/alternative_titles")
-    Call<MovieAlternativeTitles> alternativeTitles(
+    Call<AlternativeTitles> alternativeTitles(
             @Path("movie_id") int movieId,
             @Query("country") String country
     );
@@ -129,7 +149,7 @@ public interface MoviesService {
      * @param page       <em>Optional.</em> Minimum value is 1, expected value is an integer.
      */
     @GET("movie/{movie_id}/changes")
-    Call<MovieChanges> changes(
+    Call<Changes> changes(
             @Path("movie_id") int movieId,
             @Query("start_date") TmdbDate start_date,
             @Query("end_date") TmdbDate end_date,
@@ -164,7 +184,7 @@ public interface MoviesService {
      * @param movieId A Movie TMDb id.
      */
     @GET("movie/{movie_id}/keywords")
-    Call<KeywordsResultPage> keywords(
+    Call<Keywords> keywords(
             @Path("movie_id") int movieId
     );
 
@@ -176,7 +196,7 @@ public interface MoviesService {
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/{movie_id}/lists")
-    Call<MovieListResultsPage> lists(
+    Call<ListResultsPage> lists(
             @Path("movie_id") int movieId,
             @Query("page") Integer page,
             @Query("language") String language
@@ -212,7 +232,7 @@ public interface MoviesService {
 
     /**
      * Get the release dates, certifications and related information by country for a specific movie id.
-     * <p>
+     *
      * The results are keyed by iso_3166_1 code and contain a type value which on our system, maps to:
      * {@link ReleaseDate#TYPE_PREMIERE}, {@link ReleaseDate#TYPE_THEATRICAL_LIMITED},
      * {@link ReleaseDate#TYPE_THEATRICAL}, {@link ReleaseDate#TYPE_DIGITAL}, {@link ReleaseDate#TYPE_PHYSICAL},
@@ -242,13 +262,11 @@ public interface MoviesService {
     /**
      * Get the translations for a specific movie id.
      *
-     * @param movieId          A Movie TMDb id.
-     * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
+     * @param movieId A Movie TMDb id.
      */
     @GET("movie/{movie_id}/translations")
     Call<Translations> translations(
-            @Path("movie_id") int movieId,
-            @Query("append_to_response") AppendToResponse appendToResponse
+            @Path("movie_id") int movieId
     );
 
     /**
@@ -322,7 +340,23 @@ public interface MoviesService {
 
     /**
      * Sets the Rating for the movie with the specified id.
-     * <p>
+     *
+     * <b>Requires an active Session.</b>
+     *
+     * @param movieId            A Movie TMDb id.
+     * @param authenticationType Authentication Type for this operation. Available Choices: Account, Guest.
+     * @param body               <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
+     */
+    @POST("movie/{movie_id}/rating")
+    Call<Status> addRating(
+            @Path("movie_id") Integer movieId,
+            @Query("authentication") AuthenticationType authenticationType,
+            @Body RatingObject body
+    );
+
+    /**
+     * Sets the Rating for the movie with the specified id.
+     *
      * <b>Requires an active Session.</b>
      *
      * @param movieId A Movie TMDb id.
@@ -336,7 +370,21 @@ public interface MoviesService {
 
     /**
      * Deletes the Rating for the movie with the specified id.
-     * <p>
+     *
+     * <b>Requires an active Session.</b>
+     *
+     * @param movieId            A Movie TMDb id.
+     * @param authenticationType Authentication Type for this operation. Available Choices: Account, Guest.
+     */
+    @DELETE("movie/{movie_id}/rating")
+    Call<Status> deleteRating(
+            @Path("movie_id") Integer movieId,
+            @Query("authentication") AuthenticationType authenticationType
+    );
+
+    /**
+     * Deletes the Rating for the movie with the specified id.
+     *
      * <b>Requires an active Session.</b>
      *
      * @param movieId A Movie TMDb id.

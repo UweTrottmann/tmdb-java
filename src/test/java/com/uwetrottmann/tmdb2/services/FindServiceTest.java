@@ -1,115 +1,128 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
-import com.uwetrottmann.tmdb2.TestData;
+import com.uwetrottmann.tmdb2.entities.BaseMovie;
+import com.uwetrottmann.tmdb2.entities.BasePerson;
+import com.uwetrottmann.tmdb2.entities.BaseTvSeason;
+import com.uwetrottmann.tmdb2.entities.BaseTvShow;
 import com.uwetrottmann.tmdb2.entities.FindResults;
-import com.uwetrottmann.tmdb2.entities.Movie;
-import com.uwetrottmann.tmdb2.entities.Person;
 import com.uwetrottmann.tmdb2.entities.TvEpisode;
-import com.uwetrottmann.tmdb2.entities.TvSeason;
-import com.uwetrottmann.tmdb2.entities.TvShow;
 import com.uwetrottmann.tmdb2.enumerations.ExternalSource;
 import org.junit.Test;
 import retrofit2.Call;
 
 import java.io.IOException;
 
+import static com.uwetrottmann.tmdb2.TestData.testMovie;
+import static com.uwetrottmann.tmdb2.TestData.testPerson;
+import static com.uwetrottmann.tmdb2.TestData.testTvEpisode;
+import static com.uwetrottmann.tmdb2.TestData.testTvSeason;
+import static com.uwetrottmann.tmdb2.TestData.testTvShow;
+import static com.uwetrottmann.tmdb2.assertions.MovieAssertions.assertBaseMovie;
+import static com.uwetrottmann.tmdb2.assertions.PersonAssertions.assertBasePerson;
+import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertBaseTvSeason;
+import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertBaseTvShow;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FindServiceTest extends BaseTestCase {
 
-    private static final String MOVIE2_IMDB_ID = "tt0361748";
-    private static final String MOVIE_TITLE = "Inglourious Basterds";
-
     @Test
     public void test_find_movie() throws IOException {
-        Call<FindResults> call = getManager().findService().find(MOVIE2_IMDB_ID, ExternalSource.IMDB_ID, null);
-        FindResults results = call.execute().body();
-        assertThat(results).isNotNull();
-        assertThat(results.movie_results).isNotEmpty();
+        Call<FindResults> call = getUnauthenticatedInstance().findService().find(
+                testMovie.imdb_id,
+                ExternalSource.IMDB_ID,
+                null
+        );
 
-        Movie movie = results.movie_results.get(0);
-        assertThat(movie).isNotNull();
-        assertThat(movie.adult).isFalse();
-        assertThat(movie.backdrop_path).isNotNull();
-        assertThat(movie.id).isNotNull();
-        assertThat(movie.original_title).isEqualTo(MOVIE_TITLE);
-        assertThat(movie.release_date).isEqualTo("2009-08-18");
-        assertThat(movie.poster_path).isNotNull();
-        assertThat(movie.popularity).isNotNull();
-        assertThat(movie.title).isEqualTo(MOVIE_TITLE);
-        assertThat(movie.vote_average).isGreaterThanOrEqualTo(0);
-        assertThat(movie.vote_average).isGreaterThanOrEqualTo(0);
+        FindResults results = call.execute().body();
+
+        assertThat(results).isNotNull();
+
+        assertThat(results.movie_results).isNotNull();
+        assertThat(results.movie_results).isNotEmpty();
+        for (BaseMovie movie : results.movie_results) {
+            assertBaseMovie(movie);
+            assertThat(movie.title).isEqualTo(testMovie.title);
+        }
     }
 
     @Test
     public void test_find_people() throws IOException {
-        Call<FindResults> call = getManager().findService().find(TestData.PERSON_IMDB_ID, ExternalSource.IMDB_ID, null);
-        FindResults results = call.execute().body();
-        assertThat(results).isNotNull();
-        assertThat(results.person_results).isNotEmpty();
+        Call<FindResults> call = getUnauthenticatedInstance().findService().find(
+                testPerson.imdb_id,
+                ExternalSource.IMDB_ID,
+                null
+        );
 
-        Person person = results.person_results.get(0);
-        assertThat(person).isNotNull();
-        assertThat(person.id).isNotNull();
-        assertThat(person.name).isEqualTo(TestData.PERSON_NAME);
-        assertThat(person.profile_path).isNotNull();
+        FindResults results = call.execute().body();
+
+        assertThat(results).isNotNull();
+
+        assertThat(results.person_results).isNotNull();
+        assertThat(results.person_results).isNotEmpty();
+        for (BasePerson person : results.person_results) {
+            assertBasePerson(person);
+            assertThat(person.name).isEqualTo(testPerson.name);
+        }
+
     }
 
     @Test
     public void test_find_tv_show() throws IOException {
-        Call<FindResults> call = getManager().findService().find(TestData.TVSHOW_IMDB_ID, ExternalSource.IMDB_ID, null);
-        FindResults results = call.execute().body();
-        assertThat(results).isNotNull();
-        assertThat(results.tv_results).isNotEmpty();
+        Call<FindResults> call = getUnauthenticatedInstance().findService().find(
+                testTvShow.external_ids.imdb_id,
+                ExternalSource.IMDB_ID,
+                null
+        );
 
-        TvShow show = results.tv_results.get(0);
-        assertThat(show).isNotNull();
-        assertThat(show.id).isNotNull();
-        assertThat(show.original_name).isEqualTo("Breaking Bad");
-        assertThat(show.name).isEqualTo("Breaking Bad");
-        assertThat(show.first_air_date).isNotNull();
-        assertThat(show.backdrop_path).isNotNull();
-        assertThat(show.poster_path).isNotNull();
-        assertThat(show.popularity).isGreaterThanOrEqualTo(0);
-        assertThat(show.vote_average).isGreaterThanOrEqualTo(0);
-        assertThat(show.vote_count).isGreaterThanOrEqualTo(0);
+        FindResults results = call.execute().body();
+
+        assertThat(results).isNotNull();
+
+        assertThat(results.tv_results).isNotNull();
+        assertThat(results.tv_results).isNotEmpty();
+        for (BaseTvShow tvShow : results.tv_results) {
+            assertBaseTvShow(tvShow);
+            assertThat(tvShow.name).isEqualTo(testTvShow.name);
+        }
     }
 
     @Test
     public void test_find_tv_season() throws IOException {
-        Call<FindResults> call = getManager().findService().find(String.valueOf(TestData.TVSHOW_SEASON1_ID),
-                ExternalSource.TVDB_ID, null);
-        FindResults results = call.execute().body();
-        assertThat(results).isNotNull();
-        assertThat(results.tv_season_results).isNotEmpty();
+        Call<FindResults> call = getUnauthenticatedInstance().findService().find(
+                testTvSeason.external_ids.tvdb_id,
+                ExternalSource.TVDB_ID,
+                null
+        );
 
-        TvSeason season = results.tv_season_results.get(0);
-        assertThat(season).isNotNull();
-        assertThat(season.air_date).isNotNull();
-        assertThat(season.name).isNotNull();
-        assertThat(season.id).isNotNull();
-        assertThat(season.poster_path).isNotEmpty();
-        assertThat(season.season_number).isEqualTo(1);
+        FindResults results = call.execute().body();
+
+        assertThat(results).isNotNull();
+
+        assertThat(results.tv_season_results).isNotNull();
+        assertThat(results.tv_season_results).isNotEmpty();
+        for (BaseTvSeason tvSeason : results.tv_season_results) {
+            assertBaseTvSeason(tvSeason);
+            assertThat(tvSeason.id).isEqualTo(testTvSeason.id);
+        }
     }
 
     @Test
     public void test_find_tv_episode() throws IOException {
-        Call<FindResults> call = getManager().findService().find(TestData.EPISODE_IDMB_ID, ExternalSource.IMDB_ID, null);
+        Call<FindResults> call = getUnauthenticatedInstance().findService().find(
+                testTvEpisode.external_ids.imdb_id,
+                ExternalSource.IMDB_ID,
+                null
+        );
+
         FindResults results = call.execute().body();
         assertThat(results).isNotNull();
-        assertThat(results.tv_episode_results).isNotEmpty();
 
-        TvEpisode episode = results.tv_episode_results.get(0);
-        assertThat(episode).isNotNull();
-        assertThat(episode.air_date).isNotNull();
-        assertThat(episode.episode_number).isPositive();
-        assertThat(episode.name).isNotNull();
-        assertThat(episode.id).isNotNull();
-        assertThat(episode.season_number).isEqualTo(1);
-        assertThat(episode.still_path).isNotNull();
-        assertThat(episode.vote_average).isGreaterThanOrEqualTo(0);
-        assertThat(episode.vote_count).isGreaterThanOrEqualTo(0);
+        assertThat(results.tv_episode_results).isNotNull();
+        assertThat(results.tv_episode_results).isNotEmpty();
+        for (TvEpisode tvEpisode : results.tv_episode_results) {
+            assertThat(tvEpisode.id).isEqualTo(testTvEpisode.id);
+        }
     }
 
 }

@@ -19,13 +19,12 @@
 
 package com.uwetrottmann.tmdb2.entities;
 
-public class Company extends ProductionCompany {
+public class Company extends BaseCompany {
 
-    public String logo_path;
     public String description;
     public String headquarters;
     public String homepage;
-    public String parent_company;
+    public Company parent_company;
 
     public MovieResultsPage movies;
 

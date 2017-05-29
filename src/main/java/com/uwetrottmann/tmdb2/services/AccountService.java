@@ -1,20 +1,3 @@
-/*
- * Copyright 2017 Nikolas Mavropoylos
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.entities.Account;
@@ -22,8 +5,8 @@ import com.uwetrottmann.tmdb2.entities.FavoriteMedia;
 import com.uwetrottmann.tmdb2.entities.ListResultsPage;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.Status;
-import com.uwetrottmann.tmdb2.entities.TvEpisodesResultsPage;
-import com.uwetrottmann.tmdb2.entities.TvResultsPage;
+import com.uwetrottmann.tmdb2.entities.TvEpisodeResultsPage;
+import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.entities.WatchlistMedia;
 import com.uwetrottmann.tmdb2.enumerations.SortBy;
 import retrofit2.Call;
@@ -84,7 +67,7 @@ public interface AccountService {
      * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
      */
     @GET("account/{account_id}/favorite/tv")
-    Call<TvResultsPage> favoriteTvShows(
+    Call<TvShowResultsPage> favoriteTvShows(
             @Path("account_id") Integer accountId,
             @Query("language") String language,
             @Query("sort_by") SortBy sortBy,
@@ -115,7 +98,7 @@ public interface AccountService {
      * @param language  <em>Optional.</em> ISO 639-1 code.
      * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
      */
-    @GET("account/{account_id}/rates/movies")
+    @GET("account/{account_id}/rated/movies")
     Call<MovieResultsPage> ratedMovies(
             @Path("account_id") Integer accountId,
             @Query("language") String language,
@@ -133,8 +116,8 @@ public interface AccountService {
      * @param language  <em>Optional.</em> ISO 639-1 code.
      * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
      */
-    @GET("account/{account_id}/rates/tv")
-    Call<TvResultsPage> ratedTvShows(
+    @GET("account/{account_id}/rated/tv")
+    Call<TvShowResultsPage> ratedTvShows(
             @Path("account_id") Integer accountId,
             @Query("language") String language,
             @Query("sort_by") SortBy sortBy,
@@ -151,8 +134,8 @@ public interface AccountService {
      * @param language  <em>Optional.</em> ISO 639-1 code.
      * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
      */
-    @GET("account/{account_id}/rates/tv/episodes")
-    Call<TvEpisodesResultsPage> ratedTvShowEpisodes(
+    @GET("account/{account_id}/rated/tv/episodes")
+    Call<TvEpisodeResultsPage> ratedTvShowEpisodes(
             @Path("account_id") Integer accountId,
             @Query("language") String language,
             @Query("sort_by") SortBy sortBy,
@@ -188,7 +171,7 @@ public interface AccountService {
      * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
      */
     @GET("account/{account_id}/watchlist/tv")
-    Call<TvResultsPage> watchlistTvShows(
+    Call<TvShowResultsPage> watchlistTvShows(
             @Path("account_id") Integer accountId,
             @Query("language") String language,
             @Query("sort_by") SortBy sortBy,

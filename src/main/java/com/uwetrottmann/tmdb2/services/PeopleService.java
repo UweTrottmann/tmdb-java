@@ -20,10 +20,10 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.entities.AppendToResponse;
+import com.uwetrottmann.tmdb2.entities.Changes;
 import com.uwetrottmann.tmdb2.entities.Person;
-import com.uwetrottmann.tmdb2.entities.PersonChanges;
 import com.uwetrottmann.tmdb2.entities.PersonCredits;
-import com.uwetrottmann.tmdb2.entities.PersonIds;
+import com.uwetrottmann.tmdb2.entities.PersonExternalIds;
 import com.uwetrottmann.tmdb2.entities.PersonImages;
 import com.uwetrottmann.tmdb2.entities.PersonResultsPage;
 import com.uwetrottmann.tmdb2.entities.TaggedImagesResultsPage;
@@ -116,7 +116,7 @@ public interface PeopleService {
      * @param personId A Person TMDb id.
      */
     @GET("person/{person_id}/external_ids")
-    Call<PersonIds> externalIds(
+    Call<PersonExternalIds> externalIds(
             @Path("person_id") int personId
     );
 
@@ -140,7 +140,7 @@ public interface PeopleService {
      * @param language   <em>Optional.</em> ISO 639-1 code.
      */
     @GET("person/{person_id}/changes")
-    Call<PersonChanges> changes(
+    Call<Changes> changes(
             @Path("person_id") int personId,
             @Query("language") String language,
             @Query("start_date") TmdbDate start_date,

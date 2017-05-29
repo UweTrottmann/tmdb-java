@@ -7,9 +7,7 @@ public class Credits {
     public Integer id;
 
     public List<CastMember> cast;
-
     public List<CrewMember> crew;
-
     public List<CastMember> guest_stars;
 
 }

@@ -1,27 +1,33 @@
-/*
- * Copyright 2017 Nikolas Mavropoylos
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- *
- */
-
 package com.uwetrottmann.tmdb2.enumerations;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public enum MediaType {
+    @SerializedName("movie")
     MOVIE("movie"),
-    TV("tv");
+    @SerializedName("tv")
+    TV("tv"),
+    @SerializedName("person")
+    PERSON("person");
+
+    private static final Map<String, MediaType> lookup = prepareLookup();
+
+    private static Map<String,MediaType> prepareLookup() {
+        Map<String,MediaType> mtMap = new HashMap<>();
+        for (MediaType mediaType : MediaType.values()) {
+            mtMap.put(mediaType.value, mediaType);
+        }
+        return mtMap;
+    }
 
     private final String value;
+
+    public static MediaType get(String value) {
+        return lookup.get(value);
+    }
 
     MediaType(String value) {
         this.value = value;
@@ -31,5 +37,4 @@ public enum MediaType {
     public String toString() {
         return value;
     }
-
 }

@@ -21,7 +21,7 @@ package com.uwetrottmann.tmdb2.services;
 import com.uwetrottmann.tmdb2.entities.DiscoverFilter;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
-import com.uwetrottmann.tmdb2.entities.TvResultsPage;
+import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.enumerations.SortBy;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -136,7 +136,7 @@ public interface DiscoverService {
      * @see <a href="https://developers.themoviedb.org/3/discover/tv-discover">TV Discover</a>
      */
     @GET("discover/tv")
-    Call<TvResultsPage> discoverTv(
+    Call<TvShowResultsPage> discoverTv(
             @Query("language") String language,
             @Query("sort_by") SortBy sort_by,
             @Query("air_date.gte") TmdbDate air_date_gte,

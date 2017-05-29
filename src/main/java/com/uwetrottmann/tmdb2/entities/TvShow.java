@@ -34,21 +34,21 @@ public class TvShow extends BaseTvShow {
     public Date last_air_date;
     public Integer number_of_episodes;
     public Integer number_of_seasons;
-    public List<ProductionCompany> production_companies;
+    public List<BaseCompany> production_companies;
     public List<TvSeason> seasons;
     public String status;
     public String type;
-    public Images images;
-    public Credits credits;
 
     // Following are used with append_to_response
-    public ExternalIds external_ids;
-    public TvAlternativeTitles alternative_titles;
-    public TvShowChanges changes;
-    public KeywordsResultPage keywords;
-    public TvResultsPage recommendations;
+    public Images images;
+    public Credits credits;
+    public TvExternalIds external_ids;
+    public AlternativeTitles alternative_titles;
+    public Changes changes;
+    public Keywords keywords;
+    public TvShowResultsPage recommendations;
     public Translations translations;
-    public TvContentRatings content_ratings;
-    public TvResultsPage similar;
+    public ContentRatings content_ratings;
+    public TvShowResultsPage similar;
     public Videos videos;
 }

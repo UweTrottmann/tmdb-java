@@ -2,10 +2,11 @@ package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.entities.CollectionResultsPage;
 import com.uwetrottmann.tmdb2.entities.CompanyResultsPage;
+import com.uwetrottmann.tmdb2.entities.MediaResultsPage;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.PersonResultsPage;
-import com.uwetrottmann.tmdb2.entities.SearchKeywordResultsPage;
-import com.uwetrottmann.tmdb2.entities.TvResultsPage;
+import com.uwetrottmann.tmdb2.entities.KeywordResultsPage;
+import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -45,7 +46,7 @@ public interface SearchService {
      * @param page  <em>Optional.</em> Minimum value is 1, expected value is an integer.
      */
     @GET("search/keyword")
-    Call<SearchKeywordResultsPage> keyword(
+    Call<KeywordResultsPage> keyword(
             @Query("query") String query,
             @Query("page") Integer page
     );
@@ -73,6 +74,24 @@ public interface SearchService {
             @Query("year") Integer year,
             @Query("primary_release_year") Integer primaryReleaseYear,
             @Query("search_type") String searchType
+    );
+
+    /**
+     * Search for movies by title.
+     *
+     * @param query              CGI escaped string
+     * @param page               <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language           <em>Optional.</em> ISO 639-1 code.
+     * @param includeAdult       <em>Optional.</em> Toggle the inclusion of adult titles. Expected value is: true or false
+     * @param region             <em>Optional.</em> ISO 3166-1 code.
+     */
+    @GET("search/multi")
+    Call<MediaResultsPage> multi(
+            @Query("query") String query,
+            @Query("page") Integer page,
+            @Query("language") String language,
+            @Query("include_adult") Boolean includeAdult,
+            @Query("region") String region
     );
 
     /**
@@ -105,7 +124,7 @@ public interface SearchService {
      *                         an "autocomplete" type search, set this option to 'ngram'.
      */
     @GET("search/tv")
-    Call<TvResultsPage> tv(
+    Call<TvShowResultsPage> tv(
             @Query("query") String query,
             @Query("page") Integer page,
             @Query("language") String language,
