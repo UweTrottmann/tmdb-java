@@ -13,7 +13,7 @@ public interface AuthenticationService {
     /**
      * Requests authentication Token.
      */
-    @GET(Tmdb.PATH_AUTHENTICATION +"/token/new")
+    @GET(Tmdb.PATH_AUTHENTICATION + "/token/new")
     Call<RequestToken> requestToken();
 
     /**
@@ -23,7 +23,7 @@ public interface AuthenticationService {
      * @param password      Password of TMDb Account.
      * @param request_token The Token you requested.
      */
-    @GET(Tmdb.PATH_AUTHENTICATION +"/token/validate_with_login")
+    @GET(Tmdb.PATH_AUTHENTICATION + "/token/validate_with_login")
     Call<RequestToken> validateToken(
             @Query("username") String username,
             @Query("password") String password,
@@ -35,7 +35,7 @@ public interface AuthenticationService {
      *
      * @param request_token The Token you requested.
      */
-    @GET(Tmdb.PATH_AUTHENTICATION +"/session/new")
+    @GET(Tmdb.PATH_AUTHENTICATION + "/session/new")
     Call<Session> createSession(
             @Query("request_token") String request_token
     );
@@ -43,6 +43,6 @@ public interface AuthenticationService {
     /**
      * Creates Guest TvSeason
      */
-    @GET(Tmdb.PATH_AUTHENTICATION +"/guest_session/new")
+    @GET(Tmdb.PATH_AUTHENTICATION + "/guest_session/new")
     Call<GuestSession> createGuestSession();
 }

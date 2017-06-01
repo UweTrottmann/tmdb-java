@@ -86,8 +86,9 @@ public class Tmdb {
     }
 
     public void accountSession(String username, String password) throws TmdbInvalidParametersException {
-        if (username == null || password==null)
-            throw new TmdbInvalidParametersException(401,"Username and Password may not be null");
+        if (username == null || password == null) {
+            throw new TmdbInvalidParametersException(401, "Username and Password may not be null");
+        }
 
         this.username = username;
         this.password = password;
@@ -173,6 +174,7 @@ public class Tmdb {
         }
         return retrofit;
     }
+
     public AccountService accountService() {
         return getRetrofit().create(AccountService.class);
     }
@@ -253,7 +255,9 @@ public class Tmdb {
         return getRetrofit().create(SearchService.class);
     }
 
-    public TimezonesService timezonesService() { return getRetrofit().create(TimezonesService.class); }
+    public TimezonesService timezonesService() {
+        return getRetrofit().create(TimezonesService.class);
+    }
 
     public TvShowService tvService() {
         return getRetrofit().create(TvShowService.class);
@@ -266,8 +270,6 @@ public class Tmdb {
     public TvEpisodesService tvEpisodesService() {
         return getRetrofit().create(TvEpisodesService.class);
     }
-
-
 
 
     public DiscoverMovieBuilder discoverMovie() {

@@ -15,9 +15,8 @@ public interface FindService {
      * and TV episode searches will be supported shortly.
      *
      * @param externalId An External Media Object Id.
-     * @param source <em>Required.</em> An External source to search. Allowed Values: imdb_id, freebase_mid, freebase_id, tvdb_id, tvrage_id
-     * @param language <em>Optional.</em> ISO 639-1 code.
-
+     * @param source     <em>Required.</em> An External source to search. Allowed Values: imdb_id, freebase_mid, freebase_id, tvdb_id, tvrage_id
+     * @param language   <em>Optional.</em> ISO 639-1 code.
      */
     @GET("find/{external_id}")
     Call<FindResults> find(
@@ -32,9 +31,8 @@ public interface FindService {
      * and TV episode searches will be supported shortly.
      *
      * @param externalId An External Media Object Id.
-     * @param source <em>Required.</em> An External source to search. Allowed Values: imdb_id, freebase_mid, freebase_id, tvdb_id, tvrage_id
-     * @param language <em>Optional.</em> ISO 639-1 code.
-
+     * @param source     <em>Required.</em> An External source to search. Allowed Values: imdb_id, freebase_mid, freebase_id, tvdb_id, tvrage_id
+     * @param language   <em>Optional.</em> ISO 639-1 code.
      */
     @GET("find/{external_id}")
     Call<FindResults> find(

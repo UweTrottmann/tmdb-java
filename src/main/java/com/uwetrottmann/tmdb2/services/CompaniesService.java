@@ -55,7 +55,7 @@ public interface CompaniesService {
      * Get the movies for a specific A Company TMDb id.
      * <p>
      * Is highly recommend using {@link DiscoverService#discoverMovie(
-     * String, String, SortBy, String, String, String, Boolean, Boolean,
+     *String, String, SortBy, String, String, String, Boolean, Boolean,
      * Integer, Integer, TmdbDate, TmdbDate, TmdbDate, TmdbDate, Integer,
      * Integer, Float, Float, DiscoverFilter, DiscoverFilter, DiscoverFilter,
      * DiscoverFilter, DiscoverFilter, DiscoverFilter, Integer, DiscoverFilter,

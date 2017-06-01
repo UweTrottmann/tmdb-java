@@ -47,8 +47,8 @@ public class PeopleServiceTest extends BaseTestCase {
 
     @Test
     public void test_summary_with_append_to_response() throws IOException, ParseException {
-        HashMap<String,String> opts = new HashMap<>();
-        opts.put("start_date",new TmdbDate(testPersonChangesStartDate).toString());
+        HashMap<String, String> opts = new HashMap<>();
+        opts.put("start_date", new TmdbDate(testPersonChangesStartDate).toString());
         opts.put("end_date", new TmdbDate(testPersonChangesEndDate).toString());
 
         Call<Person> call = getUnauthenticatedInstance().personService().summary(

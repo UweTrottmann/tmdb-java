@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class TmdbAuthenticator implements Authenticator {
 
-    private Tmdb tmdb;
+    private final Tmdb tmdb;
 
     public TmdbAuthenticator(Tmdb tmdb) {
         this.tmdb = tmdb;
@@ -24,34 +24,34 @@ public class TmdbAuthenticator implements Authenticator {
 
     @Override
     public Request authenticate(Route route, Response response) throws IOException {
-        return handleRequest(response,tmdb);
+        return handleRequest(response, tmdb);
     }
 
 
     public static Request handleRequest(Response response, Tmdb tmdb) throws IOException {
-        if (response.request().url().pathSegments().get(0).equals(Tmdb.PATH_AUTHENTICATION))
+        if (response.request().url().pathSegments().get(0).equals(Tmdb.PATH_AUTHENTICATION)) {
             return null;
+        }
 
         if (responseCount(response) >= 2) {
-            throw new TmdbAuthenticationFailedException(30,"Authentication failed: You do not have permissions to access the service.");
+            throw new TmdbAuthenticationFailedException(30, "Authentication failed: You do not have permissions to access the service.");
         }
 
         HttpUrl.Builder urlBuilder = response.request().url().newBuilder();
 
-        AuthenticationType type = TmdbInterceptor.determineAuthenticationType(urlBuilder,tmdb);
+        AuthenticationType type = TmdbInterceptor.determineAuthenticationType(urlBuilder, tmdb);
 
         if (tmdb.hasAccountSession() && type == AuthenticationType.ACCOUNT) {
-            if (tmdb.username == null || tmdb.password == null)
-                throw new TmdbAuthenticationFailedException(26,"You must provide a username and password.");
+            if (tmdb.username == null || tmdb.password == null) {
+                throw new TmdbAuthenticationFailedException(26, "You must provide a username and password.");
+            }
             acquireAccountSession(tmdb);
-            urlBuilder.setEncodedQueryParameter(Tmdb.PARAM_SESSION_ID,tmdb.sessionId);
-        }
-        else if (tmdb.hasGuestSession() && type == AuthenticationType.GUEST) {
+            urlBuilder.setEncodedQueryParameter(Tmdb.PARAM_SESSION_ID, tmdb.sessionId);
+        } else if (tmdb.hasGuestSession() && type == AuthenticationType.GUEST) {
             acquireGuestSession(tmdb);
-            urlBuilder.setEncodedQueryParameter(Tmdb.PARAM_GUEST_SESSION_ID,tmdb.guestSessionId);
-        }
-        else {
-            throw new TmdbAuthenticationFailedException(30,"Authentication failed: You do not have permissions to access the service.");
+            urlBuilder.setEncodedQueryParameter(Tmdb.PARAM_GUEST_SESSION_ID, tmdb.guestSessionId);
+        } else {
+            throw new TmdbAuthenticationFailedException(30, "Authentication failed: You do not have permissions to access the service.");
         }
 
         return response.request().newBuilder().url(urlBuilder.build()).build();

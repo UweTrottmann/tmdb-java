@@ -10,10 +10,10 @@ import com.uwetrottmann.tmdb2.entities.Network;
 import com.uwetrottmann.tmdb2.entities.TvEpisode;
 import com.uwetrottmann.tmdb2.entities.TvEpisodeResultsPage;
 import com.uwetrottmann.tmdb2.entities.TvExternalIds;
-import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.entities.TvSeason;
 import com.uwetrottmann.tmdb2.entities.TvSeasonExternalIds;
 import com.uwetrottmann.tmdb2.entities.TvShow;
+import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 
 import static com.uwetrottmann.tmdb2.TestData.testTvEpisode;
 import static com.uwetrottmann.tmdb2.TestData.testTvSeason;

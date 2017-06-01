@@ -2,8 +2,6 @@ package com.uwetrottmann.tmdb2;
 
 import com.uwetrottmann.tmdb2.entities.BaseCompany;
 import com.uwetrottmann.tmdb2.entities.BaseKeyword;
-import com.uwetrottmann.tmdb2.entities.BaseMovie;
-import com.uwetrottmann.tmdb2.entities.BasePerson;
 import com.uwetrottmann.tmdb2.entities.Collection;
 import com.uwetrottmann.tmdb2.entities.Company;
 import com.uwetrottmann.tmdb2.entities.Credit;
@@ -33,54 +31,52 @@ public class TestData {
 
     private static final SimpleDateFormat JSON_STRING_DATE = new SimpleDateFormat("yyy-MM-dd");
 
-    public static Person testPerson = new Person();
-    public static BasePerson testBasePerson = (BasePerson) testPerson;
+    public static final Person testPerson = new Person();
     public static Date testPersonChangesStartDate;
     public static Date testPersonChangesEndDate;
 
-    public static Person testPersonCast = new Person();
-    public static Person testPersonCrew = new Person();
+    public static final Person testPersonCast = new Person();
+    public static final Person testPersonCrew = new Person();
 
-    public static Movie testMovie = new Movie();
-    public static BaseMovie testBaseMovie = (BaseMovie) testMovie;
+    public static final Movie testMovie = new Movie();
     public static Date testMovieChangesStartDate;
     public static Date testMovieChangesEndDate;
 
-    public static Credit testCredit = new Credit();
+    public static final Credit testCredit = new Credit();
 
-    public static Collection testCollection = new Collection();
+    public static final Collection testCollection = new Collection();
 
-    public static Genre testMovieGenreAdventure = new Genre();
-    public static Genre testMovieGenreRomance = new Genre();
-    public static Genre testTvGenreDrama = new Genre();
-    public static Genre testTvGenreSciFi = new Genre();
+    public static final Genre testMovieGenreAdventure = new Genre();
+    public static final Genre testMovieGenreRomance = new Genre();
+    public static final Genre testTvGenreDrama = new Genre();
+    public static final Genre testTvGenreSciFi = new Genre();
 
-    public static Network testNetwork = new Network();
+    public static final Network testNetwork = new Network();
 
-    public static Review testReview = new Review();
+    public static final Review testReview = new Review();
 
-    public static Company testMovieCompany = new Company();
-    public static BaseCompany testProductionCompany = (BaseCompany) testMovieCompany;
-    public static Company testCompany = new Company();
+    public static final Company testMovieCompany = new Company();
+    public static final BaseCompany testProductionCompany = (BaseCompany) testMovieCompany;
+    public static final Company testCompany = new Company();
 
 
-    public static TvShow testTvShow = new TvShow();
+    public static final TvShow testTvShow = new TvShow();
     public static Date testTvShowChangesStartDate;
     public static Date testTvShowChangesEndDate;
 
-    public static TvSeason testTvSeason = new TvSeason();
+    public static final TvSeason testTvSeason = new TvSeason();
     public static Date testTvSeasonChangesStartDate;
     public static Date testTvSeasonChangesEndDate;
 
-    public static TvEpisode testTvEpisode = new TvEpisode();
+    public static final TvEpisode testTvEpisode = new TvEpisode();
     public static Date testTvEpisodeChangesStartDate;
     public static Date testTvEpisodeChangesEndDate;
 
-    public static BaseKeyword testKeyword = new BaseKeyword();
+    public static final BaseKeyword testKeyword = new BaseKeyword();
 
-    public static List testList = new List();
+    public static final List testList = new List();
 
-    public static java.util.List<Integer> testListMovies = new java.util.ArrayList<>();
+    public static final java.util.List<Integer> testListMovies = new java.util.ArrayList<>();
 
     public static void initializeTestingIntegrityData() throws ParseException {
 

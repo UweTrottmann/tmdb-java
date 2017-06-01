@@ -34,9 +34,9 @@ public interface GenresService {
 
     /**
      * Get a list of movies by Genre id.
-     * <p>
+     *
      * Is highly recommend using {@link DiscoverService#discoverMovie(
-     * String, String, SortBy, String, String, String, Boolean, Boolean,
+     *String, String, SortBy, String, String, String, Boolean, Boolean,
      * Integer, Integer, TmdbDate, TmdbDate, TmdbDate, TmdbDate, Integer,
      * Integer, Float, Float, DiscoverFilter, DiscoverFilter, DiscoverFilter,
      * DiscoverFilter, DiscoverFilter, DiscoverFilter, Integer, DiscoverFilter,

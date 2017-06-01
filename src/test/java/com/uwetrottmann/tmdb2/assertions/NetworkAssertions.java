@@ -11,6 +11,7 @@ public class NetworkAssertions {
         assertThat(network.name).isNotNull();
         assertThat(network.id).isNotNull();
     }
+
     public static void assertNetworkDataIntegrity(Network network) {
         assertNetwork(network);
         assertThat(network.name).isEqualTo(testNetwork.name);

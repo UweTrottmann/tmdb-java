@@ -14,8 +14,9 @@ public class CertificationAssertions {
         assertThat(certification.meaning).isNotNull();
         assertThat(certification.order).isNotNull();
     }
+
     public static void assertCertifications(Certifications certifications) {
-        for (Map.Entry<String,List<Certifications.Certification>> certificationSet : certifications.certifications.entrySet()) {
+        for (Map.Entry<String, List<Certifications.Certification>> certificationSet : certifications.certifications.entrySet()) {
             assertThat(certificationSet.getKey()).isNotNull();
             assertThat(certificationSet.getValue()).isNotNull();
             assertThat(certificationSet.getValue()).isNotEmpty();

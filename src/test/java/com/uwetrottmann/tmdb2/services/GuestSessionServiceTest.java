@@ -1,8 +1,9 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
-import com.uwetrottmann.tmdb2.entities.TvEpisodeResultsPage;
+import com.uwetrottmann.tmdb2.annotations.RequiresGuestSession;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
+import com.uwetrottmann.tmdb2.entities.TvEpisodeResultsPage;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.exceptions.TmdbServiceErrorException;
 import org.junit.Test;
@@ -10,13 +11,17 @@ import retrofit2.Call;
 
 import java.io.IOException;
 
+import static com.uwetrottmann.tmdb2.TmdbTestSuite.guestDataInitialized;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assume.assumeTrue;
 
+@RequiresGuestSession
 public class GuestSessionServiceTest extends BaseTestCase {
 
     @Test
     public void test_rated_movies() throws IOException {
+        assumeTrue(guestDataInitialized);
+
         Call<MovieResultsPage> call = getAuthenticatedInstance().guestSessionService().ratedMovies(
                 getAuthenticatedInstance().getGuestSessionId(),
                 null,
@@ -34,6 +39,8 @@ public class GuestSessionServiceTest extends BaseTestCase {
 
     @Test
     public void test_rated_tvShows() throws IOException {
+        assumeTrue(guestDataInitialized);
+
         Call<TvShowResultsPage> call = getAuthenticatedInstance().guestSessionService().ratedTvShows(
                 getAuthenticatedInstance().getGuestSessionId(),
                 null,
@@ -51,6 +58,8 @@ public class GuestSessionServiceTest extends BaseTestCase {
 
     @Test
     public void test_rated_tvEpisodes() throws IOException {
+        assumeTrue(guestDataInitialized);
+
         Call<TvEpisodeResultsPage> call = getAuthenticatedInstance().guestSessionService().ratedTvEpisodes(
                 getAuthenticatedInstance().getGuestSessionId(),
                 null,

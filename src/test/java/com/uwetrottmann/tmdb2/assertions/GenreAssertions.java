@@ -17,6 +17,7 @@ public class GenreAssertions {
             assertThat(genre.name).isNotEmpty();
         }
     }
+
     public static void assertGenre(Genre genre) {
         assertThat(genre).isNotNull();
         assertThat(genre.name).isNotNull();

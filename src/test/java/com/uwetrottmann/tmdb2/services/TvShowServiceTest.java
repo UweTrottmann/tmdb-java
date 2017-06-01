@@ -1,6 +1,8 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
+import com.uwetrottmann.tmdb2.annotations.RequiresAccountSession;
+import com.uwetrottmann.tmdb2.annotations.RequiresGuestSession;
 import com.uwetrottmann.tmdb2.entities.AccountStates;
 import com.uwetrottmann.tmdb2.entities.AlternativeTitles;
 import com.uwetrottmann.tmdb2.entities.AppendToResponse;
@@ -14,8 +16,8 @@ import com.uwetrottmann.tmdb2.entities.Status;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.TvExternalIds;
-import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.entities.TvShow;
+import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.entities.Videos;
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
 import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
@@ -28,8 +30,8 @@ import java.util.HashMap;
 import static com.uwetrottmann.tmdb2.TestData.testTvShow;
 import static com.uwetrottmann.tmdb2.TestData.testTvShowChangesEndDate;
 import static com.uwetrottmann.tmdb2.TestData.testTvShowChangesStartDate;
-import static com.uwetrottmann.tmdb2.TmdbTestSuite.PASSWORD;
-import static com.uwetrottmann.tmdb2.TmdbTestSuite.USERNAME;
+import static com.uwetrottmann.tmdb2.TmdbTestSuite.accountDataInitialized;
+import static com.uwetrottmann.tmdb2.TmdbTestSuite.guestDataInitialized;
 import static com.uwetrottmann.tmdb2.assertions.AccountAssertions.assertAccountStates;
 import static com.uwetrottmann.tmdb2.assertions.ChangeAssertions.assertContentChanges;
 import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCredits;
@@ -61,8 +63,8 @@ public class TvShowServiceTest extends BaseTestCase {
 
     @Test
     public void test_tvShow_with_append_to_response() throws IOException {
-        HashMap<String,String> opts = new HashMap<>();
-        opts.put("start_date",new TmdbDate(testTvShowChangesStartDate).toString());
+        HashMap<String, String> opts = new HashMap<>();
+        opts.put("start_date", new TmdbDate(testTvShowChangesStartDate).toString());
         opts.put("end_date", new TmdbDate(testTvShowChangesEndDate).toString());
 
         Call<TvShow> call = getUnauthenticatedInstance().tvService().tv(
@@ -320,7 +322,10 @@ public class TvShowServiceTest extends BaseTestCase {
     }
 
     @Test
+    @RequiresAccountSession
     public void test_account_states_with_account() throws IOException {
+        assumeTrue(accountDataInitialized);
+
         Call<AccountStates> call = getAuthenticatedInstance().tvService().accountStates(
                 testTvShow.id
         );
@@ -331,8 +336,9 @@ public class TvShowServiceTest extends BaseTestCase {
     }
 
     @Test
+    @RequiresAccountSession
     public void test_modify_rating_with_account() throws IOException {
-        assumeTrue(USERNAME != null && PASSWORD != null);
+        assumeTrue(accountDataInitialized);
 
         RatingObject obj = new RatingObject();
         obj.value = 10D;
@@ -348,7 +354,9 @@ public class TvShowServiceTest extends BaseTestCase {
     }
 
     @Test
+    @RequiresGuestSession
     public void test_modify_rating_as_guest() throws IOException {
+        assumeTrue(guestDataInitialized);
 
         RatingObject obj = new RatingObject();
         obj.value = 5D;
@@ -362,7 +370,6 @@ public class TvShowServiceTest extends BaseTestCase {
         assertThat(status.status_code).isEqualTo(13);
 
     }
-
 
 
 }

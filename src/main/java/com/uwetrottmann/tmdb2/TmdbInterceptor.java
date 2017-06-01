@@ -22,7 +22,7 @@ import java.io.IOException;
  */
 public class TmdbInterceptor implements Interceptor {
 
-    private Tmdb tmdb;
+    private final Tmdb tmdb;
 
 
     public TmdbInterceptor(Tmdb tmdb) {
@@ -92,13 +92,15 @@ public class TmdbInterceptor implements Interceptor {
      * @see <a href="https://www.themoviedb.org/documentation/api/status-codes">Status Codes</a>
      */
     private static void handleErrors(Response response, Tmdb tmdb) throws IOException {
-        if (response.code() >= 200 && response.code() <= 299)
+        if (response.code() >= 200 && response.code() <= 299) {
             return;
+        }
 
         Status obj = getErrorStatusObject(response.body(), tmdb);
 
-        if (obj.status_code == 3 || obj.status_code == 14 || obj.status_code == 33)
+        if (obj.status_code == 3 || obj.status_code == 14 || obj.status_code == 33) {
             return;
+        }
 
         switch (obj.status_code) {
             case 2:
@@ -139,10 +141,9 @@ public class TmdbInterceptor implements Interceptor {
     }
 
     private static Status getErrorStatusObject(ResponseBody body, Tmdb tmdb) throws IOException {
-        Status statusObject = (Status) tmdb.getRetrofit().responseBodyConverter(
+        return (Status) tmdb.getRetrofit().responseBodyConverter(
                 Status.class, Status.class.getAnnotations())
                 .convert(body);
-        return statusObject;
     }
 
     private static void addSessionToQuery(HttpUrl.Builder urlBuilder, AuthenticationType type, Tmdb tmdb) {

@@ -197,6 +197,11 @@ public class DiscoverMovieBuilder {
         return this;
     }
 
+    public DiscoverMovieBuilder without_keywords(DiscoverFilter keywords) {
+        this.without_keywords = keywords;
+        return this;
+    }
+
     public Call<MovieResultsPage> build() {
         return discoverService.discoverMovie(
                 language,

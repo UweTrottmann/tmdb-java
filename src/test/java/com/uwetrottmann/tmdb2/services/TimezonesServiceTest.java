@@ -20,9 +20,9 @@ public class TimezonesServiceTest extends BaseTestCase {
 
         Timezones timezones = call.execute().body();
         assertThat(timezones).isNotNull();
-        for (HashMap<String,List<String>> entryMap : timezones) {
+        for (HashMap<String, List<String>> entryMap : timezones) {
             assertThat(entryMap).isNotNull();
-            for (Map.Entry<String,List<String>> entry : entryMap.entrySet()) {
+            for (Map.Entry<String, List<String>> entry : entryMap.entrySet()) {
                 assertThat(entry).isNotNull();
                 assertThat(entry.getKey()).isNotNull();
                 assertThat(entry.getValue()).isNotNull();

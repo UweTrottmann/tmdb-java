@@ -2,6 +2,8 @@ package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
 import com.uwetrottmann.tmdb2.TestData;
+import com.uwetrottmann.tmdb2.annotations.RequiresAccountSession;
+import com.uwetrottmann.tmdb2.annotations.RequiresGuestSession;
 import com.uwetrottmann.tmdb2.entities.AccountStates;
 import com.uwetrottmann.tmdb2.entities.AlternativeTitles;
 import com.uwetrottmann.tmdb2.entities.AppendToResponse;
@@ -31,8 +33,8 @@ import java.util.HashMap;
 import static com.uwetrottmann.tmdb2.TestData.testMovie;
 import static com.uwetrottmann.tmdb2.TestData.testMovieChangesEndDate;
 import static com.uwetrottmann.tmdb2.TestData.testMovieChangesStartDate;
-import static com.uwetrottmann.tmdb2.TmdbTestSuite.PASSWORD;
-import static com.uwetrottmann.tmdb2.TmdbTestSuite.USERNAME;
+import static com.uwetrottmann.tmdb2.TmdbTestSuite.accountDataInitialized;
+import static com.uwetrottmann.tmdb2.TmdbTestSuite.guestDataInitialized;
 import static com.uwetrottmann.tmdb2.assertions.AccountAssertions.assertAccountStates;
 import static com.uwetrottmann.tmdb2.assertions.ChangeAssertions.assertContentChanges;
 import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCredits;
@@ -359,8 +361,12 @@ public class MoviesServiceTest extends BaseTestCase {
         assertMovieResultsPage(page);
     }
 
+
     @Test
+    @RequiresAccountSession
     public void test_account_states_with_account() throws IOException {
+        assumeTrue(accountDataInitialized);
+
         Call<AccountStates> call = getAuthenticatedInstance().moviesService().accountStates(
                 testMovie.id
         );
@@ -371,8 +377,9 @@ public class MoviesServiceTest extends BaseTestCase {
     }
 
     @Test
+    @RequiresAccountSession
     public void test_modify_rating_with_account() throws IOException {
-        assumeTrue(USERNAME != null && PASSWORD != null);
+        assumeTrue(accountDataInitialized);
 
         RatingObject obj = new RatingObject();
         obj.value = 10D;
@@ -388,7 +395,9 @@ public class MoviesServiceTest extends BaseTestCase {
     }
 
     @Test
+    @RequiresGuestSession
     public void test_modify_rating_as_guest() throws IOException {
+        assumeTrue(guestDataInitialized);
 
         RatingObject obj = new RatingObject();
         obj.value = 5D;

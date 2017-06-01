@@ -2,10 +2,10 @@ package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.entities.CollectionResultsPage;
 import com.uwetrottmann.tmdb2.entities.CompanyResultsPage;
+import com.uwetrottmann.tmdb2.entities.KeywordResultsPage;
 import com.uwetrottmann.tmdb2.entities.MediaResultsPage;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.PersonResultsPage;
-import com.uwetrottmann.tmdb2.entities.KeywordResultsPage;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -79,11 +79,11 @@ public interface SearchService {
     /**
      * Search for movies by title.
      *
-     * @param query              CGI escaped string
-     * @param page               <em>Optional.</em> Minimum value is 1, expected value is an integer.
-     * @param language           <em>Optional.</em> ISO 639-1 code.
-     * @param includeAdult       <em>Optional.</em> Toggle the inclusion of adult titles. Expected value is: true or false
-     * @param region             <em>Optional.</em> ISO 3166-1 code.
+     * @param query        CGI escaped string
+     * @param page         <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language     <em>Optional.</em> ISO 639-1 code.
+     * @param includeAdult <em>Optional.</em> Toggle the inclusion of adult titles. Expected value is: true or false
+     * @param region       <em>Optional.</em> ISO 3166-1 code.
      */
     @GET("search/multi")
     Call<MediaResultsPage> multi(

@@ -15,8 +15,8 @@ public enum MediaType {
 
     private static final Map<String, MediaType> lookup = prepareLookup();
 
-    private static Map<String,MediaType> prepareLookup() {
-        Map<String,MediaType> mtMap = new HashMap<>();
+    private static Map<String, MediaType> prepareLookup() {
+        Map<String, MediaType> mtMap = new HashMap<>();
         for (MediaType mediaType : MediaType.values()) {
             mtMap.put(mediaType.value, mediaType);
         }

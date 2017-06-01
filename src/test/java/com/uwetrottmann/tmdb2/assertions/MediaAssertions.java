@@ -34,6 +34,7 @@ public class MediaAssertions {
 
         }
     }
+
     public static void assertMediaResultsPage(MediaResultsPage mediaResultsPage) {
         assertBaseResultsPage(mediaResultsPage);
         for (Media media : mediaResultsPage.results) {

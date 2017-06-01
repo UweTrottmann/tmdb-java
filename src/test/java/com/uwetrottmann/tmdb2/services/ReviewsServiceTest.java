@@ -11,15 +11,15 @@ import static com.uwetrottmann.tmdb2.TestData.testReview;
 import static com.uwetrottmann.tmdb2.assertions.ReviewAssertions.assertReviewDataIntegrity;
 
 public class ReviewsServiceTest extends BaseTestCase {
-	
-	@Test
-	public void test_getDetails() throws IOException{
-		Call<Review> call = getUnauthenticatedInstance().reviewsService().getDetails(
-		        testReview.id
+
+    @Test
+    public void test_getDetails() throws IOException {
+        Call<Review> call = getUnauthenticatedInstance().reviewsService().getDetails(
+                testReview.id
         );
 
         Review review = call.execute().body();
 
         assertReviewDataIntegrity(review);
-	}
+    }
 }

@@ -15,7 +15,7 @@ public interface GuestSessionService {
      * Get the rated movies for a guest session.
      *
      * @param language <em>Optional.</em> ISO 639-1 code.
-     * @param sortBy <em>Optional.</em> Sort the results. Allowed Values: created_at.asc, created_at.desc
+     * @param sortBy   <em>Optional.</em> Sort the results. Allowed Values: created_at.asc, created_at.desc
      */
     @GET("guest_session/{id}/rated/movies")
     Call<MovieResultsPage> ratedMovies(
@@ -29,7 +29,7 @@ public interface GuestSessionService {
      * Get the rated TV shows for a guest session.
      *
      * @param language <em>Optional.</em> ISO 639-1 code.
-     * @param sortBy <em>Optional.</em> Sort the results. Allowed Values: created_at.asc, created_at.desc
+     * @param sortBy   <em>Optional.</em> Sort the results. Allowed Values: created_at.asc, created_at.desc
      */
     @GET("guest_session/{id}/rated/tv")
     Call<TvShowResultsPage> ratedTvShows(
@@ -42,7 +42,7 @@ public interface GuestSessionService {
      * Get the rated TV episodes for a guest session.
      *
      * @param language <em>Optional.</em> ISO 639-1 code.
-     * @param sortBy <em>Optional.</em> Sort the results. Allowed Values: created_at.asc, created_at.desc
+     * @param sortBy   <em>Optional.</em> Sort the results. Allowed Values: created_at.asc, created_at.desc
      */
     @GET("guest_session/{id}/rated/tv/episodes")
     Call<TvEpisodeResultsPage> ratedTvEpisodes(

@@ -1,6 +1,7 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
+import com.uwetrottmann.tmdb2.annotations.RequiresAccountSession;
 import com.uwetrottmann.tmdb2.entities.AccountStates;
 import com.uwetrottmann.tmdb2.entities.AccountStatesResults;
 import com.uwetrottmann.tmdb2.entities.AppendToResponse;
@@ -21,6 +22,7 @@ import static com.uwetrottmann.tmdb2.TestData.testTvSeason;
 import static com.uwetrottmann.tmdb2.TestData.testTvSeasonChangesEndDate;
 import static com.uwetrottmann.tmdb2.TestData.testTvSeasonChangesStartDate;
 import static com.uwetrottmann.tmdb2.TestData.testTvShow;
+import static com.uwetrottmann.tmdb2.TmdbTestSuite.accountDataInitialized;
 import static com.uwetrottmann.tmdb2.assertions.AccountAssertions.assertBaseAccountStates;
 import static com.uwetrottmann.tmdb2.assertions.ChangeAssertions.assertContentChanges;
 import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCredits;
@@ -30,6 +32,7 @@ import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvSeason;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvSeasonDataIntegrity;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvSeasonExternalIdsDataIntegrity;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assume.assumeTrue;
 
 public class TvSeasonsServiceTest extends BaseTestCase {
 
@@ -137,7 +140,10 @@ public class TvSeasonsServiceTest extends BaseTestCase {
     }
 
     @Test
+    @RequiresAccountSession
     public void test_account_states_with_account() throws IOException {
+        assumeTrue(accountDataInitialized);
+
         Call<AccountStatesResults> call = getAuthenticatedInstance().tvSeasonsService().accountStates(
                 testTvShow.id,
                 testTvSeason.season_number

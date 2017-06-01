@@ -63,6 +63,7 @@ public class CreditAssertions {
         assertCreditMedia(credit.media);
 
     }
+
     public static void assertCreditMedia(CreditMedia creditMedia) {
         assertThat(creditMedia).isNotNull();
         assertThat(creditMedia.character).isNotNull();

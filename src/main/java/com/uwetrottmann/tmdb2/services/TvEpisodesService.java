@@ -147,7 +147,7 @@ public interface TvEpisodesService {
 
     /**
      * Get the changes for a TV episode. By default only the last 24 hours are returned.
-     * <p>
+     *
      * You can query up to 14 days in a single query by using the start_date and end_date query parameters.
      *
      * @param tvShowEpisodeId A Tv Show TvEpisode TMDb id.
@@ -229,7 +229,7 @@ public interface TvEpisodesService {
      *
      * <b>Requires an active Session.</b>
      *
-     * @param tvShowId TMDb id.
+     * @param tvShowId            TMDb id.
      * @param tvShowSeasonNumber  TvSeason Number.
      * @param tvShowEpisodeNumber TvEpisode Number.
      */
@@ -266,7 +266,7 @@ public interface TvEpisodesService {
      * @param tvShowId            TMDb id.
      * @param tvShowSeasonNumber  TvSeason Number.
      * @param tvShowEpisodeNumber TvEpisode Number.
-     * @param authenticationType Authentication Type for this operation. Available Choices: Account, Guest.
+     * @param authenticationType  Authentication Type for this operation. Available Choices: Account, Guest.
      * @param body                <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
      */
     @POST("tv/{tv_id}/season/{season_number}/episode/{episode_number}/rating")
@@ -286,7 +286,7 @@ public interface TvEpisodesService {
      * @param tvShowId            TMDb id.
      * @param tvShowSeasonNumber  TvSeason Number.
      * @param tvShowEpisodeNumber TvEpisode Number.
-     * @param authenticationType Authentication Type for this operation. Available Choices: Account, Guest.
+     * @param authenticationType  Authentication Type for this operation. Available Choices: Account, Guest.
      */
     @DELETE("tv/{tv_id}/season/{season_number}/episode/{episode_number}/rating")
     Call<Status> deleteRating(

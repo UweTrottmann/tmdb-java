@@ -1,6 +1,7 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
+import com.uwetrottmann.tmdb2.annotations.RequiresAccountSession;
 import com.uwetrottmann.tmdb2.entities.Account;
 import com.uwetrottmann.tmdb2.entities.BaseMovie;
 import com.uwetrottmann.tmdb2.entities.BaseTvEpisode;
@@ -8,8 +9,8 @@ import com.uwetrottmann.tmdb2.entities.BaseTvShow;
 import com.uwetrottmann.tmdb2.entities.FavoriteMedia;
 import com.uwetrottmann.tmdb2.entities.ListResultsPage;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
-import com.uwetrottmann.tmdb2.entities.TvEpisodeResultsPage;
 import com.uwetrottmann.tmdb2.entities.Status;
+import com.uwetrottmann.tmdb2.entities.TvEpisodeResultsPage;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.entities.WatchlistMedia;
 import com.uwetrottmann.tmdb2.enumerations.MediaType;
@@ -18,8 +19,7 @@ import retrofit2.Call;
 
 import java.io.IOException;
 
-import static com.uwetrottmann.tmdb2.TmdbTestSuite.PASSWORD;
-import static com.uwetrottmann.tmdb2.TmdbTestSuite.USERNAME;
+import static com.uwetrottmann.tmdb2.TmdbTestSuite.accountDataInitialized;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseRatingObject;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertStatus;
 import static com.uwetrottmann.tmdb2.assertions.ListAssertions.assertListResultsPage;
@@ -29,11 +29,12 @@ import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShowResults
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assume.assumeTrue;
 
+@RequiresAccountSession
 public class AccountServiceTest extends BaseTestCase {
 
     @Test
     public void test_details() throws IOException {
-        assumeTrue(USERNAME != null && PASSWORD != null);
+        assumeTrue(accountDataInitialized);
 
         Call<Account> call = getAuthenticatedInstance().accountService().summary();
 
@@ -52,7 +53,7 @@ public class AccountServiceTest extends BaseTestCase {
 
     @Test
     public void test_lists() throws IOException {
-        assumeTrue(USERNAME != null && PASSWORD != null);
+        assumeTrue(accountDataInitialized);
 
         Call<ListResultsPage> call = getAuthenticatedInstance().accountService().lists(
                 0
@@ -65,7 +66,7 @@ public class AccountServiceTest extends BaseTestCase {
 
     @Test
     public void test_favorite_movies() throws IOException {
-        assumeTrue(USERNAME != null && PASSWORD != null);
+        assumeTrue(accountDataInitialized);
 
         Call<MovieResultsPage> call = getAuthenticatedInstance().accountService().favoriteMovies(
                 0,
@@ -76,12 +77,15 @@ public class AccountServiceTest extends BaseTestCase {
 
         MovieResultsPage movies = call.execute().body();
 
+        assertThat(movies).isNotNull();
+        assumeTrue(!movies.results.isEmpty());
+
         assertMovieResultsPage(movies);
     }
 
     @Test
     public void test_favorite_tvShows() throws IOException {
-        assumeTrue(USERNAME != null && PASSWORD != null);
+        assumeTrue(accountDataInitialized);
 
         Call<TvShowResultsPage> call = getAuthenticatedInstance().accountService().favoriteTvShows(
                 0,
@@ -92,12 +96,15 @@ public class AccountServiceTest extends BaseTestCase {
 
         TvShowResultsPage tvShows = call.execute().body();
 
+        assertThat(tvShows).isNotNull();
+        assumeTrue(!tvShows.results.isEmpty());
+
         assertTvShowResultsPage(tvShows);
     }
 
     @Test
     public void test_watchlist_movies() throws IOException {
-        assumeTrue(USERNAME != null && PASSWORD != null);
+        assumeTrue(accountDataInitialized);
 
         Call<MovieResultsPage> call = getAuthenticatedInstance().accountService().watchlistMovies(
                 0,
@@ -108,12 +115,15 @@ public class AccountServiceTest extends BaseTestCase {
 
         MovieResultsPage movies = call.execute().body();
 
+        assertThat(movies).isNotNull();
+        assumeTrue(!movies.results.isEmpty());
+
         assertMovieResultsPage(movies);
     }
 
     @Test
     public void test_watchlist_tvShows() throws IOException {
-        assumeTrue(USERNAME != null && PASSWORD != null);
+        assumeTrue(accountDataInitialized);
 
         Call<TvShowResultsPage> call = getAuthenticatedInstance().accountService().watchlistTvShows(
                 0,
@@ -124,12 +134,15 @@ public class AccountServiceTest extends BaseTestCase {
 
         TvShowResultsPage tvShows = call.execute().body();
 
+        assertThat(tvShows).isNotNull();
+        assumeTrue(!tvShows.results.isEmpty());
+
         assertTvShowResultsPage(tvShows);
     }
 
     @Test
     public void test_rated_movies() throws IOException {
-        assumeTrue(USERNAME != null && PASSWORD != null);
+        assumeTrue(accountDataInitialized);
 
         Call<MovieResultsPage> call = getAuthenticatedInstance().accountService().ratedMovies(
                 0,
@@ -140,6 +153,9 @@ public class AccountServiceTest extends BaseTestCase {
 
         MovieResultsPage movies = call.execute().body();
 
+        assertThat(movies).isNotNull();
+        assumeTrue(!movies.results.isEmpty());
+
         assertMovieResultsPage(movies);
         for (BaseMovie movie : movies.results) {
             assertBaseRatingObject(movie);
@@ -148,7 +164,7 @@ public class AccountServiceTest extends BaseTestCase {
 
     @Test
     public void test_rated_tvShows() throws IOException {
-        assumeTrue(USERNAME != null && PASSWORD != null);
+        assumeTrue(accountDataInitialized);
 
         Call<TvShowResultsPage> call = getAuthenticatedInstance().accountService().ratedTvShows(
                 0,
@@ -159,6 +175,9 @@ public class AccountServiceTest extends BaseTestCase {
 
         TvShowResultsPage tvShows = call.execute().body();
 
+        assertThat(tvShows).isNotNull();
+        assumeTrue(!tvShows.results.isEmpty());
+
         assertTvShowResultsPage(tvShows);
         for (BaseTvShow baseTvShow : tvShows.results) {
             assertBaseRatingObject(baseTvShow);
@@ -167,7 +186,7 @@ public class AccountServiceTest extends BaseTestCase {
 
     @Test
     public void test_rated_tvEpisodes() throws IOException {
-        assumeTrue(USERNAME != null && PASSWORD != null);
+        assumeTrue(accountDataInitialized);
 
         Call<TvEpisodeResultsPage> call = getAuthenticatedInstance().accountService().ratedTvShowEpisodes(
                 0,
@@ -177,6 +196,9 @@ public class AccountServiceTest extends BaseTestCase {
         );
 
         TvEpisodeResultsPage tvShowEpisodes = call.execute().body();
+
+        assertThat(tvShowEpisodes).isNotNull();
+        assumeTrue(!tvShowEpisodes.results.isEmpty());
 
         assertTvEpisodeResultsPage(tvShowEpisodes);
         for (BaseTvEpisode baseTvEpisode : tvShowEpisodes.results) {
@@ -188,7 +210,7 @@ public class AccountServiceTest extends BaseTestCase {
 
     @Test
     public void test_mark_as_favorite() throws IOException {
-        assumeTrue(USERNAME != null && PASSWORD != null);
+        assumeTrue(accountDataInitialized);
 
         FavoriteMedia fMedia = new FavoriteMedia();
         fMedia.favorite = true;
@@ -208,7 +230,7 @@ public class AccountServiceTest extends BaseTestCase {
         fMedia.favorite = false;
 
         // Remove a movie from favorites and verify
-        call = getAuthenticatedInstance().accountService().favorite(0,fMedia);
+        call = getAuthenticatedInstance().accountService().favorite(0, fMedia);
 
         status = call.execute().body();
 
@@ -218,7 +240,7 @@ public class AccountServiceTest extends BaseTestCase {
 
     @Test
     public void test_add_to_watchlist() throws IOException {
-        assumeTrue(USERNAME != null && PASSWORD != null);
+        assumeTrue(accountDataInitialized);
 
         WatchlistMedia wMedia = new WatchlistMedia();
         wMedia.watchlist = true;

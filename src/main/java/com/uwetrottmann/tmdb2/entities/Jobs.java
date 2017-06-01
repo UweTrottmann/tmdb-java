@@ -10,7 +10,7 @@ public class Jobs {
         public List<String> job_list;
 
     }
-    
+
     public List<Department> jobs;
 
 }

@@ -1,6 +1,7 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
+import com.uwetrottmann.tmdb2.annotations.RequiresAccountSession;
 import com.uwetrottmann.tmdb2.entities.List;
 import com.uwetrottmann.tmdb2.entities.ListCreateRequest;
 import com.uwetrottmann.tmdb2.entities.ListCreateResponse;
@@ -15,6 +16,7 @@ import java.io.IOException;
 
 import static com.uwetrottmann.tmdb2.TestData.testList;
 import static com.uwetrottmann.tmdb2.TestData.testMovie;
+import static com.uwetrottmann.tmdb2.TmdbTestSuite.accountDataInitialized;
 import static com.uwetrottmann.tmdb2.assertions.ListAssertions.assertListDataIntegrity;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assume.assumeTrue;
@@ -47,7 +49,10 @@ public class ListsServiceTest extends BaseTestCase {
     }
 
     @Test
+    @RequiresAccountSession
     public void test_create_edit_clear_delete_list() throws IOException {
+        assumeTrue(accountDataInitialized);
+
         ListCreateRequest listCreateRequest = new ListCreateRequest();
         listCreateRequest.name = "Test";
         listCreateRequest.language = "en";
@@ -65,21 +70,21 @@ public class ListsServiceTest extends BaseTestCase {
         ListOperation listOperation = new ListOperation();
         listOperation.media_id = testMovie.id;
 
-        Call<Status> callStatus = getAuthenticatedInstance().listsService().addMovie(listCreateResponse.list_id,listOperation);
+        Call<Status> callStatus = getAuthenticatedInstance().listsService().addMovie(listCreateResponse.list_id, listOperation);
 
         Status status = callStatus.execute().body();
 
         assertThat(status).isNotNull();
         assertThat(status.status_code).isEqualTo(12);
 
-        callStatus = getAuthenticatedInstance().listsService().removeMovie(listCreateResponse.list_id,listOperation);
+        callStatus = getAuthenticatedInstance().listsService().removeMovie(listCreateResponse.list_id, listOperation);
 
         status = callStatus.execute().body();
 
         assertThat(status).isNotNull();
         assertThat(status.status_code).isEqualTo(13);
 
-        callStatus = getAuthenticatedInstance().listsService().clear(listCreateResponse.list_id,true);
+        callStatus = getAuthenticatedInstance().listsService().clear(listCreateResponse.list_id, true);
 
         status = callStatus.execute().body();
 

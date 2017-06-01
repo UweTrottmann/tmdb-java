@@ -7,7 +7,7 @@ import java.util.List;
 
 public class AlternativeTitles {
 
-    @SerializedName(value="titles", alternate={"results"})
+    @SerializedName(value = "titles", alternate = {"results"})
     public List<AlternativeTitle> titles;
 
     public Integer id;

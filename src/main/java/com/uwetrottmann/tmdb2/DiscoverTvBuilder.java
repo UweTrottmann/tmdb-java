@@ -125,6 +125,11 @@ public class DiscoverTvBuilder {
         return this;
     }
 
+    public DiscoverTvBuilder without_keywords(DiscoverFilter keywords) {
+        this.without_keywords = keywords;
+        return this;
+    }
+
     public Call<TvShowResultsPage> build() {
         return discoverService.discoverTv(
                 language,

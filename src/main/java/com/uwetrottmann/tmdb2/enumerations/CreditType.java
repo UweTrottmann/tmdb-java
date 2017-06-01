@@ -13,8 +13,8 @@ public enum CreditType {
 
     private static final Map<String, CreditType> lookup = prepareLookup();
 
-    private static Map<String,CreditType> prepareLookup() {
-        Map<String,CreditType> ctMap = new HashMap<>();
+    private static Map<String, CreditType> prepareLookup() {
+        Map<String, CreditType> ctMap = new HashMap<>();
         for (CreditType creditType : CreditType.values()) {
             ctMap.put(creditType.value, creditType);
         }

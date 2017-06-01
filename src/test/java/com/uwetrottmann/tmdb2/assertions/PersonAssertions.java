@@ -11,7 +11,6 @@ import com.uwetrottmann.tmdb2.entities.PersonCrewCredit;
 import com.uwetrottmann.tmdb2.entities.PersonExternalIds;
 import com.uwetrottmann.tmdb2.entities.PersonResultsPage;
 
-import java.text.ParseException;
 import java.util.List;
 
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseExternalIds;
@@ -56,7 +55,7 @@ public class PersonAssertions {
     }
 
 
-    public static void assertPersonDataIntegrity(Person person) throws ParseException {
+    public static void assertPersonDataIntegrity(Person person) {
         assertPerson(person);
         assertThat(person.name).isEqualTo(TestData.testPerson.name);
         assertThat(person.birthday).isEqualTo(TestData.testPerson.birthday);

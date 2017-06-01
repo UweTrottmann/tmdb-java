@@ -1,6 +1,8 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
+import com.uwetrottmann.tmdb2.annotations.RequiresAccountSession;
+import com.uwetrottmann.tmdb2.annotations.RequiresGuestSession;
 import com.uwetrottmann.tmdb2.entities.AppendToResponse;
 import com.uwetrottmann.tmdb2.entities.BaseAccountStates;
 import com.uwetrottmann.tmdb2.entities.Changes;
@@ -24,8 +26,7 @@ import static com.uwetrottmann.tmdb2.TestData.testTvEpisodeChangesEndDate;
 import static com.uwetrottmann.tmdb2.TestData.testTvEpisodeChangesStartDate;
 import static com.uwetrottmann.tmdb2.TestData.testTvSeason;
 import static com.uwetrottmann.tmdb2.TestData.testTvShow;
-import static com.uwetrottmann.tmdb2.TmdbTestSuite.PASSWORD;
-import static com.uwetrottmann.tmdb2.TmdbTestSuite.USERNAME;
+import static com.uwetrottmann.tmdb2.TmdbTestSuite.accountDataInitialized;
 import static com.uwetrottmann.tmdb2.assertions.AccountAssertions.assertBaseAccountStates;
 import static com.uwetrottmann.tmdb2.assertions.ChangeAssertions.assertContentChanges;
 import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCredits;
@@ -148,6 +149,7 @@ public class TvEpisodesServiceTest extends BaseTestCase {
     }
 
     @Test
+    @RequiresAccountSession
     public void test_account_states_with_account() throws IOException {
         Call<BaseAccountStates> call = getAuthenticatedInstance().tvEpisodesService().accountStates(
                 testTvShow.id,
@@ -161,8 +163,9 @@ public class TvEpisodesServiceTest extends BaseTestCase {
     }
 
     @Test
+    @RequiresAccountSession
     public void test_modify_rating_with_account() throws IOException {
-        assumeTrue(USERNAME != null && PASSWORD != null);
+        assumeTrue(accountDataInitialized);
 
         RatingObject obj = new RatingObject();
         obj.value = 10D;
@@ -178,6 +181,7 @@ public class TvEpisodesServiceTest extends BaseTestCase {
     }
 
     @Test
+    @RequiresGuestSession
     public void test_modify_rating_as_guest() throws IOException {
 
         RatingObject obj = new RatingObject();

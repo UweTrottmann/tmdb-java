@@ -22,7 +22,7 @@ import java.util.List;
 public class Videos {
 
     public static class Video {
-        
+
         public String id;
         public String iso_639_1;
         public String key;
@@ -30,9 +30,9 @@ public class Videos {
         public String site;
         public Integer size;
         public String type;
-        
+
     }
-    
+
     public Integer id;
     public List<Video> results;
 
