@@ -1,9 +1,7 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
-import com.uwetrottmann.tmdb2.annotations.RequiresAccountSession;
 import com.uwetrottmann.tmdb2.annotations.RequiresGuestSession;
-import com.uwetrottmann.tmdb2.entities.AccountStates;
 import com.uwetrottmann.tmdb2.entities.AlternativeTitles;
 import com.uwetrottmann.tmdb2.entities.AppendToResponse;
 import com.uwetrottmann.tmdb2.entities.Changes;
@@ -30,9 +28,7 @@ import java.util.HashMap;
 import static com.uwetrottmann.tmdb2.TestData.testTvShow;
 import static com.uwetrottmann.tmdb2.TestData.testTvShowChangesEndDate;
 import static com.uwetrottmann.tmdb2.TestData.testTvShowChangesStartDate;
-import static com.uwetrottmann.tmdb2.TmdbTestSuite.accountDataInitialized;
 import static com.uwetrottmann.tmdb2.TmdbTestSuite.guestDataInitialized;
-import static com.uwetrottmann.tmdb2.assertions.AccountAssertions.assertAccountStates;
 import static com.uwetrottmann.tmdb2.assertions.ChangeAssertions.assertContentChanges;
 import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCredits;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertAlternativeTitles;
@@ -319,38 +315,6 @@ public class TvShowServiceTest extends BaseTestCase {
         TvShowResultsPage results = call.execute().body();
 
         assertTvShowResultsPage(results);
-    }
-
-    @Test
-    @RequiresAccountSession
-    public void test_account_states_with_account() throws IOException {
-        assumeTrue(accountDataInitialized);
-
-        Call<AccountStates> call = getAuthenticatedInstance().tvService().accountStates(
-                testTvShow.id
-        );
-
-        AccountStates accountStates = call.execute().body();
-
-        assertAccountStates(accountStates);
-    }
-
-    @Test
-    @RequiresAccountSession
-    public void test_modify_rating_with_account() throws IOException {
-        assumeTrue(accountDataInitialized);
-
-        RatingObject obj = new RatingObject();
-        obj.value = 10D;
-
-        Call<Status> call = getAuthenticatedInstance().tvService().addRating(testTvShow.id, AuthenticationType.ACCOUNT, obj);
-        Status status = call.execute().body();
-        assertThat(status.status_code).isIn(1, 12);
-
-        call = getAuthenticatedInstance().tvService().deleteRating(testTvShow.id, AuthenticationType.ACCOUNT);
-        status = call.execute().body();
-        assertThat(status.status_code).isEqualTo(13);
-
     }
 
     @Test

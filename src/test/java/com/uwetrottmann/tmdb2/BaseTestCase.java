@@ -19,11 +19,11 @@ public abstract class BaseTestCase {
     private static final Tmdb unauthenticatedInstance = new BaseTestCase.TestTmdb(TEST_API_KEY);
     private static final Tmdb authenticatedInstance  = new BaseTestCase.TestTmdb(TEST_API_KEY);
 
-    protected final Tmdb getUnauthenticatedInstance() {
+    protected static Tmdb getUnauthenticatedInstance() {
         return unauthenticatedInstance;
     }
 
-    protected final Tmdb getAuthenticatedInstance() {
+    protected static Tmdb getAuthenticatedInstance() {
         return authenticatedInstance;
     }
 

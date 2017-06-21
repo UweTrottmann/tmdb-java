@@ -1,10 +1,8 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
-import com.uwetrottmann.tmdb2.annotations.RequiresAccountSession;
 import com.uwetrottmann.tmdb2.annotations.RequiresGuestSession;
 import com.uwetrottmann.tmdb2.entities.AppendToResponse;
-import com.uwetrottmann.tmdb2.entities.BaseAccountStates;
 import com.uwetrottmann.tmdb2.entities.Changes;
 import com.uwetrottmann.tmdb2.entities.Credits;
 import com.uwetrottmann.tmdb2.entities.Images;
@@ -26,8 +24,6 @@ import static com.uwetrottmann.tmdb2.TestData.testTvEpisodeChangesEndDate;
 import static com.uwetrottmann.tmdb2.TestData.testTvEpisodeChangesStartDate;
 import static com.uwetrottmann.tmdb2.TestData.testTvSeason;
 import static com.uwetrottmann.tmdb2.TestData.testTvShow;
-import static com.uwetrottmann.tmdb2.TmdbTestSuite.accountDataInitialized;
-import static com.uwetrottmann.tmdb2.assertions.AccountAssertions.assertBaseAccountStates;
 import static com.uwetrottmann.tmdb2.assertions.ChangeAssertions.assertContentChanges;
 import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCredits;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertImages;
@@ -37,7 +33,6 @@ import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvEpisodeData
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvEpisodeExternalIdsDataIntegrity;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvExternalIds;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assume.assumeTrue;
 
 public class TvEpisodesServiceTest extends BaseTestCase {
 
@@ -146,38 +141,6 @@ public class TvEpisodesServiceTest extends BaseTestCase {
 
         Videos videos = call.execute().body();
         assertVideos(videos);
-    }
-
-    @Test
-    @RequiresAccountSession
-    public void test_account_states_with_account() throws IOException {
-        Call<BaseAccountStates> call = getAuthenticatedInstance().tvEpisodesService().accountStates(
-                testTvShow.id,
-                testTvSeason.season_number,
-                testTvEpisode.episode_number
-        );
-
-        BaseAccountStates baseAccountStates = call.execute().body();
-
-        assertBaseAccountStates(baseAccountStates);
-    }
-
-    @Test
-    @RequiresAccountSession
-    public void test_modify_rating_with_account() throws IOException {
-        assumeTrue(accountDataInitialized);
-
-        RatingObject obj = new RatingObject();
-        obj.value = 10D;
-
-        Call<Status> call = getAuthenticatedInstance().tvEpisodesService().addRating(testTvShow.id, testTvSeason.season_number, testTvEpisode.episode_number, AuthenticationType.ACCOUNT, obj);
-        Status status = call.execute().body();
-        assertThat(status.status_code).isIn(1, 12);
-
-        call = getAuthenticatedInstance().tvEpisodesService().deleteRating(testTvShow.id, testTvSeason.season_number, testTvEpisode.episode_number, AuthenticationType.ACCOUNT);
-        status = call.execute().body();
-        assertThat(status.status_code).isEqualTo(13);
-
     }
 
     @Test

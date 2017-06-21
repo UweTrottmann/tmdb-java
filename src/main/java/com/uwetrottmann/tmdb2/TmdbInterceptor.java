@@ -52,10 +52,12 @@ public class TmdbInterceptor implements Interceptor {
 
         urlBuilder.setEncodedQueryParameter(Tmdb.PARAM_API_KEY, tmdb.apiKey());
 
-        if (request.url().pathSegments().get(1).equals("account") || request.url().pathSegments().get(request.url().pathSegments().size() - 1).equals("account_states")) {
+        if (request.url().pathSegments().get(1).equals("account")
+                || request.url().pathSegments().get(request.url().pathSegments().size() - 1).equals("account_states")) {
             type = AuthenticationType.ACCOUNT;
 
-        } else if (request.url().pathSegments().get(request.url().pathSegments().size() - 1).equals("rating") || !request.method().toLowerCase().equals("get")) {
+        } else if (request.url().pathSegments().get(request.url().pathSegments().size() - 1).equals("rating")
+                || !request.method().toLowerCase().equals("get")) {
             type = determineAuthenticationType(urlBuilder, tmdb);
         }
 
@@ -171,7 +173,6 @@ public class TmdbInterceptor implements Interceptor {
                     type = AuthenticationType.GUEST;
                 }
             } else {
-
                 if (tmdb.hasAccountSession()) {
                     type = AuthenticationType.ACCOUNT;
                 } else if (tmdb.hasGuestSession()) {

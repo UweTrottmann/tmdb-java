@@ -34,7 +34,8 @@ public class TmdbAuthenticator implements Authenticator {
         }
 
         if (responseCount(response) >= 2) {
-            throw new TmdbAuthenticationFailedException(30, "Authentication failed: You do not have permissions to access the service.");
+            throw new TmdbAuthenticationFailedException(30,
+                    "Authentication failed: You do not have permissions to access the service.");
         }
 
         HttpUrl.Builder urlBuilder = response.request().url().newBuilder();
@@ -51,7 +52,8 @@ public class TmdbAuthenticator implements Authenticator {
             acquireGuestSession(tmdb);
             urlBuilder.setEncodedQueryParameter(Tmdb.PARAM_GUEST_SESSION_ID, tmdb.guestSessionId);
         } else {
-            throw new TmdbAuthenticationFailedException(30, "Authentication failed: You do not have permissions to access the service.");
+            throw new TmdbAuthenticationFailedException(30,
+                    "Authentication failed: You do not have permissions to access the service.");
         }
 
         return response.request().newBuilder().url(urlBuilder.build()).build();
