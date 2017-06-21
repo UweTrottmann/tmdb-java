@@ -47,6 +47,9 @@ Just apply the [Proguard rules for retrofit](https://square.github.io/retrofit/#
 ## License
 
 Created by [Uwe Trottmann](https://uwetrottmann.com).
+
+See full [list of contributors](https://github.com/UweTrottmann/tmdb-java/graphs/contributors).
+
 Except where noted otherwise, released into the [public domain](UNLICENSE).
 Do not just copy, make it better.
 
