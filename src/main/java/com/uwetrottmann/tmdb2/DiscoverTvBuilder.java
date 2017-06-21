@@ -2,7 +2,7 @@ package com.uwetrottmann.tmdb2;
 
 import com.uwetrottmann.tmdb2.entities.DiscoverFilter;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
-import com.uwetrottmann.tmdb2.entities.TvResultsPage;
+import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.enumerations.SortBy;
 import com.uwetrottmann.tmdb2.services.DiscoverService;
 import retrofit2.Call;
@@ -29,6 +29,7 @@ public class DiscoverTvBuilder {
     private Integer with_runtime_lte;
     private Boolean include_null_first_air_dates;
     private String with_original_language;
+    private DiscoverFilter without_keywords;
 
     public DiscoverTvBuilder(DiscoverService discoverService) {
         this.discoverService = discoverService;
@@ -124,7 +125,12 @@ public class DiscoverTvBuilder {
         return this;
     }
 
-    public Call<TvResultsPage> build() {
+    public DiscoverTvBuilder without_keywords(DiscoverFilter keywords) {
+        this.without_keywords = keywords;
+        return this;
+    }
+
+    public Call<TvShowResultsPage> build() {
         return discoverService.discoverTv(
                 language,
                 sort_by,
@@ -143,7 +149,8 @@ public class DiscoverTvBuilder {
                 with_runtime_gte,
                 with_runtime_lte,
                 include_null_first_air_dates,
-                with_original_language
+                with_original_language,
+                without_keywords
         );
     }
 

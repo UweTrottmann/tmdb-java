@@ -1,28 +1,13 @@
-/*
- * Copyright 2015 Miguel Teixeira
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
-import com.uwetrottmann.tmdb2.TestData;
 import com.uwetrottmann.tmdb2.entities.AppendToResponse;
+import com.uwetrottmann.tmdb2.entities.Changes;
 import com.uwetrottmann.tmdb2.entities.Credits;
-import com.uwetrottmann.tmdb2.entities.ExternalIds;
 import com.uwetrottmann.tmdb2.entities.Images;
+import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.TvEpisode;
+import com.uwetrottmann.tmdb2.entities.TvExternalIds;
 import com.uwetrottmann.tmdb2.entities.Videos;
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
 import org.junit.Test;
@@ -30,67 +15,112 @@ import retrofit2.Call;
 
 import java.io.IOException;
 
+import static com.uwetrottmann.tmdb2.TestData.testTvEpisode;
+import static com.uwetrottmann.tmdb2.TestData.testTvEpisodeChangesEndDate;
+import static com.uwetrottmann.tmdb2.TestData.testTvEpisodeChangesStartDate;
+import static com.uwetrottmann.tmdb2.TestData.testTvSeason;
+import static com.uwetrottmann.tmdb2.TestData.testTvShow;
+import static com.uwetrottmann.tmdb2.assertions.ChangeAssertions.assertContentChanges;
+import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCredits;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertImages;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertVideos;
+import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvEpisode;
+import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvEpisodeDataIntegrity;
+import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvEpisodeExternalIdsDataIntegrity;
+import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvExternalIds;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TvEpisodesServiceTest extends BaseTestCase {
 
     @Test
     public void test_episode() throws IOException {
-        Call<TvEpisode> call = getManager().tvEpisodesService().episode(TestData.TVSHOW_ID, 1, 1, null, null);
-        TvEpisode episode = call.execute().body();
-        assertTvEpisode(episode);
+        Call<TvEpisode> call = getUnauthenticatedInstance().tvEpisodesService().episode(
+                testTvEpisode.id,
+                testTvSeason.season_number,
+                testTvEpisode.episode_number
+        );
+
+        TvEpisode tvEpisode = call.execute().body();
+
+        assertTvEpisode(tvEpisode);
     }
 
     @Test
     public void test_episode_with_append_to_response() throws IOException {
-        Call<TvEpisode> call = getManager().tvEpisodesService().episode(
-                TestData.TVSHOW_ID, 1, 1, null,
-                new AppendToResponse(AppendToResponseItem.IMAGES, AppendToResponseItem.EXTERNAL_IDS,
-                        AppendToResponseItem.CREDITS)
+        Call<TvEpisode> call = getUnauthenticatedInstance().tvEpisodesService().episode(
+                testTvShow.id,
+                testTvSeason.season_number,
+                testTvEpisode.episode_number,
+                new AppendToResponse(
+                        AppendToResponseItem.IMAGES,
+                        AppendToResponseItem.EXTERNAL_IDS,
+                        AppendToResponseItem.CREDITS
+                )
         );
-        TvEpisode episode = call.execute().body();
-        assertTvEpisode(episode);
+
+        TvEpisode tvEpisode = call.execute().body();
+
+        assertTvEpisodeDataIntegrity(tvEpisode);
 
         // credits
-        assertThat(episode.credits).isNotNull();
-        assertCrewCredits(episode.credits.crew);
-        assertCastCredits(episode.credits.guest_stars);
-        assertCastCredits(episode.credits.cast);
-
-        assertThat(episode.crew).isNotNull();
-        assertThat(episode.guest_stars).isNotNull();
-        assertCrewCredits(episode.crew);
-        assertCastCredits(episode.guest_stars);
+        assertCredits(tvEpisode.credits);
 
         // images
-        assertThat(episode.images).isNotNull();
-        assertImages(episode.images.stills);
+        assertThat(tvEpisode.images).isNotNull();
+        assertImages(tvEpisode.images.stills);
 
         // external ids
-        assertIds(episode.external_ids);
+        assertTvEpisodeExternalIdsDataIntegrity(tvEpisode.external_ids);
     }
 
     @Test
     public void test_credits() throws IOException {
-        Call<Credits> call = getManager().tvEpisodesService().credits(TestData.TVSHOW_ID, 1, 1);
+        Call<Credits> call = getUnauthenticatedInstance().tvEpisodesService().credits(
+                testTvShow.id,
+                testTvSeason.season_number,
+                testTvEpisode.episode_number
+        );
+
         Credits credits = call.execute().body();
-        assertThat(credits.id).isNotNull();
-        assertCrewCredits(credits.crew);
-        assertCastCredits(credits.cast);
-        assertCastCredits(credits.guest_stars);
+
+        assertCredits(credits);
+    }
+
+    @Test
+    public void test_changes() throws IOException {
+        Call<Changes> call = getUnauthenticatedInstance().tvEpisodesService().changes(
+                testTvEpisode.id,
+                new TmdbDate(testTvEpisodeChangesStartDate),
+                new TmdbDate(testTvEpisodeChangesEndDate),
+                null
+        );
+
+        Changes changes = call.execute().body();
+
+        assertContentChanges(changes);
     }
 
     @Test
     public void test_externalIds() throws IOException {
-        Call<ExternalIds> call = getManager().tvEpisodesService().externalIds(TestData.TVSHOW_ID, 1, 1);
-        ExternalIds ids = call.execute().body();
-        assertThat(ids.id).isNotNull();
-        assertIds(ids);
+        Call<TvExternalIds> call = getUnauthenticatedInstance().tvEpisodesService().externalIds(
+                testTvShow.id,
+                testTvSeason.season_number,
+                testTvEpisode.episode_number
+        );
+
+        TvExternalIds ids = call.execute().body();
+
+        assertTvExternalIds(ids);
     }
 
     @Test
     public void test_images() throws IOException {
-        Call<Images> call = getManager().tvEpisodesService().images(TestData.TVSHOW_ID, 1, 1);
+        Call<Images> call = getUnauthenticatedInstance().tvEpisodesService().images(
+                testTvShow.id,
+                testTvSeason.season_number,
+                testTvEpisode.episode_number
+        );
+
         Images images = call.execute().body();
         assertThat(images.id).isNotNull();
         assertImages(images.stills);
@@ -98,29 +128,15 @@ public class TvEpisodesServiceTest extends BaseTestCase {
 
     @Test
     public void test_videos() throws IOException {
-        Call<Videos> call = getManager().tvEpisodesService().videos(TestData.TVSHOW_ID, 1, 1);
+        Call<Videos> call = getUnauthenticatedInstance().tvEpisodesService().videos(
+                testTvShow.id,
+                testTvSeason.season_number,
+                testTvEpisode.episode_number,
+                null
+        );
+
         Videos videos = call.execute().body();
         assertVideos(videos);
-    }
-
-    private void assertIds(ExternalIds ids) {
-        assertThat(ids.freebase_id).isNull();
-        assertThat(ids.freebase_mid).isNotNull();
-        assertThat(ids.tvdb_id).isNotNull();
-        assertThat(ids.imdb_id).isNotNull();
-        assertThat(ids.tvrage_id).isNotNull();
-    }
-
-    private void assertTvEpisode(TvEpisode episode) {
-        assertThat(episode.air_date).isNotNull();
-        assertThat(episode.episode_number).isPositive();
-        assertThat(episode.name).isNotNull();
-        assertThat(episode.overview).isNotNull();
-        assertThat(episode.id).isNotNull();
-        assertThat(episode.season_number).isEqualTo(1);
-        assertThat(episode.still_path).isNotNull();
-        assertThat(episode.vote_average).isGreaterThanOrEqualTo(0);
-        assertThat(episode.vote_count).isGreaterThanOrEqualTo(0);
     }
 
 }

@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class TmdbDate {
+
     private static final ThreadLocal<DateFormat> TMDB_DATE_FORMAT = new ThreadLocal<DateFormat>() {
         @Override
         public DateFormat initialValue() {
@@ -35,4 +36,5 @@ public class TmdbDate {
     public String toString() {
         return TMDB_DATE_FORMAT.get().format(date);
     }
+
 }

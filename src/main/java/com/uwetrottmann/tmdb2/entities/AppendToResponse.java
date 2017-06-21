@@ -31,7 +31,7 @@ public class AppendToResponse {
     public String toString() {
         if (items != null && items.length > 0) {
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < items.length ; i++) {
+            for (int i = 0; i < items.length; i++) {
                 sb.append(items[i]);
 
                 if (i < items.length - 1) {
