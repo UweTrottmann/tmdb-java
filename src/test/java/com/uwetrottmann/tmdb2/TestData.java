@@ -78,9 +78,15 @@ public class TestData {
 
     public static final java.util.List<Integer> testListMovies = new java.util.ArrayList<>();
 
-    public static void initializeTestingIntegrityData() throws ParseException {
+    static {
+        try {
+            initializeTestingIntegrityData();
+        } catch (ParseException e) {
+            throw new RuntimeException("TestData setup failed.", e);
+        }
+    }
 
-
+    private static void initializeTestingIntegrityData() throws ParseException {
         testCompany.id = 5;
         testCompany.name = "Columbia Pictures";
         testCompany.description = "Columbia Pictures Industries, Inc. (CPII) is an American film production and distribution company. Columbia Pictures now forms part of the Columbia TriStar Motion Picture Group, owned by Sony Pictures Entertainment, a subsidiary of the Japanese conglomerate Sony. It is one of the leading film companies in the world, a member of the so-called Big Six. It was one of the so-called Little Three among the eight major film studios of Hollywood's Golden Age.";
@@ -233,7 +239,6 @@ public class TestData {
         testListMovies.add(550);
         testListMovies.add(99861);
         testListMovies.add(293660);
-
     }
 
 }
