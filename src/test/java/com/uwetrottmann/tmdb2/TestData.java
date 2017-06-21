@@ -75,6 +75,7 @@ public class TestData {
     public static final BaseKeyword testKeyword = new BaseKeyword();
 
     public static final List testList = new List();
+    public static final Movie testListMovie = new Movie();
 
     public static final java.util.List<Integer> testListMovies = new java.util.ArrayList<>();
 
@@ -234,6 +235,12 @@ public class TestData {
 
         testKeyword.id = 1721;
         testKeyword.name = "fight";
+
+        testList.id = 932;
+        testList.created_by = "MovieRollApp";
+        testList.name = "Girls With Guns";
+
+        testListMovie.id = 277;
 
         testListMovies.add(testMovie.id);
         testListMovies.add(550);

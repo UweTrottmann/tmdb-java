@@ -78,19 +78,6 @@ public class AccountSessionTest extends BaseTestCase {
         // FIXME ut: for all requests below ensure success or fail setup
         account = tmdb.accountService().summary().execute().body();
 
-        // TODO ut: use a public list instead of creating + deleting our own each time
-//        ListCreateRequest request = new ListCreateRequest();
-//        request.name = "TestList";
-//        request.description = "List for Testing Purposes";
-//        request.language = "en";
-
-//        ListCreateResponse response = tmdb.listsService().createList(request).execute().body();
-//        testList.id = response.list_id;
-//        testList.name = request.name;
-//        testList.created_by = account.username;
-//        testList.description = request.description;
-//        testList.items = new ArrayList<>();
-
         ListOperation listOperation = new ListOperation();
         FavoriteMedia favoriteMedia = new FavoriteMedia();
         favoriteMedia.media_type = MediaType.MOVIE;
@@ -102,14 +89,11 @@ public class AccountSessionTest extends BaseTestCase {
         for (Integer i : testListMovies) {
             BaseMovie movie = new BaseMovie();
             movie.id = i;
-//            testList.items.add(movie);
 
             listOperation.media_id = i;
             favoriteMedia.media_id = i;
             watchlistMedia.media_id = i;
 
-//            tmdb.listsService().addMovie(testList.id, listOperation).execute();
-//            Thread.sleep(200);
             tmdb.accountService().favorite(account.id, favoriteMedia).execute();
             Thread.sleep(200);
             tmdb.accountService().watchlist(account.id, watchlistMedia).execute();
@@ -179,12 +163,6 @@ public class AccountSessionTest extends BaseTestCase {
 
         tmdb.tvEpisodesService().deleteRating(testTvShow.id, testTvSeason.season_number,
                 testTvEpisode.episode_number, AuthenticationType.ACCOUNT).execute();
-
-//        try {
-//            tmdb.listsService().delete(testList.id).execute();
-//        } catch (Exception exc) {
-//
-//        }
     }
 
     @Test
@@ -537,6 +515,7 @@ public class AccountSessionTest extends BaseTestCase {
         assertStatus(status);
     }
 
+    // TODO ut: verify list contents (maybe implicitly if delete works?)
     @Test
     public void test_create_edit_clear_delete_list() throws IOException {
         assumeTrue(accountDataInitialized);
