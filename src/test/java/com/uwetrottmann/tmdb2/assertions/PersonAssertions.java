@@ -48,7 +48,6 @@ public class PersonAssertions {
         assertThat(person.biography).isNotNull();
         assertThat(person.birthday).isNotNull();
         assertThat(person.gender).isNotNull();
-        assertThat(person.homepage).isNotNull();
         assertThat(person.imdb_id).isNotNull();
         assertThat(person.place_of_birth).isNotNull();
         assertThat(person.also_known_as).isNotNull();
@@ -137,7 +136,6 @@ public class PersonAssertions {
                 assertThat(credit.media.movie).isNotNull();
                 assertThat(credit.media.movie.id).isNotNull();
                 assertThat(credit.media.movie.title).isNotNull();
-                assertThat(credit.media.movie.release_date).isNotNull();
                 assertThat(credit.media.movie.original_title).isNotNull();
                 break;
             case TV:
