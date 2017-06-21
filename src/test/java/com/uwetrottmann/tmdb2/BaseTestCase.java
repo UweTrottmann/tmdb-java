@@ -14,7 +14,7 @@ public abstract class BaseTestCase {
     // Do NOT use this API key in your application, it is only for testing tmdb-java!
     private static final String TEST_API_KEY = "25da90e9f8f0b3892d8bdeb6c3d6267d";
     // limit requests for tests to avoid hitting TMDb rate limit (40 requests/10 seconds)
-    private static final RateLimiter rateLimiter = RateLimiter.create(4);
+    private static final RateLimiter rateLimiter = RateLimiter.create(5);
 
     private static final Tmdb unauthenticatedInstance = new BaseTestCase.TestTmdb(TEST_API_KEY);
     private static final Tmdb authenticatedInstance  = new BaseTestCase.TestTmdb(TEST_API_KEY);
