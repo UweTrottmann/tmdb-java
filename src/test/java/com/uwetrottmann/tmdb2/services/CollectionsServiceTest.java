@@ -21,7 +21,7 @@ public class CollectionsServiceTest extends BaseTestCase {
 
     @Test
     public void test_summary() throws IOException {
-        Call<Collection> call = this.getUnauthenticatedInstance().collectionService().summary(
+        Call<Collection> call = getUnauthenticatedInstance().collectionService().summary(
                 testCollection.id
         );
 
@@ -32,7 +32,7 @@ public class CollectionsServiceTest extends BaseTestCase {
 
     @Test
     public void test_summary_append_images() throws IOException {
-        Call<Collection> call = this.getUnauthenticatedInstance().collectionService().summary(
+        Call<Collection> call = getUnauthenticatedInstance().collectionService().summary(
                 testCollection.id,
                 new AppendToResponse(AppendToResponseItem.IMAGES)
         );
@@ -44,7 +44,7 @@ public class CollectionsServiceTest extends BaseTestCase {
 
     @Test
     public void test_images() throws IOException {
-        Call<Images> call = this.getUnauthenticatedInstance().collectionService().images(
+        Call<Images> call = getUnauthenticatedInstance().collectionService().images(
                 testCollection.id,
                 null
         );
