@@ -1,19 +1,15 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
-import com.uwetrottmann.tmdb2.annotations.RequiresGuestSession;
 import com.uwetrottmann.tmdb2.entities.AppendToResponse;
 import com.uwetrottmann.tmdb2.entities.Changes;
 import com.uwetrottmann.tmdb2.entities.Credits;
 import com.uwetrottmann.tmdb2.entities.Images;
-import com.uwetrottmann.tmdb2.entities.RatingObject;
-import com.uwetrottmann.tmdb2.entities.Status;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.TvEpisode;
 import com.uwetrottmann.tmdb2.entities.TvExternalIds;
 import com.uwetrottmann.tmdb2.entities.Videos;
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
-import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
 import org.junit.Test;
 import retrofit2.Call;
 
@@ -143,20 +139,4 @@ public class TvEpisodesServiceTest extends BaseTestCase {
         assertVideos(videos);
     }
 
-    @Test
-    @RequiresGuestSession
-    public void test_modify_rating_as_guest() throws IOException {
-
-        RatingObject obj = new RatingObject();
-        obj.value = 5D;
-
-        Call<Status> call = getAuthenticatedInstance().tvEpisodesService().addRating(testTvShow.id, testTvSeason.season_number, testTvEpisode.episode_number, AuthenticationType.GUEST, obj);
-        Status status = call.execute().body();
-        assertThat(status.status_code).isIn(1, 12);
-
-        call = getAuthenticatedInstance().tvEpisodesService().deleteRating(testTvShow.id, testTvSeason.season_number, testTvEpisode.episode_number, AuthenticationType.GUEST);
-        status = call.execute().body();
-        assertThat(status.status_code).isEqualTo(13);
-
-    }
 }

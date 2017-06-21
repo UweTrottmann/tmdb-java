@@ -1,7 +1,6 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
-import com.uwetrottmann.tmdb2.annotations.RequiresGuestSession;
 import com.uwetrottmann.tmdb2.entities.AlternativeTitles;
 import com.uwetrottmann.tmdb2.entities.AppendToResponse;
 import com.uwetrottmann.tmdb2.entities.Changes;
@@ -9,8 +8,6 @@ import com.uwetrottmann.tmdb2.entities.ContentRatings;
 import com.uwetrottmann.tmdb2.entities.Credits;
 import com.uwetrottmann.tmdb2.entities.Images;
 import com.uwetrottmann.tmdb2.entities.Keywords;
-import com.uwetrottmann.tmdb2.entities.RatingObject;
-import com.uwetrottmann.tmdb2.entities.Status;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.TvExternalIds;
@@ -18,7 +15,6 @@ import com.uwetrottmann.tmdb2.entities.TvShow;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.entities.Videos;
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
-import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
 import org.junit.Test;
 import retrofit2.Call;
 
@@ -28,7 +24,6 @@ import java.util.HashMap;
 import static com.uwetrottmann.tmdb2.TestData.testTvShow;
 import static com.uwetrottmann.tmdb2.TestData.testTvShowChangesEndDate;
 import static com.uwetrottmann.tmdb2.TestData.testTvShowChangesStartDate;
-import static com.uwetrottmann.tmdb2.TmdbTestSuite.guestDataInitialized;
 import static com.uwetrottmann.tmdb2.assertions.ChangeAssertions.assertContentChanges;
 import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCredits;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertAlternativeTitles;
@@ -43,7 +38,6 @@ import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShow;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShowDataIntegrity;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShowResultsPage;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assume.assumeTrue;
 
 public class TvShowServiceTest extends BaseTestCase {
 
@@ -316,24 +310,5 @@ public class TvShowServiceTest extends BaseTestCase {
 
         assertTvShowResultsPage(results);
     }
-
-    @Test
-    @RequiresGuestSession
-    public void test_modify_rating_as_guest() throws IOException {
-        assumeTrue(guestDataInitialized);
-
-        RatingObject obj = new RatingObject();
-        obj.value = 5D;
-
-        Call<Status> call = getAuthenticatedInstance().tvService().addRating(testTvShow.id, AuthenticationType.GUEST, obj);
-        Status status = call.execute().body();
-        assertThat(status.status_code).isIn(1, 12);
-
-        call = getAuthenticatedInstance().tvService().deleteRating(testTvShow.id, AuthenticationType.GUEST);
-        status = call.execute().body();
-        assertThat(status.status_code).isEqualTo(13);
-
-    }
-
 
 }
