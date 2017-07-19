@@ -1,19 +1,11 @@
 Change Log
 ==========
-Supported API calls
--------------------
 
- * [Configuration](https://developers.themoviedb.org/3/configuration)
- * [Collections](https://developers.themoviedb.org/3/collections)
- * [Discover](https://developers.themoviedb.org/3/discover)
- * [Find](https://developers.themoviedb.org/3/find)
- * [Genres](https://developers.themoviedb.org/3/genres)
- * [Movies](https://developers.themoviedb.org/3/movies) _incomplete_
- * [People](https://developers.themoviedb.org/3/people) _incomplete_
- * [Search](https://developers.themoviedb.org/3/search) _incomplete_
- * [TV](https://developers.themoviedb.org/3/tv) _incomplete_
- * [TV Seasons](https://developers.themoviedb.org/3/tv-seasons) _incomplete_
- * [TV Episodes](https://developers.themoviedb.org/3/tv-episodes) _incomplete_
+## 1.8.0
+_2017-07-19_
+* Add missing API methods. Note that this includes breaking changes due to renamed services and entities. Full details in the [commit message](https://github.com/UweTrottmann/tmdb-java/commit/b79f63e2347ecb77750224e3df1fada378a776e7). Thanks @ProIcons!
+* If API calls fail, error details are wrapped in `TmdbException` and subclasses (they are still `IOException`). Thanks @ProIcons!
+* Support for account and guest sessions. Thanks @ProIcons!
 
 ## 1.7.0
 _2017-05-20_
