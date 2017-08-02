@@ -1,6 +1,10 @@
 Change Log
 ==========
 
+## 1.8.1
+_2017-08-02_
+* Fix: If multiple responses containing a date are processed at the same time date formatting fails with exceptions. Thanks @chrisbanes!
+
 ## 1.8.0
 _2017-07-19_
 * Add missing API methods. Note that this includes breaking changes due to renamed services and entities. Full details in the [commit message](https://github.com/UweTrottmann/tmdb-java/commit/b79f63e2347ecb77750224e3df1fada378a776e7). Thanks @ProIcons!
