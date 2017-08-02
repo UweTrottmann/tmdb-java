@@ -26,7 +26,7 @@ import java.util.Date;
 public class TmdbHelper {
 
     public static final String TMDB_DATE_PATTERN = "yyyy-MM-dd";
-    private static final SimpleDateFormat TMDB_DATE_FORMAT = new SimpleDateFormat(TMDB_DATE_PATTERN);
+    private static final ThreadLocal<SimpleDateFormat> TMDB_DATE_FORMAT = new ThreadLocal<>();
 
     /**
      * Create a {@link com.google.gson.GsonBuilder} and register all of the custom types needed in order to properly
@@ -177,7 +177,12 @@ public class TmdbHelper {
             public Date deserialize(JsonElement json, Type typeOfT,
                                     JsonDeserializationContext context) throws JsonParseException {
                 try {
-                    return TMDB_DATE_FORMAT.parse(json.getAsString());
+                    SimpleDateFormat sdf = TMDB_DATE_FORMAT.get();
+                    if (sdf == null) {
+                        sdf = new SimpleDateFormat(TMDB_DATE_PATTERN);
+                        TMDB_DATE_FORMAT.set(sdf);
+                    }
+                    return sdf.parse(json.getAsString());
                 } catch (ParseException e) {
                     // return null instead of failing (like default parser would)
                     return null;
