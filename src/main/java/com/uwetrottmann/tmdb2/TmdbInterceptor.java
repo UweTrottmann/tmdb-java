@@ -79,7 +79,7 @@ public class TmdbInterceptor implements Interceptor {
                 try {
                     Integer retry = Integer.parseInt(retryAfter);
                     Thread.sleep((int) ((retry + 0.5) * 1000));
-                    response = chain.proceed(builder.build());
+                    return handleIntercept(chain,tmdb);
                 } catch (Exception exc) {
 
                 }

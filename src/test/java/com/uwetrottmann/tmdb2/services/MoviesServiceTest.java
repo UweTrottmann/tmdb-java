@@ -305,7 +305,7 @@ public class MoviesServiceTest extends BaseTestCase {
     public void test_upcoming() throws IOException {
         Call<MovieResultsPage> call = getUnauthenticatedInstance().moviesService().upcoming(
                 null,
-                null
+                "el"
         );
 
         MovieResultsPage page = call.execute().body();
