@@ -21,7 +21,7 @@ public class MovieAssertions {
         assertThat(movie.title).isNotNull();
         assertThat(movie.original_language).isNotEmpty();
         assertThat(movie.overview).isNotNull();
-        assertThat(movie.adult).isFalse();
+        assertThat(movie.adult).isNotNull();
         assertThat(movie.release_date).isNotNull();
         assertThat(movie.vote_average).isGreaterThanOrEqualTo(0);
         assertThat(movie.vote_count).isGreaterThanOrEqualTo(0);

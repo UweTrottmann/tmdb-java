@@ -3,6 +3,7 @@ package com.uwetrottmann.tmdb2.services;
 import com.uwetrottmann.tmdb2.BaseTestCase;
 import com.uwetrottmann.tmdb2.entities.BaseMovie;
 import com.uwetrottmann.tmdb2.entities.BasePerson;
+import com.uwetrottmann.tmdb2.entities.BaseTvEpisode;
 import com.uwetrottmann.tmdb2.entities.BaseTvSeason;
 import com.uwetrottmann.tmdb2.entities.BaseTvShow;
 import com.uwetrottmann.tmdb2.entities.FindResults;
@@ -120,7 +121,7 @@ public class FindServiceTest extends BaseTestCase {
 
         assertThat(results.tv_episode_results).isNotNull();
         assertThat(results.tv_episode_results).isNotEmpty();
-        for (TvEpisode tvEpisode : results.tv_episode_results) {
+        for (BaseTvEpisode tvEpisode : results.tv_episode_results) {
             assertThat(tvEpisode.id).isEqualTo(testTvEpisode.id);
         }
     }
