@@ -65,9 +65,7 @@ public class GuestSessionTest extends BaseTestCase {
         assumeTrue(guestDataInitialized);
 
         Call<MovieResultsPage> call = getAuthenticatedInstance().guestSessionService().ratedMovies(
-                getAuthenticatedInstance().getGuestSessionId(),
-                null,
-                null
+                getAuthenticatedInstance().getGuestSessionId()
         );
 
         MovieResultsPage movieResultsPage = call.execute().body();
@@ -84,9 +82,7 @@ public class GuestSessionTest extends BaseTestCase {
         assumeTrue(guestDataInitialized);
 
         Call<TvShowResultsPage> call = getAuthenticatedInstance().guestSessionService().ratedTvShows(
-                getAuthenticatedInstance().getGuestSessionId(),
-                null,
-                null
+                getAuthenticatedInstance().getGuestSessionId()
         );
 
         TvShowResultsPage tvShowResultsPage = call.execute().body();
@@ -103,9 +99,7 @@ public class GuestSessionTest extends BaseTestCase {
         assumeTrue(guestDataInitialized);
 
         Call<TvEpisodeResultsPage> call = getAuthenticatedInstance().guestSessionService().ratedTvEpisodes(
-                getAuthenticatedInstance().getGuestSessionId(),
-                null,
-                null
+                getAuthenticatedInstance().getGuestSessionId()
         );
 
         // FIXME ut: should not ignore test due to service failure

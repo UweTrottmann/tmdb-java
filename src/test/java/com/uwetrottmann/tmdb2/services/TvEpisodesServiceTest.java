@@ -131,8 +131,7 @@ public class TvEpisodesServiceTest extends BaseTestCase {
         Call<Videos> call = getUnauthenticatedInstance().tvEpisodesService().videos(
                 testTvShow.id,
                 testTvSeason.season_number,
-                testTvEpisode.episode_number,
-                null
+                testTvEpisode.episode_number
         );
 
         Videos videos = call.execute().body();

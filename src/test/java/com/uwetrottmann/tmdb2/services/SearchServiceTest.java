@@ -31,8 +31,7 @@ public class SearchServiceTest extends BaseTestCase {
     @Test
     public void test_companySearch() throws IOException {
         Call<CompanyResultsPage> call = getUnauthenticatedInstance().searchService().company(
-                testCompany.name,
-                null
+                testCompany.name
         );
 
         CompanyResultsPage companyResults = call.execute().body();
@@ -43,9 +42,7 @@ public class SearchServiceTest extends BaseTestCase {
     @Test
     public void test_collectionSearch() throws IOException {
         Call<CollectionResultsPage> call = getUnauthenticatedInstance().searchService().collection(
-                testCollection.name,
-                null,
-                null
+                testCollection.name
         );
         CollectionResultsPage collectionResults = call.execute().body();
 
@@ -55,8 +52,7 @@ public class SearchServiceTest extends BaseTestCase {
     @Test
     public void test_keywordSearch() throws IOException {
         Call<KeywordResultsPage> call = getUnauthenticatedInstance().searchService().keyword(
-                "fight",
-                null
+                "fight"
         );
         KeywordResultsPage keywordResults = call.execute().body();
 
@@ -113,7 +109,7 @@ public class SearchServiceTest extends BaseTestCase {
         Call<MediaResultsPage> call = getUnauthenticatedInstance().searchService().multi(
                 "snowden",
                 null,
-                null,
+                "en",
                 null,
                 null
         );

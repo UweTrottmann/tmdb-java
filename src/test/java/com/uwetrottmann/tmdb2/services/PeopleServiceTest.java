@@ -81,7 +81,6 @@ public class PeopleServiceTest extends BaseTestCase {
     public void test_changes() throws IOException {
         Call<Changes> call = getUnauthenticatedInstance().personService().changes(
                 testPerson.id,
-                null,
                 new TmdbDate(testPersonChangesStartDate),
                 new TmdbDate(testPersonChangesEndDate),
                 1
@@ -95,8 +94,7 @@ public class PeopleServiceTest extends BaseTestCase {
     @Test
     public void test_movie_credits() throws IOException {
         Call<PersonCredits> call = getUnauthenticatedInstance().personService().movieCredits(
-                testPerson.id,
-                null
+                testPerson.id
         );
 
         PersonCredits credits = call.execute().body();
@@ -107,8 +105,7 @@ public class PeopleServiceTest extends BaseTestCase {
     @Test
     public void test_tv_credits() throws IOException {
         Call<PersonCredits> call = getUnauthenticatedInstance().personService().tvCredits(
-                testPerson.id,
-                null
+                testPerson.id
         );
 
         PersonCredits credits = call.execute().body();
@@ -119,8 +116,7 @@ public class PeopleServiceTest extends BaseTestCase {
     @Test
     public void test_combined_credits() throws IOException {
         Call<PersonCredits> call = getUnauthenticatedInstance().personService().combinedCredits(
-                testPerson.id,
-                null
+                testPerson.id
         );
 
         PersonCredits credits = call.execute().body();
@@ -141,7 +137,10 @@ public class PeopleServiceTest extends BaseTestCase {
 
     @Test
     public void test_images() throws IOException {
-        Call<PersonImages> call = getUnauthenticatedInstance().personService().images(testPerson.id);
+        Call<PersonImages> call = getUnauthenticatedInstance().personService().images(
+                testPerson.id
+        );
+
         PersonImages images = call.execute().body();
 
         assertImages(images.profiles);
@@ -150,7 +149,10 @@ public class PeopleServiceTest extends BaseTestCase {
 
     @Test
     public void test_tagged_images() throws IOException {
-        Call<TaggedImagesResultsPage> call = getUnauthenticatedInstance().personService().taggedImages(testPerson.id, null, null);
+        Call<TaggedImagesResultsPage> call = getUnauthenticatedInstance().personService().taggedImages(
+                testPerson.id
+        );
+
         TaggedImagesResultsPage images = call.execute().body();
 
         assertTaggedImages(images);
@@ -161,7 +163,7 @@ public class PeopleServiceTest extends BaseTestCase {
 
     @Test
     public void test_popular() throws IOException {
-        Call<PersonResultsPage> call = getUnauthenticatedInstance().personService().popular(null);
+        Call<PersonResultsPage> call = getUnauthenticatedInstance().personService().popular();
         PersonResultsPage popular = call.execute().body();
 
         assertPersonResultsPage(popular);

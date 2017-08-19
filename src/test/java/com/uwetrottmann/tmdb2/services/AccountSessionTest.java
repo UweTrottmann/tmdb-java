@@ -262,10 +262,7 @@ public class AccountSessionTest extends BaseTestCase {
         assumeTrue(accountDataInitialized);
 
         Call<MovieResultsPage> call = getAuthenticatedInstance().accountService().favoriteMovies(
-                0,
-                null,
-                null,
-                null
+                0
         );
 
         MovieResultsPage movies = call.execute().body();
@@ -281,10 +278,7 @@ public class AccountSessionTest extends BaseTestCase {
         assumeTrue(accountDataInitialized);
 
         Call<TvShowResultsPage> call = getAuthenticatedInstance().accountService().favoriteTvShows(
-                0,
-                null,
-                null,
-                null
+                0
         );
 
         TvShowResultsPage tvShows = call.execute().body();
@@ -300,10 +294,7 @@ public class AccountSessionTest extends BaseTestCase {
         assumeTrue(accountDataInitialized);
 
         Call<MovieResultsPage> call = getAuthenticatedInstance().accountService().watchlistMovies(
-                0,
-                null,
-                null,
-                null
+                0
         );
 
         MovieResultsPage movies = call.execute().body();
@@ -319,10 +310,7 @@ public class AccountSessionTest extends BaseTestCase {
         assumeTrue(accountDataInitialized);
 
         Call<TvShowResultsPage> call = getAuthenticatedInstance().accountService().watchlistTvShows(
-                0,
-                null,
-                null,
-                null
+                0
         );
 
         TvShowResultsPage tvShows = call.execute().body();
@@ -338,10 +326,7 @@ public class AccountSessionTest extends BaseTestCase {
         assumeTrue(accountDataInitialized);
 
         Call<MovieResultsPage> call = getAuthenticatedInstance().accountService().ratedMovies(
-                0,
-                null,
-                null,
-                null
+                0
         );
 
         MovieResultsPage movies = call.execute().body();
@@ -360,10 +345,7 @@ public class AccountSessionTest extends BaseTestCase {
         assumeTrue(accountDataInitialized);
 
         Call<TvShowResultsPage> call = getAuthenticatedInstance().accountService().ratedTvShows(
-                0,
-                null,
-                null,
-                null
+                0
         );
 
         TvShowResultsPage tvShows = call.execute().body();
@@ -382,10 +364,7 @@ public class AccountSessionTest extends BaseTestCase {
         assumeTrue(accountDataInitialized);
 
         Call<TvEpisodeResultsPage> call = getAuthenticatedInstance().accountService().ratedTvShowEpisodes(
-                0,
-                null,
-                null,
-                null
+                0
         );
 
         TvEpisodeResultsPage tvShowEpisodes = call.execute().body();
