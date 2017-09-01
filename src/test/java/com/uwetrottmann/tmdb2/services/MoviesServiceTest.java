@@ -14,6 +14,7 @@ import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.ReleaseDatesResults;
 import com.uwetrottmann.tmdb2.entities.ReviewResultsPage;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
+import com.uwetrottmann.tmdb2.entities.TmdbLocale;
 import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.Videos;
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
@@ -59,7 +60,7 @@ public class MoviesServiceTest extends BaseTestCase {
     public void test_summary_language() throws ParseException, IOException {
         Call<Movie> call = getUnauthenticatedInstance().moviesService().summary(
                 testMovie.id,
-                "pt-BR"
+                new TmdbLocale("pt-BR")
         );
 
         Movie movie = call.execute().body();
@@ -142,8 +143,7 @@ public class MoviesServiceTest extends BaseTestCase {
     @Test
     public void test_alternative_titles() throws IOException {
         Call<AlternativeTitles> call = getUnauthenticatedInstance().moviesService().alternativeTitles(
-                testMovie.id,
-                null
+                testMovie.id
         );
 
         AlternativeTitles titles = call.execute().body();
@@ -165,8 +165,7 @@ public class MoviesServiceTest extends BaseTestCase {
     @Test
     public void test_images() throws IOException {
         Call<Images> call = getUnauthenticatedInstance().moviesService().images(
-                testMovie.id,
-                null
+                testMovie.id
         );
 
         Images images = call.execute().body();
@@ -203,8 +202,7 @@ public class MoviesServiceTest extends BaseTestCase {
     @Test
     public void test_videos() throws IOException {
         Call<Videos> call = getUnauthenticatedInstance().moviesService().videos(
-                testMovie.id,
-                null
+                testMovie.id
         );
 
         Videos videos = call.execute().body();
@@ -227,8 +225,7 @@ public class MoviesServiceTest extends BaseTestCase {
     public void test_similar() throws IOException {
         Call<MovieResultsPage> call = getUnauthenticatedInstance().moviesService().similar(
                 testMovie.id,
-                1,
-                null
+                1
         );
         MovieResultsPage results = call.execute().body();
 
@@ -240,8 +237,7 @@ public class MoviesServiceTest extends BaseTestCase {
         Call<Changes> call = getUnauthenticatedInstance().moviesService().changes(
                 testMovie.id,
                 new TmdbDate(testMovieChangesStartDate),
-                new TmdbDate(testMovieChangesEndDate),
-                null
+                new TmdbDate(testMovieChangesEndDate)
         );
 
         Changes results = call.execute().body();
@@ -253,8 +249,7 @@ public class MoviesServiceTest extends BaseTestCase {
     public void test_reviews() throws IOException {
         Call<ReviewResultsPage> call = getUnauthenticatedInstance().moviesService().reviews(
                 testMovie.id,
-                1,
-                null
+                1
         );
 
         ReviewResultsPage results = call.execute().body();
@@ -266,8 +261,7 @@ public class MoviesServiceTest extends BaseTestCase {
     public void test_recommendations() throws IOException {
         Call<MovieResultsPage> call = getUnauthenticatedInstance().moviesService().recommendations(
                 testMovie.id,
-                1,
-                null
+                1
         );
 
         MovieResultsPage results = call.execute().body();
@@ -279,8 +273,7 @@ public class MoviesServiceTest extends BaseTestCase {
     public void test_lists() throws IOException {
         Call<ListResultsPage> call = getUnauthenticatedInstance().moviesService().lists(
                 testMovie.id,
-                1,
-                null
+                1
         );
 
         ListResultsPage results = call.execute().body();
@@ -303,10 +296,7 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_upcoming() throws IOException {
-        Call<MovieResultsPage> call = getUnauthenticatedInstance().moviesService().upcoming(
-                null,
-                null
-        );
+        Call<MovieResultsPage> call = getUnauthenticatedInstance().moviesService().upcoming();
 
         MovieResultsPage page = call.execute().body();
 
@@ -316,10 +306,7 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_nowPlaying() throws IOException {
-        Call<MovieResultsPage> call = getUnauthenticatedInstance().moviesService().nowPlaying(
-                null,
-                null
-        );
+        Call<MovieResultsPage> call = getUnauthenticatedInstance().moviesService().nowPlaying();
 
         MovieResultsPage page = call.execute().body();
 
@@ -328,10 +315,7 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_popular() throws IOException {
-        Call<MovieResultsPage> call = getUnauthenticatedInstance().moviesService().popular(
-                null,
-                null
-        );
+        Call<MovieResultsPage> call = getUnauthenticatedInstance().moviesService().popular();
 
         MovieResultsPage page = call.execute().body();
 
@@ -341,10 +325,7 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_topRated() throws IOException {
-        Call<MovieResultsPage> call = getUnauthenticatedInstance().moviesService().topRated(
-                null,
-                null
-        );
+        Call<MovieResultsPage> call = getUnauthenticatedInstance().moviesService().topRated();
 
         MovieResultsPage page = call.execute().body();
 

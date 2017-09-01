@@ -78,8 +78,8 @@ public class GenericAssertions {
     public static void assertImage(Image image) {
         assertThat(image).isNotNull();
         assertThat(image.file_path).isNotNull();
-        assertThat(image.width).isNotNull();
-        assertThat(image.height).isNotNull();
+        assertThat(image.width).isGreaterThan(0);
+        assertThat(image.height).isGreaterThan(0);
         assertThat(image.aspect_ratio).isGreaterThan(0);
         assertThat(image.vote_average).isGreaterThanOrEqualTo(0);
         assertThat(image.vote_count).isGreaterThanOrEqualTo(0);
@@ -88,10 +88,18 @@ public class GenericAssertions {
 
     public static void assertTaggedImage(TaggedImage image) {
         assertImage(image);
-        assertThat(image.id).isNotNull();
-        assertThat(image.image_type).isNotNull();
         assertThat(image.media_type).isNotNull();
         assertThat(image.media).isNotNull();
+        switch(image.media_type) {
+            case "movie":
+                assertThat(image.media.movie).isNotNull();
+                break;
+            case "tv":
+                assertThat(image.media.tvShow).isNotNull();
+                break;
+        }
+
+
     }
 
     public static void assertImages(List<Image> images) {

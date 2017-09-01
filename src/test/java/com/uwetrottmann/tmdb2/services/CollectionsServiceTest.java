@@ -45,8 +45,7 @@ public class CollectionsServiceTest extends BaseTestCase {
     @Test
     public void test_images() throws IOException {
         Call<Images> call = getUnauthenticatedInstance().collectionService().images(
-                testCollection.id,
-                null
+                testCollection.id
         );
 
         Images images = call.execute().body();

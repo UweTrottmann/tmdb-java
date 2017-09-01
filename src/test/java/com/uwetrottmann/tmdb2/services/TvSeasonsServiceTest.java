@@ -99,12 +99,12 @@ public class TvSeasonsServiceTest extends BaseTestCase {
     public void test_externalIds() throws IOException {
         Call<TvSeasonExternalIds> call = getUnauthenticatedInstance().tvSeasonsService().externalIds(
                 testTvShow.id,
-                testTvSeason.season_number,
-                null
+                testTvSeason.season_number
         );
 
         TvSeasonExternalIds ids = call.execute().body();
 
+        assertThat(ids).isNotNull();
         assertThat(ids.tvdb_id).isNotNull();
     }
 
@@ -112,11 +112,12 @@ public class TvSeasonsServiceTest extends BaseTestCase {
     public void test_images() throws IOException {
         Call<Images> call = getUnauthenticatedInstance().tvSeasonsService().images(
                 testTvShow.id,
-                testTvSeason.season_number,
-                null
+                testTvSeason.season_number
         );
 
         Images images = call.execute().body();
+
+        assertThat(images).isNotNull();
         assertThat(images.id).isNotNull();
         assertImages(images.posters);
     }
@@ -125,8 +126,7 @@ public class TvSeasonsServiceTest extends BaseTestCase {
     public void test_videos() throws IOException {
         Call<Videos> call = getUnauthenticatedInstance().tvSeasonsService().videos(
                 testTvShow.id,
-                testTvSeason.season_number,
-                null
+                testTvSeason.season_number
         );
         Videos videos = call.execute().body();
 
