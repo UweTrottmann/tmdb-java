@@ -155,8 +155,6 @@ public class PeopleServiceTest extends BaseTestCase {
 
         assertTaggedImages(images);
         assertThat(images.id).isEqualTo(testPerson.id);
-
-
     }
 
     @Test
