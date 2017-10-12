@@ -17,6 +17,7 @@ import com.uwetrottmann.tmdb2.entities.PersonCrewCredit;
 import com.uwetrottmann.tmdb2.entities.RatingObject;
 import com.uwetrottmann.tmdb2.enumerations.MediaType;
 import com.uwetrottmann.tmdb2.enumerations.Status;
+import com.uwetrottmann.tmdb2.enumerations.VideoType;
 
 import java.lang.reflect.Type;
 import java.text.ParseException;
@@ -51,6 +52,14 @@ public class TmdbHelper {
             public MediaType deserialize(JsonElement json, Type typeOfT,
                                          JsonDeserializationContext context) throws JsonParseException {
                 return MediaType.get(json.getAsString());
+            }
+        });
+
+        builder.registerTypeAdapter(VideoType.class, new JsonDeserializer<VideoType>() {
+            @Override
+            public VideoType deserialize(JsonElement json, Type typeOfT,
+                                         JsonDeserializationContext context) throws JsonParseException {
+                return VideoType.get(json.getAsString());
             }
         });
 

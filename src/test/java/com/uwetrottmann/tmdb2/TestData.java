@@ -100,7 +100,7 @@ public class TestData {
         testPerson.gender = 2;
         testPerson.id = 880;
         testPerson.imdb_id = "nm0000255";
-        testPerson.place_of_birth = "Berkeley, Californie, États-Unis";
+        testPerson.place_of_birth = "Berkeley, California, USA";
         testPerson.adult = false;
         testPerson.external_ids = new PersonExternalIds();
         testPerson.external_ids.twitter_id = "BenAffleck";

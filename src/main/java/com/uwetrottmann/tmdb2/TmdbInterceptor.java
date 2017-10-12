@@ -79,10 +79,10 @@ public class TmdbInterceptor implements Interceptor {
                 try {
                     Integer retry = Integer.parseInt(retryAfter);
                     Thread.sleep((int) ((retry + 0.5) * 1000));
-                    response = chain.proceed(builder.build());
-                } catch (Exception exc) {
-
+                } catch (NumberFormatException | InterruptedException e) {
+                    return response;
                 }
+                return handleIntercept(chain,tmdb);
             }
         }
         handleErrors(response, tmdb);

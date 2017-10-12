@@ -1,5 +1,7 @@
 package com.uwetrottmann.tmdb2.entities;
 
+import com.uwetrottmann.tmdb2.enumerations.VideoType;
+
 import java.util.List;
 
 public class Videos {
@@ -8,11 +10,12 @@ public class Videos {
 
         public String id;
         public String iso_639_1;
+        public String iso_3166_1;
         public String key;
         public String name;
         public String site;
         public Integer size;
-        public String type;
+        public VideoType type;
 
     }
 

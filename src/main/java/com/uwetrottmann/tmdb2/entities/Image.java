@@ -6,8 +6,8 @@ public class Image {
     public Integer width;
     public Integer height;
     public String iso_639_1;
-    public Float aspect_ratio;
-    public Float vote_average;
+    public Double aspect_ratio;
+    public Double vote_average;
     public Integer vote_count;
 
 }

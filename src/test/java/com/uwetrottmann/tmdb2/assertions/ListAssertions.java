@@ -23,7 +23,7 @@ public class ListAssertions {
     public static void assertBaseList(BaseList baseList) {
         assertThat(baseList).isNotNull();
         assertThat(baseList.id).isNotNull();
-        assertThat(baseList.description).isNotEmpty();
+        assertThat(baseList.description).isNotNull();
         assertThat(baseList.favorite_count).isNotNull();
         assertThat(baseList.favorite_count).isGreaterThanOrEqualTo(0);
         assertThat(baseList.item_count).isNotNull();
