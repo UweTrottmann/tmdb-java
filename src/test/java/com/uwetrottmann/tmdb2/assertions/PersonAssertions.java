@@ -57,7 +57,7 @@ public class PersonAssertions {
     public static void assertPersonDataIntegrity(Person person) {
         assertPerson(person);
         assertThat(person.name).isEqualTo(TestData.testPerson.name);
-        assertThat(person.birthday).isEqualTo(TestData.testPerson.birthday);
+        assertThat(person.birthday.getAsString()).isEqualTo(TestData.testPerson.birthday.getAsString());
         assertThat(person.id).isEqualTo(TestData.testPerson.id);
         assertThat(person.imdb_id).isEqualTo(TestData.testPerson.imdb_id);
         assertThat(person.gender).isEqualTo(TestData.testPerson.gender);

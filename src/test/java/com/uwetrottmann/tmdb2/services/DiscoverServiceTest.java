@@ -1,12 +1,13 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
-import com.uwetrottmann.tmdb2.entities.DiscoverFilter;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
-import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.enumerations.ReleaseType;
+import com.uwetrottmann.tmdb2.enumerations.Separator;
 import com.uwetrottmann.tmdb2.enumerations.SortBy;
+import com.uwetrottmann.tmdb2.utils.DiscoverFilter;
+import com.uwetrottmann.tmdb2.utils.TmdbDate;
 import org.junit.Test;
 import retrofit2.Call;
 
@@ -29,10 +30,10 @@ public class DiscoverServiceTest extends BaseTestCase {
                 .page(1)
                 .primary_release_date_gte(new TmdbDate("1990-01-01"))
                 .sort_by(SortBy.RELEASE_DATE_DESC)
-                .with_cast(new DiscoverFilter(testPersonCast.id))
-                .with_crew(new DiscoverFilter(testPersonCrew.id))
-                .without_genres(new DiscoverFilter(testMovieGenreRomance.id))
-                .with_release_type(new DiscoverFilter(DiscoverFilter.Separator.OR,
+                .with_cast(new DiscoverFilter(Separator.AND,testPersonCast.id))
+                .with_crew(new DiscoverFilter(Separator.AND,testPersonCrew.id))
+                .without_genres(new DiscoverFilter(Separator.AND,testMovieGenreRomance.id))
+                .with_release_type(new DiscoverFilter(Separator.OR,
                         ReleaseType.THEATRICAL, ReleaseType.DIGITAL))
                 .build();
         MovieResultsPage results = call.execute().body();
@@ -44,8 +45,8 @@ public class DiscoverServiceTest extends BaseTestCase {
     public void test_discover_tv() throws IOException {
         Call<TvShowResultsPage> call = getUnauthenticatedInstance().discoverTv()
                 .sort_by(SortBy.VOTE_AVERAGE_DESC)
-                .with_genres(new DiscoverFilter(testTvGenreDrama.id, testTvGenreSciFi.id))
-                .with_networks(new DiscoverFilter(testNetwork.id))
+                .with_genres(new DiscoverFilter(Separator.AND,testTvGenreDrama.id, testTvGenreSciFi.id))
+                .with_networks(new DiscoverFilter(Separator.AND,testNetwork.id))
                 .first_air_date_gte(new TmdbDate("2010-01-01"))
                 .first_air_date_lte(new TmdbDate("2017-01-01"))
                 .build();
@@ -53,5 +54,6 @@ public class DiscoverServiceTest extends BaseTestCase {
 
         assertTvShowResultsPage(results);
     }
+
 
 }

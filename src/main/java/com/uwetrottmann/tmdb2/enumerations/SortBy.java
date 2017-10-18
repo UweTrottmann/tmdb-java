@@ -1,7 +1,6 @@
 package com.uwetrottmann.tmdb2.enumerations;
 
 public enum SortBy {
-
     POPULARITY_ASC("popularity.asc"),
     POPULARITY_DESC("popularity.desc"),
     RELEASE_DATE_ASC("release_date.asc"),

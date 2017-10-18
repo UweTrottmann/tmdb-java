@@ -8,10 +8,12 @@ import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.ReleaseDate;
 import com.uwetrottmann.tmdb2.entities.ReleaseDatesResult;
 import com.uwetrottmann.tmdb2.entities.ReleaseDatesResults;
+import com.uwetrottmann.tmdb2.utils.TmdbLocale;
 
 import static com.uwetrottmann.tmdb2.TestData.testProductionCompany;
 import static com.uwetrottmann.tmdb2.assertions.CompanyAssertions.assertBaseCompany;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseResultsPage;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertLanguage;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MovieAssertions {
@@ -19,7 +21,7 @@ public class MovieAssertions {
         assertThat(movie).isNotNull();
         assertThat(movie.id).isNotNull();
         assertThat(movie.title).isNotNull();
-        assertThat(movie.original_language).isNotEmpty();
+        assertLanguage(movie.original_language,true);
         assertThat(movie.overview).isNotNull();
         assertThat(movie.adult).isNotNull();
         assertThat(movie.release_date).isNotNull();
@@ -65,18 +67,18 @@ public class MovieAssertions {
         assertThat(movie.production_companies.get(0).id).isEqualTo(testProductionCompany.id);
         assertThat(movie.production_companies.get(0).name).isEqualTo(testProductionCompany.name);
         assertThat(movie.production_countries).isNotEmpty();
-        assertThat(movie.production_countries.get(0).iso_3166_1).isEqualTo("US");
-        assertThat(movie.production_countries.get(0).name).isEqualTo("United States of America");
+        assertThat(movie.production_countries.get(0).getCountryCode()).isEqualTo("US");
+        assertThat(movie.production_countries.get(0).getCountry()).isEqualTo(new TmdbLocale("en","US").getLocalizedCountry());
         assertThat(movie.revenue).isEqualTo(TestData.testMovie.revenue);
         assertThat(movie.runtime).isEqualTo(TestData.testMovie.runtime);
-        assertThat(movie.spoken_languages.get(0).iso_639_1).isEqualTo("en");
-        assertThat(movie.spoken_languages.get(0).name).isEqualTo("English");
+        assertThat(movie.spoken_languages.get(0).getLanguageCode()).isEqualTo("en");
+        assertThat(movie.spoken_languages.get(0).getLocalizedLanguage()).isEqualTo("English");
         assertThat(movie.status).isEqualTo(TestData.testMovie.status);
-        assertThat(movie.release_date).isEqualTo(TestData.testMovie.release_date);
+        assertThat(movie.release_date.getAsString()).isEqualTo(TestData.testMovie.release_date.getAsString());
         assertThat(movie.tagline).isEqualTo(TestData.testMovie.tagline);
         assertThat(movie.title).isEqualTo(TestData.testMovie.title);
         assertThat(movie.original_title).isEqualTo(TestData.testMovie.original_title);
-        assertThat(movie.original_language).isEqualTo(TestData.testMovie.original_language);
+        assertThat(movie.original_language.getLanguageCode()).isEqualTo(TestData.testMovie.original_language.getLanguageCode());
         assertThat(movie.belongs_to_collection.name).isEqualTo(TestData.testCollection.name);
         assertThat(movie.belongs_to_collection.id).isEqualTo(TestData.testCollection.id);
         assertThat(movie.id).isEqualTo(TestData.testMovie.id);
@@ -88,12 +90,12 @@ public class MovieAssertions {
         assertThat(releaseDates.results).isNotEmpty();
 
         for (ReleaseDatesResult result : releaseDates.results) {
-            assertThat(result.iso_3166_1).isNotNull();
+            assertThat(result.country).isNotNull();
             assertThat(result.release_dates).isNotNull();
             assertThat(result.release_dates).isNotEmpty();
             for (ReleaseDate releaseDate : result.release_dates) {
                 assertThat(releaseDate.certification).isNotNull();
-                assertThat(releaseDate.iso_639_1).isNotNull();
+                assertLanguage(releaseDate.language,false);
                 assertThat(releaseDate.note).isNotNull();
                 assertThat(releaseDate.release_date).isNotNull();
                 assertThat(releaseDate.type).isNotNull();

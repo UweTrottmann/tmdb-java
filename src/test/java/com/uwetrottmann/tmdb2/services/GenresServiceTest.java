@@ -16,9 +16,7 @@ public class GenresServiceTest extends BaseTestCase {
 
     @Test
     public void test_movie() throws IOException {
-        Call<GenreResults> call = getUnauthenticatedInstance().genreService().movie(
-                null
-        );
+        Call<GenreResults> call = getUnauthenticatedInstance().genreService().movie();
 
         GenreResults results = call.execute().body();
         assertGenres(results);
@@ -26,9 +24,7 @@ public class GenresServiceTest extends BaseTestCase {
 
     @Test
     public void test_tv() throws IOException {
-        Call<GenreResults> call = getUnauthenticatedInstance().genreService().tv(
-                null
-        );
+        Call<GenreResults> call = getUnauthenticatedInstance().genreService().tv();
         GenreResults results = call.execute().body();
         assertGenres(results);
     }
@@ -36,10 +32,7 @@ public class GenresServiceTest extends BaseTestCase {
     @Test
     public void test_movies() throws IOException {
         Call<MovieResultsPage> call = getUnauthenticatedInstance().genreService().movies(
-                testMovieGenreAdventure.id,
-                null,
-                null,
-                null
+                testMovieGenreAdventure.id
         );
 
         MovieResultsPage results = call.execute().body();

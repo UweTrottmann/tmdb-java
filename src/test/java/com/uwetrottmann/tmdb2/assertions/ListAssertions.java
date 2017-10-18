@@ -7,6 +7,7 @@ import com.uwetrottmann.tmdb2.entities.ListResultsPage;
 
 import static com.uwetrottmann.tmdb2.TestData.testList;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseResultsPage;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertLanguage;
 import static com.uwetrottmann.tmdb2.assertions.MovieAssertions.assertBaseMovie;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -28,7 +29,7 @@ public class ListAssertions {
         assertThat(baseList.favorite_count).isGreaterThanOrEqualTo(0);
         assertThat(baseList.item_count).isNotNull();
         assertThat(baseList.item_count).isGreaterThanOrEqualTo(0);
-        assertThat(baseList.iso_639_1).isNotNull();
+        assertLanguage(baseList.language, false);
         assertThat(baseList.name).isNotEmpty();
 
         try {

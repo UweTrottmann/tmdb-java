@@ -1,7 +1,5 @@
-package com.uwetrottmann.tmdb2;
+package com.uwetrottmann.tmdb2.utils;
 
-import com.uwetrottmann.tmdb2.entities.DiscoverFilter;
-import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.enumerations.SortBy;
 import com.uwetrottmann.tmdb2.services.DiscoverService;
@@ -11,7 +9,7 @@ public class DiscoverTvBuilder {
 
     protected final DiscoverService discoverService;
 
-    private String language;
+    private TmdbLocale language;
     private SortBy sort_by;
     private TmdbDate air_date_gte;
     private TmdbDate air_date_lte;
@@ -35,7 +33,7 @@ public class DiscoverTvBuilder {
         this.discoverService = discoverService;
     }
 
-    public DiscoverTvBuilder language(String value) {
+    public DiscoverTvBuilder language(TmdbLocale value) {
         this.language = value;
         return this;
     }

@@ -1,5 +1,7 @@
 package com.uwetrottmann.tmdb2.entities;
 
+import com.uwetrottmann.tmdb2.utils.TmdbDate;
+
 public class TaggedImage extends Image {
 
     public String id;

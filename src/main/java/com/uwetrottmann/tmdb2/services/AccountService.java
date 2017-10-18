@@ -5,6 +5,7 @@ import com.uwetrottmann.tmdb2.entities.FavoriteMedia;
 import com.uwetrottmann.tmdb2.entities.ListResultsPage;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.Status;
+import com.uwetrottmann.tmdb2.utils.TmdbLocale;
 import com.uwetrottmann.tmdb2.entities.TvEpisodeResultsPage;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.entities.WatchlistMedia;
@@ -48,8 +49,148 @@ public interface AccountService {
      * @param language  <em>Optional.</em> ISO 639-1 code.
      * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
      */
+    @Deprecated
     @GET("account/{account_id}/favorite/movies")
     Call<MovieResultsPage> favoriteMovies(
+            @Path("account_id") Integer accountId,
+            @Query("language") String language,
+            @Query("sort_by") SortBy sortBy,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get the list of your favorite movies.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/favorite/movies")
+    Call<MovieResultsPage> favoriteMovies(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("sort_by") SortBy sortBy,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get the list of your favorite movies.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/favorite/movies")
+    Call<MovieResultsPage> favoriteMovies(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("sort_by") SortBy sortBy
+    );
+
+    /**
+     * Get the list of your favorite movies.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("account/{account_id}/favorite/movies")
+    Call<MovieResultsPage> favoriteMovies(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get the list of your favorite movies.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("account/{account_id}/favorite/movies")
+    Call<MovieResultsPage> favoriteMovies(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language
+    );
+
+    /**
+     * Get the list of your favorite movies.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     */
+    @GET("account/{account_id}/favorite/movies")
+    Call<MovieResultsPage> favoriteMovies(
+            @Path("account_id") Integer accountId
+    );
+
+    /**
+     * Get the list of your favorite movies.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/favorite/movies")
+    Call<MovieResultsPage> favoriteMovies(
+            @Path("account_id") Integer accountId,
+            @Query("sort_by") SortBy sortBy,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get the list of your favorite movies.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     */
+    @GET("account/{account_id}/favorite/movies")
+    Call<MovieResultsPage> favoriteMovies(
+            @Path("account_id") Integer accountId,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get the list of your favorite movies.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/favorite/movies")
+    Call<MovieResultsPage> favoriteMovies(
+            @Path("account_id") Integer accountId,
+            @Query("sort_by") SortBy sortBy
+    );
+
+    /**
+     * Get the list of your favorite TV shows.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id..
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @Deprecated
+    @GET("account/{account_id}/favorite/tv")
+    Call<TvShowResultsPage> favoriteTvShows(
             @Path("account_id") Integer accountId,
             @Query("language") String language,
             @Query("sort_by") SortBy sortBy,
@@ -69,9 +210,111 @@ public interface AccountService {
     @GET("account/{account_id}/favorite/tv")
     Call<TvShowResultsPage> favoriteTvShows(
             @Path("account_id") Integer accountId,
-            @Query("language") String language,
+            @Query("language") TmdbLocale language,
             @Query("sort_by") SortBy sortBy,
             @Query("page") Integer page
+    );
+
+    /**
+     * Get the list of your favorite TV shows.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id..
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/favorite/tv")
+    Call<TvShowResultsPage> favoriteTvShows(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("sort_by") SortBy sortBy
+    );
+
+    /**
+     * Get the list of your favorite TV shows.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id..
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("account/{account_id}/favorite/tv")
+    Call<TvShowResultsPage> favoriteTvShows(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get the list of your favorite TV shows.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id..
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/favorite/tv")
+    Call<TvShowResultsPage> favoriteTvShows(
+            @Path("account_id") Integer accountId,
+            @Query("sort_by") SortBy sortBy,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get the list of your favorite TV shows.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id..
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("account/{account_id}/favorite/tv")
+    Call<TvShowResultsPage> favoriteTvShows(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language
+    );
+
+    /**
+     * Get the list of your favorite TV shows.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id..
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/favorite/tv")
+    Call<TvShowResultsPage> favoriteTvShows(
+            @Path("account_id") Integer accountId,
+            @Query("sort_by") SortBy sortBy
+    );
+
+    /**
+     * Get the list of your favorite TV shows.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id..
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     */
+    @GET("account/{account_id}/favorite/tv")
+    Call<TvShowResultsPage> favoriteTvShows(
+            @Path("account_id") Integer accountId,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get the list of your favorite TV shows.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id..
+     */
+    @GET("account/{account_id}/favorite/tv")
+    Call<TvShowResultsPage> favoriteTvShows(
+            @Path("account_id") Integer accountId
     );
 
     /**
@@ -98,8 +341,148 @@ public interface AccountService {
      * @param language  <em>Optional.</em> ISO 639-1 code.
      * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
      */
+    @Deprecated
     @GET("account/{account_id}/rated/movies")
     Call<MovieResultsPage> ratedMovies(
+            @Path("account_id") Integer accountId,
+            @Query("language") String language,
+            @Query("sort_by") SortBy sortBy,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the movies you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/rated/movies")
+    Call<MovieResultsPage> ratedMovies(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("sort_by") SortBy sortBy,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the movies you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/rated/movies")
+    Call<MovieResultsPage> ratedMovies(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("sort_by") SortBy sortBy
+    );
+
+    /**
+     * Get a list of all the movies you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("account/{account_id}/rated/movies")
+    Call<MovieResultsPage> ratedMovies(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the movies you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("account/{account_id}/rated/movies")
+    Call<MovieResultsPage> ratedMovies(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language
+    );
+
+    /**
+     * Get a list of all the movies you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/rated/movies")
+    Call<MovieResultsPage> ratedMovies(
+            @Path("account_id") Integer accountId,
+            @Query("sort_by") SortBy sortBy,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the movies you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     */
+    @GET("account/{account_id}/rated/movies")
+    Call<MovieResultsPage> ratedMovies(
+            @Path("account_id") Integer accountId,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the movies you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/rated/movies")
+    Call<MovieResultsPage> ratedMovies(
+            @Path("account_id") Integer accountId,
+            @Query("sort_by") SortBy sortBy
+    );
+
+    /**
+     * Get a list of all the movies you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     */
+    @GET("account/{account_id}/rated/movies")
+    Call<MovieResultsPage> ratedMovies(
+            @Path("account_id") Integer accountId
+    );
+
+    /**
+     * Get a list of all the TV shows you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @Deprecated
+    @GET("account/{account_id}/rated/tv")
+    Call<TvShowResultsPage> ratedTvShows(
             @Path("account_id") Integer accountId,
             @Query("language") String language,
             @Query("sort_by") SortBy sortBy,
@@ -119,6 +502,127 @@ public interface AccountService {
     @GET("account/{account_id}/rated/tv")
     Call<TvShowResultsPage> ratedTvShows(
             @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("sort_by") SortBy sortBy,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the TV shows you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/rated/tv")
+    Call<TvShowResultsPage> ratedTvShows(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("sort_by") SortBy sortBy
+    );
+
+    /**
+     * Get a list of all the TV shows you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("account/{account_id}/rated/tv")
+    Call<TvShowResultsPage> ratedTvShows(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the TV shows you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("account/{account_id}/rated/tv")
+    Call<TvShowResultsPage> ratedTvShows(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language
+    );
+
+    /**
+     * Get a list of all the TV shows you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/rated/tv")
+    Call<TvShowResultsPage> ratedTvShows(
+            @Path("account_id") Integer accountId,
+            @Query("sort_by") SortBy sortBy,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the TV shows you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     */
+    @GET("account/{account_id}/rated/tv")
+    Call<TvShowResultsPage> ratedTvShows(
+            @Path("account_id") Integer accountId,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the TV shows you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/rated/tv")
+    Call<TvShowResultsPage> ratedTvShows(
+            @Path("account_id") Integer accountId,
+            @Query("sort_by") SortBy sortBy
+    );
+
+    /**
+     * Get a list of all the TV shows you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     */
+    @GET("account/{account_id}/rated/tv")
+    Call<TvShowResultsPage> ratedTvShows(
+            @Path("account_id") Integer accountId
+    );
+
+    /**
+     * Get a list of all the TV episodes you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @Deprecated
+    @GET("account/{account_id}/rated/tv/episodes")
+    Call<TvEpisodeResultsPage> ratedTvShowEpisodes(
+            @Path("account_id") Integer accountId,
             @Query("language") String language,
             @Query("sort_by") SortBy sortBy,
             @Query("page") Integer page
@@ -136,6 +640,127 @@ public interface AccountService {
      */
     @GET("account/{account_id}/rated/tv/episodes")
     Call<TvEpisodeResultsPage> ratedTvShowEpisodes(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("sort_by") SortBy sortBy,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the TV episodes you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/rated/tv/episodes")
+    Call<TvEpisodeResultsPage> ratedTvShowEpisodes(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("sort_by") SortBy sortBy
+    );
+
+    /**
+     * Get a list of all the TV episodes you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("account/{account_id}/rated/tv/episodes")
+    Call<TvEpisodeResultsPage> ratedTvShowEpisodes(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the TV episodes you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("account/{account_id}/rated/tv/episodes")
+    Call<TvEpisodeResultsPage> ratedTvShowEpisodes(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language
+    );
+
+    /**
+     * Get a list of all the TV episodes you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/rated/tv/episodes")
+    Call<TvEpisodeResultsPage> ratedTvShowEpisodes(
+            @Path("account_id") Integer accountId,
+            @Query("sort_by") SortBy sortBy,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the TV episodes you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     */
+    @GET("account/{account_id}/rated/tv/episodes")
+    Call<TvEpisodeResultsPage> ratedTvShowEpisodes(
+            @Path("account_id") Integer accountId,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the TV episodes you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/rated/tv/episodes")
+    Call<TvEpisodeResultsPage> ratedTvShowEpisodes(
+            @Path("account_id") Integer accountId,
+            @Query("sort_by") SortBy sortBy
+    );
+
+    /**
+     * Get a list of all the TV episodes you have rated.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     */
+    @GET("account/{account_id}/rated/tv/episodes")
+    Call<TvEpisodeResultsPage> ratedTvShowEpisodes(
+            @Path("account_id") Integer accountId
+    );
+
+    /**
+     * Get a list of all the movies you have added to your watchlist.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @Deprecated
+    @GET("account/{account_id}/watchlist/movies")
+    Call<MovieResultsPage> watchlistMovies(
             @Path("account_id") Integer accountId,
             @Query("language") String language,
             @Query("sort_by") SortBy sortBy,
@@ -155,6 +780,127 @@ public interface AccountService {
     @GET("account/{account_id}/watchlist/movies")
     Call<MovieResultsPage> watchlistMovies(
             @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("sort_by") SortBy sortBy,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the movies you have added to your watchlist.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/watchlist/movies")
+    Call<MovieResultsPage> watchlistMovies(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("sort_by") SortBy sortBy
+    );
+
+    /**
+     * Get a list of all the movies you have added to your watchlist.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("account/{account_id}/watchlist/movies")
+    Call<MovieResultsPage> watchlistMovies(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the movies you have added to your watchlist.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("account/{account_id}/watchlist/movies")
+    Call<MovieResultsPage> watchlistMovies(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language
+    );
+
+    /**
+     * Get a list of all the movies you have added to your watchlist.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/watchlist/movies")
+    Call<MovieResultsPage> watchlistMovies(
+            @Path("account_id") Integer accountId,
+            @Query("sort_by") SortBy sortBy,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the movies you have added to your watchlist.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     */
+    @GET("account/{account_id}/watchlist/movies")
+    Call<MovieResultsPage> watchlistMovies(
+            @Path("account_id") Integer accountId,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the movies you have added to your watchlist.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/watchlist/movies")
+    Call<MovieResultsPage> watchlistMovies(
+            @Path("account_id") Integer accountId,
+            @Query("sort_by") SortBy sortBy
+    );
+
+    /**
+     * Get a list of all the movies you have added to your watchlist.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     */
+    @GET("account/{account_id}/watchlist/movies")
+    Call<MovieResultsPage> watchlistMovies(
+            @Path("account_id") Integer accountId
+    );
+
+    /**
+     * Get a list of all the TV shows you have added to your watchlist.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @Deprecated
+    @GET("account/{account_id}/watchlist/tv")
+    Call<TvShowResultsPage> watchlistTvShows(
+            @Path("account_id") Integer accountId,
             @Query("language") String language,
             @Query("sort_by") SortBy sortBy,
             @Query("page") Integer page
@@ -173,9 +919,111 @@ public interface AccountService {
     @GET("account/{account_id}/watchlist/tv")
     Call<TvShowResultsPage> watchlistTvShows(
             @Path("account_id") Integer accountId,
-            @Query("language") String language,
+            @Query("language") TmdbLocale language,
             @Query("sort_by") SortBy sortBy,
             @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the TV shows you have added to your watchlist.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/watchlist/tv")
+    Call<TvShowResultsPage> watchlistTvShows(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("sort_by") SortBy sortBy
+    );
+
+    /**
+     * Get a list of all the TV shows you have added to your watchlist.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("account/{account_id}/watchlist/tv")
+    Call<TvShowResultsPage> watchlistTvShows(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the TV shows you have added to your watchlist.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("account/{account_id}/watchlist/tv")
+    Call<TvShowResultsPage> watchlistTvShows(
+            @Path("account_id") Integer accountId,
+            @Query("language") TmdbLocale language
+    );
+
+    /**
+     * Get a list of all the TV shows you have added to your watchlist.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/watchlist/tv")
+    Call<TvShowResultsPage> watchlistTvShows(
+            @Path("account_id") Integer accountId,
+            @Query("sort_by") SortBy sortBy,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the TV shows you have added to your watchlist.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param page      <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     */
+    @GET("account/{account_id}/watchlist/tv")
+    Call<TvShowResultsPage> watchlistTvShows(
+            @Path("account_id") Integer accountId,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get a list of all the TV shows you have added to your watchlist.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     * @param sortBy    <em>Optional.</em> Sort the results. <b>Allowed Value(s):</b> created_at.asc, created_at.desc
+     */
+    @GET("account/{account_id}/watchlist/tv")
+    Call<TvShowResultsPage> watchlistTvShows(
+            @Path("account_id") Integer accountId,
+            @Query("sort_by") SortBy sortBy
+    );
+
+    /**
+     * Get a list of all the TV shows you have added to your watchlist.
+     * <p>
+     * <b>Requires an active Session.</b>
+     *
+     * @param accountId <em>Optional.</em> Account TMDb Id.
+     */
+    @GET("account/{account_id}/watchlist/tv")
+    Call<TvShowResultsPage> watchlistTvShows(
+            @Path("account_id") Integer accountId
     );
 
     /**

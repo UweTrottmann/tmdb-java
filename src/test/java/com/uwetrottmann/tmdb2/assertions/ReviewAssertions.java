@@ -16,7 +16,7 @@ public class ReviewAssertions {
         if (!extensive)
             return;
 
-        assertThat(review.iso_639_1).isNotNull();
+        assertThat(review.language).isNotNull();
         assertThat(review.media_id).isNotNull();
         assertThat(review.media_title).isNotNull();
         assertThat(review.media_type).isNotNull();
@@ -28,7 +28,7 @@ public class ReviewAssertions {
         assertThat(review.media_type).isEqualTo(testReview.media_type);
         assertThat(review.media_title).isEqualTo(testReview.media_title);
         assertThat(review.media_id).isEqualTo(testReview.media_id);
-        assertThat(review.iso_639_1).isEqualTo(testReview.iso_639_1);
+        assertThat(review.language.getLanguageCode()).isEqualTo(testReview.language.getLanguageCode());
         assertThat(review.url).isEqualTo(testReview.url);
         assertThat(review.id).isEqualTo(testReview.id);
         assertThat(review.content).isEqualTo(testReview.content);

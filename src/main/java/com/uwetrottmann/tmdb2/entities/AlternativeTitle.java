@@ -1,8 +1,12 @@
 package com.uwetrottmann.tmdb2.entities;
 
+import com.google.gson.annotations.SerializedName;
+import com.uwetrottmann.tmdb2.utils.Country;
+
 public class AlternativeTitle {
 
-    public String iso_3166_1;
+    @SerializedName(value = "iso_3166_1")
+    public Country country;
     public String title;
 
 }

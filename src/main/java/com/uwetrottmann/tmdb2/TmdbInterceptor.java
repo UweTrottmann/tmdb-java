@@ -4,7 +4,6 @@ import com.uwetrottmann.tmdb2.entities.Status;
 import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
 import com.uwetrottmann.tmdb2.exceptions.TmdbAuthenticationFailedException;
 import com.uwetrottmann.tmdb2.exceptions.TmdbDuplicateEntryException;
-import com.uwetrottmann.tmdb2.exceptions.TmdbInvalidAcceptHeaderException;
 import com.uwetrottmann.tmdb2.exceptions.TmdbInvalidParametersException;
 import com.uwetrottmann.tmdb2.exceptions.TmdbNotFoundException;
 import com.uwetrottmann.tmdb2.exceptions.TmdbServiceErrorException;
@@ -84,9 +83,12 @@ public class TmdbInterceptor implements Interceptor {
                 try {
                     Integer retry = Integer.parseInt(retryHeader);
                     Thread.sleep((int) ((retry + 0.5) * 1000));
+
+                    response.close();
                     // is fine because, unlike a network interceptor, an application interceptor can re-try requests
                     return handleIntercept(chain, tmdb);
-                } catch (NumberFormatException | InterruptedException ignored) {
+                } catch (NumberFormatException | InterruptedException e) {
+                    return response;
                 }
             }
             handleErrors(response, tmdb);
@@ -113,6 +115,8 @@ public class TmdbInterceptor implements Interceptor {
             return; // these HTTP 401s may be recovered by authenticator, so do not throw
         }
 
+        response.close();
+
         String message = status.status_message;
         switch (code) {
             case 2:
@@ -121,6 +125,7 @@ public class TmdbInterceptor implements Interceptor {
             case 11:
             case 15:
             case 16:
+            case 19:
             case 24:
                 throw new TmdbServiceErrorException(code, message);
             case 7:
@@ -144,8 +149,6 @@ public class TmdbInterceptor implements Interceptor {
                 throw new TmdbNotFoundException(code, message);
             case 8:
                 throw new TmdbDuplicateEntryException(code, message);
-            case 19:
-                throw new TmdbInvalidAcceptHeaderException(code, message);
         }
     }
 

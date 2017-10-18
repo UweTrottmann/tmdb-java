@@ -15,7 +15,7 @@
  *
  */
 
-package com.uwetrottmann.tmdb2.entities;
+package com.uwetrottmann.tmdb2.utils;
 
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
 

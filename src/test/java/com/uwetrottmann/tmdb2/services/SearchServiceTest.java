@@ -8,6 +8,7 @@ import com.uwetrottmann.tmdb2.entities.MediaResultsPage;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.PersonResultsPage;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
+import com.uwetrottmann.tmdb2.utils.TmdbLocale;
 import org.junit.Test;
 import retrofit2.Call;
 
@@ -31,8 +32,7 @@ public class SearchServiceTest extends BaseTestCase {
     @Test
     public void test_companySearch() throws IOException {
         Call<CompanyResultsPage> call = getUnauthenticatedInstance().searchService().company(
-                testCompany.name,
-                null
+                testCompany.name
         );
 
         CompanyResultsPage companyResults = call.execute().body();
@@ -43,9 +43,7 @@ public class SearchServiceTest extends BaseTestCase {
     @Test
     public void test_collectionSearch() throws IOException {
         Call<CollectionResultsPage> call = getUnauthenticatedInstance().searchService().collection(
-                testCollection.name,
-                null,
-                null
+                testCollection.name
         );
         CollectionResultsPage collectionResults = call.execute().body();
 
@@ -55,8 +53,7 @@ public class SearchServiceTest extends BaseTestCase {
     @Test
     public void test_keywordSearch() throws IOException {
         Call<KeywordResultsPage> call = getUnauthenticatedInstance().searchService().keyword(
-                "fight",
-                null
+                "fight"
         );
         KeywordResultsPage keywordResults = call.execute().body();
 
@@ -67,7 +64,6 @@ public class SearchServiceTest extends BaseTestCase {
     public void test_movieSearch() throws IOException {
         Call<MovieResultsPage> call = getUnauthenticatedInstance().searchService().movie(
                 testMovie.title,
-                null,
                 null,
                 null,
                 null,
@@ -86,6 +82,7 @@ public class SearchServiceTest extends BaseTestCase {
                 testPerson.name,
                 null,
                 null,
+                null,
                 null
         );
         PersonResultsPage personResults = call.execute().body();
@@ -97,7 +94,6 @@ public class SearchServiceTest extends BaseTestCase {
     public void test_tv() throws IOException {
         Call<TvShowResultsPage> call = getUnauthenticatedInstance().searchService().tv(
                 testTvShow.name,
-                null,
                 null,
                 null,
                 null
@@ -113,7 +109,7 @@ public class SearchServiceTest extends BaseTestCase {
         Call<MediaResultsPage> call = getUnauthenticatedInstance().searchService().multi(
                 "snowden",
                 null,
-                null,
+                new TmdbLocale("en"),
                 null,
                 null
         );

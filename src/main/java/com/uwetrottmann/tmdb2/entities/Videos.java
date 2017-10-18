@@ -1,6 +1,7 @@
 package com.uwetrottmann.tmdb2.entities;
 
 import com.uwetrottmann.tmdb2.enumerations.VideoType;
+import com.uwetrottmann.tmdb2.utils.TmdbLocale;
 
 import java.util.List;
 
@@ -9,8 +10,7 @@ public class Videos {
     public static class Video {
 
         public String id;
-        public String iso_639_1;
-        public String iso_3166_1;
+        public TmdbLocale locale;
         public String key;
         public String name;
         public String site;

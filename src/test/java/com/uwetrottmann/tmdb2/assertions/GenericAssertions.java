@@ -13,6 +13,9 @@ import com.uwetrottmann.tmdb2.entities.TaggedImage;
 import com.uwetrottmann.tmdb2.entities.TaggedImagesResultsPage;
 import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.Videos;
+import com.uwetrottmann.tmdb2.utils.Country;
+import com.uwetrottmann.tmdb2.utils.Language;
+import com.uwetrottmann.tmdb2.utils.TmdbLocale;
 
 import java.util.List;
 
@@ -33,11 +36,37 @@ public class GenericAssertions {
 
     }
 
+    public static void assertCountry(Country country, Boolean requiredValue) {
+        assertThat(country).isNotNull();
+        assertThat(country.getAsTmdbLocale()).isNotNull();
+        if (requiredValue) {
+            assertThat(country.getCountryCode()).isNotEmpty();
+        }
+    }
+
+    public static void assertLanguage(Language language, Boolean requiredValue) {
+        assertThat(language).isNotNull();
+        assertThat(language.getAsTmdbLocale()).isNotNull();
+        if (requiredValue) {
+            assertThat(language.getLanguageCode()).isNotEmpty();
+        }
+    }
+
+    public static void assertLocale(TmdbLocale locale, boolean requiredLanguage, boolean requiredCountry) {
+        assertThat(locale.getLocale()).isNotNull();
+        if (requiredLanguage) {
+            assertThat(locale.getLanguageCode()).isNotEmpty();
+        }
+        if (requiredCountry) {
+            assertThat(locale.getCountryCode()).isNotEmpty();
+        }
+    }
+
     public static void assertVideos(Videos videos) {
         for (Videos.Video video : videos.results) {
             assertThat(video).isNotNull();
             assertThat(video.id).isNotNull();
-            assertThat(video.iso_639_1).isNotNull();
+            assertLocale(video.locale, true, true);
             assertThat(video.key).isNotNull();
             assertThat(video.name).isNotNull();
             assertThat(video.site).isNotNull();
@@ -46,14 +75,16 @@ public class GenericAssertions {
         }
     }
 
-    public static void assertAlternativeTitles(AlternativeTitles alternativeTitles) {
+    public static void assertAlternativeTitles(AlternativeTitles alternativeTitles, boolean requireData) {
         assertThat(alternativeTitles).isNotNull();
         assertThat(alternativeTitles.titles).isNotNull();
-        assertThat(alternativeTitles.titles).isNotEmpty();
-        for (AlternativeTitle alternativeTitle : alternativeTitles.titles) {
-            assertThat(alternativeTitle).isNotNull();
-            assertThat(alternativeTitle.iso_3166_1).isNotNull();
-            assertThat(alternativeTitle.title).isNotNull();
+        if (requireData) {
+            assertThat(alternativeTitles.titles).isNotEmpty();
+            for (AlternativeTitle alternativeTitle : alternativeTitles.titles) {
+                assertThat(alternativeTitle).isNotNull();
+                assertCountry(alternativeTitle.country, true);
+                assertThat(alternativeTitle.title).isNotNull();
+            }
         }
     }
 
@@ -68,10 +99,9 @@ public class GenericAssertions {
         assertThat(translations).isNotNull();
         assertThat(translations.translations).isNotNull();
         assertThat(translations.translations).isNotEmpty();
-        for (Translations.Translation translation : translations.translations) {
-            assertThat(translation.english_name).isNotNull();
-            assertThat(translation.name).isNotNull();
-            assertThat(translation.iso_639_1).isNotNull();
+
+        for (TmdbLocale translation : translations.translations) {
+            assertLocale(translation,true,true);
         }
     }
 
@@ -90,7 +120,7 @@ public class GenericAssertions {
         assertImage(image);
         assertThat(image.media_type).isNotNull();
         assertThat(image.media).isNotNull();
-        switch(image.media_type) {
+        switch (image.media_type) {
             case "movie":
                 assertThat(image.media.movie).isNotNull();
                 break;
@@ -125,7 +155,7 @@ public class GenericAssertions {
         assertThat(contentRatings.results).isNotEmpty();
         for (ContentRating contentRating : contentRatings.results) {
             assertThat(contentRating).isNotNull();
-            assertThat(contentRating.iso_3166_1).isNotNull();
+            assertCountry(contentRating.country, true);
             assertThat(contentRating.rating).isNotNull();
         }
     }
