@@ -111,10 +111,10 @@ public class TvAssertions {
     public static void assertTvShowDataIntegrity(TvShow tvShow) {
         assertTvShow(tvShow);
         assertThat(tvShow.name).isEqualTo(testTvShow.name);
-        assertThat(tvShow.first_air_date).isEqualTo(testTvShow.first_air_date);
+        assertThat(tvShow.first_air_date.getAsString()).isEqualTo(testTvShow.first_air_date.getAsString());
         assertThat(tvShow.id).isEqualTo(testTvShow.id);
         assertThat(tvShow.homepage).isEqualTo(testTvShow.homepage);
-        assertThat(tvShow.original_language).isEqualTo(testTvShow.original_language);
+        assertThat(tvShow.original_language.getLanguageCode()).isEqualTo(testTvShow.original_language.getLanguageCode());
         assertThat(tvShow.original_name).isEqualTo(testTvShow.original_name);
         assertThat(tvShow.overview).isEqualTo(testTvShow.overview);
         assertThat(tvShow.type).isEqualTo(testTvShow.type);
@@ -154,12 +154,12 @@ public class TvAssertions {
         assertTvSeason(tvSeason);
         assertThat(tvSeason.overview).isEqualTo(testTvSeason.overview);
         assertThat(tvSeason.name).isEqualTo(testTvSeason.name);
-        assertThat(tvSeason.air_date).isEqualTo(testTvSeason.air_date);
+        assertThat(tvSeason.air_date.getAsString()).isEqualTo(testTvSeason.air_date.getAsString());
         assertThat(tvSeason.season_number).isEqualTo(testTvSeason.season_number);
         assertThat(tvSeason.id).isEqualTo(testTvSeason.id);
         assertThat(tvSeason._id).isEqualTo(testTvSeason._id);
         assertThat(tvSeason.episodes.size()).isEqualTo(testTvSeason.episodes.size());
-        assertThat(tvSeason.poster_path).isEqualTo(testTvSeason.poster_path);
+        assertThat(tvSeason.poster_path).isNotEmpty();
 
     }
 
@@ -193,7 +193,7 @@ public class TvAssertions {
         assertThat(tvEpisode.id).isEqualTo(testTvEpisode.id);
         assertThat(tvEpisode.season_number).isEqualTo(testTvEpisode.season_number);
         assertThat(tvEpisode.episode_number).isEqualTo(testTvEpisode.episode_number);
-        assertThat(tvEpisode.air_date).isEqualTo(testTvEpisode.air_date);
+        assertThat(tvEpisode.air_date.getAsString()).isEqualTo(testTvEpisode.air_date.getAsString());
     }
 
     public static void assertTvEpisodeResultsPage(TvEpisodeResultsPage tvEpisodeResultsPage) {

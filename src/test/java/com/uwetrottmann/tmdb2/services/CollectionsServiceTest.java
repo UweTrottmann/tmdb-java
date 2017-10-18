@@ -1,10 +1,10 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
-import com.uwetrottmann.tmdb2.entities.AppendToResponse;
 import com.uwetrottmann.tmdb2.entities.Collection;
 import com.uwetrottmann.tmdb2.entities.Images;
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
+import com.uwetrottmann.tmdb2.utils.AppendToResponse;
 import org.junit.Test;
 import retrofit2.Call;
 
@@ -45,8 +45,7 @@ public class CollectionsServiceTest extends BaseTestCase {
     @Test
     public void test_images() throws IOException {
         Call<Images> call = getUnauthenticatedInstance().collectionService().images(
-                testCollection.id,
-                null
+                testCollection.id
         );
 
         Images images = call.execute().body();

@@ -25,6 +25,8 @@ import com.uwetrottmann.tmdb2.services.TimezonesService;
 import com.uwetrottmann.tmdb2.services.TvEpisodesService;
 import com.uwetrottmann.tmdb2.services.TvSeasonsService;
 import com.uwetrottmann.tmdb2.services.TvShowService;
+import com.uwetrottmann.tmdb2.utils.DiscoverMovieBuilder;
+import com.uwetrottmann.tmdb2.utils.DiscoverTvBuilder;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

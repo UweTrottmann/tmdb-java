@@ -1,6 +1,7 @@
 package com.uwetrottmann.tmdb2.entities;
 
-import java.util.Date;
+import com.uwetrottmann.tmdb2.utils.TmdbDate;
+
 import java.util.List;
 
 public class TvShow extends BaseTvShow {
@@ -12,7 +13,7 @@ public class TvShow extends BaseTvShow {
     public String homepage;
     public boolean in_production;
     public List<String> languages;
-    public Date last_air_date;
+    public TmdbDate last_air_date;
     public Integer number_of_episodes;
     public Integer number_of_seasons;
     public List<BaseCompany> production_companies;

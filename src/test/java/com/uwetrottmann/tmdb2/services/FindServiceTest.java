@@ -7,7 +7,6 @@ import com.uwetrottmann.tmdb2.entities.BaseTvEpisode;
 import com.uwetrottmann.tmdb2.entities.BaseTvSeason;
 import com.uwetrottmann.tmdb2.entities.BaseTvShow;
 import com.uwetrottmann.tmdb2.entities.FindResults;
-import com.uwetrottmann.tmdb2.entities.TvEpisode;
 import com.uwetrottmann.tmdb2.enumerations.ExternalSource;
 import org.junit.Test;
 import retrofit2.Call;
@@ -31,8 +30,7 @@ public class FindServiceTest extends BaseTestCase {
     public void test_find_movie() throws IOException {
         Call<FindResults> call = getUnauthenticatedInstance().findService().find(
                 testMovie.imdb_id,
-                ExternalSource.IMDB_ID,
-                null
+                ExternalSource.IMDB_ID
         );
 
         FindResults results = call.execute().body();
@@ -51,8 +49,7 @@ public class FindServiceTest extends BaseTestCase {
     public void test_find_people() throws IOException {
         Call<FindResults> call = getUnauthenticatedInstance().findService().find(
                 testPerson.imdb_id,
-                ExternalSource.IMDB_ID,
-                null
+                ExternalSource.IMDB_ID
         );
 
         FindResults results = call.execute().body();
@@ -72,8 +69,7 @@ public class FindServiceTest extends BaseTestCase {
     public void test_find_tv_show() throws IOException {
         Call<FindResults> call = getUnauthenticatedInstance().findService().find(
                 testTvShow.external_ids.imdb_id,
-                ExternalSource.IMDB_ID,
-                null
+                ExternalSource.IMDB_ID
         );
 
         FindResults results = call.execute().body();
@@ -92,8 +88,7 @@ public class FindServiceTest extends BaseTestCase {
     public void test_find_tv_season() throws IOException {
         Call<FindResults> call = getUnauthenticatedInstance().findService().find(
                 testTvSeason.external_ids.tvdb_id,
-                ExternalSource.TVDB_ID,
-                null
+                ExternalSource.TVDB_ID
         );
 
         FindResults results = call.execute().body();
@@ -112,8 +107,7 @@ public class FindServiceTest extends BaseTestCase {
     public void test_find_tv_episode() throws IOException {
         Call<FindResults> call = getUnauthenticatedInstance().findService().find(
                 testTvEpisode.external_ids.imdb_id,
-                ExternalSource.IMDB_ID,
-                null
+                ExternalSource.IMDB_ID
         );
 
         FindResults results = call.execute().body();

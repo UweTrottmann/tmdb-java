@@ -1,33 +1,49 @@
 package com.uwetrottmann.tmdb2;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.JsonPrimitive;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+import com.uwetrottmann.tmdb2.entities.Account;
 import com.uwetrottmann.tmdb2.entities.AccountStates;
 import com.uwetrottmann.tmdb2.entities.BaseAccountStates;
 import com.uwetrottmann.tmdb2.entities.BaseMovie;
 import com.uwetrottmann.tmdb2.entities.BasePerson;
 import com.uwetrottmann.tmdb2.entities.BaseTvShow;
+import com.uwetrottmann.tmdb2.enumerations.ReleaseType;
+import com.uwetrottmann.tmdb2.utils.Country;
+import com.uwetrottmann.tmdb2.utils.Language;
 import com.uwetrottmann.tmdb2.entities.Media;
 import com.uwetrottmann.tmdb2.entities.PersonCastCredit;
 import com.uwetrottmann.tmdb2.entities.PersonCrewCredit;
 import com.uwetrottmann.tmdb2.entities.RatingObject;
+import com.uwetrottmann.tmdb2.utils.TmdbDate;
+import com.uwetrottmann.tmdb2.utils.TmdbLocale;
+import com.uwetrottmann.tmdb2.entities.Videos;
 import com.uwetrottmann.tmdb2.enumerations.MediaType;
-import com.uwetrottmann.tmdb2.enumerations.Status;
 import com.uwetrottmann.tmdb2.enumerations.VideoType;
 
 import java.lang.reflect.Type;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class TmdbHelper {
 
-    public static final String TMDB_DATE_PATTERN = "yyyy-MM-dd";
-    private static final ThreadLocal<SimpleDateFormat> TMDB_DATE_FORMAT = new ThreadLocal<>();
+    private static abstract class CombinedSerializer<T> implements JsonSerializer<T>, JsonDeserializer<T> {
+
+    }
+    private static Boolean isUpperCase(String str) {
+        for (Character chr : str.toCharArray()) {
+            if (!Character.isUpperCase(chr)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * Create a {@link com.google.gson.GsonBuilder} and register all of the custom types needed in order to properly
@@ -47,19 +63,114 @@ public class TmdbHelper {
             }
         });
 
-        builder.registerTypeAdapter(MediaType.class, new JsonDeserializer<MediaType>() {
+        builder.registerTypeAdapter(ReleaseType.class, new JsonDeserializer<ReleaseType>() {
             @Override
-            public MediaType deserialize(JsonElement json, Type typeOfT,
-                                         JsonDeserializationContext context) throws JsonParseException {
-                return MediaType.get(json.getAsString());
+            public ReleaseType deserialize(JsonElement json, Type typeOfT,
+                                       JsonDeserializationContext context) throws JsonParseException {
+                return ReleaseType.get(json.getAsInt());
             }
         });
 
-        builder.registerTypeAdapter(VideoType.class, new JsonDeserializer<VideoType>() {
+        builder.registerTypeAdapter(Account.class, new JsonDeserializer<Account>() {
             @Override
-            public VideoType deserialize(JsonElement json, Type typeOfT,
+            public Account deserialize(JsonElement json, Type typeOfT,
+                                        JsonDeserializationContext context) throws JsonParseException {
+                Account account = new Gson().fromJson(json,Account.class);
+
+                account.locale = context.deserialize(json,TmdbLocale.class);
+
+                return account;
+            }
+        });
+
+        builder.registerTypeAdapter(Videos.Video.class, new JsonDeserializer<Videos.Video>() {
+            @Override
+            public Videos.Video deserialize(JsonElement json, Type typeOfT,
+                                       JsonDeserializationContext context) throws JsonParseException {
+
+                Videos.Video video = new Gson().fromJson(json,Videos.Video.class);
+                video.type = context.deserialize(json.getAsJsonObject().get("type"),VideoType.class);
+                video.locale = context.deserialize(json,TmdbLocale.class);
+
+                return video;
+            }
+        });
+
+        builder.registerTypeAdapter(Language.class, new JsonDeserializer<Language>() {
+            @Override
+            public Language deserialize(JsonElement json, Type typeOfT,
                                          JsonDeserializationContext context) throws JsonParseException {
-                return VideoType.get(json.getAsString());
+                String lang;
+                try {
+                    JsonObject object = json.getAsJsonObject();
+                    lang = object.get("iso_639_1").getAsString();
+                } catch (Exception exc) {
+                    lang = json.getAsString();
+                }
+
+                return new Language(new TmdbLocale(lang));
+            }
+        });
+
+        builder.registerTypeAdapter(Country.class, new JsonDeserializer<Country>() {
+            @Override
+            public Country deserialize(JsonElement json, Type typeOfT,
+                                         JsonDeserializationContext context) throws JsonParseException {
+                String cntry;
+                try {
+                    JsonObject object = json.getAsJsonObject();
+                    cntry = object.get("iso_3166_1").getAsString();
+                } catch (Exception exc) {
+                    cntry = json.getAsString();
+                }
+
+                Country country = null;
+                if (!cntry.equals("")) {
+                    country = new Country(new TmdbLocale("",cntry));
+                }
+
+                return country;
+            }
+        });
+
+        builder.registerTypeAdapter(TmdbLocale.class, new CombinedSerializer<TmdbLocale>() {
+            @Override
+            public JsonElement serialize(TmdbLocale src, Type typeOfSrc, JsonSerializationContext context) {
+
+                return new JsonPrimitive(src.toString());
+            }
+
+            @Override
+            public TmdbLocale deserialize(JsonElement json, Type typeOfT,
+                                         JsonDeserializationContext context) throws JsonParseException {
+                TmdbLocale locale;
+                try {
+                    JsonObject object = json.getAsJsonObject();
+
+                    String language = "";
+                    if (object.has("iso_639_1")) {
+                        language = object.get("iso_639_1").getAsString();
+                    }
+
+                    String country = "";
+                    if (object.has("iso_3166_1")) {
+                        country = object.get("iso_3166_1").getAsString();
+                    }
+
+                    locale = new TmdbLocale(language,country);
+                } catch (Exception exc) {
+
+                    String input = json.getAsString();
+
+                    if (isUpperCase(input)) {
+                        locale = new TmdbLocale("",input);
+                    }
+                    else {
+                        locale = new TmdbLocale(input);
+                    }
+                }
+
+                return locale;
             }
         });
 
@@ -77,7 +188,6 @@ public class TmdbHelper {
                     accountStates.rated = true;
                     accountStates.rating = jsonDeserializationContext.deserialize(object.get("rated"), RatingObject.class);
                 }
-
                 return accountStates;
             }
         });
@@ -181,35 +291,11 @@ public class TmdbHelper {
             }
         });
 
-        builder.registerTypeAdapter(Date.class, new JsonDeserializer<Date>() {
+        builder.registerTypeAdapter(TmdbDate.class, new JsonDeserializer<TmdbDate>() {
             @Override
-            public Date deserialize(JsonElement json, Type typeOfT,
+            public TmdbDate deserialize(JsonElement json, Type typeOfT,
                                     JsonDeserializationContext context) throws JsonParseException {
-                try {
-                    SimpleDateFormat sdf = TMDB_DATE_FORMAT.get();
-                    if (sdf == null) {
-                        sdf = new SimpleDateFormat(TMDB_DATE_PATTERN);
-                        TMDB_DATE_FORMAT.set(sdf);
-                    }
-                    return sdf.parse(json.getAsString());
-                } catch (ParseException e) {
-                    // return null instead of failing (like default parser would)
-                    return null;
-                }
-            }
-        });
-
-
-        builder.registerTypeAdapter(Status.class, new JsonDeserializer<Status>() {
-            @Override
-            public Status deserialize(JsonElement jsonElement, Type type,
-                                      JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-                String value = jsonElement.getAsString();
-                if (value != null) {
-                    return Status.fromValue(value);
-                } else {
-                    return null;
-                }
+                return new TmdbDate(json.getAsString());
             }
         });
 

@@ -1,6 +1,6 @@
 package com.uwetrottmann.tmdb2.entities;
 
-import java.util.Date;
+import com.uwetrottmann.tmdb2.utils.TmdbDate;
 
 public class BaseTvEpisode extends BaseTvEpisodeRatingObject {
 
@@ -13,7 +13,7 @@ public class BaseTvEpisode extends BaseTvEpisodeRatingObject {
     public Integer vote_count;
     public Integer id;
 
-    public Date air_date;
+    public TmdbDate air_date;
     public Integer episode_number;
 
 }

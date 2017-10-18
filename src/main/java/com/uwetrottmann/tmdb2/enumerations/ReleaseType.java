@@ -1,5 +1,8 @@
 package com.uwetrottmann.tmdb2.enumerations;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public enum ReleaseType {
 
     PREMIERE(1),
@@ -14,4 +17,19 @@ public enum ReleaseType {
     ReleaseType(int id) {
         this.id = id;
     }
+
+    private static final Map<Integer, ReleaseType> lookup = prepareLookup();
+
+    private static Map<Integer, ReleaseType> prepareLookup() {
+        Map<Integer, ReleaseType> atMap = new HashMap<>();
+        for (ReleaseType type : ReleaseType.values()) {
+            atMap.put(type.id, type);
+        }
+        return atMap;
+    }
+
+    public static ReleaseType get(int value) {
+        return lookup.get(value);
+    }
+
 }

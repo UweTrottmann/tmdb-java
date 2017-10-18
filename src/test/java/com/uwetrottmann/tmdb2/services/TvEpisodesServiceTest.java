@@ -1,15 +1,14 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
-import com.uwetrottmann.tmdb2.entities.AppendToResponse;
 import com.uwetrottmann.tmdb2.entities.Changes;
 import com.uwetrottmann.tmdb2.entities.Credits;
 import com.uwetrottmann.tmdb2.entities.Images;
-import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.TvEpisode;
 import com.uwetrottmann.tmdb2.entities.TvExternalIds;
 import com.uwetrottmann.tmdb2.entities.Videos;
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
+import com.uwetrottmann.tmdb2.utils.AppendToResponse;
 import org.junit.Test;
 import retrofit2.Call;
 
@@ -90,9 +89,8 @@ public class TvEpisodesServiceTest extends BaseTestCase {
     public void test_changes() throws IOException {
         Call<Changes> call = getUnauthenticatedInstance().tvEpisodesService().changes(
                 testTvEpisode.id,
-                new TmdbDate(testTvEpisodeChangesStartDate),
-                new TmdbDate(testTvEpisodeChangesEndDate),
-                null
+                testTvEpisodeChangesStartDate,
+                testTvEpisodeChangesEndDate
         );
 
         Changes changes = call.execute().body();
@@ -131,8 +129,7 @@ public class TvEpisodesServiceTest extends BaseTestCase {
         Call<Videos> call = getUnauthenticatedInstance().tvEpisodesService().videos(
                 testTvShow.id,
                 testTvSeason.season_number,
-                testTvEpisode.episode_number,
-                null
+                testTvEpisode.episode_number
         );
 
         Videos videos = call.execute().body();

@@ -1,6 +1,8 @@
 package com.uwetrottmann.tmdb2.entities;
 
 import com.uwetrottmann.tmdb2.enumerations.Status;
+import com.uwetrottmann.tmdb2.utils.Country;
+import com.uwetrottmann.tmdb2.utils.Language;
 
 import java.util.List;
 
@@ -14,7 +16,7 @@ public class Movie extends BaseMovie {
     public List<Country> production_countries;
     public Integer revenue;
     public Integer runtime;
-    public List<SpokenLanguage> spoken_languages;
+    public List<Language> spoken_languages;
     public Status status;
     public String tagline;
 

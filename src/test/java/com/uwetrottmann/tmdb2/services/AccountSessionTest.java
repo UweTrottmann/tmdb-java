@@ -6,10 +6,12 @@ import com.uwetrottmann.tmdb2.entities.Account;
 import com.uwetrottmann.tmdb2.entities.AccountStates;
 import com.uwetrottmann.tmdb2.entities.AccountStatesResults;
 import com.uwetrottmann.tmdb2.entities.BaseAccountStates;
+import com.uwetrottmann.tmdb2.entities.BaseList;
 import com.uwetrottmann.tmdb2.entities.BaseMovie;
 import com.uwetrottmann.tmdb2.entities.BaseTvEpisode;
 import com.uwetrottmann.tmdb2.entities.BaseTvShow;
 import com.uwetrottmann.tmdb2.entities.FavoriteMedia;
+import com.uwetrottmann.tmdb2.entities.List;
 import com.uwetrottmann.tmdb2.entities.ListCreateRequest;
 import com.uwetrottmann.tmdb2.entities.ListCreateResponse;
 import com.uwetrottmann.tmdb2.entities.ListOperation;
@@ -22,7 +24,9 @@ import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.entities.WatchlistMedia;
 import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
 import com.uwetrottmann.tmdb2.enumerations.MediaType;
+import com.uwetrottmann.tmdb2.exceptions.TmdbNotFoundException;
 import com.uwetrottmann.tmdb2.exceptions.TmdbServiceErrorException;
+import com.uwetrottmann.tmdb2.utils.TmdbLocale;
 import org.assertj.core.util.Strings;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -40,12 +44,14 @@ import static com.uwetrottmann.tmdb2.TestData.testTvShow;
 import static com.uwetrottmann.tmdb2.assertions.AccountAssertions.assertAccountStates;
 import static com.uwetrottmann.tmdb2.assertions.AccountAssertions.assertBaseAccountStates;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseRatingObject;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertLocale;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertStatus;
 import static com.uwetrottmann.tmdb2.assertions.ListAssertions.assertListResultsPage;
 import static com.uwetrottmann.tmdb2.assertions.MovieAssertions.assertMovieResultsPage;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvEpisodeResultsPage;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShowResultsPage;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.fail;
 import static org.junit.Assume.assumeTrue;
 
 public class AccountSessionTest extends BaseTestCase {
@@ -78,7 +84,16 @@ public class AccountSessionTest extends BaseTestCase {
         // FIXME ut: for all requests below ensure success or fail setup
         account = tmdb.accountService().summary().execute().body();
 
+        ListCreateRequest listCreateRequest = new ListCreateRequest();
+
+        listCreateRequest.name = "tmdb-java";
+        listCreateRequest.description = "List for tmdb-java testing purposes";
+        listCreateRequest.language = new TmdbLocale("en");
+
+        ListCreateResponse listCreateResponse = getAuthenticatedInstance().listsService().createList(listCreateRequest).execute().body();
+
         ListOperation listOperation = new ListOperation();
+
         FavoriteMedia favoriteMedia = new FavoriteMedia();
         favoriteMedia.media_type = MediaType.MOVIE;
         favoriteMedia.favorite = true;
@@ -97,6 +112,8 @@ public class AccountSessionTest extends BaseTestCase {
             tmdb.accountService().favorite(account.id, favoriteMedia).execute();
             Thread.sleep(200);
             tmdb.accountService().watchlist(account.id, watchlistMedia).execute();
+            Thread.sleep(200);
+            tmdb.listsService().addMovie(listCreateResponse.list_id, listOperation).execute();
         }
 
         favoriteMedia.media_type = MediaType.TV;
@@ -119,7 +136,7 @@ public class AccountSessionTest extends BaseTestCase {
                 testTvEpisode.episode_number, AuthenticationType.ACCOUNT, ratingObject).execute();
 
         // leave some time for TMDb to process changes
-        Thread.sleep(5000);
+        Thread.sleep(3000);
 
         accountDataInitialized = true;
     }
@@ -163,6 +180,19 @@ public class AccountSessionTest extends BaseTestCase {
 
         tmdb.tvEpisodesService().deleteRating(testTvShow.id, testTvSeason.season_number,
                 testTvEpisode.episode_number, AuthenticationType.ACCOUNT).execute();
+
+        ListResultsPage listResultsPage = getAuthenticatedInstance().accountService().lists(account.id).execute().body();
+
+        for (BaseList list : listResultsPage.results) {
+            {
+                if (list.name.equals("tmdb-java")) {
+                    try {
+                        getAuthenticatedInstance().listsService().delete(list.id).execute();
+                    } catch (TmdbServiceErrorException ignored) {
+                    }
+                }
+            }
+        }
     }
 
     @Test
@@ -178,8 +208,7 @@ public class AccountSessionTest extends BaseTestCase {
         assertThat(account.name).isNotNull();
         assertThat(account.avatar).isNotNull();
         assertThat(account.username).isNotNull();
-        assertThat(account.iso_639_1).isNotNull();
-        assertThat(account.iso_3166_1).isNotNull();
+        assertLocale(account.locale, true, true);
         assertThat(account.include_adult).isNotNull();
     }
 
@@ -262,10 +291,7 @@ public class AccountSessionTest extends BaseTestCase {
         assumeTrue(accountDataInitialized);
 
         Call<MovieResultsPage> call = getAuthenticatedInstance().accountService().favoriteMovies(
-                0,
-                null,
-                null,
-                null
+                0
         );
 
         MovieResultsPage movies = call.execute().body();
@@ -281,10 +307,7 @@ public class AccountSessionTest extends BaseTestCase {
         assumeTrue(accountDataInitialized);
 
         Call<TvShowResultsPage> call = getAuthenticatedInstance().accountService().favoriteTvShows(
-                0,
-                null,
-                null,
-                null
+                0
         );
 
         TvShowResultsPage tvShows = call.execute().body();
@@ -300,10 +323,7 @@ public class AccountSessionTest extends BaseTestCase {
         assumeTrue(accountDataInitialized);
 
         Call<MovieResultsPage> call = getAuthenticatedInstance().accountService().watchlistMovies(
-                0,
-                null,
-                null,
-                null
+                0
         );
 
         MovieResultsPage movies = call.execute().body();
@@ -319,10 +339,7 @@ public class AccountSessionTest extends BaseTestCase {
         assumeTrue(accountDataInitialized);
 
         Call<TvShowResultsPage> call = getAuthenticatedInstance().accountService().watchlistTvShows(
-                0,
-                null,
-                null,
-                null
+                0
         );
 
         TvShowResultsPage tvShows = call.execute().body();
@@ -337,14 +354,11 @@ public class AccountSessionTest extends BaseTestCase {
     public void test_rated_movies() throws IOException {
         assumeTrue(accountDataInitialized);
 
-        Call<MovieResultsPage> call = getAuthenticatedInstance().accountService().ratedMovies(
-                0,
-                null,
-                null,
-                null
+        Call<MovieResultsPage> callMRP = getAuthenticatedInstance().accountService().ratedMovies(
+                0
         );
 
-        MovieResultsPage movies = call.execute().body();
+        MovieResultsPage movies = callMRP.execute().body();
 
         assertThat(movies).isNotNull();
         assumeTrue(!movies.results.isEmpty());
@@ -353,55 +367,7 @@ public class AccountSessionTest extends BaseTestCase {
         for (BaseMovie movie : movies.results) {
             assertBaseRatingObject(movie);
         }
-    }
 
-    @Test
-    public void test_rated_tvShows() throws IOException {
-        assumeTrue(accountDataInitialized);
-
-        Call<TvShowResultsPage> call = getAuthenticatedInstance().accountService().ratedTvShows(
-                0,
-                null,
-                null,
-                null
-        );
-
-        TvShowResultsPage tvShows = call.execute().body();
-
-        assertThat(tvShows).isNotNull();
-        assumeTrue(!tvShows.results.isEmpty());
-
-        assertTvShowResultsPage(tvShows);
-        for (BaseTvShow baseTvShow : tvShows.results) {
-            assertBaseRatingObject(baseTvShow);
-        }
-    }
-
-    @Test
-    public void test_rated_tvEpisodes() throws IOException {
-        assumeTrue(accountDataInitialized);
-
-        Call<TvEpisodeResultsPage> call = getAuthenticatedInstance().accountService().ratedTvShowEpisodes(
-                0,
-                null,
-                null,
-                null
-        );
-
-        TvEpisodeResultsPage tvShowEpisodes = call.execute().body();
-
-        assertThat(tvShowEpisodes).isNotNull();
-        assumeTrue(!tvShowEpisodes.results.isEmpty());
-
-        assertTvEpisodeResultsPage(tvShowEpisodes);
-        for (BaseTvEpisode baseTvEpisode : tvShowEpisodes.results) {
-            assertBaseRatingObject(baseTvEpisode);
-            assertThat(baseTvEpisode.show_id).isNotNull();
-        }
-    }
-
-    @Test
-    public void test_modify_rating_movie() throws IOException {
         assumeTrue(accountDataInitialized);
 
         RatingObject obj = new RatingObject();
@@ -418,7 +384,55 @@ public class AccountSessionTest extends BaseTestCase {
     }
 
     @Test
-    public void test_modify_rating_tvEpisode() throws IOException {
+    public void test_rated_tvShows() throws IOException {
+        assumeTrue(accountDataInitialized);
+
+        Call<TvShowResultsPage> call = getAuthenticatedInstance().accountService().ratedTvShows(
+                0
+        );
+
+        TvShowResultsPage tvShows = call.execute().body();
+
+        assertThat(tvShows).isNotNull();
+        assumeTrue(!tvShows.results.isEmpty());
+
+        assertTvShowResultsPage(tvShows);
+        for (BaseTvShow baseTvShow : tvShows.results) {
+            assertBaseRatingObject(baseTvShow);
+        }
+
+        RatingObject obj = new RatingObject();
+        obj.value = 10D;
+
+        Call<Status> callStatus = getAuthenticatedInstance().tvService().addRating(testTvShow.id, AuthenticationType.ACCOUNT,
+                obj);
+        Status status = callStatus.execute().body();
+        assertThat(status.status_code).isIn(1, 12);
+
+        callStatus = getAuthenticatedInstance().tvService().deleteRating(testTvShow.id, AuthenticationType.ACCOUNT);
+        status = callStatus.execute().body();
+        assertThat(status.status_code).isEqualTo(13);
+    }
+
+    @Test
+    public void test_rated_tvEpisodes() throws IOException {
+        assumeTrue(accountDataInitialized);
+
+        Call<TvEpisodeResultsPage> callTERP = getAuthenticatedInstance().accountService().ratedTvShowEpisodes(
+                0
+        );
+
+        TvEpisodeResultsPage tvShowEpisodes = callTERP.execute().body();
+
+        assertThat(tvShowEpisodes).isNotNull();
+        assumeTrue(!tvShowEpisodes.results.isEmpty());
+
+        assertTvEpisodeResultsPage(tvShowEpisodes);
+        for (BaseTvEpisode baseTvEpisode : tvShowEpisodes.results) {
+            assertBaseRatingObject(baseTvEpisode);
+            assertThat(baseTvEpisode.show_id).isNotNull();
+        }
+
         assumeTrue(accountDataInitialized);
 
         RatingObject obj = new RatingObject();
@@ -433,24 +447,6 @@ public class AccountSessionTest extends BaseTestCase {
                 testTvEpisode.episode_number, AuthenticationType.ACCOUNT);
         status = call.execute().body();
         assertThat(status.status_code).isEqualTo(13);
-    }
-
-    @Test
-    public void test_modify_rating_tvShow() throws IOException {
-        assumeTrue(accountDataInitialized);
-
-        RatingObject obj = new RatingObject();
-        obj.value = 10D;
-
-        Call<Status> call = getAuthenticatedInstance().tvService().addRating(testTvShow.id, AuthenticationType.ACCOUNT,
-                obj);
-        Status status = call.execute().body();
-        assertThat(status.status_code).isIn(1, 12);
-
-        call = getAuthenticatedInstance().tvService().deleteRating(testTvShow.id, AuthenticationType.ACCOUNT);
-        status = call.execute().body();
-        assertThat(status.status_code).isEqualTo(13);
-
     }
 
     @Test
@@ -516,13 +512,13 @@ public class AccountSessionTest extends BaseTestCase {
     }
 
     // TODO ut: verify list contents (maybe implicitly if delete works?)
-    @Test
-    public void test_create_edit_clear_delete_list() throws IOException {
+    @Test(timeout = 100000)
+    public void test_create_edit_clear_delete_list() throws IOException, InterruptedException {
         assumeTrue(accountDataInitialized);
 
         ListCreateRequest listCreateRequest = new ListCreateRequest();
         listCreateRequest.name = "Test";
-        listCreateRequest.language = "en";
+        listCreateRequest.language = new TmdbLocale("en");
         listCreateRequest.description = "Test";
 
         Call<ListCreateResponse> callLCResponse = getAuthenticatedInstance().listsService().createList(
@@ -566,10 +562,20 @@ public class AccountSessionTest extends BaseTestCase {
         callStatus = getAuthenticatedInstance().listsService().delete(listCreateResponse.list_id);
         try {
             status = callStatus.execute().body();
-
             assertThat(status).isNotNull();
         } catch (TmdbServiceErrorException exc) {
-            assumeTrue(true);
+
+            Call<List> callList = getAuthenticatedInstance().listsService().summary(listCreateResponse.list_id);
+
+            // We get a Service Related Exception. We are not sure if our list deleted
+            // but we can query and check it out.
+            try {
+                List list = callList.execute().body();
+
+                fail("List hasn't been erased. It is advised to manually erase the list from your profile.");
+            } catch (TmdbNotFoundException nExc) {
+                assertThat(nExc).isNotNull();
+            }
         }
     }
 }

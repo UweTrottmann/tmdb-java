@@ -1,8 +1,14 @@
 package com.uwetrottmann.tmdb2.entities;
 
-public class Genre {
+import com.uwetrottmann.tmdb2.interfaces.ITmdbIdentifiedEntity;
+
+public class Genre implements ITmdbIdentifiedEntity {
 
     public Integer id;
     public String name;
 
+    @Override
+    public Integer getId() {
+        return id;
+    }
 }

@@ -1,8 +1,6 @@
-package com.uwetrottmann.tmdb2;
+package com.uwetrottmann.tmdb2.utils;
 
-import com.uwetrottmann.tmdb2.entities.DiscoverFilter;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
-import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.enumerations.SortBy;
 import com.uwetrottmann.tmdb2.services.DiscoverService;
 import retrofit2.Call;
@@ -11,7 +9,7 @@ public class DiscoverMovieBuilder {
 
     private final DiscoverService discoverService;
 
-    private String language;
+    private TmdbLocale language;
     private String region;
     private SortBy sort_by;
     private String certification_country;
@@ -47,7 +45,7 @@ public class DiscoverMovieBuilder {
         this.discoverService = discoverService;
     }
 
-    public DiscoverMovieBuilder language(String value) {
+    public DiscoverMovieBuilder language(TmdbLocale value) {
         this.language = value;
         return this;
     }

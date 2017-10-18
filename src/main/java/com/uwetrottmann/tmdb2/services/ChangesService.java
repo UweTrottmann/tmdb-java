@@ -1,7 +1,7 @@
 package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.entities.ChangeResultsPage;
-import com.uwetrottmann.tmdb2.entities.TmdbDate;
+import com.uwetrottmann.tmdb2.utils.TmdbDate;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;

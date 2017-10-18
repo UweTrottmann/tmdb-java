@@ -2,19 +2,18 @@ package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
 import com.uwetrottmann.tmdb2.entities.AlternativeTitles;
-import com.uwetrottmann.tmdb2.entities.AppendToResponse;
 import com.uwetrottmann.tmdb2.entities.Changes;
 import com.uwetrottmann.tmdb2.entities.ContentRatings;
 import com.uwetrottmann.tmdb2.entities.Credits;
 import com.uwetrottmann.tmdb2.entities.Images;
 import com.uwetrottmann.tmdb2.entities.Keywords;
-import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.TvExternalIds;
 import com.uwetrottmann.tmdb2.entities.TvShow;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.entities.Videos;
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
+import com.uwetrottmann.tmdb2.utils.AppendToResponse;
 import org.junit.Test;
 import retrofit2.Call;
 
@@ -54,8 +53,8 @@ public class TvShowServiceTest extends BaseTestCase {
     @Test
     public void test_tvShow_with_append_to_response() throws IOException {
         HashMap<String, String> opts = new HashMap<>();
-        opts.put("start_date", new TmdbDate(testTvShowChangesStartDate).toString());
-        opts.put("end_date", new TmdbDate(testTvShowChangesEndDate).toString());
+        opts.put("start_date", testTvShowChangesStartDate.toString());
+        opts.put("end_date", testTvShowChangesEndDate.toString());
 
         Call<TvShow> call = getUnauthenticatedInstance().tvService().tv(
                 testTvShow.id,
@@ -110,7 +109,7 @@ public class TvShowServiceTest extends BaseTestCase {
         assertVideos(show.videos);
 
         //Alternative Titles Assertions
-        assertAlternativeTitles(show.alternative_titles);
+        assertAlternativeTitles(show.alternative_titles, false);
 
         //Content Ratings Assertions
         assertContentRatings(show.content_ratings);
@@ -135,14 +134,13 @@ public class TvShowServiceTest extends BaseTestCase {
 
         AlternativeTitles titles = call.execute().body();
 
-        assertAlternativeTitles(titles);
+        assertAlternativeTitles(titles, false);
     }
 
     @Test
     public void test_credits() throws IOException {
         Call<Credits> call = getUnauthenticatedInstance().tvService().credits(
-                testTvShow.id,
-                null
+                testTvShow.id
         );
 
         Credits credits = call.execute().body();
@@ -154,9 +152,8 @@ public class TvShowServiceTest extends BaseTestCase {
     public void test_changes() throws IOException {
         Call<Changes> call = getUnauthenticatedInstance().tvService().changes(
                 testTvShow.id,
-                new TmdbDate(testTvShowChangesStartDate),
-                new TmdbDate(testTvShowChangesEndDate),
-                null
+                testTvShowChangesStartDate,
+                testTvShowChangesEndDate
         );
 
         Changes changes = call.execute().body();
@@ -167,8 +164,7 @@ public class TvShowServiceTest extends BaseTestCase {
     @Test
     public void test_externalIds() throws IOException {
         Call<TvExternalIds> call = getUnauthenticatedInstance().tvService().externalIds(
-                testTvShow.id,
-                null
+                testTvShow.id
         );
 
         TvExternalIds ids = call.execute().body();
@@ -179,8 +175,7 @@ public class TvShowServiceTest extends BaseTestCase {
     @Test
     public void test_images() throws IOException {
         Call<Images> call = getUnauthenticatedInstance().tvService().images(
-                testTvShow.id,
-                null
+                testTvShow.id
         );
 
         Images images = call.execute().body();
@@ -206,8 +201,7 @@ public class TvShowServiceTest extends BaseTestCase {
     public void test_similar() throws IOException {
         Call<TvShowResultsPage> call = getUnauthenticatedInstance().tvService().similar(
                 testTvShow.id,
-                1,
-                null
+                1
         );
 
         TvShowResultsPage results = call.execute().body();
@@ -219,8 +213,7 @@ public class TvShowServiceTest extends BaseTestCase {
     public void test_recommendations() throws IOException {
         Call<TvShowResultsPage> call = getUnauthenticatedInstance().tvService().recommendations(
                 testTvShow.id,
-                1,
-                null
+                1
         );
 
         TvShowResultsPage results = call.execute().body();
@@ -231,8 +224,7 @@ public class TvShowServiceTest extends BaseTestCase {
     @Test
     public void test_videos() throws IOException {
         Call<Videos> call = getUnauthenticatedInstance().tvService().videos(
-                testTvShow.id,
-                null
+                testTvShow.id
         );
 
         Videos videos = call.execute().body();
@@ -243,8 +235,7 @@ public class TvShowServiceTest extends BaseTestCase {
     @Test
     public void test_translations() throws IOException {
         Call<Translations> call = getUnauthenticatedInstance().tvService().translations(
-                testTvShow.id,
-                null
+                testTvShow.id
         );
 
         Translations translations = call.execute().body();
@@ -265,10 +256,7 @@ public class TvShowServiceTest extends BaseTestCase {
 
     @Test
     public void test_onTheAir() throws IOException {
-        Call<TvShowResultsPage> call = getUnauthenticatedInstance().tvService().onTheAir(
-                null,
-                null
-        );
+        Call<TvShowResultsPage> call = getUnauthenticatedInstance().tvService().onTheAir();
 
         TvShowResultsPage results = call.execute().body();
 
@@ -277,10 +265,7 @@ public class TvShowServiceTest extends BaseTestCase {
 
     @Test
     public void test_airingToday() throws IOException {
-        Call<TvShowResultsPage> call = getUnauthenticatedInstance().tvService().airingToday(
-                null,
-                null
-        );
+        Call<TvShowResultsPage> call = getUnauthenticatedInstance().tvService().airingToday();
 
         TvShowResultsPage results = call.execute().body();
 
@@ -289,10 +274,7 @@ public class TvShowServiceTest extends BaseTestCase {
 
     @Test
     public void test_topRated() throws IOException {
-        Call<TvShowResultsPage> call = getUnauthenticatedInstance().tvService().topRated(
-                null,
-                null
-        );
+        Call<TvShowResultsPage> call = getUnauthenticatedInstance().tvService().topRated();
 
         TvShowResultsPage results = call.execute().body();
 
@@ -301,10 +283,7 @@ public class TvShowServiceTest extends BaseTestCase {
 
     @Test
     public void test_popular() throws IOException {
-        Call<TvShowResultsPage> call = getUnauthenticatedInstance().tvService().popular(
-                null,
-                null
-        );
+        Call<TvShowResultsPage> call = getUnauthenticatedInstance().tvService().popular();
 
         TvShowResultsPage results = call.execute().body();
 

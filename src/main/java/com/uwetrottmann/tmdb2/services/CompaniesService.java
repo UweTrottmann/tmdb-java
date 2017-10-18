@@ -1,10 +1,11 @@
 package com.uwetrottmann.tmdb2.services;
 
-import com.uwetrottmann.tmdb2.entities.AppendToResponse;
+import com.uwetrottmann.tmdb2.utils.TmdbLocale;
+import com.uwetrottmann.tmdb2.utils.AppendToResponse;
 import com.uwetrottmann.tmdb2.entities.Company;
-import com.uwetrottmann.tmdb2.entities.DiscoverFilter;
+import com.uwetrottmann.tmdb2.utils.DiscoverFilter;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
-import com.uwetrottmann.tmdb2.entities.TmdbDate;
+import com.uwetrottmann.tmdb2.utils.TmdbDate;
 import com.uwetrottmann.tmdb2.enumerations.SortBy;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -55,7 +56,7 @@ public interface CompaniesService {
      * Get the movies for a specific A Company TMDb id.
      * <p>
      * Is highly recommend using {@link DiscoverService#discoverMovie(
-     *String, String, SortBy, String, String, String, Boolean, Boolean,
+     * String, String, SortBy, String, String, String, Boolean, Boolean,
      * Integer, Integer, TmdbDate, TmdbDate, TmdbDate, TmdbDate, Integer,
      * Integer, Float, Float, DiscoverFilter, DiscoverFilter, DiscoverFilter,
      * DiscoverFilter, DiscoverFilter, DiscoverFilter, Integer, DiscoverFilter,
@@ -67,6 +68,26 @@ public interface CompaniesService {
     @GET("company/{company_id}/movies")
     Call<MovieResultsPage> movies(
             @Path("company_id") int companyId
+    );
+
+    /**
+     * Get the movies for a specific A Company TMDb id.
+     * <p>
+     * Is highly recommend using {@link DiscoverService#discoverMovie(
+     * String, String, SortBy, String, String, String, Boolean, Boolean,
+     * Integer, Integer, TmdbDate, TmdbDate, TmdbDate, TmdbDate, Integer,
+     * Integer, Float, Float, DiscoverFilter, DiscoverFilter, DiscoverFilter,
+     * DiscoverFilter, DiscoverFilter, DiscoverFilter, Integer, DiscoverFilter,
+     * Integer, Integer, DiscoverFilter, String, DiscoverFilter) discoverMovie}
+     * instead of this method as it is much more flexible.
+     *
+     * @param companyId A Company TMDb id.
+     * @param language  <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("company/{company_id}/movies")
+    Call<MovieResultsPage> movies(
+            @Path("company_id") int companyId,
+            @Query("language") TmdbLocale language
     );
 }
 
