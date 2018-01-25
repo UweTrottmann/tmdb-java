@@ -28,7 +28,7 @@ import retrofit2.http.QueryMap;
 
 import java.util.Map;
 
-public interface TvShowService {
+public interface TvService {
 
     /**
      * Get the primary information about a TV series by id.

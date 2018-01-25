@@ -24,7 +24,7 @@ import com.uwetrottmann.tmdb2.services.SearchService;
 import com.uwetrottmann.tmdb2.services.TimezonesService;
 import com.uwetrottmann.tmdb2.services.TvEpisodesService;
 import com.uwetrottmann.tmdb2.services.TvSeasonsService;
-import com.uwetrottmann.tmdb2.services.TvShowService;
+import com.uwetrottmann.tmdb2.services.TvService;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -259,8 +259,8 @@ public class Tmdb {
         return getRetrofit().create(TimezonesService.class);
     }
 
-    public TvShowService tvService() {
-        return getRetrofit().create(TvShowService.class);
+    public TvService tvService() {
+        return getRetrofit().create(TvService.class);
     }
 
     public TvSeasonsService tvSeasonsService() {

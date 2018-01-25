@@ -39,7 +39,7 @@ import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShowDataInt
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShowResultsPage;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TvShowServiceTest extends BaseTestCase {
+public class TvServiceTest extends BaseTestCase {
 
     @Test
     public void test_tvShow() throws IOException {
