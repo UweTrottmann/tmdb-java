@@ -4,18 +4,16 @@ import com.uwetrottmann.tmdb2.entities.Status;
 import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
 import com.uwetrottmann.tmdb2.exceptions.TmdbAuthenticationFailedException;
 import com.uwetrottmann.tmdb2.exceptions.TmdbDuplicateEntryException;
-import com.uwetrottmann.tmdb2.exceptions.TmdbInvalidAcceptHeaderException;
 import com.uwetrottmann.tmdb2.exceptions.TmdbInvalidParametersException;
 import com.uwetrottmann.tmdb2.exceptions.TmdbNotFoundException;
 import com.uwetrottmann.tmdb2.exceptions.TmdbServiceErrorException;
+import java.io.IOException;
+import java.util.List;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-
-import java.io.IOException;
-import java.util.List;
 
 /**
  * {@link Interceptor} to add the API key query parameter and if available session information. As it modifies the URL
@@ -121,6 +119,7 @@ public class TmdbInterceptor implements Interceptor {
             case 11:
             case 15:
             case 16:
+            case 19:
             case 24:
                 throw new TmdbServiceErrorException(code, message);
             case 7:
@@ -144,8 +143,6 @@ public class TmdbInterceptor implements Interceptor {
                 throw new TmdbNotFoundException(code, message);
             case 8:
                 throw new TmdbDuplicateEntryException(code, message);
-            case 19:
-                throw new TmdbInvalidAcceptHeaderException(code, message);
         }
     }
 
