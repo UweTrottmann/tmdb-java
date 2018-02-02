@@ -1,6 +1,16 @@
 Change Log
 ==========
 
+## 1.8.2
+_2018-02-02_
+
+* Undo rename of TvService to TvShowService.
+* Removed TmdbInvalidAcceptHeaderException: managed by retrofit. Thanks @ProIcons!
+* Move jobs endpoint into `ConfigurationService`, returns list of `Jobs`.
+* Find results should return base media classes. #49 Thanks @ProIcons!
+* Add missing fields to TaggedImage entity. #51 Thanks @ProIcons!
+* Video type is now an enum (was a String). #52 Thanks @ProIcons!
+
 ## 1.8.1
 _2017-08-02_
 * Fix: If multiple responses containing a date are processed at the same time date formatting fails with exceptions. Thanks @chrisbanes!
