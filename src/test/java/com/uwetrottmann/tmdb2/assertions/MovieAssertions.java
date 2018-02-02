@@ -1,5 +1,10 @@
 package com.uwetrottmann.tmdb2.assertions;
 
+import static com.uwetrottmann.tmdb2.TestData.testProductionCompany;
+import static com.uwetrottmann.tmdb2.assertions.CompanyAssertions.assertBaseCompany;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseResultsPage;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.uwetrottmann.tmdb2.TestData;
 import com.uwetrottmann.tmdb2.entities.BaseCompany;
 import com.uwetrottmann.tmdb2.entities.BaseMovie;
@@ -9,11 +14,6 @@ import com.uwetrottmann.tmdb2.entities.ReleaseDate;
 import com.uwetrottmann.tmdb2.entities.ReleaseDatesResult;
 import com.uwetrottmann.tmdb2.entities.ReleaseDatesResults;
 
-import static com.uwetrottmann.tmdb2.TestData.testProductionCompany;
-import static com.uwetrottmann.tmdb2.assertions.CompanyAssertions.assertBaseCompany;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseResultsPage;
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class MovieAssertions {
     public static void assertBaseMovie(BaseMovie movie) {
         assertThat(movie).isNotNull();
@@ -22,7 +22,6 @@ public class MovieAssertions {
         assertThat(movie.original_language).isNotEmpty();
         assertThat(movie.overview).isNotNull();
         assertThat(movie.adult).isNotNull();
-        assertThat(movie.release_date).isNotNull();
         assertThat(movie.vote_average).isGreaterThanOrEqualTo(0);
         assertThat(movie.vote_count).isGreaterThanOrEqualTo(0);
 
