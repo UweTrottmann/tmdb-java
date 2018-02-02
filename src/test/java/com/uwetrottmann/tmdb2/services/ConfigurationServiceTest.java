@@ -1,13 +1,14 @@
 package com.uwetrottmann.tmdb2.services;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.uwetrottmann.tmdb2.BaseTestCase;
 import com.uwetrottmann.tmdb2.entities.Configuration;
+import com.uwetrottmann.tmdb2.entities.Jobs;
+import java.io.IOException;
+import java.util.List;
 import org.junit.Test;
 import retrofit2.Call;
-
-import java.io.IOException;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class ConfigurationServiceTest extends BaseTestCase {
 
@@ -26,4 +27,20 @@ public class ConfigurationServiceTest extends BaseTestCase {
         assertThat(config.images.still_sizes).isNotEmpty();
         assertThat(config.change_keys).isNotEmpty();
     }
+
+    @Test
+    public void test_jobs() throws IOException {
+        Call<List<Jobs>> call = getUnauthenticatedInstance().configurationService().jobs();
+        List<Jobs> jobs = call.execute().body();
+
+        assertThat(jobs).isNotNull();
+        assertThat(jobs).isNotEmpty();
+        for (Jobs dept : jobs) {
+            assertThat(dept).isNotNull();
+            assertThat(dept.department).isNotEmpty();
+            assertThat(dept.jobs).isNotEmpty();
+            assertThat(dept.jobs.contains(null)).isFalse();
+        }
+    }
+
 }

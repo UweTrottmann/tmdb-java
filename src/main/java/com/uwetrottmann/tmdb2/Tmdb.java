@@ -13,7 +13,6 @@ import com.uwetrottmann.tmdb2.services.DiscoverService;
 import com.uwetrottmann.tmdb2.services.FindService;
 import com.uwetrottmann.tmdb2.services.GenresService;
 import com.uwetrottmann.tmdb2.services.GuestSessionService;
-import com.uwetrottmann.tmdb2.services.JobsService;
 import com.uwetrottmann.tmdb2.services.KeywordsService;
 import com.uwetrottmann.tmdb2.services.ListsService;
 import com.uwetrottmann.tmdb2.services.MoviesService;
@@ -221,10 +220,6 @@ public class Tmdb {
 
     public GuestSessionService guestSessionService() {
         return getRetrofit().create(GuestSessionService.class);
-    }
-
-    public JobsService jobsService() {
-        return getRetrofit().create(JobsService.class);
     }
 
     public KeywordsService keywordsService() {
