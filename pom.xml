@@ -112,6 +112,7 @@
                     <arguments>-Dmaven.test.skip=true</arguments>
                     <localCheckout>true</localCheckout>
                     <pushChanges>false</pushChanges>
+                    <releaseProfiles>release</releaseProfiles>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                 </configuration>
             </plugin>
