@@ -9,6 +9,7 @@ import com.uwetrottmann.tmdb2.exceptions.TmdbNotFoundException;
 import com.uwetrottmann.tmdb2.exceptions.TmdbServiceErrorException;
 import java.io.IOException;
 import java.util.List;
+import javax.annotation.Nonnull;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -30,7 +31,7 @@ public class TmdbInterceptor implements Interceptor {
     }
 
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    public Response intercept(@Nonnull Chain chain) throws IOException {
         return handleIntercept(chain, tmdb);
     }
 
