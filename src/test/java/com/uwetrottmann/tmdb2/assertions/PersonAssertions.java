@@ -1,5 +1,10 @@
 package com.uwetrottmann.tmdb2.assertions;
 
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseExternalIds;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseResultsPage;
+import static com.uwetrottmann.tmdb2.assertions.MediaAssertions.assertMedia;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.uwetrottmann.tmdb2.TestData;
 import com.uwetrottmann.tmdb2.entities.BasePerson;
 import com.uwetrottmann.tmdb2.entities.BasePersonCredit;
@@ -10,13 +15,7 @@ import com.uwetrottmann.tmdb2.entities.PersonCredits;
 import com.uwetrottmann.tmdb2.entities.PersonCrewCredit;
 import com.uwetrottmann.tmdb2.entities.PersonExternalIds;
 import com.uwetrottmann.tmdb2.entities.PersonResultsPage;
-
 import java.util.List;
-
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseExternalIds;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseResultsPage;
-import static com.uwetrottmann.tmdb2.assertions.MediaAssertions.assertMedia;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class PersonAssertions {
     public static void assertBasePerson(BasePerson person) {
@@ -32,7 +31,9 @@ public class PersonAssertions {
             return;
 
         assertThat(person.adult).isNotNull();
-        assertThat(person.popularity).isPositive();
+        if (person.popularity != null) {
+            assertThat(person.popularity).isPositive();
+        }
         try {
             Person p = (Person) person;
         } catch (Exception exc) {
