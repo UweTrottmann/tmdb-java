@@ -1,5 +1,18 @@
 package com.uwetrottmann.tmdb2.assertions;
 
+import static com.uwetrottmann.tmdb2.TestData.testTvEpisode;
+import static com.uwetrottmann.tmdb2.TestData.testTvSeason;
+import static com.uwetrottmann.tmdb2.TestData.testTvShow;
+import static com.uwetrottmann.tmdb2.assertions.CompanyAssertions.assertBaseCompany;
+import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCastCredits;
+import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCrewCredits;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseExternalIds;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseResultsPage;
+import static com.uwetrottmann.tmdb2.assertions.GenreAssertions.assertGenre;
+import static com.uwetrottmann.tmdb2.assertions.NetworkAssertions.assertNetwork;
+import static com.uwetrottmann.tmdb2.assertions.PersonAssertions.assertBasePerson;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.uwetrottmann.tmdb2.entities.BaseCompany;
 import com.uwetrottmann.tmdb2.entities.BasePerson;
 import com.uwetrottmann.tmdb2.entities.BaseTvEpisode;
@@ -14,19 +27,6 @@ import com.uwetrottmann.tmdb2.entities.TvSeason;
 import com.uwetrottmann.tmdb2.entities.TvSeasonExternalIds;
 import com.uwetrottmann.tmdb2.entities.TvShow;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
-
-import static com.uwetrottmann.tmdb2.TestData.testTvEpisode;
-import static com.uwetrottmann.tmdb2.TestData.testTvSeason;
-import static com.uwetrottmann.tmdb2.TestData.testTvShow;
-import static com.uwetrottmann.tmdb2.assertions.CompanyAssertions.assertBaseCompany;
-import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCastCredits;
-import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCrewCredits;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseExternalIds;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseResultsPage;
-import static com.uwetrottmann.tmdb2.assertions.GenreAssertions.assertGenre;
-import static com.uwetrottmann.tmdb2.assertions.NetworkAssertions.assertNetwork;
-import static com.uwetrottmann.tmdb2.assertions.PersonAssertions.assertBasePerson;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class TvAssertions {
 
@@ -43,8 +43,9 @@ public class TvAssertions {
         assertThat(tvShow.vote_count).isGreaterThanOrEqualTo(0);
         assertThat(tvShow.vote_average).isNotNull();
         assertThat(tvShow.vote_average).isGreaterThanOrEqualTo(0);
-        assertThat(tvShow.popularity).isNotNull();
-        assertThat(tvShow.popularity).isGreaterThanOrEqualTo(0);
+        if (tvShow.popularity != null) {
+            assertThat(tvShow.popularity).isGreaterThanOrEqualTo(0);
+        }
 
         try {
             TvShow _tvShow = (TvShow) tvShow;
