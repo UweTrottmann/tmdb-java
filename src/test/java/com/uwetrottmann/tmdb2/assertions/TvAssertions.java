@@ -38,7 +38,6 @@ public class TvAssertions {
         assertThat(tvShow.origin_country).isNotNull();
         assertThat(tvShow.original_language).isNotNull();
         assertThat(tvShow.original_name).isNotNull();
-        assertThat(tvShow.overview).isNotNull();
         assertThat(tvShow.vote_count).isNotNull();
         assertThat(tvShow.vote_count).isGreaterThanOrEqualTo(0);
         assertThat(tvShow.vote_average).isNotNull();
