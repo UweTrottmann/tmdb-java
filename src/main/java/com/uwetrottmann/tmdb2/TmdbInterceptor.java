@@ -1,12 +1,6 @@
 package com.uwetrottmann.tmdb2;
 
-import com.uwetrottmann.tmdb2.entities.Status;
 import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
-import com.uwetrottmann.tmdb2.exceptions.TmdbAuthenticationFailedException;
-import com.uwetrottmann.tmdb2.exceptions.TmdbDuplicateEntryException;
-import com.uwetrottmann.tmdb2.exceptions.TmdbInvalidParametersException;
-import com.uwetrottmann.tmdb2.exceptions.TmdbNotFoundException;
-import com.uwetrottmann.tmdb2.exceptions.TmdbServiceErrorException;
 import java.io.IOException;
 import java.util.List;
 import javax.annotation.Nonnull;
@@ -14,7 +8,6 @@ import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
-import okhttp3.ResponseBody;
 
 /**
  * {@link Interceptor} to add the API key query parameter and if available session information. As it modifies the URL
@@ -88,63 +81,9 @@ public class TmdbInterceptor implements Interceptor {
                 } catch (NumberFormatException | InterruptedException ignored) {
                 }
             }
-            handleErrors(response, tmdb);
         }
 
         return response;
-    }
-
-    /**
-     * @see <a href="https://www.themoviedb.org/documentation/api/status-codes">Status Codes</a>
-     */
-    private static void handleErrors(Response response, Tmdb tmdb) throws IOException {
-        ResponseBody responseBody = response.body();
-        if (responseBody == null) {
-            return;
-        }
-
-        Status status = (Status) tmdb.getRetrofit()
-                .responseBodyConverter(Status.class, Status.class.getAnnotations())
-                .convert(responseBody);
-
-        Integer code = status.status_code;
-        if (code == 3 || code == 14 || code == 33) {
-            return; // these HTTP 401s may be recovered by authenticator, so do not throw
-        }
-
-        String message = status.status_message;
-        switch (code) {
-            case 2:
-            case 4:
-            case 9:
-            case 11:
-            case 15:
-            case 16:
-            case 19:
-            case 24:
-                throw new TmdbServiceErrorException(code, message);
-            case 7:
-            case 10:
-            case 17:
-            case 18:
-            case 26:
-            case 30:
-            case 31:
-            case 32:
-                throw new TmdbAuthenticationFailedException(code, message);
-            case 5:
-            case 20:
-            case 22:
-            case 23:
-            case 27:
-            case 28:
-                throw new TmdbInvalidParametersException(code, message);
-            case 6:
-            case 34:
-                throw new TmdbNotFoundException(code, message);
-            case 8:
-                throw new TmdbDuplicateEntryException(code, message);
-        }
     }
 
     private static void addSessionToQuery(HttpUrl.Builder urlBuilder, AuthenticationType type, Tmdb tmdb) {

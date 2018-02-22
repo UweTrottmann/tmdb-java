@@ -1,6 +1,11 @@
 package com.uwetrottmann.tmdb2;
 
+import com.uwetrottmann.tmdb2.entities.Status;
+import com.uwetrottmann.tmdb2.exceptions.TmdbAuthenticationFailedException;
+import com.uwetrottmann.tmdb2.exceptions.TmdbDuplicateEntryException;
 import com.uwetrottmann.tmdb2.exceptions.TmdbInvalidParametersException;
+import com.uwetrottmann.tmdb2.exceptions.TmdbNotFoundException;
+import com.uwetrottmann.tmdb2.exceptions.TmdbServiceErrorException;
 import com.uwetrottmann.tmdb2.services.AccountService;
 import com.uwetrottmann.tmdb2.services.AuthenticationService;
 import com.uwetrottmann.tmdb2.services.CertificationsService;
@@ -24,8 +29,11 @@ import com.uwetrottmann.tmdb2.services.TimezonesService;
 import com.uwetrottmann.tmdb2.services.TvEpisodesService;
 import com.uwetrottmann.tmdb2.services.TvSeasonsService;
 import com.uwetrottmann.tmdb2.services.TvService;
+import java.io.IOException;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -172,6 +180,65 @@ public class Tmdb {
             retrofit = retrofitBuilder().build();
         }
         return retrofit;
+    }
+
+    /**
+     * Throws a {@link com.uwetrottmann.tmdb2.exceptions.TmdbException} if the given unsuccessful response contains a
+     * known TMDB status code.
+     *
+     * @see <a href="https://www.themoviedb.org/documentation/api/status-codes">Status Codes</a>
+     */
+    public void throwOnKnownError(Response response) throws IOException {
+        if (response.isSuccessful()) {
+            return;
+        }
+
+        ResponseBody responseBody = response.errorBody();
+        if (responseBody == null) {
+            return;
+        }
+
+        Status status = (Status) retrofit
+                .responseBodyConverter(Status.class, Status.class.getAnnotations())
+                .convert(responseBody);
+
+        Integer code = status.status_code;
+        String message = status.status_message;
+        switch (code) {
+            case 2:
+            case 4:
+            case 9:
+            case 11:
+            case 15:
+            case 16:
+            case 19:
+            case 24:
+                throw new TmdbServiceErrorException(code, message);
+            case 3:
+            case 14:
+            case 33:
+            case 7:
+            case 10:
+            case 17:
+            case 18:
+            case 26:
+            case 30:
+            case 31:
+            case 32:
+                throw new TmdbAuthenticationFailedException(code, message);
+            case 5:
+            case 20:
+            case 22:
+            case 23:
+            case 27:
+            case 28:
+                throw new TmdbInvalidParametersException(code, message);
+            case 6:
+            case 34:
+                throw new TmdbNotFoundException(code, message);
+            case 8:
+                throw new TmdbDuplicateEntryException(code, message);
+        }
     }
 
     public AccountService accountService() {
