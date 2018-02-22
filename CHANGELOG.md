@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+## 1.8.3
+_2018-02-22_
+
+* Do not crash if response is unsuccessful and error code is not handled.
+* Undo throwing on unsuccessful responses with known error codes. To analyze why a response is unsuccessful 
+  use `Tmdb.throwOnKnownError(response)` instead.
+
 ## 1.8.2
 _2018-02-02_
 
