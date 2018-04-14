@@ -1,13 +1,13 @@
 package com.uwetrottmann.tmdb2.assertions;
 
 import com.uwetrottmann.tmdb2.entities.BaseList;
-import com.uwetrottmann.tmdb2.entities.BaseMovie;
+import com.uwetrottmann.tmdb2.entities.Media;
 import com.uwetrottmann.tmdb2.entities.List;
 import com.uwetrottmann.tmdb2.entities.ListResultsPage;
 
 import static com.uwetrottmann.tmdb2.TestData.testList;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseResultsPage;
-import static com.uwetrottmann.tmdb2.assertions.MovieAssertions.assertBaseMovie;
+import static com.uwetrottmann.tmdb2.assertions.MediaAssertions.assertMedia;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ListAssertions {
@@ -46,8 +46,8 @@ public class ListAssertions {
         assertThat(list.name).isEqualTo(testList.name);
 
         assertThat(list.items).isNotEmpty();
-        for (BaseMovie movie : list.items) {
-            assertBaseMovie(movie);
+        for (Media media : list.items) {
+            assertMedia(media);
         }
     }
 }
