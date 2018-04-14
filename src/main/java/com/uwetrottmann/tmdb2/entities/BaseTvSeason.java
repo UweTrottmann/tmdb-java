@@ -8,5 +8,6 @@ public class BaseTvSeason {
     public Integer id;
     public String poster_path;
     public Integer season_number;
-
+    public Integer episode_count;
+    
 }
