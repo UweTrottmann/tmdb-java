@@ -236,9 +236,9 @@ public class TestData {
         testKeyword.id = 1721;
         testKeyword.name = "fight";
 
-        testList.id = 932;
-        testList.created_by = "MovieRollApp";
-        testList.name = "Girls With Guns";
+        testList.id = 9883;
+        testList.created_by = "Banana";
+        testList.name = "YA adaptations";
 
         testListMovie.id = 277;
 
