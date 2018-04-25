@@ -90,10 +90,6 @@ public class TestData {
     private static void initializeTestingIntegrityData() throws ParseException {
         testCompany.id = 5;
         testCompany.name = "Columbia Pictures";
-        testCompany.description = "Columbia Pictures Industries, Inc. (CPII) is an American film production and distribution company. Columbia Pictures now forms part of the Columbia TriStar Motion Picture Group, owned by Sony Pictures Entertainment, a subsidiary of the Japanese conglomerate Sony. It is one of the leading film companies in the world, a member of the so-called Big Six. It was one of the so-called Little Three among the eight major film studios of Hollywood's Golden Age.";
-        testCompany.headquarters = "Culver City, California";
-        testCompany.logo_path = "/mjUSfXXUhMiLAA1Zq1TfStNSoLR.png";
-        testCompany.homepage = "http://www.sonypictures.com/";
 
         testPerson.name = "Ben Affleck";
         testPerson.birthday = JSON_STRING_DATE.parse("1972-08-15");
@@ -135,10 +131,8 @@ public class TestData {
         testNetwork.id = 49;
         testNetwork.name = "HBO";
 
-        testMovieCompany.name = "Paramount Pictures";
-        testMovieCompany.id = 4;
-        testMovieCompany.headquarters = "Burbank, California, United States";
-        testMovieCompany.homepage = "http://www.paramount.com/";
+        testMovieCompany.name = "Marvel Studios";
+        testMovieCompany.id = 420;
 
         testMovie.id = 24428;
         testMovie.title = "The Avengers";
@@ -184,7 +178,6 @@ public class TestData {
         testTvSeason.id = 3582;
         testTvSeason.season_number = 1;
         testTvSeason.name = "Season 1";
-        testTvSeason.poster_path = "/u3U4aGwSTpvbULPHTsm7XhadynO.jpg";
         testTvSeason.overview = "The Simpsons' first season originally aired between December 17, 1989 and May 13, 1990, beginning with the Christmas special \"Simpsons Roasting on an Open Fire\". The executive producers for the first production season were Matt Groening, James L. Brooks, and Sam Simon.\n\nThe series was originally set to debut in late 1989 with the episode \"Some Enchanted Evening\", which was meant to introduce the main characters; during the first screening of the episode, the producers discovered that the animation was so appalling that 70% of the episode needed to be redone. The producers considered aborting the series if the next episode turned out as bad, but it only suffered from easily fixable problems. The producers convinced Fox to move the debut to December 17, and aired \"Simpsons Roasting on an Open Fire\" as the first episode of the series. The first season won one Emmy Award, and received four additional nominations.\n\nThe DVD boxset was released on September 25, 2001 in Region 1 and September 24, 2001 in both Region 2 and Region 4. Season one was also released for the iTunes Store on December 22, 2010, dubbed a \"digital edition.\"";
         testTvSeason.air_date = JSON_STRING_DATE.parse("1989-12-17");
         testTvSeason.episodes = new ArrayList<>();

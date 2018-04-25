@@ -159,7 +159,7 @@ public class TvAssertions {
         assertThat(tvSeason.id).isEqualTo(testTvSeason.id);
         assertThat(tvSeason._id).isEqualTo(testTvSeason._id);
         assertThat(tvSeason.episodes.size()).isEqualTo(testTvSeason.episodes.size());
-        assertThat(tvSeason.poster_path).isEqualTo(testTvSeason.poster_path);
+        assertThat(tvSeason.poster_path).isNotEmpty();
 
     }
 
