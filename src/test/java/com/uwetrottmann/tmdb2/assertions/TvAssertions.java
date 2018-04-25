@@ -101,9 +101,9 @@ public class TvAssertions {
         assertThat(tvShow.seasons).isNotEmpty();
         assertThat(tvShow.seasons.size()).isGreaterThanOrEqualTo(tvShow.number_of_seasons);
         for (BaseTvSeason tvSeason : tvShow.seasons) {
-            if (tvShow.seasons.indexOf(tvSeason) == tvShow.number_of_seasons - 2 && tvShow.in_production)
-                break;
             assertBaseTvSeason(tvSeason);
+            // seasons include episode count ONLY when getting show summary
+            assertThat(tvSeason.episode_count).isGreaterThan(0);
         }
 
     }

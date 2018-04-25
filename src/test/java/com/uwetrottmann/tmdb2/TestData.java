@@ -183,7 +183,6 @@ public class TestData {
         testTvSeason._id = "5256c24719c2956ff600565b";
         testTvSeason.id = 3582;
         testTvSeason.season_number = 1;
-        testTvSeason.episode_count = 13;
         testTvSeason.name = "Season 1";
         testTvSeason.poster_path = "/u3U4aGwSTpvbULPHTsm7XhadynO.jpg";
         testTvSeason.overview = "The Simpsons' first season originally aired between December 17, 1989 and May 13, 1990, beginning with the Christmas special \"Simpsons Roasting on an Open Fire\". The executive producers for the first production season were Matt Groening, James L. Brooks, and Sam Simon.\n\nThe series was originally set to debut in late 1989 with the episode \"Some Enchanted Evening\", which was meant to introduce the main characters; during the first screening of the episode, the producers discovered that the animation was so appalling that 70% of the episode needed to be redone. The producers considered aborting the series if the next episode turned out as bad, but it only suffered from easily fixable problems. The producers convinced Fox to move the debut to December 17, and aired \"Simpsons Roasting on an Open Fire\" as the first episode of the series. The first season won one Emmy Award, and received four additional nominations.\n\nThe DVD boxset was released on September 25, 2001 in Region 1 and September 24, 2001 in both Region 2 and Region 4. Season one was also released for the iTunes Store on December 22, 2010, dubbed a \"digital edition.\"";
@@ -238,10 +237,10 @@ public class TestData {
         testKeyword.name = "fight";
 
         testList.id = 9883;
-        testList.created_by = "Banana";
+        testList.created_by = "banana_girl";
         testList.name = "YA adaptations";
 
-        testListMovie.id = 277;
+        testListMovie.id = 9880;
 
         testListMovies.add(testMovie.id);
         testListMovies.add(550);
