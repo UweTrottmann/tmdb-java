@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+## 1.8.4
+_2018-04-25_
+
+* Add `BaseTvSeason.episode_count` which is included in a show summary. Thanks @stavangr!
+* Allow lists to include shows: `List.items` type changed to `Media` from `BaseMovie`. Thanks @stavangr!
+
 ## 1.8.3
 _2018-02-22_
 
