@@ -29,12 +29,12 @@ Use like any other retrofit2 based service. For example:
 // Create an instance of the service you wish to use
 // you can keep this around
 Tmdb tmdb = new Tmdb("yourapikey");
-MovieService movieService = tmdb.movieService();
+MoviesService moviesService = tmdb.moviesService();
 //
 // Call any of the available endpoints
-Call<Movie> call = movieService.summary(550);
+Call<Movie> call = moviesService.summary(550);
 Movie movie = call.execute().body();
-Call<Trailers> callTrailers = movieService.trailers(550);
+Call<Trailers> callTrailers = moviesService.trailers(550);
 Trailers trailers = callTrailers.execute().body();
 ```
 
