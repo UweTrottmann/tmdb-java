@@ -2,50 +2,28 @@ package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.BaseTestCase;
 import com.uwetrottmann.tmdb2.TestData;
-import com.uwetrottmann.tmdb2.entities.AlternativeTitles;
-import com.uwetrottmann.tmdb2.entities.AppendToResponse;
-import com.uwetrottmann.tmdb2.entities.Changes;
-import com.uwetrottmann.tmdb2.entities.Credits;
-import com.uwetrottmann.tmdb2.entities.Images;
-import com.uwetrottmann.tmdb2.entities.Keywords;
-import com.uwetrottmann.tmdb2.entities.ListResultsPage;
-import com.uwetrottmann.tmdb2.entities.Movie;
-import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
-import com.uwetrottmann.tmdb2.entities.ReleaseDatesResults;
-import com.uwetrottmann.tmdb2.entities.ReviewResultsPage;
-import com.uwetrottmann.tmdb2.entities.TmdbDate;
-import com.uwetrottmann.tmdb2.entities.Translations;
-import com.uwetrottmann.tmdb2.entities.Videos;
+import com.uwetrottmann.tmdb2.entities.*;
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
 import org.junit.Test;
 import retrofit2.Call;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.HashMap;
 
-import static com.uwetrottmann.tmdb2.TestData.testMovie;
-import static com.uwetrottmann.tmdb2.TestData.testMovieChangesEndDate;
-import static com.uwetrottmann.tmdb2.TestData.testMovieChangesStartDate;
+import static com.uwetrottmann.tmdb2.TestData.*;
 import static com.uwetrottmann.tmdb2.assertions.ChangeAssertions.assertContentChanges;
 import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCredits;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertAlternativeTitles;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertImages;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertTranslations;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertVideos;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.*;
 import static com.uwetrottmann.tmdb2.assertions.KeywordAssertions.assertKeywords;
 import static com.uwetrottmann.tmdb2.assertions.ListAssertions.assertListResultsPage;
-import static com.uwetrottmann.tmdb2.assertions.MovieAssertions.assertMovie;
-import static com.uwetrottmann.tmdb2.assertions.MovieAssertions.assertMovieDataIntegrity;
-import static com.uwetrottmann.tmdb2.assertions.MovieAssertions.assertMovieReleaseDates;
-import static com.uwetrottmann.tmdb2.assertions.MovieAssertions.assertMovieResultsPage;
+import static com.uwetrottmann.tmdb2.assertions.MovieAssertions.*;
 import static com.uwetrottmann.tmdb2.assertions.ReviewAssertions.assertReviews;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MoviesServiceTest extends BaseTestCase {
 
     @Test
-    public void test_summary() throws ParseException, IOException {
+    public void test_summary() throws IOException {
         Call<Movie> call = getUnauthenticatedInstance().moviesService().summary(
                 testMovie.id
         );
@@ -56,7 +34,7 @@ public class MoviesServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void test_summary_language() throws ParseException, IOException {
+    public void test_summary_language() throws IOException {
         Call<Movie> call = getUnauthenticatedInstance().moviesService().summary(
                 testMovie.id,
                 "pt-BR"
@@ -160,6 +138,17 @@ public class MoviesServiceTest extends BaseTestCase {
         Credits credits = call.execute().body();
 
         assertCredits(credits);
+    }
+
+    @Test
+    public void test_externalIds() throws IOException {
+        Call<MovieExternalIds> call = getUnauthenticatedInstance().moviesService().externalIds(
+                testMovie.id, null
+        );
+
+        MovieExternalIds ids = call.execute().body();
+
+        assertMovieExternalIds(ids);
     }
 
     @Test
