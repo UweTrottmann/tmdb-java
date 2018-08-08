@@ -45,7 +45,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MoviesServiceTest extends BaseTestCase {
 
     @Test
-    public void test_summary() throws ParseException, IOException {
+    public void test_summary() throws IOException {
         Call<Movie> call = getUnauthenticatedInstance().moviesService().summary(
                 testMovie.id
         );
@@ -56,7 +56,7 @@ public class MoviesServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void test_summary_language() throws ParseException, IOException {
+    public void test_summary_language() throws IOException {
         Call<Movie> call = getUnauthenticatedInstance().moviesService().summary(
                 testMovie.id,
                 "pt-BR"

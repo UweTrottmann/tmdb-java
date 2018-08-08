@@ -15,7 +15,6 @@ import org.junit.Test;
 import retrofit2.Call;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.util.HashMap;
 
 import static com.uwetrottmann.tmdb2.TestData.testPerson;
@@ -35,7 +34,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PeopleServiceTest extends BaseTestCase {
 
     @Test
-    public void test_summary() throws IOException, ParseException {
+    public void test_summary() throws IOException {
         Call<Person> call = getUnauthenticatedInstance().personService().summary(
                 testPerson.id
         );
@@ -46,7 +45,7 @@ public class PeopleServiceTest extends BaseTestCase {
     }
 
     @Test
-    public void test_summary_with_append_to_response() throws IOException, ParseException {
+    public void test_summary_with_append_to_response() throws IOException {
         HashMap<String, String> opts = new HashMap<>();
         opts.put("start_date", new TmdbDate(testPersonChangesStartDate).toString());
         opts.put("end_date", new TmdbDate(testPersonChangesEndDate).toString());
