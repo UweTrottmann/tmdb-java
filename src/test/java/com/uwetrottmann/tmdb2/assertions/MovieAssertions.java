@@ -1,18 +1,12 @@
 package com.uwetrottmann.tmdb2.assertions;
 
+import com.uwetrottmann.tmdb2.TestData;
+import com.uwetrottmann.tmdb2.entities.*;
+
 import static com.uwetrottmann.tmdb2.TestData.testProductionCompany;
 import static com.uwetrottmann.tmdb2.assertions.CompanyAssertions.assertBaseCompany;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseResultsPage;
 import static org.assertj.core.api.Assertions.assertThat;
-
-import com.uwetrottmann.tmdb2.TestData;
-import com.uwetrottmann.tmdb2.entities.BaseCompany;
-import com.uwetrottmann.tmdb2.entities.BaseMovie;
-import com.uwetrottmann.tmdb2.entities.Movie;
-import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
-import com.uwetrottmann.tmdb2.entities.ReleaseDate;
-import com.uwetrottmann.tmdb2.entities.ReleaseDatesResult;
-import com.uwetrottmann.tmdb2.entities.ReleaseDatesResults;
 
 public class MovieAssertions {
     public static void assertBaseMovie(BaseMovie movie) {
@@ -98,6 +92,10 @@ public class MovieAssertions {
                 assertThat(releaseDate.type).isNotNull();
             }
         }
+    }
+
+    public static void assertMovieExternalIds(MovieExternalIds externalIds) {
+        assertThat(externalIds.imdb_id).isNotNull();
     }
 
     public static void assertMovieResultsPage(MovieResultsPage movieResultsPage) {

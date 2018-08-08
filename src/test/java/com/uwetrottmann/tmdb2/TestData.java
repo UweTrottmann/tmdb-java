@@ -1,23 +1,6 @@
 package com.uwetrottmann.tmdb2;
 
-import com.uwetrottmann.tmdb2.entities.BaseCompany;
-import com.uwetrottmann.tmdb2.entities.BaseKeyword;
-import com.uwetrottmann.tmdb2.entities.Collection;
-import com.uwetrottmann.tmdb2.entities.Company;
-import com.uwetrottmann.tmdb2.entities.Credit;
-import com.uwetrottmann.tmdb2.entities.CreditMedia;
-import com.uwetrottmann.tmdb2.entities.Genre;
-import com.uwetrottmann.tmdb2.entities.List;
-import com.uwetrottmann.tmdb2.entities.Movie;
-import com.uwetrottmann.tmdb2.entities.Network;
-import com.uwetrottmann.tmdb2.entities.Person;
-import com.uwetrottmann.tmdb2.entities.PersonExternalIds;
-import com.uwetrottmann.tmdb2.entities.Review;
-import com.uwetrottmann.tmdb2.entities.TvEpisode;
-import com.uwetrottmann.tmdb2.entities.TvExternalIds;
-import com.uwetrottmann.tmdb2.entities.TvSeason;
-import com.uwetrottmann.tmdb2.entities.TvSeasonExternalIds;
-import com.uwetrottmann.tmdb2.entities.TvShow;
+import com.uwetrottmann.tmdb2.entities.*;
 import com.uwetrottmann.tmdb2.enumerations.CreditType;
 import com.uwetrottmann.tmdb2.enumerations.MediaType;
 import com.uwetrottmann.tmdb2.enumerations.Status;
