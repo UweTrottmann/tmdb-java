@@ -21,7 +21,6 @@ import com.uwetrottmann.tmdb2.entities.TvShow;
 import com.uwetrottmann.tmdb2.enumerations.CreditType;
 import com.uwetrottmann.tmdb2.enumerations.MediaType;
 import com.uwetrottmann.tmdb2.enumerations.Status;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,7 +55,7 @@ public class TestData {
     public static final Review testReview = new Review();
 
     public static final Company testMovieCompany = new Company();
-    public static final BaseCompany testProductionCompany = (BaseCompany) testMovieCompany;
+    public static final BaseCompany testProductionCompany = testMovieCompany;
     public static final Company testCompany = new Company();
 
 
@@ -77,7 +76,7 @@ public class TestData {
     public static final List testList = new List();
     public static final Movie testListMovie = new Movie();
 
-    public static final java.util.List<Integer> testListMovies = new java.util.ArrayList<>();
+    public static final java.util.List<Integer> testListMovies = new ArrayList<>();
 
     static {
         try {
@@ -207,7 +206,7 @@ public class TestData {
         testTvEpisodeChangesEndDate = JSON_STRING_DATE.parse("2017-2-4");
 
         testCredit.credit_type = CreditType.CAST;
-        testCredit.department = "Actors";
+        testCredit.department = "Acting";
         testCredit.job = "Actor";
         testCredit.media_type = MediaType.TV;
         testCredit.id = "5256bdc319c2956ff6001554";
