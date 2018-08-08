@@ -1,6 +1,14 @@
 Change Log
 ==========
 
+## 1.9.0
+_2018-08-08_
+
+* Support getting external IDs for movies. Thanks @JeremyQuagmire!
+* Drop `BaseExternalIds`. Properties have moved to their respective subclasses. Added `TvEpisodeExternalIds`.
+* Add new social media IDs to external IDs.
+* Update `retrofit` dependency to `2.4.0`.
+
 ## 1.8.4
 _2018-04-25_
 
