@@ -10,5 +10,7 @@ pom.xml.*
 bin
 
 #IntelliJ IDEA
-.idea/
 *.iml
+!.idea/
+.idea/*
+!.idea/codeStyles
