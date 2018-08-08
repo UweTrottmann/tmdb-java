@@ -26,6 +26,7 @@ public class Movie extends BaseMovie {
     public Images images;
     public Translations translations;
     public Credits credits;
+    public MovieExternalIds external_ids;
     public ReleaseDatesResults release_dates;
     public MovieResultsPage similar;
     public MovieResultsPage recommendations;
