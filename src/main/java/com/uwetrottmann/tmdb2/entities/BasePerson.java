@@ -8,7 +8,7 @@ public class BasePerson {
     public Boolean adult;
     public Integer id;
     public String name;
-    public Integer popularity;
+    public Double popularity;
     public List<Media> known_for;
 
 }
