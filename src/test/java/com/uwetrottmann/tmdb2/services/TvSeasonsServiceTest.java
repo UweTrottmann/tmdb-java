@@ -1,20 +1,5 @@
 package com.uwetrottmann.tmdb2.services;
 
-import com.uwetrottmann.tmdb2.BaseTestCase;
-import com.uwetrottmann.tmdb2.entities.AppendToResponse;
-import com.uwetrottmann.tmdb2.entities.Changes;
-import com.uwetrottmann.tmdb2.entities.Credits;
-import com.uwetrottmann.tmdb2.entities.Images;
-import com.uwetrottmann.tmdb2.entities.TmdbDate;
-import com.uwetrottmann.tmdb2.entities.TvSeason;
-import com.uwetrottmann.tmdb2.entities.TvSeasonExternalIds;
-import com.uwetrottmann.tmdb2.entities.Videos;
-import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
-import org.junit.Test;
-import retrofit2.Call;
-
-import java.io.IOException;
-
 import static com.uwetrottmann.tmdb2.TestData.testTvSeason;
 import static com.uwetrottmann.tmdb2.TestData.testTvSeasonChangesEndDate;
 import static com.uwetrottmann.tmdb2.TestData.testTvSeasonChangesStartDate;
@@ -25,8 +10,22 @@ import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertImages;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertVideos;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvSeason;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvSeasonDataIntegrity;
-import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvSeasonExternalIdsDataIntegrity;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import com.uwetrottmann.tmdb2.BaseTestCase;
+import com.uwetrottmann.tmdb2.assertions.TvAssertions;
+import com.uwetrottmann.tmdb2.entities.AppendToResponse;
+import com.uwetrottmann.tmdb2.entities.Changes;
+import com.uwetrottmann.tmdb2.entities.Credits;
+import com.uwetrottmann.tmdb2.entities.Images;
+import com.uwetrottmann.tmdb2.entities.TmdbDate;
+import com.uwetrottmann.tmdb2.entities.TvSeason;
+import com.uwetrottmann.tmdb2.entities.TvSeasonExternalIds;
+import com.uwetrottmann.tmdb2.entities.Videos;
+import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
+import java.io.IOException;
+import org.junit.Test;
+import retrofit2.Call;
 
 public class TvSeasonsServiceTest extends BaseTestCase {
 
@@ -66,7 +65,7 @@ public class TvSeasonsServiceTest extends BaseTestCase {
         assertImages(tvSeason.images.posters);
 
         // external ids
-        assertTvSeasonExternalIdsDataIntegrity(tvSeason.external_ids);
+        TvAssertions.assertTvSeasonExternalIdsMatch(tvSeason.external_ids);
     }
 
     @Test
@@ -105,7 +104,7 @@ public class TvSeasonsServiceTest extends BaseTestCase {
 
         TvSeasonExternalIds ids = call.execute().body();
 
-        assertThat(ids.tvdb_id).isNotNull();
+        TvAssertions.assertTvSeasonExternalIdsMatch(ids);
     }
 
     @Test

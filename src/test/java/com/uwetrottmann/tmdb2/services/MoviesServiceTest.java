@@ -1,29 +1,5 @@
 package com.uwetrottmann.tmdb2.services;
 
-import com.uwetrottmann.tmdb2.BaseTestCase;
-import com.uwetrottmann.tmdb2.TestData;
-import com.uwetrottmann.tmdb2.entities.AlternativeTitles;
-import com.uwetrottmann.tmdb2.entities.AppendToResponse;
-import com.uwetrottmann.tmdb2.entities.Changes;
-import com.uwetrottmann.tmdb2.entities.Credits;
-import com.uwetrottmann.tmdb2.entities.Images;
-import com.uwetrottmann.tmdb2.entities.Keywords;
-import com.uwetrottmann.tmdb2.entities.ListResultsPage;
-import com.uwetrottmann.tmdb2.entities.Movie;
-import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
-import com.uwetrottmann.tmdb2.entities.ReleaseDatesResults;
-import com.uwetrottmann.tmdb2.entities.ReviewResultsPage;
-import com.uwetrottmann.tmdb2.entities.TmdbDate;
-import com.uwetrottmann.tmdb2.entities.Translations;
-import com.uwetrottmann.tmdb2.entities.Videos;
-import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
-import org.junit.Test;
-import retrofit2.Call;
-
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.HashMap;
-
 import static com.uwetrottmann.tmdb2.TestData.testMovie;
 import static com.uwetrottmann.tmdb2.TestData.testMovieChangesEndDate;
 import static com.uwetrottmann.tmdb2.TestData.testMovieChangesStartDate;
@@ -41,6 +17,29 @@ import static com.uwetrottmann.tmdb2.assertions.MovieAssertions.assertMovieRelea
 import static com.uwetrottmann.tmdb2.assertions.MovieAssertions.assertMovieResultsPage;
 import static com.uwetrottmann.tmdb2.assertions.ReviewAssertions.assertReviews;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import com.uwetrottmann.tmdb2.BaseTestCase;
+import com.uwetrottmann.tmdb2.TestData;
+import com.uwetrottmann.tmdb2.entities.AlternativeTitles;
+import com.uwetrottmann.tmdb2.entities.AppendToResponse;
+import com.uwetrottmann.tmdb2.entities.Changes;
+import com.uwetrottmann.tmdb2.entities.Credits;
+import com.uwetrottmann.tmdb2.entities.Images;
+import com.uwetrottmann.tmdb2.entities.Keywords;
+import com.uwetrottmann.tmdb2.entities.ListResultsPage;
+import com.uwetrottmann.tmdb2.entities.Movie;
+import com.uwetrottmann.tmdb2.entities.MovieExternalIds;
+import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
+import com.uwetrottmann.tmdb2.entities.ReleaseDatesResults;
+import com.uwetrottmann.tmdb2.entities.ReviewResultsPage;
+import com.uwetrottmann.tmdb2.entities.TmdbDate;
+import com.uwetrottmann.tmdb2.entities.Translations;
+import com.uwetrottmann.tmdb2.entities.Videos;
+import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
+import java.io.IOException;
+import java.util.HashMap;
+import org.junit.Test;
+import retrofit2.Call;
 
 public class MoviesServiceTest extends BaseTestCase {
 
@@ -160,6 +159,21 @@ public class MoviesServiceTest extends BaseTestCase {
         Credits credits = call.execute().body();
 
         assertCredits(credits);
+    }
+
+    @Test
+    public void test_externalIds() throws IOException {
+        int movieId = 335984;
+        Call<MovieExternalIds> call = getUnauthenticatedInstance().moviesService().externalIds(
+                movieId, null
+        );
+
+        MovieExternalIds ids = call.execute().body();
+        assertThat(ids.id).isEqualTo(movieId);
+        assertThat(ids.imdb_id).isEqualTo("tt1856101");
+        assertThat(ids.facebook_id).isEqualTo("BladeRunner2049");
+        assertThat(ids.instagram_id).isEqualTo("bladerunnermovie");
+        assertThat(ids.twitter_id).isEqualTo("bladerunner");
     }
 
     @Test

@@ -6,7 +6,6 @@ import static com.uwetrottmann.tmdb2.TestData.testTvShow;
 import static com.uwetrottmann.tmdb2.assertions.CompanyAssertions.assertBaseCompany;
 import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCastCredits;
 import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCrewCredits;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseExternalIds;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseResultsPage;
 import static com.uwetrottmann.tmdb2.assertions.GenreAssertions.assertGenre;
 import static com.uwetrottmann.tmdb2.assertions.NetworkAssertions.assertNetwork;
@@ -21,6 +20,7 @@ import com.uwetrottmann.tmdb2.entities.BaseTvShow;
 import com.uwetrottmann.tmdb2.entities.Genre;
 import com.uwetrottmann.tmdb2.entities.Network;
 import com.uwetrottmann.tmdb2.entities.TvEpisode;
+import com.uwetrottmann.tmdb2.entities.TvEpisodeExternalIds;
 import com.uwetrottmann.tmdb2.entities.TvEpisodeResultsPage;
 import com.uwetrottmann.tmdb2.entities.TvExternalIds;
 import com.uwetrottmann.tmdb2.entities.TvSeason;
@@ -203,40 +203,30 @@ public class TvAssertions {
         }
     }
 
-    public static void assertTvExternalIds(TvExternalIds externalIds) {
-        assertBaseExternalIds(externalIds);
-        assertThat(externalIds.tvdb_id).isNotNull();
-        assertThat(externalIds.imdb_id).isNotNull();
+    public static void assertTvShowExternalIdsMatch(TvExternalIds actual) {
+        assertThat(actual.imdb_id).isEqualTo(testTvShow.external_ids.imdb_id);
+        assertThat(actual.tvdb_id).isEqualTo(testTvShow.external_ids.tvdb_id);
+        assertThat(actual.facebook_id).isEqualTo(testTvShow.external_ids.facebook_id);
+        assertThat(actual.freebase_id).isEqualTo(testTvShow.external_ids.freebase_id);
+        assertThat(actual.freebase_mid).isEqualTo(testTvShow.external_ids.freebase_mid);
+        assertThat(actual.instagram_id).isEqualTo(testTvShow.external_ids.instagram_id);
+        assertThat(actual.tvrage_id).isEqualTo(testTvShow.external_ids.tvrage_id);
+        assertThat(actual.twitter_id).isEqualTo(testTvShow.external_ids.twitter_id);
     }
 
-    public static void assertTvSeasonExternalIds(TvSeasonExternalIds externalIds) {
-        assertBaseExternalIds(externalIds);
-        assertThat(externalIds.tvdb_id).isNotNull();
+    public static void assertTvEpisodeExternalIdsMatch(TvEpisodeExternalIds actual) {
+        assertThat(actual.imdb_id).isEqualTo(testTvEpisode.external_ids.imdb_id);
+        assertThat(actual.tvdb_id).isEqualTo(testTvEpisode.external_ids.tvdb_id);
+        assertThat(actual.freebase_id).isEqualTo(testTvEpisode.external_ids.freebase_id);
+        assertThat(actual.freebase_mid).isEqualTo(testTvEpisode.external_ids.freebase_mid);
+        assertThat(actual.tvrage_id).isEqualTo(testTvEpisode.external_ids.tvrage_id);
     }
 
-    public static void assertTvSeasonExternalIdsDataIntegrity(TvSeasonExternalIds externalIds) {
-        assertTvSeasonExternalIds(externalIds);
-        assertThat(externalIds.tvrage_id).isEqualTo(testTvSeason.external_ids.tvrage_id);
-        assertThat(externalIds.tvdb_id).isEqualTo(testTvSeason.external_ids.tvdb_id);
-        assertThat(externalIds.freebase_id).isEqualTo(testTvSeason.external_ids.freebase_id);
-        assertThat(externalIds.freebase_mid).isEqualTo(testTvSeason.external_ids.freebase_mid);
-    }
-
-    public static void assertTvExternalIdsDataIntegrity(TvExternalIds externalIds) {
-        assertTvExternalIds(externalIds);
-        assertThat(externalIds.imdb_id).isEqualTo(testTvShow.external_ids.imdb_id);
-        assertThat(externalIds.tvrage_id).isEqualTo(testTvShow.external_ids.tvrage_id);
-        assertThat(externalIds.tvdb_id).isEqualTo(testTvShow.external_ids.tvdb_id);
-        assertThat(externalIds.freebase_id).isEqualTo(testTvShow.external_ids.freebase_id);
-        assertThat(externalIds.freebase_mid).isEqualTo(testTvShow.external_ids.freebase_mid);
-    }
-
-    public static void assertTvEpisodeExternalIdsDataIntegrity(TvExternalIds externalIds) {
-        assertBaseExternalIds(externalIds);
-        assertThat(externalIds.tvrage_id).isEqualTo(testTvEpisode.external_ids.tvrage_id);
-        assertThat(externalIds.tvdb_id).isEqualTo(testTvEpisode.external_ids.tvdb_id);
-        assertThat(externalIds.freebase_id).isEqualTo(testTvEpisode.external_ids.freebase_id);
-        assertThat(externalIds.freebase_mid).isEqualTo(testTvEpisode.external_ids.freebase_mid);
+    public static void assertTvSeasonExternalIdsMatch(TvSeasonExternalIds actual) {
+        assertThat(actual.tvdb_id).isEqualTo(testTvSeason.external_ids.tvdb_id);
+        assertThat(actual.freebase_id).isEqualTo(testTvSeason.external_ids.freebase_id);
+        assertThat(actual.freebase_mid).isEqualTo(testTvSeason.external_ids.freebase_mid);
+        assertThat(actual.tvrage_id).isEqualTo(testTvSeason.external_ids.tvrage_id);
     }
 
 }

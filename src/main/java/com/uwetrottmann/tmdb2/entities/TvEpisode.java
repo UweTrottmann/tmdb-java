@@ -10,7 +10,7 @@ public class TvEpisode extends BaseTvEpisode {
 
 
     public Images images;
-    public TvExternalIds external_ids;
+    public TvEpisodeExternalIds external_ids;
     public Credits credits;
     public Videos videos;
 

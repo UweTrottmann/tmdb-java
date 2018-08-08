@@ -1,8 +1,10 @@
 package com.uwetrottmann.tmdb2.assertions;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
+
 import com.uwetrottmann.tmdb2.entities.AlternativeTitle;
 import com.uwetrottmann.tmdb2.entities.AlternativeTitles;
-import com.uwetrottmann.tmdb2.entities.BaseExternalIds;
 import com.uwetrottmann.tmdb2.entities.BaseRatingObject;
 import com.uwetrottmann.tmdb2.entities.BaseResultsPage;
 import com.uwetrottmann.tmdb2.entities.ContentRating;
@@ -13,11 +15,7 @@ import com.uwetrottmann.tmdb2.entities.TaggedImage;
 import com.uwetrottmann.tmdb2.entities.TaggedImagesResultsPage;
 import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.Videos;
-
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 
 public class GenericAssertions {
 
@@ -55,13 +53,6 @@ public class GenericAssertions {
             assertThat(alternativeTitle.iso_3166_1).isNotNull();
             assertThat(alternativeTitle.title).isNotNull();
         }
-    }
-
-    public static void assertBaseExternalIds(BaseExternalIds externalIds) {
-        assertThat(externalIds).isNotNull();
-        assertThat(externalIds.freebase_id).isNotNull();
-        assertThat(externalIds.freebase_mid).isNotNull();
-        assertThat(externalIds.tvrage_id).isNotNull();
     }
 
     public static void assertTranslations(Translations translations) {

@@ -1,6 +1,6 @@
 package com.uwetrottmann.tmdb2.assertions;
 
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseExternalIds;
+import static com.uwetrottmann.tmdb2.TestData.testPerson;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseResultsPage;
 import static com.uwetrottmann.tmdb2.assertions.MediaAssertions.assertMedia;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -67,12 +67,14 @@ public class PersonAssertions {
 
     }
 
-    public static void assertPersonExternalIds(PersonExternalIds externalIds) {
-        assertBaseExternalIds(externalIds);
-        assertThat(externalIds.instagram_id).isNotNull();
-        assertThat(externalIds.imdb_id).isNotNull();
-        assertThat(externalIds.facebook_id).isNotNull();
-        assertThat(externalIds.twitter_id).isNotNull();
+    public static void assertTestPersonExternalIds(PersonExternalIds ids) {
+        assertThat(ids.imdb_id).isEqualTo(testPerson.external_ids.imdb_id);
+        assertThat(ids.facebook_id).isEqualTo(testPerson.external_ids.facebook_id);
+        assertThat(ids.freebase_id).isEqualTo(testPerson.external_ids.freebase_id);
+        assertThat(ids.freebase_mid).isEqualTo(testPerson.external_ids.freebase_mid);
+        assertThat(ids.instagram_id).isEqualTo(testPerson.external_ids.instagram_id);
+        assertThat(ids.tvrage_id).isEqualTo(testPerson.external_ids.tvrage_id);
+        assertThat(ids.twitter_id).isEqualTo(testPerson.external_ids.twitter_id);
     }
 
     public static void assertPersonResultsPage(PersonResultsPage personResultsPage) {
@@ -80,18 +82,6 @@ public class PersonAssertions {
         for (BasePerson basePerson : personResultsPage.results) {
             assertBasePerson(basePerson);
         }
-    }
-
-    public static void assertPersonExternalIdsIntegrity(PersonExternalIds personExternalIds) {
-
-        assertPersonExternalIds(personExternalIds);
-
-        assertThat(personExternalIds.facebook_id).isEqualTo(TestData.testPerson.external_ids.facebook_id);
-        assertThat(personExternalIds.imdb_id).isEqualTo(TestData.testPerson.external_ids.imdb_id);
-        assertThat(personExternalIds.instagram_id).isEqualTo(TestData.testPerson.external_ids.instagram_id);
-        assertThat(personExternalIds.freebase_id).isEqualTo(TestData.testPerson.external_ids.freebase_id);
-        assertThat(personExternalIds.freebase_mid).isEqualTo(TestData.testPerson.external_ids.freebase_mid);
-        assertThat(personExternalIds.tvrage_id).isEqualTo(TestData.testPerson.external_ids.tvrage_id);
     }
 
     public static void assertPersonCredits(PersonCredits credits) {

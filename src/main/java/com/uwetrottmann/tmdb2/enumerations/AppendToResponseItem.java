@@ -24,7 +24,7 @@ public enum AppendToResponseItem {
     // Applies to Movies
     LISTS("lists"),
 
-    // Applies to TV Shows, TV Episodes, TV Seasons, People
+    // Applies to Movies, TV Shows, TV Episodes, TV Seasons, People
     EXTERNAL_IDS("external_ids"),
 
     // Applies to TV Shows

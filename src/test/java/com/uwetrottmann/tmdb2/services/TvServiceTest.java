@@ -1,6 +1,23 @@
 package com.uwetrottmann.tmdb2.services;
 
+import static com.uwetrottmann.tmdb2.TestData.testTvShow;
+import static com.uwetrottmann.tmdb2.TestData.testTvShowChangesEndDate;
+import static com.uwetrottmann.tmdb2.TestData.testTvShowChangesStartDate;
+import static com.uwetrottmann.tmdb2.assertions.ChangeAssertions.assertContentChanges;
+import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCredits;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertAlternativeTitles;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertContentRatings;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertImages;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertTranslations;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertVideos;
+import static com.uwetrottmann.tmdb2.assertions.KeywordAssertions.assertKeywords;
+import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShow;
+import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShowDataIntegrity;
+import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShowResultsPage;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.uwetrottmann.tmdb2.BaseTestCase;
+import com.uwetrottmann.tmdb2.assertions.TvAssertions;
 import com.uwetrottmann.tmdb2.entities.AlternativeTitles;
 import com.uwetrottmann.tmdb2.entities.AppendToResponse;
 import com.uwetrottmann.tmdb2.entities.Changes;
@@ -15,29 +32,10 @@ import com.uwetrottmann.tmdb2.entities.TvShow;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.entities.Videos;
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
-import org.junit.Test;
-import retrofit2.Call;
-
 import java.io.IOException;
 import java.util.HashMap;
-
-import static com.uwetrottmann.tmdb2.TestData.testTvShow;
-import static com.uwetrottmann.tmdb2.TestData.testTvShowChangesEndDate;
-import static com.uwetrottmann.tmdb2.TestData.testTvShowChangesStartDate;
-import static com.uwetrottmann.tmdb2.assertions.ChangeAssertions.assertContentChanges;
-import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCredits;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertAlternativeTitles;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertContentRatings;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertImages;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertTranslations;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertVideos;
-import static com.uwetrottmann.tmdb2.assertions.KeywordAssertions.assertKeywords;
-import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvExternalIds;
-import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvExternalIdsDataIntegrity;
-import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShow;
-import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShowDataIntegrity;
-import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShowResultsPage;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Test;
+import retrofit2.Call;
 
 public class TvServiceTest extends BaseTestCase {
 
@@ -89,7 +87,7 @@ public class TvServiceTest extends BaseTestCase {
         assertImages(show.images.posters);
 
         //External Ids Assertions & Data Verifications
-        assertTvExternalIdsDataIntegrity(show.external_ids);
+        TvAssertions.assertTvShowExternalIdsMatch(show.external_ids);
 
         //Similar Movies Assertions
         assertTvShowResultsPage(show.similar);
@@ -173,7 +171,8 @@ public class TvServiceTest extends BaseTestCase {
 
         TvExternalIds ids = call.execute().body();
 
-        assertTvExternalIds(ids);
+        assertThat(ids.id).isEqualTo(testTvShow.id);
+        TvAssertions.assertTvShowExternalIdsMatch(ids);
     }
 
     @Test

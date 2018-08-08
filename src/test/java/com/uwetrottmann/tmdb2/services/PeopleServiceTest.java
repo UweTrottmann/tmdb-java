@@ -1,6 +1,19 @@
 package com.uwetrottmann.tmdb2.services;
 
+import static com.uwetrottmann.tmdb2.TestData.testPerson;
+import static com.uwetrottmann.tmdb2.TestData.testPersonChangesEndDate;
+import static com.uwetrottmann.tmdb2.TestData.testPersonChangesStartDate;
+import static com.uwetrottmann.tmdb2.assertions.ChangeAssertions.assertContentChanges;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertImages;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertTaggedImages;
+import static com.uwetrottmann.tmdb2.assertions.PersonAssertions.assertPerson;
+import static com.uwetrottmann.tmdb2.assertions.PersonAssertions.assertPersonCredits;
+import static com.uwetrottmann.tmdb2.assertions.PersonAssertions.assertPersonDataIntegrity;
+import static com.uwetrottmann.tmdb2.assertions.PersonAssertions.assertPersonResultsPage;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.uwetrottmann.tmdb2.BaseTestCase;
+import com.uwetrottmann.tmdb2.assertions.PersonAssertions;
 import com.uwetrottmann.tmdb2.entities.AppendToResponse;
 import com.uwetrottmann.tmdb2.entities.Changes;
 import com.uwetrottmann.tmdb2.entities.Person;
@@ -11,25 +24,10 @@ import com.uwetrottmann.tmdb2.entities.PersonResultsPage;
 import com.uwetrottmann.tmdb2.entities.TaggedImagesResultsPage;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
-import org.junit.Test;
-import retrofit2.Call;
-
 import java.io.IOException;
 import java.util.HashMap;
-
-import static com.uwetrottmann.tmdb2.TestData.testPerson;
-import static com.uwetrottmann.tmdb2.TestData.testPersonChangesEndDate;
-import static com.uwetrottmann.tmdb2.TestData.testPersonChangesStartDate;
-import static com.uwetrottmann.tmdb2.assertions.ChangeAssertions.assertContentChanges;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertImages;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertTaggedImages;
-import static com.uwetrottmann.tmdb2.assertions.PersonAssertions.assertPerson;
-import static com.uwetrottmann.tmdb2.assertions.PersonAssertions.assertPersonCredits;
-import static com.uwetrottmann.tmdb2.assertions.PersonAssertions.assertPersonDataIntegrity;
-import static com.uwetrottmann.tmdb2.assertions.PersonAssertions.assertPersonExternalIds;
-import static com.uwetrottmann.tmdb2.assertions.PersonAssertions.assertPersonExternalIdsIntegrity;
-import static com.uwetrottmann.tmdb2.assertions.PersonAssertions.assertPersonResultsPage;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.Test;
+import retrofit2.Call;
 
 public class PeopleServiceTest extends BaseTestCase {
 
@@ -73,7 +71,7 @@ public class PeopleServiceTest extends BaseTestCase {
         assertPersonCredits(person.movie_credits);
         assertPersonCredits(person.tv_credits);
         assertPersonCredits(person.combined_credits);
-        assertPersonExternalIds(person.external_ids);
+        PersonAssertions.assertTestPersonExternalIds(person.external_ids);
     }
 
     @Test
@@ -135,7 +133,8 @@ public class PeopleServiceTest extends BaseTestCase {
 
         PersonExternalIds ids = call.execute().body();
 
-        assertPersonExternalIdsIntegrity(ids);
+        assertThat(ids.id).isEqualTo(testPerson.id);
+        PersonAssertions.assertTestPersonExternalIds(ids);
     }
 
     @Test

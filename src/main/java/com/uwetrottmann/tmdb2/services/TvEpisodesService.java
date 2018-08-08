@@ -9,9 +9,10 @@ import com.uwetrottmann.tmdb2.entities.RatingObject;
 import com.uwetrottmann.tmdb2.entities.Status;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.TvEpisode;
-import com.uwetrottmann.tmdb2.entities.TvExternalIds;
+import com.uwetrottmann.tmdb2.entities.TvEpisodeExternalIds;
 import com.uwetrottmann.tmdb2.entities.Videos;
 import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
+import java.util.Map;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -20,8 +21,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
-
-import java.util.Map;
 
 public interface TvEpisodesService {
 
@@ -167,7 +166,7 @@ public interface TvEpisodesService {
      * @param tvShowEpisodeNumber TvEpisode Number.
      */
     @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}/external_ids")
-    Call<TvExternalIds> externalIds(
+    Call<TvEpisodeExternalIds> externalIds(
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber

@@ -1,20 +1,5 @@
 package com.uwetrottmann.tmdb2.services;
 
-import com.uwetrottmann.tmdb2.BaseTestCase;
-import com.uwetrottmann.tmdb2.entities.AppendToResponse;
-import com.uwetrottmann.tmdb2.entities.Changes;
-import com.uwetrottmann.tmdb2.entities.Credits;
-import com.uwetrottmann.tmdb2.entities.Images;
-import com.uwetrottmann.tmdb2.entities.TmdbDate;
-import com.uwetrottmann.tmdb2.entities.TvEpisode;
-import com.uwetrottmann.tmdb2.entities.TvExternalIds;
-import com.uwetrottmann.tmdb2.entities.Videos;
-import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
-import org.junit.Test;
-import retrofit2.Call;
-
-import java.io.IOException;
-
 import static com.uwetrottmann.tmdb2.TestData.testTvEpisode;
 import static com.uwetrottmann.tmdb2.TestData.testTvEpisodeChangesEndDate;
 import static com.uwetrottmann.tmdb2.TestData.testTvEpisodeChangesStartDate;
@@ -26,9 +11,22 @@ import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertImages;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertVideos;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvEpisode;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvEpisodeDataIntegrity;
-import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvEpisodeExternalIdsDataIntegrity;
-import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvExternalIds;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import com.uwetrottmann.tmdb2.BaseTestCase;
+import com.uwetrottmann.tmdb2.assertions.TvAssertions;
+import com.uwetrottmann.tmdb2.entities.AppendToResponse;
+import com.uwetrottmann.tmdb2.entities.Changes;
+import com.uwetrottmann.tmdb2.entities.Credits;
+import com.uwetrottmann.tmdb2.entities.Images;
+import com.uwetrottmann.tmdb2.entities.TmdbDate;
+import com.uwetrottmann.tmdb2.entities.TvEpisode;
+import com.uwetrottmann.tmdb2.entities.TvEpisodeExternalIds;
+import com.uwetrottmann.tmdb2.entities.Videos;
+import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
+import java.io.IOException;
+import org.junit.Test;
+import retrofit2.Call;
 
 public class TvEpisodesServiceTest extends BaseTestCase {
 
@@ -70,7 +68,7 @@ public class TvEpisodesServiceTest extends BaseTestCase {
         assertImages(tvEpisode.images.stills);
 
         // external ids
-        assertTvEpisodeExternalIdsDataIntegrity(tvEpisode.external_ids);
+        TvAssertions.assertTvEpisodeExternalIdsMatch(tvEpisode.external_ids);
     }
 
     @Test
@@ -102,15 +100,15 @@ public class TvEpisodesServiceTest extends BaseTestCase {
 
     @Test
     public void test_externalIds() throws IOException {
-        Call<TvExternalIds> call = getUnauthenticatedInstance().tvEpisodesService().externalIds(
+        Call<TvEpisodeExternalIds> call = getUnauthenticatedInstance().tvEpisodesService().externalIds(
                 testTvShow.id,
                 testTvSeason.season_number,
                 testTvEpisode.episode_number
         );
 
-        TvExternalIds ids = call.execute().body();
+        TvEpisodeExternalIds ids = call.execute().body();
 
-        assertTvExternalIds(ids);
+        TvAssertions.assertTvEpisodeExternalIdsMatch(ids);
     }
 
     @Test
