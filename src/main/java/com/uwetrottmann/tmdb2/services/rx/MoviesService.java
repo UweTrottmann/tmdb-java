@@ -1,0 +1,408 @@
+package com.uwetrottmann.tmdb2.services.rx;
+
+import com.uwetrottmann.tmdb2.entities.AccountStates;
+import com.uwetrottmann.tmdb2.entities.AlternativeTitles;
+import com.uwetrottmann.tmdb2.entities.AppendToResponse;
+import com.uwetrottmann.tmdb2.entities.Changes;
+import com.uwetrottmann.tmdb2.entities.Credits;
+import com.uwetrottmann.tmdb2.entities.Images;
+import com.uwetrottmann.tmdb2.entities.Keywords;
+import com.uwetrottmann.tmdb2.entities.ListResultsPage;
+import com.uwetrottmann.tmdb2.entities.Movie;
+import com.uwetrottmann.tmdb2.entities.MovieExternalIds;
+import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
+import com.uwetrottmann.tmdb2.entities.RatingObject;
+import com.uwetrottmann.tmdb2.entities.ReleaseDate;
+import com.uwetrottmann.tmdb2.entities.ReleaseDatesResults;
+import com.uwetrottmann.tmdb2.entities.ReviewResultsPage;
+import com.uwetrottmann.tmdb2.entities.Status;
+import com.uwetrottmann.tmdb2.entities.TmdbDate;
+import com.uwetrottmann.tmdb2.entities.Translations;
+import com.uwetrottmann.tmdb2.entities.Videos;
+import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
+import io.reactivex.Single;
+import java.util.Map;
+import retrofit2.http.Body;
+import retrofit2.http.DELETE;
+import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
+
+public interface MoviesService {
+
+    /**
+     * Get the basic movie information for a specific movie id.
+     *
+     * @param movieId  A Movie TMDb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/{movie_id}")
+    Single<Movie> summary(
+            @Path("movie_id") int movieId,
+            @Query("language") String language
+    );
+
+    /**
+     * Get the basic movie information for a specific movie id.
+     *
+     * @param movieId A Movie TMDb id.
+     */
+    @GET("movie/{movie_id}")
+    Single<Movie> summary(
+            @Path("movie_id") int movieId
+    );
+
+    /**
+     * Get the basic movie information for a specific movie id.
+     *
+     * @param movieId          A Movie TMDb id.
+     * @param language         <em>Optional.</em> ISO 639-1 code.
+     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Values:</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
+     */
+    @GET("movie/{movie_id}")
+    Single<Movie> summary(
+            @Path("movie_id") int movieId,
+            @Query("language") String language,
+            @Query("append_to_response") AppendToResponse appendToResponse
+    );
+
+    /**
+     * Get the basic movie information for a specific movie id.
+     *
+     * @param movieId          A Movie TMDb id.
+     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Values:</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
+     */
+    @GET("movie/{movie_id}")
+    Single<Movie> summary(
+            @Path("movie_id") int movieId,
+            @Query("append_to_response") AppendToResponse appendToResponse
+    );
+
+    /**
+     * Get the basic movie information for a specific movie id.
+     *
+     * @param movieId          A Movie TMDb id.
+     * @param language         <em>Optional.</em> ISO 639-1 code.
+     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Value(s):</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
+     * @param options          <em>Optional.</em> parameters for the appended extra results.
+     */
+    @GET("movie/{movie_id}")
+    Single<Movie> summary(
+            @Path("movie_id") int movieId,
+            @Query("language") String language,
+            @Query("append_to_response") AppendToResponse appendToResponse,
+            @QueryMap Map<String, String> options
+    );
+
+    /**
+     * Get the basic movie information for a specific movie id.
+     *
+     * @param movieId          A Movie TMDb id.
+     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Value(s):</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
+     * @param options          <em>Optional.</em> parameters for the appended extra results.
+     */
+    @GET("movie/{movie_id}")
+    Single<Movie> summary(
+            @Path("movie_id") int movieId,
+            @Query("append_to_response") AppendToResponse appendToResponse,
+            @QueryMap Map<String, String> options
+    );
+
+    /**
+     * Grab the following account states for a session:
+     *
+     * * Movie rating
+     * * If it belongs to your watchlist
+     * * If it belongs to your favorite list
+     *
+     * <b>Requires an active Session.</b>
+     *
+     * @param movieId A Movie TMDb id.
+     */
+    @GET("movie/{movie_id}/account_states")
+    Single<AccountStates> accountStates(
+            @Path("movie_id") int movieId
+    );
+
+    /**
+     * Get the alternative titles for a specific movie id.
+     *
+     * @param movieId A Movie TMDb id.
+     * @param country <em>Optional.</em> ISO 3166-1 code.
+     */
+    @GET("movie/{movie_id}/alternative_titles")
+    Single<AlternativeTitles> alternativeTitles(
+            @Path("movie_id") int movieId,
+            @Query("country") String country
+    );
+
+    /**
+     * Get the changes for a movie. By default only the last 24 hours are returned.
+     * <p>
+     * You can query up to 14 days in a single query by using the start_date and end_date query parameters.
+     *
+     * @param movieId    A Movie TMDb id.
+     * @param start_date <em>Optional.</em> Starting date of changes occurred to a movie.
+     * @param end_date   <em>Optional.</em> Ending date of changes occurred to a movie.
+     * @param page       <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     */
+    @GET("movie/{movie_id}/changes")
+    Single<Changes> changes(
+            @Path("movie_id") int movieId,
+            @Query("start_date") TmdbDate start_date,
+            @Query("end_date") TmdbDate end_date,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get the cast and crew information for a specific movie id.
+     *
+     * @param movieId A Movie TMDb id.
+     */
+    @GET("movie/{movie_id}/credits")
+    Single<Credits> credits(
+            @Path("movie_id") int movieId
+    );
+
+    /**
+     * Get the external ids that we have stored for a movie.
+     *
+     * @param movieId A Movie TMDb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/{movie_id}/external_ids")
+    Single<MovieExternalIds> externalIds(
+            @Path("movie_id") int movieId,
+            @Query("language") String language
+    );
+
+    /**
+     * Get the images (posters and backdrops) for a specific movie id.
+     *
+     * @param movieId  A Movie TMDb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/{movie_id}/images")
+    Single<Images> images(
+            @Path("movie_id") int movieId,
+            @Query("language") String language
+    );
+
+    /**
+     * Get the plot keywords for a specific movie id.
+     *
+     * @param movieId A Movie TMDb id.
+     */
+    @GET("movie/{movie_id}/keywords")
+    Single<Keywords> keywords(
+            @Path("movie_id") int movieId
+    );
+
+    /**
+     * Get the lists that the movie belongs to.
+     *
+     * @param movieId  A Movie TMDb id.
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/{movie_id}/lists")
+    Single<ListResultsPage> lists(
+            @Path("movie_id") int movieId,
+            @Query("page") Integer page,
+            @Query("language") String language
+    );
+
+    /**
+     * Get the similar movies for a specific movie id.
+     *
+     * @param movieId  A Movie TMDb id.
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/{movie_id}/similar")
+    Single<MovieResultsPage> similar(
+            @Path("movie_id") int movieId,
+            @Query("page") Integer page,
+            @Query("language") String language
+    );
+
+    /**
+     * Get the recommendations for a particular movie id.
+     *
+     * @param movieId  A Movie TMDb id.
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/{movie_id}/recommendations")
+    Single<MovieResultsPage> recommendations(
+            @Path("movie_id") int movieId,
+            @Query("page") Integer page,
+            @Query("language") String language
+    );
+
+    /**
+     * Get the release dates, certifications and related information by country for a specific movie id.
+     *
+     * The results are keyed by iso_3166_1 code and contain a type value which on our system, maps to:
+     * {@link ReleaseDate#TYPE_PREMIERE}, {@link ReleaseDate#TYPE_THEATRICAL_LIMITED},
+     * {@link ReleaseDate#TYPE_THEATRICAL}, {@link ReleaseDate#TYPE_DIGITAL}, {@link ReleaseDate#TYPE_PHYSICAL},
+     * {@link ReleaseDate#TYPE_TV}
+     *
+     * @param movieId A Movie TMDb id.
+     */
+    @GET("movie/{movie_id}/release_dates")
+    Single<ReleaseDatesResults> releaseDates(
+            @Path("movie_id") int movieId
+    );
+
+    /**
+     * Get the reviews for a particular movie id.
+     *
+     * @param movieId  A Movie TMDb id.
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/{movie_id}/reviews")
+    Single<ReviewResultsPage> reviews(
+            @Path("movie_id") int movieId,
+            @Query("page") Integer page,
+            @Query("language") String language
+    );
+
+    /**
+     * Get the translations for a specific movie id.
+     *
+     * @param movieId A Movie TMDb id.
+     */
+    @GET("movie/{movie_id}/translations")
+    Single<Translations> translations(
+            @Path("movie_id") int movieId
+    );
+
+    /**
+     * Get the videos (trailers, teasers, clips, etc...) for a specific movie id.
+     *
+     * @param movieId  A Movie TMDb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/{movie_id}/videos")
+    Single<Videos> videos(
+            @Path("movie_id") int movieId,
+            @Query("language") String language
+    );
+
+    /**
+     * Get the latest movie id.
+     */
+    @GET("movie/latest")
+    Single<Movie> latest();
+
+    /**
+     * Get the list of movies playing in theaters. This list refreshes every day. The maximum number of items this list
+     * will include is 100.
+     *
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/now_playing")
+    Single<MovieResultsPage> nowPlaying(
+            @Query("page") Integer page,
+            @Query("language") String language
+    );
+
+    /**
+     * Get the list of popular movies on The Movie Database. This list refreshes every day.
+     *
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/popular")
+    Single<MovieResultsPage> popular(
+            @Query("page") Integer page,
+            @Query("language") String language
+    );
+
+    /**
+     * Get the list of top rated movies. By default, this list will only include movies that have 10 or more votes. This
+     * list refreshes every day.
+     *
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/top_rated")
+    Single<MovieResultsPage> topRated(
+            @Query("page") Integer page,
+            @Query("language") String language
+    );
+
+    /**
+     * Get the list of upcoming movies. This list refreshes every day. The maximum number of items this list will
+     * include is 100.
+     *
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/upcoming")
+    Single<MovieResultsPage> upcoming(
+            @Query("page") Integer page,
+            @Query("language") String language
+    );
+
+    /**
+     * Sets the Rating for the movie with the specified id.
+     *
+     * <b>Requires an active Session.</b>
+     *
+     * @param movieId            A Movie TMDb id.
+     * @param authenticationType Authentication Type for this operation. Available Choices: Account, Guest.
+     * @param body               <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
+     */
+    @POST("movie/{movie_id}/rating")
+    Single<Status> addRating(
+            @Path("movie_id") Integer movieId,
+            @Query("authentication") AuthenticationType authenticationType,
+            @Body RatingObject body
+    );
+
+    /**
+     * Sets the Rating for the movie with the specified id.
+     *
+     * <b>Requires an active Session.</b>
+     *
+     * @param movieId A Movie TMDb id.
+     * @param body    <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
+     */
+    @POST("movie/{movie_id}/rating")
+    Single<Status> addRating(
+            @Path("movie_id") Integer movieId,
+            @Body RatingObject body
+    );
+
+    /**
+     * Deletes the Rating for the movie with the specified id.
+     *
+     * <b>Requires an active Session.</b>
+     *
+     * @param movieId            A Movie TMDb id.
+     * @param authenticationType Authentication Type for this operation. Available Choices: Account, Guest.
+     */
+    @DELETE("movie/{movie_id}/rating")
+    Single<Status> deleteRating(
+            @Path("movie_id") Integer movieId,
+            @Query("authentication") AuthenticationType authenticationType
+    );
+
+    /**
+     * Deletes the Rating for the movie with the specified id.
+     *
+     * <b>Requires an active Session.</b>
+     *
+     * @param movieId A Movie TMDb id.
+     */
+    @DELETE("movie/{movie_id}/rating")
+    Single<Status> deleteRating(
+            @Path("movie_id") Integer movieId
+    );
+}

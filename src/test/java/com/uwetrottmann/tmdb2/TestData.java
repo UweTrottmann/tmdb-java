@@ -1,5 +1,7 @@
 package com.uwetrottmann.tmdb2;
 
+import com.uwetrottmann.tmdb2.entities.AlternativeTitle;
+import com.uwetrottmann.tmdb2.entities.AlternativeTitles;
 import com.uwetrottmann.tmdb2.entities.BaseCompany;
 import com.uwetrottmann.tmdb2.entities.BaseKeyword;
 import com.uwetrottmann.tmdb2.entities.Collection;
@@ -25,6 +27,7 @@ import com.uwetrottmann.tmdb2.enumerations.Status;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 public class TestData {
@@ -174,6 +177,16 @@ public class TestData {
         testTvShow.external_ids.tvrage_id = 6190;
         testTvShow.external_ids.twitter_id = "thesimpsons";
         testTvShow.external_ids.id = testTvShow.id;
+
+        AlternativeTitle title = new AlternativeTitle();
+        title.iso_3166_1 = "iso_test";
+        title.title = "title_test";
+        testTvShow.alternative_titles = new AlternativeTitles();
+        testTvShow.alternative_titles.id = 456;
+        testTvShow.alternative_titles.titles = Arrays.asList(title);
+
+
+
         testTvShowChangesStartDate = JSON_STRING_DATE.parse("2017-2-2");
         testTvShowChangesEndDate = JSON_STRING_DATE.parse("2017-2-4");
 

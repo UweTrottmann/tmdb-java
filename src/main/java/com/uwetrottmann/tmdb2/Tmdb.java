@@ -35,6 +35,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -143,6 +144,7 @@ public class Tmdb {
     protected Retrofit.Builder retrofitBuilder() {
         return new Retrofit.Builder()
                 .baseUrl(API_URL)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create(TmdbHelper.getGsonBuilder().create()))
                 .client(okHttpClient());
     }
@@ -340,6 +342,16 @@ public class Tmdb {
 
     public DiscoverTvBuilder discoverTv() {
         return new DiscoverTvBuilder(discoverService());
+    }
+
+    public Rx rx = new Rx();
+
+    public class Rx {
+
+        public com.uwetrottmann.tmdb2.services.rx.MoviesService moviesService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.MoviesService.class);
+        }
+
     }
 
 }
