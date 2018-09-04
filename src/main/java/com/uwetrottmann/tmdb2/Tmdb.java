@@ -363,6 +363,10 @@ public class Tmdb {
             return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.CompaniesService.class);
         }
 
+        public com.uwetrottmann.tmdb2.services.rx.ConfigurationService configurationService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.ConfigurationService.class);
+        }
+
         public com.uwetrottmann.tmdb2.services.rx.CollectionsService collectionService() {
             return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.CollectionsService.class);
         }
@@ -375,8 +379,16 @@ public class Tmdb {
             return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.DiscoverService.class);
         }
 
+        public com.uwetrottmann.tmdb2.services.rx.FindService findService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.FindService.class);
+        }
+
         public com.uwetrottmann.tmdb2.services.rx.GenresService genreService() {
             return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.GenresService.class);
+        }
+
+        public com.uwetrottmann.tmdb2.services.rx.GuestSessionService guestSessionService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.GuestSessionService.class);
         }
 
         public com.uwetrottmann.tmdb2.services.rx.KeywordsService keywordsService() {

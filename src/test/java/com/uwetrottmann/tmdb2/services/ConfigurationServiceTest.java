@@ -5,17 +5,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 import com.uwetrottmann.tmdb2.BaseTestCase;
 import com.uwetrottmann.tmdb2.entities.Configuration;
 import com.uwetrottmann.tmdb2.entities.Jobs;
+import io.reactivex.Observable;
 import java.io.IOException;
 import java.util.List;
 import org.junit.Test;
-import retrofit2.Call;
 
 public class ConfigurationServiceTest extends BaseTestCase {
 
     @Test
     public void test_configuration() throws IOException {
-        Call<Configuration> call = getUnauthenticatedInstance().configurationService().configuration();
-        Configuration config = call.execute().body();
+        Observable<Configuration> call = getUnauthenticatedInstance().rx.configurationService().configuration();
+        Configuration config = call.singleOrError().blockingGet();
         assertThat(config).isNotNull();
         assertThat(config.images).isNotNull();
         assertThat(config.images.base_url).isNotEmpty();
@@ -30,8 +30,8 @@ public class ConfigurationServiceTest extends BaseTestCase {
 
     @Test
     public void test_jobs() throws IOException {
-        Call<List<Jobs>> call = getUnauthenticatedInstance().configurationService().jobs();
-        List<Jobs> jobs = call.execute().body();
+        Observable<List<Jobs>> call = getUnauthenticatedInstance().rx.configurationService().jobs();
+        List<Jobs> jobs = call.singleOrError().blockingGet();
 
         assertThat(jobs).isNotNull();
         assertThat(jobs).isNotEmpty();
