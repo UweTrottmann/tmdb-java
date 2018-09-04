@@ -363,6 +363,18 @@ public class Tmdb {
             return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.CompaniesService.class);
         }
 
+        public com.uwetrottmann.tmdb2.services.rx.CreditsService creditsService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.CreditsService.class);
+        }
+
+        public com.uwetrottmann.tmdb2.services.rx.DiscoverService discoverService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.DiscoverService.class);
+        }
+
+        public com.uwetrottmann.tmdb2.services.rx.GenresService genreService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.GenresService.class);
+        }
+
         public com.uwetrottmann.tmdb2.services.rx.ListsService listsService() {
             return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.ListsService.class);
         }
@@ -389,6 +401,14 @@ public class Tmdb {
 
         public com.uwetrottmann.tmdb2.services.rx.TvService tvService() {
             return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.TvService.class);
+        }
+
+        public com.uwetrottmann.tmdb2.services.rx.DiscoverMovieBuilder discoverMovie() {
+            return new com.uwetrottmann.tmdb2.services.rx.DiscoverMovieBuilder(discoverService());
+        }
+
+        public com.uwetrottmann.tmdb2.services.rx.DiscoverTvBuilder discoverTv() {
+            return new com.uwetrottmann.tmdb2.services.rx.DiscoverTvBuilder(discoverService());
         }
 
     }
