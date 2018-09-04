@@ -348,9 +348,31 @@ public class Tmdb {
 
     public class Rx {
 
+        public com.uwetrottmann.tmdb2.services.rx.AccountService accountService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.AccountService.class);
+        }
+
+        public com.uwetrottmann.tmdb2.services.rx.ListsService listsService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.ListsService.class);
+        }
+
         public com.uwetrottmann.tmdb2.services.rx.MoviesService moviesService() {
             return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.MoviesService.class);
         }
+
+        public com.uwetrottmann.tmdb2.services.rx.TvEpisodesService tvEpisodesService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.TvEpisodesService.class);
+        }
+
+        public com.uwetrottmann.tmdb2.services.rx.TvSeasonsService tvSeasonsService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.TvSeasonsService.class);
+        }
+
+        public com.uwetrottmann.tmdb2.services.rx.TvService tvService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.TvService.class);
+        }
+
+
 
     }
 

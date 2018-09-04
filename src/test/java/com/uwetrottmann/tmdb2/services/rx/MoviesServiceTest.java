@@ -36,7 +36,7 @@ import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.Videos;
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
-import io.reactivex.Single;
+import io.reactivex.Observable;
 import java.io.IOException;
 import java.util.HashMap;
 import org.junit.Test;
@@ -45,23 +45,23 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_summary() throws IOException {
-        Single<Movie> single = getUnauthenticatedInstance().rx.moviesService().summary(
+        Observable<Movie> single = getUnauthenticatedInstance().rx.moviesService().summary(
                 testMovie.id
         );
 
-        Movie movie = single.blockingGet();
+        Movie movie = single.singleOrError().blockingGet();
 
         assertMovie(movie);
     }
 
     @Test
     public void test_summary_language() throws IOException {
-        Single<Movie> single = getUnauthenticatedInstance().rx.moviesService().summary(
+        Observable<Movie> single = getUnauthenticatedInstance().rx.moviesService().summary(
                 testMovie.id,
                 "pt-BR"
         );
 
-        Movie movie = single.blockingGet();
+        Movie movie = single.singleOrError().blockingGet();
 
         assertMovie(movie);
 
@@ -76,7 +76,7 @@ public class MoviesServiceTest extends BaseTestCase {
         opts.put("start_date", new TmdbDate(testMovieChangesStartDate).toString());
         opts.put("end_date", new TmdbDate(testMovieChangesEndDate).toString());
 
-        Single<Movie> single = getUnauthenticatedInstance().rx.moviesService().summary(
+        Observable<Movie> single = getUnauthenticatedInstance().rx.moviesService().summary(
                 testMovie.id,
                 new AppendToResponse(
                         AppendToResponseItem.RELEASE_DATES,
@@ -95,7 +95,7 @@ public class MoviesServiceTest extends BaseTestCase {
                 opts
         );
 
-        Movie movie = single.blockingGet();
+        Movie movie = single.singleOrError().blockingGet();
 
         assertMovieDataIntegrity(movie);
 
@@ -140,23 +140,23 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_alternative_titles() throws IOException {
-        Single<AlternativeTitles> single = getUnauthenticatedInstance().rx.moviesService().alternativeTitles(
+        Observable<AlternativeTitles> single = getUnauthenticatedInstance().rx.moviesService().alternativeTitles(
                 testMovie.id,
                 null
         );
 
-        AlternativeTitles titles = single.blockingGet();
+        AlternativeTitles titles = single.singleOrError().blockingGet();
 
         assertAlternativeTitles(titles);
     }
 
     @Test
     public void test_credits() throws IOException {
-        Single<Credits> single = getUnauthenticatedInstance().rx.moviesService().credits(
+        Observable<Credits> single = getUnauthenticatedInstance().rx.moviesService().credits(
                 testMovie.id
         );
 
-        Credits credits = single.blockingGet();
+        Credits credits = single.singleOrError().blockingGet();
 
         assertCredits(credits);
     }
@@ -164,11 +164,11 @@ public class MoviesServiceTest extends BaseTestCase {
     @Test
     public void test_externalIds() throws IOException {
         int movieId = 335984;
-        Single<MovieExternalIds> single = getUnauthenticatedInstance().rx.moviesService().externalIds(
+        Observable<MovieExternalIds> single = getUnauthenticatedInstance().rx.moviesService().externalIds(
                 movieId, null
         );
 
-        MovieExternalIds ids = single.blockingGet();
+        MovieExternalIds ids = single.singleOrError().blockingGet();
         assertThat(ids.id).isEqualTo(movieId);
         assertThat(ids.imdb_id).isEqualTo("tt1856101");
         assertThat(ids.facebook_id).isEqualTo("BladeRunner2049");
@@ -178,12 +178,12 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_images() throws IOException {
-        Single<Images> single = getUnauthenticatedInstance().rx.moviesService().images(
+        Observable<Images> single = getUnauthenticatedInstance().rx.moviesService().images(
                 testMovie.id,
                 null
         );
 
-        Images images = single.blockingGet();
+        Images images = single.singleOrError().blockingGet();
 
         assertThat(images).isNotNull();
         assertThat(images.id).isNotNull();
@@ -193,11 +193,11 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_keywords() throws IOException {
-        Single<Keywords> single = getUnauthenticatedInstance().rx.moviesService().keywords(
+        Observable<Keywords> single = getUnauthenticatedInstance().rx.moviesService().keywords(
                 TestData.testMovie.id
         );
 
-        Keywords keywords = single.blockingGet();
+        Keywords keywords = single.singleOrError().blockingGet();
 
 
         assertKeywords(keywords);
@@ -205,33 +205,33 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_release_dates() throws IOException {
-        Single<ReleaseDatesResults> single = getUnauthenticatedInstance().rx.moviesService().releaseDates(
+        Observable<ReleaseDatesResults> single = getUnauthenticatedInstance().rx.moviesService().releaseDates(
                 testMovie.id
         );
 
-        ReleaseDatesResults results = single.blockingGet();
+        ReleaseDatesResults results = single.singleOrError().blockingGet();
 
         assertMovieReleaseDates(results);
     }
 
     @Test
     public void test_videos() throws IOException {
-        Single<Videos> single = getUnauthenticatedInstance().rx.moviesService().videos(
+        Observable<Videos> single = getUnauthenticatedInstance().rx.moviesService().videos(
                 testMovie.id,
                 null
         );
 
-        Videos videos = single.blockingGet();
+        Videos videos = single.singleOrError().blockingGet();
 
         assertVideos(videos);
     }
 
     @Test
     public void test_translations() throws IOException {
-        Single<Translations> single = getUnauthenticatedInstance().rx.moviesService().translations(
+        Observable<Translations> single = getUnauthenticatedInstance().rx.moviesService().translations(
                 testMovie.id
         );
-        Translations translations = single.blockingGet();
+        Translations translations = single.singleOrError().blockingGet();
 
         assertTranslations(translations);
 
@@ -239,65 +239,65 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_similar() throws IOException {
-        Single<MovieResultsPage> single = getUnauthenticatedInstance().rx.moviesService().similar(
+        Observable<MovieResultsPage> single = getUnauthenticatedInstance().rx.moviesService().similar(
                 testMovie.id,
                 1,
                 null
         );
-        MovieResultsPage results = single.blockingGet();
+        MovieResultsPage results = single.singleOrError().blockingGet();
 
         assertMovieResultsPage(results);
     }
 
     @Test
     public void test_changes() throws IOException {
-        Single<Changes> single = getUnauthenticatedInstance().rx.moviesService().changes(
+        Observable<Changes> single = getUnauthenticatedInstance().rx.moviesService().changes(
                 testMovie.id,
                 new TmdbDate(testMovieChangesStartDate),
                 new TmdbDate(testMovieChangesEndDate),
                 null
         );
 
-        Changes results = single.blockingGet();
+        Changes results = single.singleOrError().blockingGet();
 
         assertContentChanges(results);
     }
 
     @Test
     public void test_reviews() throws IOException {
-        Single<ReviewResultsPage> single = getUnauthenticatedInstance().rx.moviesService().reviews(
+        Observable<ReviewResultsPage> single = getUnauthenticatedInstance().rx.moviesService().reviews(
                 testMovie.id,
                 1,
                 null
         );
 
-        ReviewResultsPage results = single.blockingGet();
+        ReviewResultsPage results = single.singleOrError().blockingGet();
 
         assertReviews(results);
     }
 
     @Test
     public void test_recommendations() throws IOException {
-        Single<MovieResultsPage> single = getUnauthenticatedInstance().rx.moviesService().recommendations(
+        Observable<MovieResultsPage> single = getUnauthenticatedInstance().rx.moviesService().recommendations(
                 testMovie.id,
                 1,
                 null
         );
 
-        MovieResultsPage results = single.blockingGet();
+        MovieResultsPage results = single.singleOrError().blockingGet();
 
         assertMovieResultsPage(results);
     }
 
     @Test
     public void test_lists() throws IOException {
-        Single<ListResultsPage> single = getUnauthenticatedInstance().rx.moviesService().lists(
+        Observable<ListResultsPage> single = getUnauthenticatedInstance().rx.moviesService().lists(
                 testMovie.id,
                 1,
                 null
         );
 
-        ListResultsPage results = single.blockingGet();
+        ListResultsPage results = single.singleOrError().blockingGet();
 
         assertListResultsPage(results);
 
@@ -305,9 +305,9 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_latest() throws IOException {
-        Single<Movie> single = getUnauthenticatedInstance().rx.moviesService().latest();
+        Observable<Movie> single = getUnauthenticatedInstance().rx.moviesService().latest();
 
-        Movie movie = single.blockingGet();
+        Movie movie = single.singleOrError().blockingGet();
 
         // Latest testMovie might not have a complete TMDb entry, but should at least some basic properties.
         assertThat(movie).isNotNull();
@@ -317,12 +317,12 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_upcoming() throws IOException {
-        Single<MovieResultsPage> single = getUnauthenticatedInstance().rx.moviesService().upcoming(
+        Observable<MovieResultsPage> single = getUnauthenticatedInstance().rx.moviesService().upcoming(
                 null,
                 null
         );
 
-        MovieResultsPage page = single.blockingGet();
+        MovieResultsPage page = single.singleOrError().blockingGet();
 
         assertThat(page).isNotNull();
         assertThat(page.results).isNotEmpty();
@@ -330,24 +330,24 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_nowPlaying() throws IOException {
-        Single<MovieResultsPage> single = getUnauthenticatedInstance().rx.moviesService().nowPlaying(
+        Observable<MovieResultsPage> single = getUnauthenticatedInstance().rx.moviesService().nowPlaying(
                 null,
                 null
         );
 
-        MovieResultsPage page = single.blockingGet();
+        MovieResultsPage page = single.singleOrError().blockingGet();
 
         assertMovieResultsPage(page);
     }
 
     @Test
     public void test_popular() throws IOException {
-        Single<MovieResultsPage> single = getUnauthenticatedInstance().rx.moviesService().popular(
+        Observable<MovieResultsPage> single = getUnauthenticatedInstance().rx.moviesService().popular(
                 null,
                 null
         );
 
-        MovieResultsPage page = single.blockingGet();
+        MovieResultsPage page = single.singleOrError().blockingGet();
 
         assertMovieResultsPage(page);
 
@@ -355,12 +355,12 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void test_topRated() throws IOException {
-        Single<MovieResultsPage> single = getUnauthenticatedInstance().rx.moviesService().topRated(
+        Observable<MovieResultsPage> single = getUnauthenticatedInstance().rx.moviesService().topRated(
                 null,
                 null
         );
 
-        MovieResultsPage page = single.blockingGet();
+        MovieResultsPage page = single.singleOrError().blockingGet();
 
         assertMovieResultsPage(page);
     }
