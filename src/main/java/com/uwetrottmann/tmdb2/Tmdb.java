@@ -363,6 +363,10 @@ public class Tmdb {
             return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.CompaniesService.class);
         }
 
+        public com.uwetrottmann.tmdb2.services.rx.CollectionsService collectionService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.CollectionsService.class);
+        }
+
         public com.uwetrottmann.tmdb2.services.rx.CreditsService creditsService() {
             return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.CreditsService.class);
         }
@@ -375,6 +379,10 @@ public class Tmdb {
             return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.GenresService.class);
         }
 
+        public com.uwetrottmann.tmdb2.services.rx.KeywordsService keywordsService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.KeywordsService.class);
+        }
+
         public com.uwetrottmann.tmdb2.services.rx.ListsService listsService() {
             return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.ListsService.class);
         }
@@ -383,8 +391,20 @@ public class Tmdb {
             return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.MoviesService.class);
         }
 
+        public com.uwetrottmann.tmdb2.services.rx.NetworksService networksService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.NetworksService.class);
+        }
+
+        public com.uwetrottmann.tmdb2.services.rx.PeopleService personService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.PeopleService.class);
+        }
+
         public com.uwetrottmann.tmdb2.services.rx.ReviewsService reviewsService() {
             return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.ReviewsService.class);
+        }
+
+        public com.uwetrottmann.tmdb2.services.rx.SearchService searchService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.SearchService.class);
         }
 
         public com.uwetrottmann.tmdb2.services.rx.TimezonesService timezonesService() {
