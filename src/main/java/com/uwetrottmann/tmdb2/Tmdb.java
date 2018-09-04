@@ -174,8 +174,8 @@ public class Tmdb {
 
     /**
      * Return the current {@link Retrofit} instance. If none exists (first call, auth changed), builds a new one.
-     * <p>When building, sets the base url and a custom client with an {@link Interceptor} which supplies authentication
-     * data.
+     * <p>When building, sets the base url and a custom client with an {@link Interceptor} which supplies
+     * authentication data.
      */
     protected Retrofit getRetrofit() {
         if (retrofit == null) {
@@ -344,12 +344,23 @@ public class Tmdb {
         return new DiscoverTvBuilder(discoverService());
     }
 
-    public Rx rx = new Rx();
-
+    public final Rx rx = new Rx();
     public class Rx {
 
         public com.uwetrottmann.tmdb2.services.rx.AccountService accountService() {
             return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.AccountService.class);
+        }
+
+        public com.uwetrottmann.tmdb2.services.rx.CertificationsService certificationsService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.CertificationsService.class);
+        }
+
+        public com.uwetrottmann.tmdb2.services.rx.ChangesService changesService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.ChangesService.class);
+        }
+
+        public com.uwetrottmann.tmdb2.services.rx.CompaniesService companiesService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.CompaniesService.class);
         }
 
         public com.uwetrottmann.tmdb2.services.rx.ListsService listsService() {
@@ -358,6 +369,14 @@ public class Tmdb {
 
         public com.uwetrottmann.tmdb2.services.rx.MoviesService moviesService() {
             return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.MoviesService.class);
+        }
+
+        public com.uwetrottmann.tmdb2.services.rx.ReviewsService reviewsService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.ReviewsService.class);
+        }
+
+        public com.uwetrottmann.tmdb2.services.rx.TimezonesService timezonesService() {
+            return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.TimezonesService.class);
         }
 
         public com.uwetrottmann.tmdb2.services.rx.TvEpisodesService tvEpisodesService() {
@@ -371,8 +390,6 @@ public class Tmdb {
         public com.uwetrottmann.tmdb2.services.rx.TvService tvService() {
             return getRetrofit().create(com.uwetrottmann.tmdb2.services.rx.TvService.class);
         }
-
-
 
     }
 
