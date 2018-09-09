@@ -34,7 +34,8 @@ public class PeopleServiceTest extends BaseTestCase {
     @Test
     public void test_summary() throws IOException {
         Call<Person> call = getUnauthenticatedInstance().personService().summary(
-                testPerson.id
+                testPerson.id,
+                null
         );
 
         Person person = call.execute().body();
@@ -50,6 +51,7 @@ public class PeopleServiceTest extends BaseTestCase {
 
         Call<Person> call = getUnauthenticatedInstance().personService().summary(
                 testPerson.id,
+                null,
                 new AppendToResponse(
                         AppendToResponseItem.IMAGES,
                         AppendToResponseItem.MOVIE_CREDITS,

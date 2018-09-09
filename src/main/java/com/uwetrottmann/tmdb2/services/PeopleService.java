@@ -26,7 +26,8 @@ public interface PeopleService {
      */
     @GET("person/{person_id}")
     Call<Person> summary(
-            @Path("person_id") int personId
+            @Path("person_id") int personId,
+            @Query("language") String language
     );
 
     /**
@@ -38,6 +39,7 @@ public interface PeopleService {
     @GET("person/{person_id}")
     Call<Person> summary(
             @Path("person_id") int personId,
+            @Query("language") String language,
             @Query("append_to_response") AppendToResponse appendToResponse
     );
 
@@ -51,6 +53,7 @@ public interface PeopleService {
     @GET("person/{person_id}")
     Call<Person> summary(
             @Path("person_id") int personId,
+            @Query("language") String language,
             @Query("append_to_response") AppendToResponse appendToResponse,
             @QueryMap Map<String, String> options
     );
