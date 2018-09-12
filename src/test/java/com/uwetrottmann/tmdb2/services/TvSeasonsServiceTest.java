@@ -33,7 +33,8 @@ public class TvSeasonsServiceTest extends BaseTestCase {
     public void test_season() throws IOException {
         Call<TvSeason> call = getUnauthenticatedInstance().tvSeasonsService().season(
                 testTvShow.id,
-                testTvSeason.season_number
+                testTvSeason.season_number,
+                "en"
         );
 
         TvSeason tvSeason = call.execute().body();
@@ -46,6 +47,7 @@ public class TvSeasonsServiceTest extends BaseTestCase {
         Call<TvSeason> call = getUnauthenticatedInstance().tvSeasonsService().season(
                 testTvShow.id,
                 testTvSeason.season_number,
+                "en",
                 new AppendToResponse(
                         AppendToResponseItem.IMAGES,
                         AppendToResponseItem.EXTERNAL_IDS,

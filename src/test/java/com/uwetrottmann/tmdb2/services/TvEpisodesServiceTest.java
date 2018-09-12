@@ -35,7 +35,8 @@ public class TvEpisodesServiceTest extends BaseTestCase {
         Call<TvEpisode> call = getUnauthenticatedInstance().tvEpisodesService().episode(
                 testTvEpisode.id,
                 testTvSeason.season_number,
-                testTvEpisode.episode_number
+                testTvEpisode.episode_number,
+                "en"
         );
 
         TvEpisode tvEpisode = call.execute().body();
@@ -49,6 +50,7 @@ public class TvEpisodesServiceTest extends BaseTestCase {
                 testTvShow.id,
                 testTvSeason.season_number,
                 testTvEpisode.episode_number,
+                "en",
                 new AppendToResponse(
                         AppendToResponseItem.IMAGES,
                         AppendToResponseItem.EXTERNAL_IDS,
