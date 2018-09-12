@@ -46,7 +46,8 @@ public class MoviesServiceTest extends BaseTestCase {
     @Test
     public void test_summary() throws IOException {
         Call<Movie> call = getUnauthenticatedInstance().moviesService().summary(
-                testMovie.id
+                testMovie.id,
+                "en"
         );
 
         Movie movie = call.execute().body();
@@ -78,6 +79,7 @@ public class MoviesServiceTest extends BaseTestCase {
 
         Call<Movie> call = getUnauthenticatedInstance().moviesService().summary(
                 testMovie.id,
+                "en",
                 new AppendToResponse(
                         AppendToResponseItem.RELEASE_DATES,
                         AppendToResponseItem.CREDITS,

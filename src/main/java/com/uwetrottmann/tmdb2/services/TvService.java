@@ -34,16 +34,6 @@ public interface TvService {
      * Get the primary information about a TV series by id.
      *
      * @param tvShowId A Tv Show TMDb id.
-     */
-    @GET("tv/{tv_id}")
-    Call<TvShow> tv(
-            @Path("tv_id") int tvShowId
-    );
-
-    /**
-     * Get the primary information about a TV series by id.
-     *
-     * @param tvShowId A Tv Show TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/{tv_id}")
@@ -78,32 +68,6 @@ public interface TvService {
     Call<TvShow> tv(
             @Path("tv_id") int tvShowId,
             @Query("language") String language,
-            @Query("append_to_response") AppendToResponse appendToResponse,
-            @QueryMap Map<String, String> options
-    );
-
-    /**
-     * Get the primary information about a TV series by id.
-     *
-     * @param tvShowId         A Tv Show TMDb id.
-     * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
-     */
-    @GET("tv/{tv_id}")
-    Call<TvShow> tv(
-            @Path("tv_id") int tvShowId,
-            @Query("append_to_response") AppendToResponse appendToResponse
-    );
-
-    /**
-     * Get the primary information about a TV series by id.
-     *
-     * @param tvShowId         A Tv Show TMDb id.
-     * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
-     * @param options          <em>Optional.</em> parameters for the appended extra results.
-     */
-    @GET("tv/{tv_id}")
-    Call<TvShow> tv(
-            @Path("tv_id") int tvShowId,
             @Query("append_to_response") AppendToResponse appendToResponse,
             @QueryMap Map<String, String> options
     );

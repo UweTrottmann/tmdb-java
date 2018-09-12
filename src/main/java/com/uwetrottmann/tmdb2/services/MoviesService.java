@@ -47,36 +47,14 @@ public interface MoviesService {
     /**
      * Get the basic movie information for a specific movie id.
      *
-     * @param movieId A Movie TMDb id.
-     */
-    @GET("movie/{movie_id}")
-    Call<Movie> summary(
-            @Path("movie_id") int movieId
-    );
-
-    /**
-     * Get the basic movie information for a specific movie id.
-     *
      * @param movieId          A Movie TMDb id.
      * @param language         <em>Optional.</em> ISO 639-1 code.
-     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Values:</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
+     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Value(s):</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
      */
     @GET("movie/{movie_id}")
     Call<Movie> summary(
             @Path("movie_id") int movieId,
             @Query("language") String language,
-            @Query("append_to_response") AppendToResponse appendToResponse
-    );
-
-    /**
-     * Get the basic movie information for a specific movie id.
-     *
-     * @param movieId          A Movie TMDb id.
-     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Values:</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
-     */
-    @GET("movie/{movie_id}")
-    Call<Movie> summary(
-            @Path("movie_id") int movieId,
             @Query("append_to_response") AppendToResponse appendToResponse
     );
 
@@ -92,20 +70,6 @@ public interface MoviesService {
     Call<Movie> summary(
             @Path("movie_id") int movieId,
             @Query("language") String language,
-            @Query("append_to_response") AppendToResponse appendToResponse,
-            @QueryMap Map<String, String> options
-    );
-
-    /**
-     * Get the basic movie information for a specific movie id.
-     *
-     * @param movieId          A Movie TMDb id.
-     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Value(s):</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
-     * @param options          <em>Optional.</em> parameters for the appended extra results.
-     */
-    @GET("movie/{movie_id}")
-    Call<Movie> summary(
-            @Path("movie_id") int movieId,
             @Query("append_to_response") AppendToResponse appendToResponse,
             @QueryMap Map<String, String> options
     );
