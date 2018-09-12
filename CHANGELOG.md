@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+## 1.10.0
+_2018-09-12_
+
+* Clean up some methods, notably those without language param.
+* Add language parameter to People summary methods, thanks @JeremyQuagmire!
+
 ## 1.9.0
 _2018-08-08_
 
