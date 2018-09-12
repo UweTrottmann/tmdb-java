@@ -46,7 +46,8 @@ public class TvServiceTest extends BaseTestCase {
     @Test
     public void test_tvShow() throws IOException {
         Call<TvShow> call = getUnauthenticatedInstance().tvService().tv(
-                testTvShow.id
+                testTvShow.id,
+                "en"
         );
         TvShow show = call.execute().body();
 
@@ -61,6 +62,7 @@ public class TvServiceTest extends BaseTestCase {
 
         Call<TvShow> call = getUnauthenticatedInstance().tvService().tv(
                 testTvShow.id,
+                "en",
                 new AppendToResponse(
                         AppendToResponseItem.CREDITS,
                         AppendToResponseItem.VIDEOS,

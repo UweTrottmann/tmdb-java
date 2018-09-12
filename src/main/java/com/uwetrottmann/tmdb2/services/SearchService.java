@@ -108,6 +108,7 @@ public interface SearchService {
     Call<PersonResultsPage> person(
             @Query("query") String query,
             @Query("page") Integer page,
+            @Query("language") String language,
             @Query("include_adult") Boolean includeAdult,
             @Query("search_type") String searchType
     );

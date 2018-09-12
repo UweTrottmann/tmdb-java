@@ -30,20 +30,6 @@ public interface TvEpisodesService {
      * @param tvShowId            A Tv Show TMDb id.
      * @param tvShowSeasonNumber  TvSeason Number.
      * @param tvShowEpisodeNumber TvEpisode Number.
-     */
-    @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}")
-    Call<TvEpisode> episode(
-            @Path("tv_id") int tvShowId,
-            @Path("season_number") int tvShowSeasonNumber,
-            @Path("episode_number") int tvShowEpisodeNumber
-    );
-
-    /**
-     * Get the primary information about a TV episode by combination of a season and episode number.
-     *
-     * @param tvShowId            A Tv Show TMDb id.
-     * @param tvShowSeasonNumber  TvSeason Number.
-     * @param tvShowEpisodeNumber TvEpisode Number.
      * @param language            <em>Optional.</em> ISO 639-1 code.
      */
     @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}")
@@ -52,22 +38,6 @@ public interface TvEpisodesService {
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber,
             @Query("language") String language
-    );
-
-    /**
-     * Get the primary information about a TV episode by combination of a season and episode number.
-     *
-     * @param tvShowId            A Tv Show TMDb id.
-     * @param tvShowSeasonNumber  TvSeason Number.
-     * @param tvShowEpisodeNumber TvEpisode Number.
-     * @param appendToResponse    <em>Optional.</em> extra requests to append to the result.
-     */
-    @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}")
-    Call<TvEpisode> episode(
-            @Path("tv_id") int tvShowId,
-            @Path("season_number") int tvShowSeasonNumber,
-            @Path("episode_number") int tvShowEpisodeNumber,
-            @Query("append_to_response") AppendToResponse appendToResponse
     );
 
     /**
@@ -86,24 +56,6 @@ public interface TvEpisodesService {
             @Path("episode_number") int tvShowEpisodeNumber,
             @Query("language") String language,
             @Query("append_to_response") AppendToResponse appendToResponse
-    );
-
-    /**
-     * Get the primary information about a TV episode by combination of a season and episode number.
-     *
-     * @param tvShowId            A Tv Show TMDb id.
-     * @param tvShowSeasonNumber  TvSeason Number.
-     * @param tvShowEpisodeNumber TvEpisode Number.
-     * @param appendToResponse    <em>Optional.</em> extra requests to append to the result.
-     * @param options             <em>Optional.</em> parameters for the appended extra results.
-     */
-    @GET("tv/{tv_id}/season/{season_number}/episode/{episode_number}")
-    Call<TvEpisode> episode(
-            @Path("tv_id") int tvShowId,
-            @Path("season_number") int tvShowSeasonNumber,
-            @Path("episode_number") int tvShowEpisodeNumber,
-            @Query("append_to_response") AppendToResponse appendToResponse,
-            @QueryMap Map<String, String> options
     );
 
     /**

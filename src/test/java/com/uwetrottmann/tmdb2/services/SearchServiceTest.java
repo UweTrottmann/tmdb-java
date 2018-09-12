@@ -86,6 +86,7 @@ public class SearchServiceTest extends BaseTestCase {
                 testPerson.name,
                 null,
                 null,
+                null,
                 null
         );
         PersonResultsPage personResults = call.execute().body();

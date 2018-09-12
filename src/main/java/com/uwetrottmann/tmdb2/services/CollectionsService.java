@@ -12,15 +12,6 @@ import retrofit2.http.QueryMap;
 import java.util.Map;
 
 public interface CollectionsService {
-    /**
-     * Get the basic collection information for a specific collection id.
-     *
-     * @param collectionId TMDb id.
-     */
-    @GET("collection/{collection_id}")
-    Call<Collection> summary(
-            @Path("collection_id") int collectionId
-    );
 
     /**
      * Get the basic collection information for a specific collection id.
@@ -46,32 +37,6 @@ public interface CollectionsService {
             @Path("collection_id") int collectionId,
             @Query("language") String language,
             @Query("append_to_response") AppendToResponse appendToResponse
-    );
-
-    /**
-     * Get the basic collection information for a specific collection id.
-     *
-     * @param collectionId     TMDb id.
-     * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
-     */
-    @GET("collection/{collection_id}")
-    Call<Collection> summary(
-            @Path("collection_id") int collectionId,
-            @Query("append_to_response") AppendToResponse appendToResponse
-    );
-
-    /**
-     * Get the basic collection information for a specific collection id.
-     *
-     * @param collectionId     TMDb id.
-     * @param appendToResponse <em>Optional.</em> extra requests to append to the result.
-     * @param options          <em>Optional.</em> parameters for the appended extra results.
-     */
-    @GET("collection/{collection_id}")
-    Call<Collection> summary(
-            @Path("collection_id") int collectionId,
-            @Query("append_to_response") AppendToResponse appendToResponse,
-            @QueryMap Map<String, String> options
     );
 
     /**
