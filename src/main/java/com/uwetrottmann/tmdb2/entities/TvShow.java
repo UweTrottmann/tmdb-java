@@ -32,4 +32,7 @@ public class TvShow extends BaseTvShow {
     public ContentRatings content_ratings;
     public TvShowResultsPage similar;
     public Videos videos;
+    
+    public BaseTvEpisode last_episode_to_air;
+    public BaseTvEpisode next_episode_to_air;
 }
