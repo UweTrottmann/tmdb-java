@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+## 1.10.1
+_2018-09-21_
+
+* Do not leak the response body if TMDB asks to retry the request.
+* Add `last_episode_to_air` and `next_episode_to_air` to `TvShow`. Thanks @serafo27!
+
 ## 1.10.0
 _2018-09-12_
 
