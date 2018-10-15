@@ -148,8 +148,12 @@ public class TmdbHelper {
                                                 JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
                 PersonCastCredit personCastCredit = new PersonCastCredit();
                 personCastCredit.media = jsonDeserializationContext.deserialize(jsonElement, Media.class);
-                personCastCredit.character = jsonElement.getAsJsonObject().get("character").getAsString();
-                personCastCredit.credit_id = jsonElement.getAsJsonObject().get("credit_id").getAsString();
+                if(jsonElement.getAsJsonObject().get("character") != null) {
+                    personCastCredit.character = jsonElement.getAsJsonObject().get("character").getAsString();
+                }
+                if(jsonElement.getAsJsonObject().get("credit_id") != null) {
+                    personCastCredit.credit_id = jsonElement.getAsJsonObject().get("credit_id").getAsString();
+                }
                 switch (personCastCredit.media.media_type) {
                     case TV:
                         personCastCredit.episode_count = jsonElement.getAsJsonObject().get("episode_count").getAsInt();
