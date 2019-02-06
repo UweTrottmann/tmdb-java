@@ -46,6 +46,9 @@ try {
 
 See test cases in `src/test/` for more examples and the [retrofit website](https://square.github.io/retrofit/) for configuration options.
 
+### Android
+This library ships Java 8 bytecode. This requires Android Gradle Plugin 3.2.x or newer.
+
 ## Use Proguard!
 You likely will not use every method in this library, so it is probably useful to strip unused ones with Proguard.
 Just apply the [Proguard rules for retrofit](https://square.github.io/retrofit/#download).

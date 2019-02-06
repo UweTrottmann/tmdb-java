@@ -9,12 +9,8 @@ import java.util.Date;
 
 public class TmdbDate {
 
-    private static final ThreadLocal<DateFormat> TMDB_DATE_FORMAT = new ThreadLocal<DateFormat>() {
-        @Override
-        public DateFormat initialValue() {
-            return new SimpleDateFormat(TmdbHelper.TMDB_DATE_PATTERN);
-        }
-    };
+    private static final ThreadLocal<DateFormat> TMDB_DATE_FORMAT =
+            ThreadLocal.withInitial(() -> new SimpleDateFormat(TmdbHelper.TMDB_DATE_PATTERN));
 
     private final Date date;
 
