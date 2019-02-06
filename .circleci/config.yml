@@ -18,14 +18,14 @@ jobs:
     - restore_cache: # restore the saved cache after the first run or if `pom.xml` has changed
         key: tmdb-java-{{ checksum "pom.xml" }}
 
-    - run: mvn dependency:go-offline # gets the project dependencies
+    - run: mvn --batch-mode -show-version --errors dependency:go-offline # gets the project dependencies
 
     - save_cache: # saves the project dependencies
         paths:
         - ~/.m2
         key: tmdb-java-{{ checksum "pom.xml" }}
 
-    - run: mvn package # run the actual tests
+    - run: mvn --batch-mode -show-version --errors package # run the actual tests
 
     - store_test_results: # uploads the test metadata so that it can show up in the CircleCI dashboard.
         path: target/surefire-reports
