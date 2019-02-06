@@ -1,11 +1,8 @@
 package com.uwetrottmann.tmdb2;
 
 import com.google.common.util.concurrent.RateLimiter;
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-
-import java.io.IOException;
 
 public abstract class BaseTestCase {
 
@@ -14,7 +11,7 @@ public abstract class BaseTestCase {
     // Do NOT use this API key in your application, it is only for testing tmdb-java!
     private static final String TEST_API_KEY = "25da90e9f8f0b3892d8bdeb6c3d6267d";
     // limit requests for tests to avoid hitting TMDb rate limit (40 requests/10 seconds)
-    private static final RateLimiter rateLimiter = RateLimiter.create(5);
+    @SuppressWarnings("UnstableApiUsage") private static final RateLimiter rateLimiter = RateLimiter.create(5);
 
     private static final Tmdb unauthenticatedInstance = new BaseTestCase.TestTmdb(TEST_API_KEY);
     private static final Tmdb authenticatedInstance  = new BaseTestCase.TestTmdb(TEST_API_KEY);
@@ -36,22 +33,13 @@ public abstract class BaseTestCase {
         protected void setOkHttpClientDefaults(OkHttpClient.Builder builder) {
             final Tmdb instance = this;
             builder.authenticator(new TmdbAuthenticator(instance));
-            builder.addInterceptor(new Interceptor() {
-                @Override
-                public okhttp3.Response intercept(Chain chain) throws IOException {
-                    rateLimiter.acquire();
-                    return TmdbInterceptor.handleIntercept(chain, instance);
-                }
+            builder.addInterceptor(chain -> {
+                rateLimiter.acquire();
+                return TmdbInterceptor.handleIntercept(chain, instance);
             });
             if (PRINT_REQUESTS) {
-                // add logging
-                HttpLoggingInterceptor logging = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
-                    @Override
-                    public void log(String s) {
-                        // standard output is easier to read
-                        System.out.println(s);
-                    }
-                });
+                // add logging, standard output is easier to read
+                HttpLoggingInterceptor logging = new HttpLoggingInterceptor(System.out::println);
                 logging.setLevel(HttpLoggingInterceptor.Level.BODY);
                 builder.addInterceptor(logging);
             }
