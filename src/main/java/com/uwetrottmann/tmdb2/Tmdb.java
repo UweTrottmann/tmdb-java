@@ -75,15 +75,13 @@ public class Tmdb {
 
     private String apiKey;
 
-    private Boolean hasGuestSession = false;
-    private Boolean hasAccountSession = false;
+    private boolean useGuestSession = false;
+    private boolean useAccountSession = false;
 
-    Boolean isLoggedIn = false;
-
-    String username;
-    String password;
-    String sessionId;
-    String guestSessionId;
+    @Nullable private String username;
+    @Nullable private String password;
+    @Nullable private String sessionId;
+    @Nullable private String guestSessionId;
 
     /**
      * Create a new manager instance.
@@ -94,38 +92,63 @@ public class Tmdb {
         this.apiKey = apiKey;
     }
 
-    public void accountSession(String username, String password) throws TmdbInvalidParametersException {
-        if (username == null || password == null) {
-            throw new TmdbInvalidParametersException(401, "Username and Password may not be null");
-        }
-
+    public void accountSession(String username, String password) {
         this.username = username;
         this.password = password;
-        hasAccountSession = true;
+        useAccountSession = true;
     }
 
     public void guestSession() {
-        hasGuestSession = true;
+        useGuestSession = true;
     }
 
+    public void clearSessions() {
+        this.username = null;
+        this.password = null;
+        useAccountSession = false;
+        useGuestSession = false;
+        setSessionId(null);
+        setGuestSessionId(null);
+    }
+
+    public boolean useAccountSession() {
+        return useAccountSession;
+    }
+
+    public boolean useGuestSession() {
+        return useGuestSession;
+    }
+
+    @Nullable
+    public String getUsername() {
+        return username;
+    }
+
+    @Nullable
+    public String getPassword() {
+        return password;
+    }
+
+    @Nullable
     public String getSessionId() {
         return sessionId;
     }
 
+    public void setSessionId(@Nullable String sessionId) {
+        this.sessionId = sessionId;
+    }
+
+    @Nullable
     public String getGuestSessionId() {
         return guestSessionId;
     }
 
-    public Boolean isLoggedIn() {
-        return isLoggedIn;
+    public void setGuestSessionId(@Nullable String guestSessionId) {
+        this.guestSessionId = guestSessionId;
     }
 
-    public Boolean hasGuestSession() {
-        return hasGuestSession;
-    }
-
-    public Boolean hasAccountSession() {
-        return hasAccountSession;
+    public boolean isLoggedIn() {
+        return getSessionId() != null || getGuestSessionId() != null;
     }
 
     public void apiKey(String apiKey) {

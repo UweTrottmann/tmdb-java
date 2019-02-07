@@ -1,6 +1,5 @@
 package com.uwetrottmann.tmdb2;
 
-import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
 import java.io.IOException;
 import java.util.List;
 import javax.annotation.Nonnull;
@@ -44,25 +43,15 @@ public class TmdbInterceptor implements Interceptor {
         HttpUrl.Builder urlBuilder = request.url().newBuilder();
         urlBuilder.setEncodedQueryParameter(Tmdb.PARAM_API_KEY, tmdb.apiKey());
 
-        // check for paths requiring auth
-        AuthenticationType type = null;
-        List<String> pathSegments = request.url().pathSegments();
-        if ((pathSegments.size() >= 2 && pathSegments.get(1).equals("account"))
-                || pathSegments.get(pathSegments.size() - 1).equals("account_states")) {
-            type = AuthenticationType.ACCOUNT;
-        } else if (pathSegments.get(pathSegments.size() - 1).equals("rating")
-                || !request.method().equals("GET")) {
-            type = determineAuthenticationType(urlBuilder, tmdb);
-        }
-
-        addSessionToQuery(urlBuilder, type, tmdb);
-        // TODO ut: why is the authentication query param removed?
-        urlBuilder.removeAllEncodedQueryParameters("authentication");
-        // TODO ut: why can't the authenticator determine the required strategy?
-        // adds fragment with the desired authentication strategy (like '#account') to the URL,
-        // so the authenticator will know how to proceed.
-        if (type != null) {
-            urlBuilder.fragment(type.toString());
+        if (tmdb.isLoggedIn()) {
+            // add auth only for paths that require it
+            List<String> pathSegments = request.url().pathSegments();
+            if ((pathSegments.size() >= 2 && pathSegments.get(1).equals("account"))
+                    || pathSegments.get(pathSegments.size() - 1).equals("account_states")
+                    || pathSegments.get(pathSegments.size() - 1).equals("rating")
+                    || !request.method().equals("GET")) {
+                addSessionToken(tmdb, urlBuilder);
+            }
         }
 
         Request.Builder builder = request.newBuilder();
@@ -91,38 +80,13 @@ public class TmdbInterceptor implements Interceptor {
         return response;
     }
 
-    private static void addSessionToQuery(HttpUrl.Builder urlBuilder, AuthenticationType type, Tmdb tmdb) {
-        if (type == AuthenticationType.GUEST) {
-            urlBuilder.addEncodedQueryParameter(Tmdb.PARAM_GUEST_SESSION_ID, tmdb.getGuestSessionId());
-        } else if (type == AuthenticationType.ACCOUNT) {
+    private static void addSessionToken(Tmdb tmdb, HttpUrl.Builder urlBuilder) {
+        // prefer account session if both are available
+        if (tmdb.getSessionId() != null) {
             urlBuilder.addEncodedQueryParameter(Tmdb.PARAM_SESSION_ID, tmdb.getSessionId());
+        } else if (tmdb.getGuestSessionId() != null) {
+            urlBuilder.addEncodedQueryParameter(Tmdb.PARAM_GUEST_SESSION_ID, tmdb.getGuestSessionId());
         }
-    }
-
-    static AuthenticationType determineAuthenticationType(HttpUrl.Builder builder, Tmdb tmdb) {
-        HttpUrl url = builder.build();
-        String authParam = url.queryParameter("authentication");
-        AuthenticationType type = AuthenticationType.get(url.fragment());
-
-        if (type == null) {
-            if (authParam != null) {
-                if (authParam.equals("account")) {
-                    type = AuthenticationType.ACCOUNT;
-                } else {
-                    type = AuthenticationType.GUEST;
-                }
-            } else {
-                if (tmdb.hasAccountSession()) {
-                    type = AuthenticationType.ACCOUNT;
-                } else if (tmdb.hasGuestSession()) {
-                    type = AuthenticationType.GUEST;
-                } else {
-                    type = null;
-                }
-            }
-        }
-
-        return type;
     }
 
 }

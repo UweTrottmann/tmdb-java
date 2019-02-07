@@ -16,7 +16,7 @@ import com.uwetrottmann.tmdb2.entities.TvExternalIds;
 import com.uwetrottmann.tmdb2.entities.TvShow;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.entities.Videos;
-import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
+import java.util.Map;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -25,8 +25,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
-
-import java.util.Map;
 
 public interface TvService {
 
@@ -292,22 +290,6 @@ public interface TvService {
      *
      * <b>Requires an active Session.</b>
      *
-     * @param tvShowId           TMDb id.
-     * @param authenticationType Authentication Type for this operation. Available Choices: Account, Guest.
-     * @param body               <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
-     */
-    @POST("tv/{tv_id}/rating")
-    Call<Status> addRating(
-            @Path("tv_id") Integer tvShowId,
-            @Query("authentication") AuthenticationType authenticationType,
-            @Body RatingObject body
-    );
-
-    /**
-     * Rate a TV show.
-     *
-     * <b>Requires an active Session.</b>
-     *
      * @param tvShowId TMDb id.
      * @param body     <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
      */
@@ -315,20 +297,6 @@ public interface TvService {
     Call<Status> addRating(
             @Path("tv_id") Integer tvShowId,
             @Body RatingObject body
-    );
-
-    /**
-     * Remove your rating for a TV show.
-     *
-     * <b>Requires an active Session.</b>
-     *
-     * @param tvShowId           TMDb id.
-     * @param authenticationType Authentication Type for this operation. Available Choices: Account, Guest.
-     */
-    @DELETE("tv/{tv_id}/rating")
-    Call<Status> deleteRating(
-            @Path("tv_id") Integer tvShowId,
-            @Query("authentication") AuthenticationType authenticationType
     );
 
     /**
