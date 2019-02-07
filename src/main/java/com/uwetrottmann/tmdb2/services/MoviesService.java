@@ -19,7 +19,6 @@ import com.uwetrottmann.tmdb2.entities.Status;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.Videos;
-import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
 import java.util.Map;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -319,22 +318,6 @@ public interface MoviesService {
      *
      * <b>Requires an active Session.</b>
      *
-     * @param movieId            A Movie TMDb id.
-     * @param authenticationType Authentication Type for this operation. Available Choices: Account, Guest.
-     * @param body               <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
-     */
-    @POST("movie/{movie_id}/rating")
-    Call<Status> addRating(
-            @Path("movie_id") Integer movieId,
-            @Query("authentication") AuthenticationType authenticationType,
-            @Body RatingObject body
-    );
-
-    /**
-     * Sets the Rating for the movie with the specified id.
-     *
-     * <b>Requires an active Session.</b>
-     *
      * @param movieId A Movie TMDb id.
      * @param body    <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
      */
@@ -342,20 +325,6 @@ public interface MoviesService {
     Call<Status> addRating(
             @Path("movie_id") Integer movieId,
             @Body RatingObject body
-    );
-
-    /**
-     * Deletes the Rating for the movie with the specified id.
-     *
-     * <b>Requires an active Session.</b>
-     *
-     * @param movieId            A Movie TMDb id.
-     * @param authenticationType Authentication Type for this operation. Available Choices: Account, Guest.
-     */
-    @DELETE("movie/{movie_id}/rating")
-    Call<Status> deleteRating(
-            @Path("movie_id") Integer movieId,
-            @Query("authentication") AuthenticationType authenticationType
     );
 
     /**

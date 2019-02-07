@@ -11,7 +11,6 @@ import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.TvEpisode;
 import com.uwetrottmann.tmdb2.entities.TvEpisodeExternalIds;
 import com.uwetrottmann.tmdb2.entities.Videos;
-import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
 import java.util.Map;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -189,44 +188,6 @@ public interface TvEpisodesService {
             @Path("season_number") int tvShowSeasonNumber,
             @Path("episode_number") int tvShowEpisodeNumber,
             @Body RatingObject body
-    );
-
-    /**
-     * Rate a TV show.
-     *
-     * <b>Requires an active Session.</b>
-     *
-     * @param tvShowId            TMDb id.
-     * @param tvShowSeasonNumber  TvSeason Number.
-     * @param tvShowEpisodeNumber TvEpisode Number.
-     * @param authenticationType  Authentication Type for this operation. Available Choices: Account, Guest.
-     * @param body                <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
-     */
-    @POST("tv/{tv_id}/season/{season_number}/episode/{episode_number}/rating")
-    Call<Status> addRating(
-            @Path("tv_id") int tvShowId,
-            @Path("season_number") int tvShowSeasonNumber,
-            @Path("episode_number") int tvShowEpisodeNumber,
-            @Query("authentication") AuthenticationType authenticationType,
-            @Body RatingObject body
-    );
-
-    /**
-     * Remove your rating for a TV show.
-     *
-     * <b>Requires an active Session.</b>
-     *
-     * @param tvShowId            TMDb id.
-     * @param tvShowSeasonNumber  TvSeason Number.
-     * @param tvShowEpisodeNumber TvEpisode Number.
-     * @param authenticationType  Authentication Type for this operation. Available Choices: Account, Guest.
-     */
-    @DELETE("tv/{tv_id}/season/{season_number}/episode/{episode_number}/rating")
-    Call<Status> deleteRating(
-            @Path("tv_id") int tvShowId,
-            @Path("season_number") int tvShowSeasonNumber,
-            @Path("episode_number") int tvShowEpisodeNumber,
-            @Query("authentication") AuthenticationType authenticationType
     );
 
     /**

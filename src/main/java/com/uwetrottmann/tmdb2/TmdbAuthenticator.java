@@ -3,7 +3,6 @@ package com.uwetrottmann.tmdb2;
 import com.uwetrottmann.tmdb2.entities.GuestSession;
 import com.uwetrottmann.tmdb2.entities.RequestToken;
 import com.uwetrottmann.tmdb2.entities.Session;
-import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
 import com.uwetrottmann.tmdb2.exceptions.TmdbAuthenticationFailedException;
 import com.uwetrottmann.tmdb2.services.AuthenticationService;
 import java.io.IOException;
@@ -40,17 +39,22 @@ public class TmdbAuthenticator implements Authenticator {
 
         HttpUrl.Builder urlBuilder = response.request().url().newBuilder();
 
-        AuthenticationType type = TmdbInterceptor.determineAuthenticationType(urlBuilder, tmdb);
-
-        if (tmdb.hasAccountSession() && type == AuthenticationType.ACCOUNT) {
-            if (tmdb.username == null || tmdb.password == null) {
+        // prefer account session if both are available
+        if (tmdb.useAccountSession()) {
+            if (tmdb.getUsername() == null || tmdb.getPassword() == null) {
                 throw new TmdbAuthenticationFailedException(26, "You must provide a username and password.");
             }
-            acquireAccountSession(tmdb);
-            urlBuilder.setEncodedQueryParameter(Tmdb.PARAM_SESSION_ID, tmdb.sessionId);
-        } else if (tmdb.hasGuestSession() && type == AuthenticationType.GUEST) {
-            acquireGuestSession(tmdb);
-            urlBuilder.setEncodedQueryParameter(Tmdb.PARAM_GUEST_SESSION_ID, tmdb.guestSessionId);
+            String session = acquireAccountSession(tmdb);
+            if (session == null) {
+                return null; // failed to retrieve session, give up
+            }
+            urlBuilder.setEncodedQueryParameter(Tmdb.PARAM_SESSION_ID, session);
+        } else if (tmdb.useGuestSession()) {
+            String session = acquireGuestSession(tmdb);
+            if (session == null) {
+                return null; // failed to retrieve session, give up
+            }
+            urlBuilder.setEncodedQueryParameter(Tmdb.PARAM_GUEST_SESSION_ID, tmdb.getGuestSessionId());
         } else {
             throw new TmdbAuthenticationFailedException(30,
                     "Authentication failed: You do not have permissions to access the service.");
@@ -59,28 +63,39 @@ public class TmdbAuthenticator implements Authenticator {
         return response.request().newBuilder().url(urlBuilder.build()).build();
     }
 
-
-    public static void acquireAccountSession(Tmdb tmdb) throws IOException {
+    @Nullable
+    public static String acquireAccountSession(Tmdb tmdb) throws IOException {
         AuthenticationService authService = tmdb.getRetrofit().create(AuthenticationService.class);
 
         RequestToken token = authService.requestToken().execute().body();
+        if (token == null) {
+            return null;
+        }
 
-        token = authService.validateToken(tmdb.username, tmdb.password, token.request_token).execute().body();
+        token = authService.validateToken(tmdb.getUsername(), tmdb.getPassword(), token.request_token).execute().body();
+        if (token == null) {
+            return null;
+        }
 
         Session session = authService.createSession(token.request_token).execute().body();
+        if (session == null) {
+            return null;
+        }
 
-        tmdb.sessionId = session.session_id;
-        tmdb.isLoggedIn = true;
-
+        tmdb.setSessionId(session.session_id);
+        return session.session_id;
     }
 
-    public static void acquireGuestSession(Tmdb tmdb) throws IOException {
+    @Nullable
+    public static String acquireGuestSession(Tmdb tmdb) throws IOException {
         AuthenticationService authService = tmdb.getRetrofit().create(AuthenticationService.class);
         GuestSession session = authService.createGuestSession().execute().body();
+        if (session == null) {
+            return null;
+        }
 
-        tmdb.guestSessionId = session.guest_session_id;
-        tmdb.isLoggedIn = true;
-
+        tmdb.setGuestSessionId(session.guest_session_id);
+        return session.guest_session_id;
     }
 
     private static int responseCount(Response response) {

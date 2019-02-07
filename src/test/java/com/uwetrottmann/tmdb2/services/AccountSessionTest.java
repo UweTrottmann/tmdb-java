@@ -1,5 +1,21 @@
 package com.uwetrottmann.tmdb2.services;
 
+import static com.uwetrottmann.tmdb2.TestData.testListMovies;
+import static com.uwetrottmann.tmdb2.TestData.testMovie;
+import static com.uwetrottmann.tmdb2.TestData.testTvEpisode;
+import static com.uwetrottmann.tmdb2.TestData.testTvSeason;
+import static com.uwetrottmann.tmdb2.TestData.testTvShow;
+import static com.uwetrottmann.tmdb2.assertions.AccountAssertions.assertAccountStates;
+import static com.uwetrottmann.tmdb2.assertions.AccountAssertions.assertBaseAccountStates;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseRatingObject;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertStatus;
+import static com.uwetrottmann.tmdb2.assertions.ListAssertions.assertListResultsPage;
+import static com.uwetrottmann.tmdb2.assertions.MovieAssertions.assertMovieResultsPage;
+import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvEpisodeResultsPage;
+import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShowResultsPage;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assume.assumeTrue;
+
 import com.uwetrottmann.tmdb2.BaseTestCase;
 import com.uwetrottmann.tmdb2.Tmdb;
 import com.uwetrottmann.tmdb2.entities.Account;
@@ -20,33 +36,15 @@ import com.uwetrottmann.tmdb2.entities.Status;
 import com.uwetrottmann.tmdb2.entities.TvEpisodeResultsPage;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.entities.WatchlistMedia;
-import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
 import com.uwetrottmann.tmdb2.enumerations.MediaType;
 import com.uwetrottmann.tmdb2.exceptions.TmdbServiceErrorException;
+import java.io.IOException;
+import javax.annotation.Nullable;
 import org.assertj.core.util.Strings;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import retrofit2.Call;
-
-import javax.annotation.Nullable;
-import java.io.IOException;
-
-import static com.uwetrottmann.tmdb2.TestData.testListMovies;
-import static com.uwetrottmann.tmdb2.TestData.testMovie;
-import static com.uwetrottmann.tmdb2.TestData.testTvEpisode;
-import static com.uwetrottmann.tmdb2.TestData.testTvSeason;
-import static com.uwetrottmann.tmdb2.TestData.testTvShow;
-import static com.uwetrottmann.tmdb2.assertions.AccountAssertions.assertAccountStates;
-import static com.uwetrottmann.tmdb2.assertions.AccountAssertions.assertBaseAccountStates;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseRatingObject;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertStatus;
-import static com.uwetrottmann.tmdb2.assertions.ListAssertions.assertListResultsPage;
-import static com.uwetrottmann.tmdb2.assertions.MovieAssertions.assertMovieResultsPage;
-import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvEpisodeResultsPage;
-import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShowResultsPage;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.Assume.assumeTrue;
 
 public class AccountSessionTest extends BaseTestCase {
 
@@ -110,13 +108,12 @@ public class AccountSessionTest extends BaseTestCase {
         RatingObject ratingObject = new RatingObject();
         ratingObject.value = 7.5;
 
-        tmdb.moviesService().addRating(testMovie.id, AuthenticationType.ACCOUNT,
-                ratingObject).execute();
+        tmdb.moviesService().addRating(testMovie.id, ratingObject).execute();
 
-        tmdb.tvService().addRating(testTvShow.id, AuthenticationType.ACCOUNT, ratingObject).execute();
+        tmdb.tvService().addRating(testTvShow.id, ratingObject).execute();
 
         tmdb.tvEpisodesService().addRating(testTvShow.id, testTvSeason.season_number,
-                testTvEpisode.episode_number, AuthenticationType.ACCOUNT, ratingObject).execute();
+                testTvEpisode.episode_number, ratingObject).execute();
 
         // leave some time for TMDb to process changes
         Thread.sleep(5000);
@@ -157,12 +154,12 @@ public class AccountSessionTest extends BaseTestCase {
         watchlistMedia.media_id = 1399;
         tmdb.accountService().watchlist(account.id, watchlistMedia).execute();
 
-        tmdb.moviesService().deleteRating(testMovie.id, AuthenticationType.ACCOUNT).execute();
+        tmdb.moviesService().deleteRating(testMovie.id).execute();
 
-        tmdb.tvService().deleteRating(testTvShow.id, AuthenticationType.ACCOUNT).execute();
+        tmdb.tvService().deleteRating(testTvShow.id).execute();
 
         tmdb.tvEpisodesService().deleteRating(testTvShow.id, testTvSeason.season_number,
-                testTvEpisode.episode_number, AuthenticationType.ACCOUNT).execute();
+                testTvEpisode.episode_number).execute();
     }
 
     @Test
@@ -407,12 +404,11 @@ public class AccountSessionTest extends BaseTestCase {
         RatingObject obj = new RatingObject();
         obj.value = 10D;
 
-        Call<Status> call = getAuthenticatedInstance().moviesService().addRating(testMovie.id,
-                AuthenticationType.ACCOUNT, obj);
+        Call<Status> call = getAuthenticatedInstance().moviesService().addRating(testMovie.id, obj);
         Status status = call.execute().body();
         assertThat(status.status_code).isIn(1, 12);
 
-        call = getAuthenticatedInstance().moviesService().deleteRating(testMovie.id, AuthenticationType.ACCOUNT);
+        call = getAuthenticatedInstance().moviesService().deleteRating(testMovie.id);
         status = call.execute().body();
         assertThat(status.status_code).isEqualTo(13);
     }
@@ -425,12 +421,12 @@ public class AccountSessionTest extends BaseTestCase {
         obj.value = 10D;
 
         Call<Status> call = getAuthenticatedInstance().tvEpisodesService().addRating(testTvShow.id,
-                testTvSeason.season_number, testTvEpisode.episode_number, AuthenticationType.ACCOUNT, obj);
+                testTvSeason.season_number, testTvEpisode.episode_number, obj);
         Status status = call.execute().body();
         assertThat(status.status_code).isIn(1, 12);
 
         call = getAuthenticatedInstance().tvEpisodesService().deleteRating(testTvShow.id, testTvSeason.season_number,
-                testTvEpisode.episode_number, AuthenticationType.ACCOUNT);
+                testTvEpisode.episode_number);
         status = call.execute().body();
         assertThat(status.status_code).isEqualTo(13);
     }
@@ -442,12 +438,11 @@ public class AccountSessionTest extends BaseTestCase {
         RatingObject obj = new RatingObject();
         obj.value = 10D;
 
-        Call<Status> call = getAuthenticatedInstance().tvService().addRating(testTvShow.id, AuthenticationType.ACCOUNT,
-                obj);
+        Call<Status> call = getAuthenticatedInstance().tvService().addRating(testTvShow.id, obj);
         Status status = call.execute().body();
         assertThat(status.status_code).isIn(1, 12);
 
-        call = getAuthenticatedInstance().tvService().deleteRating(testTvShow.id, AuthenticationType.ACCOUNT);
+        call = getAuthenticatedInstance().tvService().deleteRating(testTvShow.id);
         status = call.execute().body();
         assertThat(status.status_code).isEqualTo(13);
 
