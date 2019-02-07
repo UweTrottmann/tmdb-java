@@ -30,6 +30,7 @@ import com.uwetrottmann.tmdb2.services.TvEpisodesService;
 import com.uwetrottmann.tmdb2.services.TvSeasonsService;
 import com.uwetrottmann.tmdb2.services.TvService;
 import java.io.IOException;
+import javax.annotation.Nullable;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
@@ -47,6 +48,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * <p>
  * <p>Only one {@link Retrofit} instance is created upon the first and re-used for any consequent service method call.
  */
+@SuppressWarnings("unused")
 public class Tmdb {
 
     /**
@@ -68,8 +70,8 @@ public class Tmdb {
      */
     public static final String PATH_AUTHENTICATION = "authentication";
 
-    private OkHttpClient okHttpClient;
-    private Retrofit retrofit;
+    @Nullable private OkHttpClient okHttpClient;
+    @Nullable private Retrofit retrofit;
 
     private String apiKey;
 
@@ -198,9 +200,12 @@ public class Tmdb {
             return;
         }
 
-        Status status = (Status) retrofit
+        Status status = (Status) getRetrofit()
                 .responseBodyConverter(Status.class, Status.class.getAnnotations())
                 .convert(responseBody);
+        if (status == null) {
+            return;
+        }
 
         Integer code = status.status_code;
         String message = status.status_message;

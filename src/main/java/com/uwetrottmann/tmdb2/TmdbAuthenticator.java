@@ -6,13 +6,13 @@ import com.uwetrottmann.tmdb2.entities.Session;
 import com.uwetrottmann.tmdb2.enumerations.AuthenticationType;
 import com.uwetrottmann.tmdb2.exceptions.TmdbAuthenticationFailedException;
 import com.uwetrottmann.tmdb2.services.AuthenticationService;
+import java.io.IOException;
+import javax.annotation.Nullable;
 import okhttp3.Authenticator;
 import okhttp3.HttpUrl;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.Route;
-
-import java.io.IOException;
 
 public class TmdbAuthenticator implements Authenticator {
 
@@ -23,11 +23,11 @@ public class TmdbAuthenticator implements Authenticator {
     }
 
     @Override
-    public Request authenticate(Route route, Response response) throws IOException {
+    public Request authenticate(@Nullable Route route, Response response) throws IOException {
         return handleRequest(response, tmdb);
     }
 
-
+    @Nullable
     public static Request handleRequest(Response response, Tmdb tmdb) throws IOException {
         if (response.request().url().pathSegments().get(0).equals(Tmdb.PATH_AUTHENTICATION)) {
             return null;
