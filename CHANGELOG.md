@@ -1,6 +1,21 @@
 Change Log
 ==========
 
+## 2.0.0
+_2019-02-07_
+
+* Update `retrofit` dependency to `2.5.0`. The previous versions are affected by a path-traversal security vulnerability. 
+  https://github.com/square/retrofit/blob/master/CHANGELOG.md
+* Produce Java 8 bytecode. For Android this requires Android Gradle Plugin 3.2.x or newer.
+* Fix crash due to missing `character` property for cast credits. Thanks @JeremyQuagmire!
+  https://github.com/UweTrottmann/tmdb-java/pull/69
+* For the `com.uwetrottmann.tmdb2` package return values and fields are now non-null unless otherwise annotated. For 
+  the `com.uwetrottmann.tmdb2.entities` package return values and fields are now annotated nullable.
+  https://github.com/UweTrottmann/tmdb-java/pull/70
+* Simplified session handling: instead of passing an `AuthenticationType` the library will use an available account
+  session, or if not available a guest session. Also `Tmdb` methods regarding sessions have changed. 
+  See https://github.com/UweTrottmann/tmdb-java/pull/71 for details.
+
 ## 1.10.1
 _2018-09-21_
 
