@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 2.0.1
+_2019-02-08_
+
+* Do not use `ThreadLocal.withInitial` from Java 8, it's not available on Android.
+
 ## 2.0.0
 _2019-02-07_
 
