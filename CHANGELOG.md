@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 2.0.2
+_2019-03-14_
+
+* Add country code and translation data (title, overview, website) to `Translation`. Thanks @myron0815!
+
 ## 2.0.1
 _2019-02-08_
 
