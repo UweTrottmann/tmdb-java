@@ -63,6 +63,8 @@ public class GenericAssertions {
             assertThat(translation.english_name).isNotNull();
             assertThat(translation.name).isNotNull();
             assertThat(translation.iso_639_1).isNotNull();
+            assertThat(translation.iso_3166_1).isNotNull();
+            assertThat(translation.data).isNotNull();
         }
     }
 

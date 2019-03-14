@@ -12,7 +12,7 @@ public class Translations {
         public String english_name;
         public Data data;
 
-        public class Data {
+        public static class Data {
 
             public String title;
             public String overview;
