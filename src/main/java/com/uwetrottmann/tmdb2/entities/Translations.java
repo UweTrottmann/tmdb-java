@@ -14,7 +14,14 @@ public class Translations {
 
         public static class Data {
 
+            /**
+             * Title for movies
+             */
             public String title;
+            /**
+             * Title for tvshows/episodes
+             */
+            public String name;
             public String overview;
             public String homepage;
         }
