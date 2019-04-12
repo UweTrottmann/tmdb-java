@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 2.0.3
+_2019-04-12_
+
+* Add `name` property to `Translation`, used for TV shows instead of `title`. Thanks @myron0815!
+
 ## 2.0.2
 _2019-03-14_
 
