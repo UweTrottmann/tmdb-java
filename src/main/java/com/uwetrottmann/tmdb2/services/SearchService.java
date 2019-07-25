@@ -14,10 +14,9 @@ import retrofit2.http.Query;
 public interface SearchService {
 
     /**
-     * Search for companies by name.
+     * Search for companies.
      *
-     * @param query CGI escaped string
-     * @param page  <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @see <a href="https://developers.themoviedb.org/3/search/search-companies">Documentation</a>
      */
     @GET("search/company")
     Call<CompanyResultsPage> company(
@@ -26,11 +25,9 @@ public interface SearchService {
     );
 
     /**
-     * Search for collections by name.
+     * Search for collections.
      *
-     * @param query    CGI escaped string
-     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
-     * @param language <em>Optional.</em> ISO 639-1 code.
+     * @see <a href="https://developers.themoviedb.org/3/search/search-collections">Documentation</a>
      */
     @GET("search/collection")
     Call<CollectionResultsPage> collection(
@@ -40,10 +37,9 @@ public interface SearchService {
     );
 
     /**
-     * Search for keywords by name.
+     * Search for keywords.
      *
-     * @param query CGI escaped string
-     * @param page  <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @see <a href="https://developers.themoviedb.org/3/search/search-keywords">Documentation</a>
      */
     @GET("search/keyword")
     Call<KeywordResultsPage> keyword(
@@ -52,84 +48,61 @@ public interface SearchService {
     );
 
     /**
-     * Search for movies by title.
+     * Search for movies.
      *
-     * @param query              CGI escaped string
-     * @param page               <em>Optional.</em> Minimum value is 1, expected value is an integer.
-     * @param language           <em>Optional.</em> ISO 639-1 code.
-     * @param includeAdult       <em>Optional.</em> Toggle the inclusion of adult titles. Expected value is: true or false
-     * @param year               <em>Optional.</em> Filter the results release dates to matches that include this value.
-     * @param primaryReleaseYear <em>Optional.</em> Filter the results so that only the primary release dates have this
-     *                           value.
-     * @param searchType         <em>Optional.</em> By default, the search type is 'phrase'. This is almost guaranteed the
-     *                           option you will want. It's a great all purpose search type and by far the most tuned for every day querying. For
-     *                           those wanting more of an "autocomplete" type search, set this option to 'ngram'.
+     * @see <a href="https://developers.themoviedb.org/3/search/search-movies">Documentation</a>
      */
     @GET("search/movie")
     Call<MovieResultsPage> movie(
             @Query("query") String query,
             @Query("page") Integer page,
             @Query("language") String language,
+            @Query("region") String region,
             @Query("include_adult") Boolean includeAdult,
             @Query("year") Integer year,
-            @Query("primary_release_year") Integer primaryReleaseYear,
-            @Query("search_type") String searchType
+            @Query("primary_release_year") Integer primaryReleaseYear
     );
 
     /**
-     * Search for movies by title.
+     * Search multiple models in a single request.
+     * Multi search currently supports searching for movies,
+     * tv shows and people in a single request.
      *
-     * @param query        CGI escaped string
-     * @param page         <em>Optional.</em> Minimum value is 1, expected value is an integer.
-     * @param language     <em>Optional.</em> ISO 639-1 code.
-     * @param includeAdult <em>Optional.</em> Toggle the inclusion of adult titles. Expected value is: true or false
-     * @param region       <em>Optional.</em> ISO 3166-1 code.
+     * @see <a href="https://developers.themoviedb.org/3/search/multi-search">Documentation</a>
      */
     @GET("search/multi")
     Call<MediaResultsPage> multi(
             @Query("query") String query,
             @Query("page") Integer page,
             @Query("language") String language,
-            @Query("include_adult") Boolean includeAdult,
-            @Query("region") String region
+            @Query("region") String region,
+            @Query("include_adult") Boolean includeAdult
     );
 
     /**
-     * Search for people by name.
+     * Search for people.
      *
-     * @param query        CGI escaped string
-     * @param page         <em>Optional.</em> Minimum value is 1, expected value is an integer.
-     * @param includeAdult <em>Optional.</em> Toggle the inclusion of adult titles. Expected value is: true or false
-     * @param searchType   <em>Optional.</em> By default, the search type is 'phrase'. This is almost guaranteed the
-     *                     option you will want. It's a great all purpose search type and by far the most tuned for every day querying. For
-     *                     those wanting more of an "autocomplete" type search, set this option to 'ngram'.
+     * @see <a href="https://developers.themoviedb.org/3/search/search-people">Documentation</a>
      */
     @GET("search/person")
     Call<PersonResultsPage> person(
             @Query("query") String query,
             @Query("page") Integer page,
             @Query("language") String language,
-            @Query("include_adult") Boolean includeAdult,
-            @Query("search_type") String searchType
+            @Query("region") String region,
+            @Query("include_adult") Boolean includeAdult
     );
 
     /**
-     * Search for TV shows by title.
+     * Search for TV shows.
      *
-     * @param query            CGI escaped string
-     * @param page             Minimum 1, maximum 1000.
-     * @param language         ISO 639-1 code.
-     * @param firstAirDateYear Filter the results to only match shows that have an air date with this value.
-     * @param searchType       By default, the search type is 'phrase'. This is almost guaranteed the option you will want.
-     *                         It's a great all purpose search type and by far the most tuned for every day querying. For those wanting more of
-     *                         an "autocomplete" type search, set this option to 'ngram'.
+     * @see <a href="https://developers.themoviedb.org/3/search/search-tv-shows">Documentation</a>
      */
     @GET("search/tv")
     Call<TvShowResultsPage> tv(
             @Query("query") String query,
             @Query("page") Integer page,
             @Query("language") String language,
-            @Query("first_air_date_year") Integer firstAirDateYear,
-            @Query("search_type") String searchType
+            @Query("first_air_date_year") Integer firstAirDateYear
     );
 }

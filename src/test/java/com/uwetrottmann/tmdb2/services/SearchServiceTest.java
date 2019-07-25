@@ -1,18 +1,5 @@
 package com.uwetrottmann.tmdb2.services;
 
-import com.uwetrottmann.tmdb2.BaseTestCase;
-import com.uwetrottmann.tmdb2.entities.CollectionResultsPage;
-import com.uwetrottmann.tmdb2.entities.CompanyResultsPage;
-import com.uwetrottmann.tmdb2.entities.KeywordResultsPage;
-import com.uwetrottmann.tmdb2.entities.MediaResultsPage;
-import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
-import com.uwetrottmann.tmdb2.entities.PersonResultsPage;
-import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
-import org.junit.Test;
-import retrofit2.Call;
-
-import java.io.IOException;
-
 import static com.uwetrottmann.tmdb2.TestData.testCollection;
 import static com.uwetrottmann.tmdb2.TestData.testCompany;
 import static com.uwetrottmann.tmdb2.TestData.testMovie;
@@ -25,6 +12,18 @@ import static com.uwetrottmann.tmdb2.assertions.MediaAssertions.assertMediaResul
 import static com.uwetrottmann.tmdb2.assertions.MovieAssertions.assertMovieResultsPage;
 import static com.uwetrottmann.tmdb2.assertions.PersonAssertions.assertPersonResultsPage;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShowResultsPage;
+
+import com.uwetrottmann.tmdb2.BaseTestCase;
+import com.uwetrottmann.tmdb2.entities.CollectionResultsPage;
+import com.uwetrottmann.tmdb2.entities.CompanyResultsPage;
+import com.uwetrottmann.tmdb2.entities.KeywordResultsPage;
+import com.uwetrottmann.tmdb2.entities.MediaResultsPage;
+import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
+import com.uwetrottmann.tmdb2.entities.PersonResultsPage;
+import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
+import java.io.IOException;
+import org.junit.Test;
+import retrofit2.Call;
 
 public class SearchServiceTest extends BaseTestCase {
 
@@ -98,7 +97,6 @@ public class SearchServiceTest extends BaseTestCase {
     public void test_tv() throws IOException {
         Call<TvShowResultsPage> call = getUnauthenticatedInstance().searchService().tv(
                 testTvShow.name,
-                null,
                 null,
                 null,
                 null
