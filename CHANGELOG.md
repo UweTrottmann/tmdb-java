@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 2.1.1
+_2019-07-25_
+
+* ReleaseDate: make types actual non-nullable constants (to allow using `==` in Kotlin).
+
 ## 2.1.0
 _2019-07-25_
 
