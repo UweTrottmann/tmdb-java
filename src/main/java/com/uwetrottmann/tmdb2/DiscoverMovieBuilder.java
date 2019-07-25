@@ -5,74 +5,76 @@ import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.enumerations.SortBy;
 import com.uwetrottmann.tmdb2.services.DiscoverService;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import retrofit2.Call;
 
 public class DiscoverMovieBuilder {
 
     private final DiscoverService discoverService;
 
-    private String language;
-    private String region;
-    private SortBy sort_by;
-    private String certification_country;
-    private String certification;
-    private String certification_lte;
-    private Boolean include_adult;
-    private Boolean include_video;
-    private Integer page;
-    private Integer primary_release_year;
-    private TmdbDate primary_release_date_gte;
-    private TmdbDate primary_release_date_lte;
-    private TmdbDate release_date_gte;
-    private TmdbDate release_date_lte;
-    private Integer vote_count_gte;
-    private Integer vote_count_lte;
-    private Float vote_average_gte;
-    private Float vote_average_lte;
-    private DiscoverFilter with_cast;
-    private DiscoverFilter with_crew;
-    private DiscoverFilter with_companies;
-    private DiscoverFilter with_genres;
-    private DiscoverFilter with_keywords;
-    private DiscoverFilter with_people;
-    private Integer year;
-    private DiscoverFilter without_genres;
-    private Integer with_runtime_gte;
-    private Integer with_runtime_lte;
-    private DiscoverFilter with_release_type;
-    private String with_original_language;
-    private DiscoverFilter without_keywords;
+    @Nullable private String language;
+    @Nullable private String region;
+    @Nullable private SortBy sort_by;
+    @Nullable private String certification_country;
+    @Nullable private String certification;
+    @Nullable private String certification_lte;
+    @Nullable private Boolean include_adult;
+    @Nullable private Boolean include_video;
+    @Nullable private Integer page;
+    @Nullable private Integer primary_release_year;
+    @Nullable private TmdbDate primary_release_date_gte;
+    @Nullable private TmdbDate primary_release_date_lte;
+    @Nullable private TmdbDate release_date_gte;
+    @Nullable private TmdbDate release_date_lte;
+    @Nullable private Integer vote_count_gte;
+    @Nullable private Integer vote_count_lte;
+    @Nullable private Float vote_average_gte;
+    @Nullable private Float vote_average_lte;
+    @Nullable private DiscoverFilter with_cast;
+    @Nullable private DiscoverFilter with_crew;
+    @Nullable private DiscoverFilter with_companies;
+    @Nullable private DiscoverFilter with_genres;
+    @Nullable private DiscoverFilter with_keywords;
+    @Nullable private DiscoverFilter with_people;
+    @Nullable private Integer year;
+    @Nullable private DiscoverFilter without_genres;
+    @Nullable private Integer with_runtime_gte;
+    @Nullable private Integer with_runtime_lte;
+    @Nullable private DiscoverFilter with_release_type;
+    @Nullable private String with_original_language;
+    @Nullable private DiscoverFilter without_keywords;
 
-    public DiscoverMovieBuilder(DiscoverService discoverService) {
+    public DiscoverMovieBuilder(@Nonnull DiscoverService discoverService) {
         this.discoverService = discoverService;
     }
 
-    public DiscoverMovieBuilder language(String value) {
+    public DiscoverMovieBuilder language(@Nullable String value) {
         this.language = value;
         return this;
     }
 
-    public DiscoverMovieBuilder region(String value) {
+    public DiscoverMovieBuilder region(@Nullable String value) {
         this.region = value;
         return this;
     }
 
-    public DiscoverMovieBuilder sort_by(SortBy value) {
+    public DiscoverMovieBuilder sort_by(@Nullable SortBy value) {
         this.sort_by = value;
         return this;
     }
 
-    public DiscoverMovieBuilder certification_country(String value) {
+    public DiscoverMovieBuilder certification_country(@Nullable String value) {
         this.certification_country = value;
         return this;
     }
 
-    public DiscoverMovieBuilder certification(String value) {
+    public DiscoverMovieBuilder certification(@Nullable String value) {
         this.certification = value;
         return this;
     }
 
-    public DiscoverMovieBuilder certification_lte(String value) {
+    public DiscoverMovieBuilder certification_lte(@Nullable String value) {
         this.certification_lte = value;
         return this;
     }
@@ -87,117 +89,117 @@ public class DiscoverMovieBuilder {
         return this;
     }
 
-    public DiscoverMovieBuilder page(Integer value) {
+    public DiscoverMovieBuilder page(@Nullable Integer value) {
         this.page = value;
         return this;
     }
 
-    public DiscoverMovieBuilder primary_release_year(Integer value) {
+    public DiscoverMovieBuilder primary_release_year(@Nullable Integer value) {
         this.primary_release_year = value;
         return this;
     }
 
-    public DiscoverMovieBuilder primary_release_date_gte(TmdbDate value) {
+    public DiscoverMovieBuilder primary_release_date_gte(@Nullable TmdbDate value) {
         this.primary_release_date_gte = value;
         return this;
     }
 
-    public DiscoverMovieBuilder primary_release_date_lte(TmdbDate value) {
+    public DiscoverMovieBuilder primary_release_date_lte(@Nullable TmdbDate value) {
         this.primary_release_date_lte = value;
         return this;
     }
 
-    public DiscoverMovieBuilder release_date_gte(TmdbDate value) {
+    public DiscoverMovieBuilder release_date_gte(@Nullable TmdbDate value) {
         this.release_date_gte = value;
         return this;
     }
 
-    public DiscoverMovieBuilder release_date_lte(TmdbDate value) {
+    public DiscoverMovieBuilder release_date_lte(@Nullable TmdbDate value) {
         this.release_date_lte = value;
         return this;
     }
 
-    public DiscoverMovieBuilder vote_count_gte(Integer value) {
+    public DiscoverMovieBuilder vote_count_gte(@Nullable Integer value) {
         this.vote_count_gte = value;
         return this;
     }
 
-    public DiscoverMovieBuilder vote_count_lte(Integer value) {
+    public DiscoverMovieBuilder vote_count_lte(@Nullable Integer value) {
         this.vote_count_lte = value;
         return this;
     }
 
-    public DiscoverMovieBuilder vote_average_gte(Float value) {
+    public DiscoverMovieBuilder vote_average_gte(@Nullable Float value) {
         this.vote_average_gte = value;
         return this;
     }
 
-    public DiscoverMovieBuilder vote_average_lte(Float value) {
+    public DiscoverMovieBuilder vote_average_lte(@Nullable Float value) {
         this.vote_average_lte = value;
         return this;
     }
 
-    public DiscoverMovieBuilder with_cast(DiscoverFilter value) {
+    public DiscoverMovieBuilder with_cast(@Nullable DiscoverFilter value) {
         this.with_cast = value;
         return this;
     }
 
-    public DiscoverMovieBuilder with_crew(DiscoverFilter value) {
+    public DiscoverMovieBuilder with_crew(@Nullable DiscoverFilter value) {
         this.with_crew = value;
         return this;
     }
 
-    public DiscoverMovieBuilder with_companies(DiscoverFilter value) {
+    public DiscoverMovieBuilder with_companies(@Nullable DiscoverFilter value) {
         this.with_companies = value;
         return this;
     }
 
-    public DiscoverMovieBuilder with_genres(DiscoverFilter value) {
+    public DiscoverMovieBuilder with_genres(@Nullable DiscoverFilter value) {
         this.with_genres = value;
         return this;
     }
 
-    public DiscoverMovieBuilder with_keywords(DiscoverFilter value) {
+    public DiscoverMovieBuilder with_keywords(@Nullable DiscoverFilter value) {
         this.with_keywords = value;
         return this;
     }
 
-    public DiscoverMovieBuilder with_people(DiscoverFilter value) {
+    public DiscoverMovieBuilder with_people(@Nullable DiscoverFilter value) {
         this.with_people = value;
         return this;
     }
 
-    public DiscoverMovieBuilder year(Integer value) {
+    public DiscoverMovieBuilder year(@Nullable Integer value) {
         this.year = value;
         return this;
     }
 
-    public DiscoverMovieBuilder without_genres(DiscoverFilter value) {
+    public DiscoverMovieBuilder without_genres(@Nullable DiscoverFilter value) {
         this.without_genres = value;
         return this;
     }
 
-    public DiscoverMovieBuilder with_runtime_gte(Integer value) {
+    public DiscoverMovieBuilder with_runtime_gte(@Nullable Integer value) {
         this.with_runtime_gte = value;
         return this;
     }
 
-    public DiscoverMovieBuilder with_runtime_lte(Integer value) {
+    public DiscoverMovieBuilder with_runtime_lte(@Nullable Integer value) {
         this.with_runtime_lte = value;
         return this;
     }
 
-    public DiscoverMovieBuilder with_release_type(DiscoverFilter value) {
+    public DiscoverMovieBuilder with_release_type(@Nullable DiscoverFilter value) {
         this.with_release_type = value;
         return this;
     }
 
-    public DiscoverMovieBuilder with_original_language(String value) {
+    public DiscoverMovieBuilder with_original_language(@Nullable String value) {
         this.with_original_language = value;
         return this;
     }
 
-    public DiscoverMovieBuilder without_keywords(DiscoverFilter keywords) {
+    public DiscoverMovieBuilder without_keywords(@Nullable DiscoverFilter keywords) {
         this.without_keywords = keywords;
         return this;
     }

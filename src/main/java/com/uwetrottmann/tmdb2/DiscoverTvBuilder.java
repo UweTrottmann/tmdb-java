@@ -5,112 +5,113 @@ import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import com.uwetrottmann.tmdb2.enumerations.SortBy;
 import com.uwetrottmann.tmdb2.services.DiscoverService;
+import javax.annotation.Nullable;
 import retrofit2.Call;
 
 public class DiscoverTvBuilder {
 
     protected final DiscoverService discoverService;
 
-    private String language;
-    private SortBy sort_by;
-    private TmdbDate air_date_gte;
-    private TmdbDate air_date_lte;
-    private TmdbDate first_air_date_gte;
-    private TmdbDate first_air_date_lte;
-    private Integer first_air_date_year;
-    private Integer page;
-    private String timezone;
-    private Float vote_average_gte;
-    private Integer vote_count_gte;
-    private DiscoverFilter with_genres;
-    private DiscoverFilter with_networks;
-    private DiscoverFilter without_genres;
-    private Integer with_runtime_gte;
-    private Integer with_runtime_lte;
-    private Boolean include_null_first_air_dates;
-    private String with_original_language;
-    private DiscoverFilter without_keywords;
+    @Nullable private String language;
+    @Nullable private SortBy sort_by;
+    @Nullable private TmdbDate air_date_gte;
+    @Nullable private TmdbDate air_date_lte;
+    @Nullable private TmdbDate first_air_date_gte;
+    @Nullable private TmdbDate first_air_date_lte;
+    @Nullable private Integer first_air_date_year;
+    @Nullable private Integer page;
+    @Nullable private String timezone;
+    @Nullable private Float vote_average_gte;
+    @Nullable private Integer vote_count_gte;
+    @Nullable private DiscoverFilter with_genres;
+    @Nullable private DiscoverFilter with_networks;
+    @Nullable private DiscoverFilter without_genres;
+    @Nullable private Integer with_runtime_gte;
+    @Nullable private Integer with_runtime_lte;
+    @Nullable private Boolean include_null_first_air_dates;
+    @Nullable private String with_original_language;
+    @Nullable private DiscoverFilter without_keywords;
 
     public DiscoverTvBuilder(DiscoverService discoverService) {
         this.discoverService = discoverService;
     }
 
-    public DiscoverTvBuilder language(String value) {
+    public DiscoverTvBuilder language(@Nullable String value) {
         this.language = value;
         return this;
     }
 
-    public DiscoverTvBuilder sort_by(SortBy value) {
+    public DiscoverTvBuilder sort_by(@Nullable SortBy value) {
         this.sort_by = value;
         return this;
     }
 
-    public DiscoverTvBuilder air_date_gte(TmdbDate value) {
+    public DiscoverTvBuilder air_date_gte(@Nullable TmdbDate value) {
         this.air_date_gte = value;
         return this;
     }
 
-    public DiscoverTvBuilder air_date_lte(TmdbDate value) {
+    public DiscoverTvBuilder air_date_lte(@Nullable TmdbDate value) {
         this.air_date_lte = value;
         return this;
     }
 
-    public DiscoverTvBuilder first_air_date_gte(TmdbDate value) {
+    public DiscoverTvBuilder first_air_date_gte(@Nullable TmdbDate value) {
         this.first_air_date_gte = value;
         return this;
     }
 
-    public DiscoverTvBuilder first_air_date_lte(TmdbDate value) {
+    public DiscoverTvBuilder first_air_date_lte(@Nullable TmdbDate value) {
         this.first_air_date_lte = value;
         return this;
     }
 
-    public DiscoverTvBuilder first_air_date_year(Integer value) {
+    public DiscoverTvBuilder first_air_date_year(@Nullable Integer value) {
         this.first_air_date_year = value;
         return this;
     }
 
-    public DiscoverTvBuilder page(Integer value) {
+    public DiscoverTvBuilder page(@Nullable Integer value) {
         this.page = value;
         return this;
     }
 
-    public DiscoverTvBuilder timezone(String value) {
+    public DiscoverTvBuilder timezone(@Nullable String value) {
         this.timezone = value;
         return this;
     }
 
-    public DiscoverTvBuilder vote_average_gte(Float value) {
+    public DiscoverTvBuilder vote_average_gte(@Nullable Float value) {
         this.vote_average_gte = value;
         return this;
     }
 
-    public DiscoverTvBuilder vote_count_gte(Integer value) {
+    public DiscoverTvBuilder vote_count_gte(@Nullable Integer value) {
         this.vote_count_gte = value;
         return this;
     }
 
-    public DiscoverTvBuilder with_genres(DiscoverFilter value) {
+    public DiscoverTvBuilder with_genres(@Nullable DiscoverFilter value) {
         this.with_genres = value;
         return this;
     }
 
-    public DiscoverTvBuilder with_networks(DiscoverFilter value) {
+    public DiscoverTvBuilder with_networks(@Nullable DiscoverFilter value) {
         this.with_networks = value;
         return this;
     }
 
-    public DiscoverTvBuilder without_genres(DiscoverFilter value) {
+    public DiscoverTvBuilder without_genres(@Nullable DiscoverFilter value) {
         this.without_genres = value;
         return this;
     }
 
-    public DiscoverTvBuilder with_runtime_gte(Integer value) {
+    public DiscoverTvBuilder with_runtime_gte(@Nullable Integer value) {
         this.with_runtime_gte = value;
         return this;
     }
 
-    public DiscoverTvBuilder with_runtime_lte(Integer value) {
+    public DiscoverTvBuilder with_runtime_lte(@Nullable Integer value) {
         this.with_runtime_lte = value;
         return this;
     }
@@ -120,12 +121,12 @@ public class DiscoverTvBuilder {
         return this;
     }
 
-    public DiscoverTvBuilder with_original_language(String value) {
+    public DiscoverTvBuilder with_original_language(@Nullable String value) {
         this.with_original_language = value;
         return this;
     }
 
-    public DiscoverTvBuilder without_keywords(DiscoverFilter keywords) {
+    public DiscoverTvBuilder without_keywords(@Nullable DiscoverFilter keywords) {
         this.without_keywords = keywords;
         return this;
     }
