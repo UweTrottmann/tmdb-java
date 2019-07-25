@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+## 2.1.0
+_2019-07-25_
+
+* Movies: add region parameter to various lists (popular, top rated, ...). This requires code updates.
+* Search: add region, remove search type, reorder params. This requires code updates.
+* Kotlin: allow nullable values when using the discover builders.
+
 ## 2.0.3
 _2019-04-12_
 
