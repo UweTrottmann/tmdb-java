@@ -41,7 +41,7 @@ public abstract class BaseTestCase {
                 // add logging, standard output is easier to read
                 HttpLoggingInterceptor logging = new HttpLoggingInterceptor(System.out::println);
                 logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-                builder.addInterceptor(logging);
+                builder.addNetworkInterceptor(logging);
             }
         }
     }
