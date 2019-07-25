@@ -321,6 +321,7 @@ public class MoviesServiceTest extends BaseTestCase {
     public void test_upcoming() throws IOException {
         Call<MovieResultsPage> call = getUnauthenticatedInstance().moviesService().upcoming(
                 null,
+                null,
                 null
         );
 
@@ -334,6 +335,7 @@ public class MoviesServiceTest extends BaseTestCase {
     public void test_nowPlaying() throws IOException {
         Call<MovieResultsPage> call = getUnauthenticatedInstance().moviesService().nowPlaying(
                 null,
+                null,
                 null
         );
 
@@ -345,6 +347,7 @@ public class MoviesServiceTest extends BaseTestCase {
     @Test
     public void test_popular() throws IOException {
         Call<MovieResultsPage> call = getUnauthenticatedInstance().moviesService().popular(
+                null,
                 null,
                 null
         );
@@ -358,6 +361,7 @@ public class MoviesServiceTest extends BaseTestCase {
     @Test
     public void test_topRated() throws IOException {
         Call<MovieResultsPage> call = getUnauthenticatedInstance().moviesService().topRated(
+                null,
                 null,
                 null
         );

@@ -263,54 +263,59 @@ public interface MoviesService {
     Call<Movie> latest();
 
     /**
-     * Get the list of movies playing in theaters. This list refreshes every day. The maximum number of items this list
-     * will include is 100.
+     * Get a list of movies in theatres. This is a release type query that looks
+     * for all movies that have a release type of 2 or 3 within the specified date range.
      *
-     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
-     * @param language <em>Optional.</em> ISO 639-1 code.
+     * You can optionally specify a region parameter which will narrow the search
+     * to only look for theatrical release dates within the specified country.
+     *
+     * @see <a href="https://developers.themoviedb.org/3/movies/get-now-playing">Documentation</a>
      */
     @GET("movie/now_playing")
     Call<MovieResultsPage> nowPlaying(
             @Query("page") Integer page,
-            @Query("language") String language
+            @Query("language") String language,
+            @Query("region") String region
     );
 
     /**
-     * Get the list of popular movies on The Movie Database. This list refreshes every day.
+     * Get a list of the current popular movies on TMDb. This list updates daily.
      *
-     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
-     * @param language <em>Optional.</em> ISO 639-1 code.
+     * @see <a href="https://developers.themoviedb.org/3/movies/get-popular-movies">Documentation</a>
      */
     @GET("movie/popular")
     Call<MovieResultsPage> popular(
             @Query("page") Integer page,
-            @Query("language") String language
+            @Query("language") String language,
+            @Query("region") String region
     );
 
     /**
-     * Get the list of top rated movies. By default, this list will only include movies that have 10 or more votes. This
-     * list refreshes every day.
+     * Get the top rated movies on TMDb.
      *
-     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
-     * @param language <em>Optional.</em> ISO 639-1 code.
+     * @see <a href="https://developers.themoviedb.org/3/movies/get-top-rated-movies">Documentation</a>
      */
     @GET("movie/top_rated")
     Call<MovieResultsPage> topRated(
             @Query("page") Integer page,
-            @Query("language") String language
+            @Query("language") String language,
+            @Query("region") String region
     );
 
     /**
-     * Get the list of upcoming movies. This list refreshes every day. The maximum number of items this list will
-     * include is 100.
+     * Get a list of upcoming movies in theatres. This is a release type query that looks
+     * for all movies that have a release type of 2 or 3 within the specified date range.
      *
-     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
-     * @param language <em>Optional.</em> ISO 639-1 code.
+     * You can optionally specify a region prameter which will narrow the search to
+     * only look for theatrical release dates within the specified country.
+     *
+     * @see <a href="https://developers.themoviedb.org/3/movies/get-upcoming">Documentation</a>
      */
     @GET("movie/upcoming")
     Call<MovieResultsPage> upcoming(
             @Query("page") Integer page,
-            @Query("language") String language
+            @Query("language") String language,
+            @Query("region") String region
     );
 
     /**
