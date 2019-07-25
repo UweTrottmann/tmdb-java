@@ -218,7 +218,7 @@ public class TestData {
         testCredit.media.id = 456;
         testCredit.media.name = "The Simpsons";
         testCredit.media.original_name = "The Simpsons";
-        testCredit.media.character = "Bart Simpson / Nelson Muntz / Ralph Wiggum / Todd Flanders / Kearney / Various (voice)";
+        testCredit.media.character = "Bart Simpson";
 
         testReview.id = "581bbdbbc3a36805c60001f1";
         testReview.author = "iheardthatmoviewas";
