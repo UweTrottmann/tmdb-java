@@ -90,6 +90,7 @@ public class TestData {
     private static void initializeTestingIntegrityData() throws ParseException {
         testCompany.id = 5;
         testCompany.name = "Columbia Pictures";
+        testCompany.origin_country = "US";
 
         testPerson.name = "Ben Affleck";
         testPerson.birthday = JSON_STRING_DATE.parse("1972-08-15");
