@@ -7,12 +7,12 @@ import java.util.List;
 public class Movie extends BaseMovie {
 
     public Collection belongs_to_collection;
-    public Integer budget;
+    public Long budget;
     public String homepage;
     public String imdb_id;
     public List<BaseCompany> production_companies;
     public List<Country> production_countries;
-    public Integer revenue;
+    public Long revenue;
     public Integer runtime;
     public List<SpokenLanguage> spoken_languages;
     public Status status;
