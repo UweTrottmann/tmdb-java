@@ -35,7 +35,6 @@ public class CompanyAssertions {
         assertThat(company.headquarters).isNotNull();
         assertThat(company.homepage).isNotNull();
         assertThat(company.origin_country).isNotEmpty();
-        assertThat(company.origin_country).isNotEmpty();
         if (company.parent_company != null)
             assertBaseCompany(company.parent_company, true);
     }
