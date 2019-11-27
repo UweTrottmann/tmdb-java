@@ -70,7 +70,7 @@
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
-            <version>3.11.1</version>
+            <version>3.14.0</version>
             <scope>test</scope>
         </dependency>
         <!-- logging-interceptor version should match okhttp dependency of retrofit -->
@@ -83,7 +83,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>27.1-jre</version>
+            <version>28.1-jre</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
