@@ -79,7 +79,7 @@ public class TvAssertions {
         assertThat(tvShow.networks).isNotNull();
         assertThat(tvShow.networks).isNotEmpty();
         for (Network network : tvShow.networks) {
-            assertNetwork(network);
+            assertNetwork(network, true);
         }
 
         assertThat(tvShow.episode_run_time).isNotNull();

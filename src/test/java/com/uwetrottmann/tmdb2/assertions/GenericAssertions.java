@@ -10,6 +10,7 @@ import com.uwetrottmann.tmdb2.entities.BaseResultsPage;
 import com.uwetrottmann.tmdb2.entities.ContentRating;
 import com.uwetrottmann.tmdb2.entities.ContentRatings;
 import com.uwetrottmann.tmdb2.entities.Image;
+import com.uwetrottmann.tmdb2.entities.NetworkImage;
 import com.uwetrottmann.tmdb2.entities.Status;
 import com.uwetrottmann.tmdb2.entities.TaggedImage;
 import com.uwetrottmann.tmdb2.entities.TaggedImagesResultsPage;
@@ -91,8 +92,11 @@ public class GenericAssertions {
                 assertThat(image.media.tvShow).isNotNull();
                 break;
         }
+    }
 
-
+    public static void assertNetworkImage(NetworkImage image) {
+        assertImage(image);
+        assertThat(image.file_type).isNotNull();
     }
 
     public static void assertImages(List<Image> images) {
@@ -108,6 +112,14 @@ public class GenericAssertions {
 
         for (TaggedImage image : images.results) {
             assertTaggedImage(image);
+        }
+    }
+
+    public static void assertNetworkImages(List<NetworkImage> images) {
+        assertThat(images).isNotNull();
+        assertThat(images).isNotEmpty();
+        for (NetworkImage image : images) {
+            assertNetworkImage(image);
         }
     }
 
