@@ -34,7 +34,7 @@ public class CompanyAssertions {
 
         assertThat(company.headquarters).isNotNull();
         assertThat(company.homepage).isNotNull();
-
+        assertThat(company.origin_country).isNotEmpty();
         if (company.parent_company != null)
             assertBaseCompany(company.parent_company, true);
     }
@@ -43,6 +43,8 @@ public class CompanyAssertions {
         assertCompany(company);
         assertThat(company.id).isEqualTo(testCompany.id);
         assertThat(company.name).isEqualTo(testCompany.name);
+        assertThat(company.origin_country).isEqualTo(testCompany.origin_country);
         assertThat(company.description).isNotEmpty();
+
     }
 }

@@ -90,6 +90,7 @@ public class TestData {
     private static void initializeTestingIntegrityData() throws ParseException {
         testCompany.id = 5;
         testCompany.name = "Columbia Pictures";
+        testCompany.origin_country = "US";
 
         testPerson.name = "Ben Affleck";
         testPerson.birthday = JSON_STRING_DATE.parse("1972-08-15");
@@ -140,10 +141,10 @@ public class TestData {
         testMovie.status = Status.RELEASED;
         testMovie.tagline = "Some assembly required.";
         testMovie.runtime = 143;
-        testMovie.revenue = 1519557910;
+        testMovie.revenue = 1519557910L;
         testMovie.release_date = JSON_STRING_DATE.parse("2012-04-25");
         testMovie.original_language = "en";
-        testMovie.budget = 220000000;
+        testMovie.budget = 220000000L;
         testMovie.imdb_id = "tt0848228";
         testMovie.overview = "When an unexpected enemy emerges and threatens global safety and security, Nick Fury, director of the international peacekeeping agency known as S.H.I.E.L.D., finds himself in need of a team to pull the world back from the brink of disaster. Spanning the globe, a daring recruitment effort begins!";
         testMovie.homepage = "http://marvel.com/avengers_movie/";

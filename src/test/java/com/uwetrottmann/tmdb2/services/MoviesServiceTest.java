@@ -66,7 +66,7 @@ public class MoviesServiceTest extends BaseTestCase {
 
         assertMovie(movie);
 
-        assertThat(movie.title).isEqualTo("Os Vingadores");
+        assertThat(movie.title).isEqualTo("The Avengers - Os Vingadores");
     }
 
 
