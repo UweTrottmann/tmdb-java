@@ -4,7 +4,7 @@ Change Log
 ## 2.2.0
 _2019-11-27_
 
-* Update retrofit dependency to `2.6.1`. Thanks @ProIcons!
+* Update retrofit dependency to `2.6.2`.
 * Add homepage, headquarters, logo_path and origin_country to `Network`. Thanks @chrisbanes!
 * Changed budget and revenue in `Movie` from `Integer` to `Long`. Thanks @ProIcons!
 * Added origin_country to `Company`. Thanks @ProIcons!
