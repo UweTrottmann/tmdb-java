@@ -14,7 +14,7 @@ patches you agree with the following:
 
 1. [Fork tmdb-java][1].
 2. Create a new branch and make [great commits + messages][2]. If you add or modify methods, make sure to also create and run basic tests ensuring they work (see `src/test`).
-3. [Start a pull request][3] against `master`. Reference [existing issues][4] when possible.
+3. [Start a pull request][3] against `main`. Reference [existing issues][4] when possible.
 
 #### No code!
 * You can [discuss a bug][4] or if it was not reported yet [submit a bug][5]!
