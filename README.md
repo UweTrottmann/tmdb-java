@@ -1,4 +1,4 @@
-**Pull requests (e.g. support for more API endpoints, bug fixes) are welcome!**
+**[Pull requests](CONTRIBUTING.md) (e.g. support for more API endpoints, bug fixes) are welcome!**
 
 # tmdb-java
 

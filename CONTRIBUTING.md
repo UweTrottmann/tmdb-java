@@ -6,9 +6,11 @@ If you contribute any [non-trivial](http://www.gnu.org/prep/maintain/maintain.ht
 
 #### Would you like to contribute code?
 
+**Note:** Keep your pull requests small, otherwise it is less likely they will get merged.
+
 1. [Fork tmdb-java](https://github.com/UweTrottmann/tmdb-java/fork).
 2. Create a new branch and make [great commits + messages](http://robots.thoughtbot.com/post/48933156625/5-useful-tips-for-a-better-commit-message). If you add or modify methods, make sure to also create and run basic tests (see `src/test`).
-3. [Start a pull request](https://github.com/UweTrottmann/tmdb-java/compare) against `main`. Reference [existing issues](https://github.com/UweTrottmann/tmdb-java/issues) when possible.
+3. [Start a pull request](https://github.com/UweTrottmann/tmdb-java/compare) against `main`.
 
 #### No code!
 * You can [discuss or submit bug reports](https://github.com/UweTrottmann/tmdb-java/issues)!
