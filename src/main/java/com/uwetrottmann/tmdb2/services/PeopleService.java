@@ -26,6 +26,17 @@ public interface PeopleService {
      */
     @GET("person/{person_id}")
     Call<Person> summary(
+            @Path("person_id") int personId
+    );
+
+    /**
+     * Get the general person information for a specific id.
+     *
+     * @param personId A Person TMDb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("person/{person_id}")
+    Call<Person> summary(
             @Path("person_id") int personId,
             @Query("language") String language
     );
@@ -35,6 +46,7 @@ public interface PeopleService {
      *
      * @param personId         A Person TMDb id.
      * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Value(s):</b> movie_credits, tv_credits, combined_credits, external_ids, images, changes, tagged_images,
+     * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("person/{person_id}")
     Call<Person> summary(
@@ -49,6 +61,7 @@ public interface PeopleService {
      * @param personId         A Person TMDb id.
      * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Value(s):</b> movie_credits, tv_credits, combined_credits, external_ids, images, changes, tagged_images,
      * @param options          <em>Optional.</em> parameters for the appended extra results.
+     * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("person/{person_id}")
     Call<Person> summary(

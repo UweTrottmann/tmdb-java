@@ -35,11 +35,43 @@ public interface MoviesService {
      * Get the basic movie information for a specific movie id.
      *
      * @param movieId  A Movie TMDb id.
+     */
+    @GET("movie/{movie_id}")
+    Call<Movie> summary(
+            @Path("movie_id") int movieId
+    );
+
+    /**
+     * Get the basic movie information for a specific movie id.
+     *
+     * @param imdbMovieId  A Movie IMDb id.
+     */
+    @GET("movie/{movie_id}")
+    Call<Movie> summary(
+            @Path("movie_id") String imdbMovieId
+    );
+
+    /**
+     * Get the basic movie information for a specific movie id.
+     *
+     * @param movieId  A Movie TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/{movie_id}")
     Call<Movie> summary(
             @Path("movie_id") int movieId,
+            @Query("language") String language
+    );
+
+    /**
+     * Get the basic movie information for a specific movie id.
+     *
+     * @param imdbMovieId  A Movie IMDb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/{movie_id}")
+    Call<Movie> summary(
+            @Path("movie_id") String imdbMovieId,
             @Query("language") String language
     );
 
@@ -60,6 +92,20 @@ public interface MoviesService {
     /**
      * Get the basic movie information for a specific movie id.
      *
+     * @param imdbMovieId          A Movie IMDb id.
+     * @param language         <em>Optional.</em> ISO 639-1 code.
+     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Value(s):</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
+     */
+    @GET("movie/{movie_id}")
+    Call<Movie> summary(
+            @Path("movie_id") String imdbMovieId,
+            @Query("language") String language,
+            @Query("append_to_response") AppendToResponse appendToResponse
+    );
+
+    /**
+     * Get the basic movie information for a specific movie id.
+     *
      * @param movieId          A Movie TMDb id.
      * @param language         <em>Optional.</em> ISO 639-1 code.
      * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Value(s):</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
@@ -68,6 +114,22 @@ public interface MoviesService {
     @GET("movie/{movie_id}")
     Call<Movie> summary(
             @Path("movie_id") int movieId,
+            @Query("language") String language,
+            @Query("append_to_response") AppendToResponse appendToResponse,
+            @QueryMap Map<String, String> options
+    );
+
+    /**
+     * Get the basic movie information for a specific movie id.
+     *
+     * @param imdbMovieId          A Movie IMDb id.
+     * @param language         <em>Optional.</em> ISO 639-1 code.
+     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Value(s):</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
+     * @param options          <em>Optional.</em> parameters for the appended extra results.
+     */
+    @GET("movie/{movie_id}")
+    Call<Movie> summary(
+            @Path("movie_id") String imdbMovieId,
             @Query("language") String language,
             @Query("append_to_response") AppendToResponse appendToResponse,
             @QueryMap Map<String, String> options
@@ -90,6 +152,22 @@ public interface MoviesService {
     );
 
     /**
+     * Grab the following account states for a session:
+     *
+     * * Movie rating
+     * * If it belongs to your watchlist
+     * * If it belongs to your favorite list
+     *
+     * <b>Requires an active Session.</b>
+     *
+     * @param imdbMovieId A Movie IMDb id.
+     */
+    @GET("movie/{movie_id}/account_states")
+    Call<AccountStates> accountStates(
+            @Path("movie_id") String imdbMovieId
+    );
+
+    /**
      * Get the alternative titles for a specific movie id.
      *
      * @param movieId A Movie TMDb id.
@@ -98,6 +176,18 @@ public interface MoviesService {
     @GET("movie/{movie_id}/alternative_titles")
     Call<AlternativeTitles> alternativeTitles(
             @Path("movie_id") int movieId,
+            @Query("country") String country
+    );
+
+    /**
+     * Get the alternative titles for a specific movie id.
+     *
+     * @param imdbMovieId A Movie IMDb id.
+     * @param country <em>Optional.</em> ISO 3166-1 code.
+     */
+    @GET("movie/{movie_id}/alternative_titles")
+    Call<AlternativeTitles> alternativeTitles(
+            @Path("movie_id") String imdbMovieId,
             @Query("country") String country
     );
 
@@ -120,6 +210,24 @@ public interface MoviesService {
     );
 
     /**
+     * Get the changes for a movie. By default only the last 24 hours are returned.
+     * <p>
+     * You can query up to 14 days in a single query by using the start_date and end_date query parameters.
+     *
+     * @param imdbMovieId    A Movie IMDb id.
+     * @param start_date <em>Optional.</em> Starting date of changes occurred to a movie.
+     * @param end_date   <em>Optional.</em> Ending date of changes occurred to a movie.
+     * @param page       <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     */
+    @GET("movie/{movie_id}/changes")
+    Call<Changes> changes(
+            @Path("movie_id") String imdbMovieId,
+            @Query("start_date") TmdbDate start_date,
+            @Query("end_date") TmdbDate end_date,
+            @Query("page") Integer page
+    );
+
+    /**
      * Get the cast and crew information for a specific movie id.
      *
      * @param movieId A Movie TMDb id.
@@ -130,15 +238,53 @@ public interface MoviesService {
     );
 
     /**
+     * Get the cast and crew information for a specific movie id.
+     *
+     * @param imdbMovieId A Movie TMDb id.
+     */
+    @GET("movie/{movie_id}/credits")
+    Call<Credits> credits(
+            @Path("movie_id") String imdbMovieId
+    );
+
+    /**
      * Get the external ids that we have stored for a movie.
      *
      * @param movieId A Movie TMDb id.
-     * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/{movie_id}/external_ids")
     Call<MovieExternalIds> externalIds(
-            @Path("movie_id") int movieId,
-            @Query("language") String language
+            @Path("movie_id") int movieId
+    );
+
+    /**
+     * Get the external ids that we have stored for a movie.
+     *
+     * @param imdbMovieId A Movie TMDb id.
+     */
+    @GET("movie/{movie_id}/external_ids")
+    Call<MovieExternalIds> externalIds(
+            @Path("movie_id") String imdbMovieId
+    );
+
+    /**
+     * Get the images (posters and backdrops) for a specific movie id.
+     *
+     * @param movieId  A Movie TMDb id.
+     */
+    @GET("movie/{movie_id}/images")
+    Call<Images> images(
+            @Path("movie_id") int movieId
+    );
+
+    /**
+     * Get the images (posters and backdrops) for a specific movie id.
+     *
+     * @param imdbMovieId  A Movie IMDb id.
+     */
+    @GET("movie/{movie_id}/images")
+    Call<Images> images(
+            @Path("movie_id") String imdbMovieId
     );
 
     /**
@@ -146,11 +292,29 @@ public interface MoviesService {
      *
      * @param movieId  A Movie TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
+     * @param includeImageLanguage  If you want to include a fallback language (especially useful for backdrops) you can use this.
+     *                              This should be a comma seperated value like so: include_image_language=en,null
      */
     @GET("movie/{movie_id}/images")
     Call<Images> images(
             @Path("movie_id") int movieId,
-            @Query("language") String language
+            @Query("language") String language,
+            @Query("include_image_language") String includeImageLanguage
+    );
+
+    /**
+     * Get the images (posters and backdrops) for a specific movie id.
+     *
+     * @param imdbMovieId  A Movie IMDb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     * @param includeImageLanguage  If you want to include a fallback language (especially useful for backdrops) you can use this.
+     *                              This should be a comma seperated value like so: include_image_language=en,null
+     */
+    @GET("movie/{movie_id}/images")
+    Call<Images> images(
+            @Path("movie_id") String imdbMovieId,
+            @Query("language") String language,
+            @Query("include_image_language") String includeImageLanguage
     );
 
     /**
@@ -161,6 +325,40 @@ public interface MoviesService {
     @GET("movie/{movie_id}/keywords")
     Call<Keywords> keywords(
             @Path("movie_id") int movieId
+    );
+
+    /**
+     * Get the plot keywords for a specific movie id.
+     *
+     * @param imdbMovieId A Movie IMDb id.
+     */
+    @GET("movie/{movie_id}/keywords")
+    Call<Keywords> keywords(
+            @Path("movie_id") String imdbMovieId
+    );
+
+    /**
+     * Get the lists that the movie belongs to.
+     *
+     * @param movieId  A Movie TMDb id.
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     */
+    @GET("movie/{movie_id}/lists")
+    Call<ListResultsPage> lists(
+            @Path("movie_id") int movieId,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get the lists that the movie belongs to.
+     *
+     * @param imdbMovieId  A Movie IMDb id.
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     */
+    @GET("movie/{movie_id}/lists")
+    Call<ListResultsPage> lists(
+            @Path("movie_id") String imdbMovieId,
+            @Query("page") Integer page
     );
 
     /**
@@ -175,6 +373,45 @@ public interface MoviesService {
             @Path("movie_id") int movieId,
             @Query("page") Integer page,
             @Query("language") String language
+    );
+
+
+    /**
+     * Get the lists that the movie belongs to.
+     *
+     * @param imdbMovieId  A Movie IMDb id.
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/{movie_id}/lists")
+    Call<ListResultsPage> lists(
+            @Path("movie_id") String imdbMovieId,
+            @Query("page") Integer page,
+            @Query("language") String language
+    );
+
+    /**
+     * Get the similar movies for a specific movie id.
+     *
+     * @param movieId  A Movie TMDb id.
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     */
+    @GET("movie/{movie_id}/similar")
+    Call<MovieResultsPage> similar(
+            @Path("movie_id") int movieId,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get the similar movies for a specific movie id.
+     *
+     * @param imdbMovieId  A Movie IMDb id.
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     */
+    @GET("movie/{movie_id}/similar")
+    Call<MovieResultsPage> similar(
+            @Path("movie_id") String imdbMovieId,
+            @Query("page") Integer page
     );
 
     /**
@@ -192,6 +429,44 @@ public interface MoviesService {
     );
 
     /**
+     * Get the similar movies for a specific movie id.
+     *
+     * @param imdbMovieId  A Movie IMDb id.
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/{movie_id}/similar")
+    Call<MovieResultsPage> similar(
+            @Path("movie_id") String imdbMovieId,
+            @Query("page") Integer page,
+            @Query("language") String language
+    );
+
+    /**
+     * Get the recommendations for a particular movie id.
+     *
+     * @param movieId  A Movie TMDb id.
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     */
+    @GET("movie/{movie_id}/recommendations")
+    Call<MovieResultsPage> recommendations(
+            @Path("movie_id") int movieId,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get the recommendations for a particular movie id.
+     *
+     * @param imdbMovieId  A Movie IMDb id.
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     */
+    @GET("movie/{movie_id}/recommendations")
+    Call<MovieResultsPage> recommendations(
+            @Path("movie_id") String imdbMovieId,
+            @Query("page") Integer page
+    );
+
+    /**
      * Get the recommendations for a particular movie id.
      *
      * @param movieId  A Movie TMDb id.
@@ -201,6 +476,20 @@ public interface MoviesService {
     @GET("movie/{movie_id}/recommendations")
     Call<MovieResultsPage> recommendations(
             @Path("movie_id") int movieId,
+            @Query("page") Integer page,
+            @Query("language") String language
+    );
+
+    /**
+     * Get the recommendations for a particular movie id.
+     *
+     * @param imdbMovieId  A Movie IMDb id.
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/{movie_id}/recommendations")
+    Call<MovieResultsPage> recommendations(
+            @Path("movie_id") String imdbMovieId,
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -221,6 +510,45 @@ public interface MoviesService {
     );
 
     /**
+     * Get the release dates, certifications and related information by country for a specific movie id.
+     *
+     * The results are keyed by iso_3166_1 code and contain a type value which on our system, maps to:
+     * {@link ReleaseDate#TYPE_PREMIERE}, {@link ReleaseDate#TYPE_THEATRICAL_LIMITED},
+     * {@link ReleaseDate#TYPE_THEATRICAL}, {@link ReleaseDate#TYPE_DIGITAL}, {@link ReleaseDate#TYPE_PHYSICAL},
+     * {@link ReleaseDate#TYPE_TV}
+     *
+     * @param imdbMovieId A Movie IMDb id.
+     */
+    @GET("movie/{movie_id}/release_dates")
+    Call<ReleaseDatesResults> releaseDates(
+            @Path("movie_id") String imdbMovieId
+    );
+
+    /**
+     * Get the reviews for a particular movie id.
+     *
+     * @param movieId  A Movie TMDb id.
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     */
+    @GET("movie/{movie_id}/reviews")
+    Call<ReviewResultsPage> reviews(
+            @Path("movie_id") int movieId,
+            @Query("page") Integer page
+    );
+
+    /**
+     * Get the reviews for a particular movie id.
+     *
+     * @param imdbMovieId  A Movie IMDb id.
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     */
+    @GET("movie/{movie_id}/reviews")
+    Call<ReviewResultsPage> reviews(
+            @Path("movie_id") String imdbMovieId,
+            @Query("page") Integer page
+    );
+
+    /**
      * Get the reviews for a particular movie id.
      *
      * @param movieId  A Movie TMDb id.
@@ -230,6 +558,20 @@ public interface MoviesService {
     @GET("movie/{movie_id}/reviews")
     Call<ReviewResultsPage> reviews(
             @Path("movie_id") int movieId,
+            @Query("page") Integer page,
+            @Query("language") String language
+    );
+
+    /**
+     * Get the reviews for a particular movie id.
+     *
+     * @param imdbMovieId  A Movie IMDb id.
+     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/{movie_id}/reviews")
+    Call<ReviewResultsPage> reviews(
+            @Path("movie_id") String imdbMovieId,
             @Query("page") Integer page,
             @Query("language") String language
     );
@@ -245,6 +587,36 @@ public interface MoviesService {
     );
 
     /**
+     * Get the translations for a specific movie id.
+     *
+     * @param imdbMovieId A Movie IMDb id.
+     */
+    @GET("movie/{movie_id}/translations")
+    Call<Translations> translations(
+            @Path("movie_id") String imdbMovieId
+    );
+
+    /**
+     * Get the videos (trailers, teasers, clips, etc...) for a specific movie id.
+     *
+     * @param movieId  A Movie TMDb id.
+     */
+    @GET("movie/{movie_id}/videos")
+    Call<Videos> videos(
+            @Path("movie_id") int movieId
+    );
+
+    /**
+     * Get the videos (trailers, teasers, clips, etc...) for a specific movie id.
+     *
+     * @param imdbMovieId  A Movie IMDb id.
+     */
+    @GET("movie/{movie_id}/videos")
+    Call<Videos> videos(
+            @Path("movie_id") String imdbMovieId
+    );
+
+    /**
      * Get the videos (trailers, teasers, clips, etc...) for a specific movie id.
      *
      * @param movieId  A Movie TMDb id.
@@ -253,6 +625,18 @@ public interface MoviesService {
     @GET("movie/{movie_id}/videos")
     Call<Videos> videos(
             @Path("movie_id") int movieId,
+            @Query("language") String language
+    );
+
+    /**
+     * Get the videos (trailers, teasers, clips, etc...) for a specific movie id.
+     *
+     * @param imdbMovieId  A Movie IMDb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     */
+    @GET("movie/{movie_id}/videos")
+    Call<Videos> videos(
+            @Path("movie_id") String imdbMovieId,
             @Query("language") String language
     );
 
