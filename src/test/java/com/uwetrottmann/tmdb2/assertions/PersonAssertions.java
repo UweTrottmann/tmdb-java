@@ -68,13 +68,7 @@ public class PersonAssertions {
     }
 
     public static void assertTestPersonExternalIds(PersonExternalIds ids) {
-        assertThat(ids.imdb_id).isEqualTo(testPerson.external_ids.imdb_id);
-        assertThat(ids.facebook_id).isEqualTo(testPerson.external_ids.facebook_id);
-        assertThat(ids.freebase_id).isEqualTo(testPerson.external_ids.freebase_id);
-        assertThat(ids.freebase_mid).isEqualTo(testPerson.external_ids.freebase_mid);
-        assertThat(ids.instagram_id).isEqualTo(testPerson.external_ids.instagram_id);
-        assertThat(ids.tvrage_id).isEqualTo(testPerson.external_ids.tvrage_id);
-        assertThat(ids.twitter_id).isEqualTo(testPerson.external_ids.twitter_id);
+        assertThat(ids.imdb_id).isEqualTo(testPerson.imdb_id);
     }
 
     public static void assertPersonResultsPage(PersonResultsPage personResultsPage) {

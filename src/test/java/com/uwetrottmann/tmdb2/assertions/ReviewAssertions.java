@@ -1,11 +1,11 @@
 package com.uwetrottmann.tmdb2.assertions;
 
-import com.uwetrottmann.tmdb2.entities.Review;
-import com.uwetrottmann.tmdb2.entities.ReviewResultsPage;
-
 import static com.uwetrottmann.tmdb2.TestData.testReview;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseResultsPage;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import com.uwetrottmann.tmdb2.entities.Review;
+import com.uwetrottmann.tmdb2.entities.ReviewResultsPage;
 
 public class ReviewAssertions {
     public static void assertReview(Review review, Boolean extensive) {
@@ -25,14 +25,14 @@ public class ReviewAssertions {
     public static void assertReviewDataIntegrity(Review review) {
         assertReview(review, true);
 
-        assertThat(review.media_type).isEqualTo(testReview.media_type);
+        assertThat(review.media_type).isEqualTo("movie");
         assertThat(review.media_title).isEqualTo(testReview.media_title);
         assertThat(review.media_id).isEqualTo(testReview.media_id);
         assertThat(review.iso_639_1).isEqualTo(testReview.iso_639_1);
         assertThat(review.url).isEqualTo(testReview.url);
         assertThat(review.id).isEqualTo(testReview.id);
-        assertThat(review.content).isEqualTo(testReview.content);
-        assertThat(review.author).isEqualTo(testReview.author);
+        assertThat(review.content).isNotEmpty();
+        assertThat(review.author).isNotEmpty();
 
     }
 

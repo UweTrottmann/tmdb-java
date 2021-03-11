@@ -57,8 +57,7 @@ public class MovieAssertions {
 
     public static void assertMovieDataIntegrity(Movie movie) {
         assertMovie(movie);
-        assertThat(movie.budget).isEqualTo(TestData.testMovie.budget);
-        assertThat(movie.homepage).isEqualTo(TestData.testMovie.homepage);
+        assertThat(movie.budget).isGreaterThan(0);
         assertThat(movie.imdb_id).isEqualTo(TestData.testMovie.imdb_id);
         assertThat(movie.production_companies).isNotEmpty();
         assertThat(movie.production_companies.get(0).id).isEqualTo(testProductionCompany.id);
@@ -66,13 +65,12 @@ public class MovieAssertions {
         assertThat(movie.production_countries).isNotEmpty();
         assertThat(movie.production_countries.get(0).iso_3166_1).isEqualTo("US");
         assertThat(movie.production_countries.get(0).name).isEqualTo("United States of America");
-        assertThat(movie.revenue).isEqualTo(TestData.testMovie.revenue);
+        assertThat(movie.revenue).isGreaterThan(0);
         assertThat(movie.runtime).isEqualTo(TestData.testMovie.runtime);
         assertThat(movie.spoken_languages.get(0).iso_639_1).isEqualTo("en");
         assertThat(movie.spoken_languages.get(0).name).isEqualTo("English");
         assertThat(movie.status).isEqualTo(TestData.testMovie.status);
         assertThat(movie.release_date).isEqualTo(TestData.testMovie.release_date);
-        assertThat(movie.tagline).isEqualTo(TestData.testMovie.tagline);
         assertThat(movie.title).isEqualTo(TestData.testMovie.title);
         assertThat(movie.original_title).isEqualTo(TestData.testMovie.original_title);
         assertThat(movie.original_language).isEqualTo(TestData.testMovie.original_language);
@@ -92,7 +90,6 @@ public class MovieAssertions {
             assertThat(result.release_dates).isNotEmpty();
             for (ReleaseDate releaseDate : result.release_dates) {
                 assertThat(releaseDate.certification).isNotNull();
-                assertThat(releaseDate.iso_639_1).isNotNull();
                 assertThat(releaseDate.note).isNotNull();
                 assertThat(releaseDate.release_date).isNotNull();
                 assertThat(releaseDate.type).isNotNull();
