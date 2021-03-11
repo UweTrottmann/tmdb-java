@@ -20,8 +20,10 @@ public class WatchProviders {
          * TMDB).
          */
         public String link;
-        @Nonnull public java.util.List<WatchProvider> buy = new ArrayList<>();
         @Nonnull public java.util.List<WatchProvider> flatrate = new ArrayList<>();
+        @Nonnull public java.util.List<WatchProvider> free = new ArrayList<>();
+        @Nonnull public java.util.List<WatchProvider> ads = new ArrayList<>();
+        @Nonnull public java.util.List<WatchProvider> buy = new ArrayList<>();
 
     }
 

@@ -46,12 +46,21 @@ public class GenericAssertions {
         }
     }
 
-    public static void assertWatchProvider(WatchProviders.WatchProvider provider) {
-        assertThat(provider).isNotNull();
-        assertThat(provider.display_priority).isGreaterThanOrEqualTo(0);
-        assertThat(provider.logo_path).isNotEmpty();
-        assertThat(provider.provider_name).isNotEmpty();
-        assertThat(provider.provider_id).isNotNull();
+    public static void assertWatchProviderCountryInfo(WatchProviders.CountryInfo info) {
+        assertWatchProviders(info.flatrate);
+        assertWatchProviders(info.free);
+        assertWatchProviders(info.ads);
+        assertWatchProviders(info.buy);
+    }
+
+    private static void assertWatchProviders(List<WatchProviders.WatchProvider> providers) {
+        for (WatchProviders.WatchProvider provider : providers) {
+            assertThat(provider).isNotNull();
+            assertThat(provider.display_priority).isGreaterThanOrEqualTo(0);
+            assertThat(provider.logo_path).isNotEmpty();
+            assertThat(provider.provider_name).isNotEmpty();
+            assertThat(provider.provider_id).isNotNull();
+        }
     }
 
     public static void assertAlternativeTitles(AlternativeTitles alternativeTitles) {

@@ -10,7 +10,7 @@ import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertContentR
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertImages;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertTranslations;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertVideos;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertWatchProvider;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertWatchProviderCountryInfo;
 import static com.uwetrottmann.tmdb2.assertions.KeywordAssertions.assertKeywords;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShow;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShowDataIntegrity;
@@ -257,13 +257,9 @@ public class TvServiceTest extends BaseTestCase {
         assertThat(providers.results).isNotNull();
         for (Map.Entry<String, WatchProviders.CountryInfo> entry : providers.results.entrySet()) {
             assertThat(entry.getKey()).isNotEmpty();
-            assertThat(entry.getValue().link).isNotEmpty();
-            for (WatchProviders.WatchProvider provider : entry.getValue().buy) {
-                assertWatchProvider(provider);
-            }
-            for (WatchProviders.WatchProvider provider : entry.getValue().flatrate) {
-                assertWatchProvider(provider);
-            }
+            WatchProviders.CountryInfo countryInfo = entry.getValue();
+            assertThat(countryInfo.link).isNotEmpty();
+            assertWatchProviderCountryInfo(countryInfo);
         }
     }
 
