@@ -5,6 +5,8 @@ Change Log
 _in development_
 
 * Add Watch Providers methods for movies and TV.
+* Update retrofit dependency to `2.9.0`, requires Java 8 or Android 5.0. If you need to support older devices,
+  you might have to exclude this transitive dependency.
 
 ## 2.2.0
 _2019-11-27_
