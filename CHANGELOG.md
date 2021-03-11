@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 2.3.0
+_in development_
+
+* Add Watch Providers methods for movies and TV.
+
 ## 2.2.0
 _2019-11-27_
 

@@ -16,6 +16,7 @@ import com.uwetrottmann.tmdb2.entities.TaggedImage;
 import com.uwetrottmann.tmdb2.entities.TaggedImagesResultsPage;
 import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.Videos;
+import com.uwetrottmann.tmdb2.entities.WatchProviders;
 import java.util.List;
 
 public class GenericAssertions {
@@ -43,6 +44,14 @@ public class GenericAssertions {
             assertThat(video.size).isNotNull();
             assertThat(video.type).isNotNull();
         }
+    }
+
+    public static void assertWatchProvider(WatchProviders.WatchProvider provider) {
+        assertThat(provider).isNotNull();
+        assertThat(provider.display_priority).isGreaterThanOrEqualTo(0);
+        assertThat(provider.logo_path).isNotEmpty();
+        assertThat(provider.provider_name).isNotEmpty();
+        assertThat(provider.provider_id).isNotNull();
     }
 
     public static void assertAlternativeTitles(AlternativeTitles alternativeTitles) {

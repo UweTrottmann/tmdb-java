@@ -19,6 +19,7 @@ import com.uwetrottmann.tmdb2.entities.Status;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.Videos;
+import com.uwetrottmann.tmdb2.entities.WatchProviders;
 import java.util.Map;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -254,6 +255,18 @@ public interface MoviesService {
     Call<Videos> videos(
             @Path("movie_id") int movieId,
             @Query("language") String language
+    );
+
+    /**
+     * Get a list of the availabilities per country by provider.
+     *
+     * Please note: In order to use this data you must attribute the source of the data as JustWatch.
+     *
+     * @see <a href="https://developers.themoviedb.org/3/movies/get-movie-watch-providers">Documentation</a>
+     */
+    @GET("movie/{movie_id}/watch/providers")
+    Call<WatchProviders> watchProviders(
+            @Path("movie_id") int movieId
     );
 
     /**

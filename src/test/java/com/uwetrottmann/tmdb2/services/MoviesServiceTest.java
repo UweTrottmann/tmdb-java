@@ -9,6 +9,7 @@ import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertAlternat
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertImages;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertTranslations;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertVideos;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertWatchProvider;
 import static com.uwetrottmann.tmdb2.assertions.KeywordAssertions.assertKeywords;
 import static com.uwetrottmann.tmdb2.assertions.ListAssertions.assertListResultsPage;
 import static com.uwetrottmann.tmdb2.assertions.MovieAssertions.assertMovie;
@@ -35,9 +36,11 @@ import com.uwetrottmann.tmdb2.entities.ReviewResultsPage;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.Videos;
+import com.uwetrottmann.tmdb2.entities.WatchProviders;
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import org.junit.Test;
 import retrofit2.Call;
 
@@ -225,7 +228,31 @@ public class MoviesServiceTest extends BaseTestCase {
 
         Videos videos = call.execute().body();
 
+        assertThat(videos).isNotNull();
         assertVideos(videos);
+    }
+
+    @Test
+    public void watchProviders() throws IOException {
+        Call<WatchProviders> call = getUnauthenticatedInstance().moviesService().watchProviders(
+                testMovie.id
+        );
+
+        WatchProviders providers = call.execute().body();
+
+        assertThat(providers).isNotNull();
+        assertThat(providers.id).isEqualTo(testMovie.id);
+        assertThat(providers.results).isNotNull();
+        for (Map.Entry<String, WatchProviders.CountryInfo> entry : providers.results.entrySet()) {
+            assertThat(entry.getKey()).isNotEmpty();
+            assertThat(entry.getValue().link).isNotEmpty();
+            for (WatchProviders.WatchProvider provider : entry.getValue().buy) {
+                assertWatchProvider(provider);
+            }
+            for (WatchProviders.WatchProvider provider : entry.getValue().flatrate) {
+                assertWatchProvider(provider);
+            }
+        }
     }
 
     @Test
