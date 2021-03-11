@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 2.3.1
+_2021-03-11_
+
+* Add additional Watch Provider lists.
+
 ## 2.3.0
 _2021-03-11_
 
