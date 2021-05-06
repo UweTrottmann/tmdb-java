@@ -103,6 +103,7 @@ public interface SearchService {
             @Query("query") String query,
             @Query("page") Integer page,
             @Query("language") String language,
-            @Query("first_air_date_year") Integer firstAirDateYear
+            @Query("first_air_date_year") Integer firstAirDateYear,
+            @Query("include_adult") Boolean includeAdult
     );
 }

@@ -99,6 +99,7 @@ public class SearchServiceTest extends BaseTestCase {
                 testTvShow.name,
                 null,
                 null,
+                null,
                 null
         );
 
