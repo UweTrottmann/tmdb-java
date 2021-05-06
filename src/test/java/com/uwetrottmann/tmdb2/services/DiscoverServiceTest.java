@@ -1,17 +1,5 @@
 package com.uwetrottmann.tmdb2.services;
 
-import com.uwetrottmann.tmdb2.BaseTestCase;
-import com.uwetrottmann.tmdb2.entities.DiscoverFilter;
-import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
-import com.uwetrottmann.tmdb2.entities.TmdbDate;
-import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
-import com.uwetrottmann.tmdb2.enumerations.ReleaseType;
-import com.uwetrottmann.tmdb2.enumerations.SortBy;
-import org.junit.Test;
-import retrofit2.Call;
-
-import java.io.IOException;
-
 import static com.uwetrottmann.tmdb2.TestData.testMovieGenreRomance;
 import static com.uwetrottmann.tmdb2.TestData.testNetwork;
 import static com.uwetrottmann.tmdb2.TestData.testPersonCast;
@@ -20,6 +8,17 @@ import static com.uwetrottmann.tmdb2.TestData.testTvGenreDrama;
 import static com.uwetrottmann.tmdb2.TestData.testTvGenreSciFi;
 import static com.uwetrottmann.tmdb2.assertions.MovieAssertions.assertMovieResultsPage;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShowResultsPage;
+
+import com.uwetrottmann.tmdb2.BaseTestCase;
+import com.uwetrottmann.tmdb2.entities.DiscoverFilter;
+import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
+import com.uwetrottmann.tmdb2.entities.TmdbDate;
+import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
+import com.uwetrottmann.tmdb2.enumerations.ReleaseType;
+import com.uwetrottmann.tmdb2.enumerations.SortBy;
+import java.io.IOException;
+import org.junit.Test;
+import retrofit2.Call;
 
 public class DiscoverServiceTest extends BaseTestCase {
 
@@ -32,6 +31,8 @@ public class DiscoverServiceTest extends BaseTestCase {
                 .with_cast(new DiscoverFilter(testPersonCast.id))
                 .with_crew(new DiscoverFilter(testPersonCrew.id))
                 .without_genres(new DiscoverFilter(testMovieGenreRomance.id))
+                // 'cult film', 'insomnia' or 'based on short story'
+                .with_keywords(new DiscoverFilter(DiscoverFilter.Separator.OR, 34117, 4142, 156866))
                 .with_release_type(new DiscoverFilter(DiscoverFilter.Separator.OR,
                         ReleaseType.THEATRICAL, ReleaseType.DIGITAL))
                 .build();
