@@ -36,6 +36,7 @@ public class TestData {
 
     public static final Person testPersonCast = new Person();
     public static final Person testPersonCrew = new Person();
+    public static Integer[] testKeywordsId;
 
     public static final Movie testMovie = new Movie();
     public static Date testMovieChangesStartDate;
@@ -107,6 +108,8 @@ public class TestData {
 
         testPersonCrew.id = 7467;
         testPersonCrew.name = "David Fincher";
+
+        testKeywordsId = new Integer[]{34117, 4142, 156866};
 
         testMovieGenreAdventure.name = "Adventure";
         testMovieGenreAdventure.id = 12;

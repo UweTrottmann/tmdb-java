@@ -12,6 +12,7 @@ import retrofit2.Call;
 
 import java.io.IOException;
 
+import static com.uwetrottmann.tmdb2.TestData.testKeywordsId;
 import static com.uwetrottmann.tmdb2.TestData.testMovieGenreRomance;
 import static com.uwetrottmann.tmdb2.TestData.testNetwork;
 import static com.uwetrottmann.tmdb2.TestData.testPersonCast;
@@ -32,6 +33,8 @@ public class DiscoverServiceTest extends BaseTestCase {
                 .with_cast(new DiscoverFilter(testPersonCast.id))
                 .with_crew(new DiscoverFilter(testPersonCrew.id))
                 .without_genres(new DiscoverFilter(testMovieGenreRomance.id))
+                .with_keywords(new DiscoverFilter(DiscoverFilter.Separator.OR,
+                        testKeywordsId))
                 .with_release_type(new DiscoverFilter(DiscoverFilter.Separator.OR,
                         ReleaseType.THEATRICAL, ReleaseType.DIGITAL))
                 .build();
