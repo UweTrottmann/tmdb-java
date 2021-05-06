@@ -22,6 +22,11 @@ public class DiscoverFilter {
         this.items = items;
     }
 
+    public DiscoverFilter(Separator separator, Integer... items) {
+        this.separator = separator;
+        this.items = items;
+    }
+
     public DiscoverFilter(Separator separator, ReleaseType... types) {
         this.separator = separator;
         this.items = new Integer[types.length];
