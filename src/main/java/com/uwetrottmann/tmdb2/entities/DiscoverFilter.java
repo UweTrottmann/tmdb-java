@@ -18,8 +18,7 @@ public class DiscoverFilter {
     }
 
     public DiscoverFilter(Integer... items) {
-        this.separator = Separator.AND;
-        this.items = items;
+        this(Separator.AND, items);
     }
 
     public DiscoverFilter(Separator separator, Integer... items) {
