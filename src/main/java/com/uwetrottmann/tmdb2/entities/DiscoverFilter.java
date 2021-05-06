@@ -27,6 +27,9 @@ public class DiscoverFilter {
     }
 
     public DiscoverFilter(Separator separator, ReleaseType... types) {
+        if (types == null){
+            throw new IllegalArgumentException("types must not be null");
+        }
         this.separator = separator;
         this.items = new Integer[types.length];
         for (int i = 0; i < types.length; i++) {
@@ -39,6 +42,9 @@ public class DiscoverFilter {
 
     @Override
     public String toString() {
+        if (separator == null){
+            throw new NullPointerException();
+        }
         if (items == null || items.length == 0) {
             return null;
         }
