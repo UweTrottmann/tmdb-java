@@ -21,3 +21,8 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Build with Maven
         run: mvn --batch-mode -show-version --update-snapshots --errors package
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always() # also run if build/step step failed
+        with:
+          files: target/surefire-reports/*.xml
