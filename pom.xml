@@ -20,14 +20,14 @@
     <licenses>
         <license>
             <name>Apache 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
         </license>
     </licenses>
 
     <developers>
         <developer>
             <name>Uwe Trottmann</name>
-            <url>http://uwetrottmann.com</url>
+            <url>https://www.uwetrottmann.com</url>
         </developer>
     </developers>
 
