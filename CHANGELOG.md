@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+## 2.4.0
+_2021-05-20_
+
+* Enhanced the method SearchService.tv() by the parameter `includeAdult` [#84](https://github.com/UweTrottmann/tmdb-java/pull/84) Thanks to @mlaggner!
+* Added an alternative DiscoverFilter constructor to allow 'OR' as an operator choice [#85](https://github.com/UweTrottmann/tmdb-java/pull/85) Thanks to @Ethan-Icet!
+
 ## 2.3.1
 _2021-03-11_
 
