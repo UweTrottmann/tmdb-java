@@ -1,14 +1,11 @@
 package com.uwetrottmann.tmdb2.assertions;
 
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseResultsPage;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.uwetrottmann.tmdb2.entities.BaseList;
-import com.uwetrottmann.tmdb2.entities.Media;
 import com.uwetrottmann.tmdb2.entities.List;
 import com.uwetrottmann.tmdb2.entities.ListResultsPage;
-
-import static com.uwetrottmann.tmdb2.TestData.testList;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseResultsPage;
-import static com.uwetrottmann.tmdb2.assertions.MediaAssertions.assertMedia;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class ListAssertions {
     public static void assertListResultsPage(ListResultsPage listResultsPage) {
@@ -39,15 +36,4 @@ public class ListAssertions {
         }
     }
 
-    public static void assertListDataIntegrity(List list) {
-        assertBaseList(list);
-
-        assertThat(list.created_by).isEqualTo(testList.created_by);
-        assertThat(list.name).isEqualTo(testList.name);
-
-        assertThat(list.items).isNotEmpty();
-        for (Media media : list.items) {
-            assertMedia(media);
-        }
-    }
 }
