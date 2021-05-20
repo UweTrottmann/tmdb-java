@@ -7,7 +7,6 @@ import com.uwetrottmann.tmdb2.entities.Company;
 import com.uwetrottmann.tmdb2.entities.Credit;
 import com.uwetrottmann.tmdb2.entities.CreditMedia;
 import com.uwetrottmann.tmdb2.entities.Genre;
-import com.uwetrottmann.tmdb2.entities.List;
 import com.uwetrottmann.tmdb2.entities.Movie;
 import com.uwetrottmann.tmdb2.entities.Network;
 import com.uwetrottmann.tmdb2.entities.Person;
@@ -26,6 +25,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Note: if possible add data WITHIN the test class and NOT here.
+ * Also do NOT use the static initializer block, use constants or methods instead.
+ */
 public class TestData {
 
     private static final SimpleDateFormat JSON_STRING_DATE = new SimpleDateFormat("yyy-MM-dd");
@@ -72,9 +75,6 @@ public class TestData {
     public static Date testTvEpisodeChangesEndDate;
 
     public static final BaseKeyword testKeyword = new BaseKeyword();
-
-    public static final List testList = new List();
-    public static final Movie testListMovie = new Movie();
 
     public static final java.util.List<Integer> testListMovies = new ArrayList<>();
 
@@ -213,11 +213,6 @@ public class TestData {
         testKeyword.id = 1721;
         testKeyword.name = "fight";
 
-        testList.id = 9883;
-        testList.created_by = "banana_girl";
-        testList.name = "YA adaptations";
-
-        testListMovie.id = 9880;
 
         testListMovies.add(testMovie.id);
         testListMovies.add(550);

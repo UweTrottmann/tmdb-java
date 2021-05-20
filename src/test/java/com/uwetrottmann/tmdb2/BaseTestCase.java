@@ -6,7 +6,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 
 public abstract class BaseTestCase {
 
-    private static final boolean PRINT_REQUESTS = true;
+    private static final boolean LOG_BODY = System.getenv("CI") == null;
 
     // Do NOT use this API key in your application, it is only for testing tmdb-java!
     private static final String TEST_API_KEY = "25da90e9f8f0b3892d8bdeb6c3d6267d";
@@ -37,12 +37,11 @@ public abstract class BaseTestCase {
                 rateLimiter.acquire();
                 return TmdbInterceptor.handleIntercept(chain, instance);
             });
-            if (PRINT_REQUESTS) {
-                // add logging, standard output is easier to read
-                HttpLoggingInterceptor logging = new HttpLoggingInterceptor(System.out::println);
-                logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-                builder.addNetworkInterceptor(logging);
-            }
+            // add logging, standard output is easier to read
+            // but only log headers on CI to keep logs short
+            HttpLoggingInterceptor logging = new HttpLoggingInterceptor(System.out::println);
+            logging.setLevel(LOG_BODY ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.BASIC);
+            builder.addNetworkInterceptor(logging);
         }
     }
 

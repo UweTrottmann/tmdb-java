@@ -1,35 +1,47 @@
 package com.uwetrottmann.tmdb2.services;
 
+import static com.uwetrottmann.tmdb2.assertions.MediaAssertions.assertMedia;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import com.uwetrottmann.tmdb2.BaseTestCase;
-import com.uwetrottmann.tmdb2.TestData;
+import com.uwetrottmann.tmdb2.assertions.ListAssertions;
 import com.uwetrottmann.tmdb2.entities.List;
 import com.uwetrottmann.tmdb2.entities.ListItemStatus;
+import com.uwetrottmann.tmdb2.entities.Media;
+import java.io.IOException;
 import org.junit.Test;
 import retrofit2.Call;
 
-import java.io.IOException;
-
-import static com.uwetrottmann.tmdb2.assertions.ListAssertions.assertListDataIntegrity;
-import static org.assertj.core.api.Assertions.assertThat;
-
 public class ListsServiceTest extends BaseTestCase {
+
+    private static final int TEST_LIST_ID = 5;
 
     @Test
     public void test_summary() throws IOException {
         Call<List> call = getUnauthenticatedInstance().listsService().summary(
-                TestData.testList.id
+                TEST_LIST_ID
         );
 
         List list = call.execute().body();
 
-        assertListDataIntegrity(list);
+        ListAssertions.assertBaseList(list);
+
+        assertThat(list).isNotNull();
+        assertThat(list.created_by).isEqualTo("travisbell");
+        assertThat(list.name).isEqualTo("The Avengers");
+
+        assertThat(list.items).isNotNull();
+        assertThat(list.items).isNotEmpty();
+        for (Media media : list.items) {
+            assertMedia(media);
+        }
     }
 
     @Test
     public void test_item_status() throws IOException {
         Call<ListItemStatus> call = getUnauthenticatedInstance().listsService().itemStatus(
-                TestData.testList.id,
-                TestData.testListMovie.id
+                TEST_LIST_ID,
+                10195 /* Thor */
         );
 
         ListItemStatus listItemStatus = call.execute().body();
