@@ -1,10 +1,13 @@
 package com.uwetrottmann.tmdb2.entities;
 
 import com.uwetrottmann.tmdb2.enumerations.ReleaseType;
+import javax.annotation.Nonnull;
 
 public class DiscoverFilter {
 
+    @Nonnull
     private final Separator separator;
+    @Nonnull
     private final Integer[] items;
 
     public enum Separator {
@@ -17,12 +20,16 @@ public class DiscoverFilter {
         }
     }
 
-    public DiscoverFilter(Integer... items) {
-        this.separator = Separator.AND;
+    public DiscoverFilter(@Nonnull Integer... items) {
+        this(Separator.AND, items);
+    }
+
+    public DiscoverFilter(@Nonnull Separator separator, @Nonnull Integer... items) {
+        this.separator = separator;
         this.items = items;
     }
 
-    public DiscoverFilter(Separator separator, ReleaseType... types) {
+    public DiscoverFilter(@Nonnull Separator separator, @Nonnull ReleaseType... types) {
         this.separator = separator;
         this.items = new Integer[types.length];
         for (int i = 0; i < types.length; i++) {
@@ -35,7 +42,8 @@ public class DiscoverFilter {
 
     @Override
     public String toString() {
-        if (items == null || items.length == 0) {
+        //noinspection ConstantConditions Annotations do not guarantee null safety.
+        if (separator == null || items == null || items.length == 0) {
             return null;
         }
 
