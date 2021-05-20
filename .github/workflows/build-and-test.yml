@@ -4,6 +4,7 @@ on: [push, pull_request]
 
 jobs:
   package:
+    name: Maven Build and Test
     runs-on: ubuntu-latest
 
     steps:
