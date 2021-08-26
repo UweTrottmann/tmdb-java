@@ -13,5 +13,6 @@ public class TvEpisode extends BaseTvEpisode {
     public TvEpisodeExternalIds external_ids;
     public Credits credits;
     public Videos videos;
+    public Translations translations;
 
 }
