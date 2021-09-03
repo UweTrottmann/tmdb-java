@@ -8,6 +8,7 @@ import static com.uwetrottmann.tmdb2.TestData.testTvShow;
 import static com.uwetrottmann.tmdb2.assertions.ChangeAssertions.assertContentChanges;
 import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCredits;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertImages;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertTranslations;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertVideos;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvEpisode;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvEpisodeDataIntegrity;
@@ -54,7 +55,8 @@ public class TvEpisodesServiceTest extends BaseTestCase {
                 new AppendToResponse(
                         AppendToResponseItem.IMAGES,
                         AppendToResponseItem.EXTERNAL_IDS,
-                        AppendToResponseItem.CREDITS
+                        AppendToResponseItem.CREDITS,
+                        AppendToResponseItem.TRANSLATIONS
                 )
         );
 
@@ -68,6 +70,9 @@ public class TvEpisodesServiceTest extends BaseTestCase {
         // images
         assertThat(tvEpisode.images).isNotNull();
         assertImages(tvEpisode.images.stills);
+
+        // translations
+        assertTranslations(tvEpisode.translations);
 
         // external ids
         TvAssertions.assertTvEpisodeExternalIdsMatch(tvEpisode.external_ids);
