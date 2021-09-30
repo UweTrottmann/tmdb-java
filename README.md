@@ -10,7 +10,7 @@ A Java wrapper around the [TMDb v3 API](https://developers.themoviedb.org/3) usi
 Add the following dependency to your Gradle project:
 
 ```groovy
-implementation 'com.uwetrottmann.tmdb2:tmdb-java:2.4.0'
+implementation("com.uwetrottmann.tmdb2:tmdb-java:2.5.0")
 ```
 
 or your Maven project:
@@ -19,7 +19,7 @@ or your Maven project:
 <dependency>
     <groupId>com.uwetrottmann.tmdb2</groupId>
     <artifactId>tmdb-java</artifactId>
-    <version>2.4.0</version>
+    <version>2.5.0</version>
 </dependency>
 ```
 

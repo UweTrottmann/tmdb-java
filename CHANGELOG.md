@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+## 2.5.0
+_2021-09-30_
+
+* Added AppendToResponseItem.TRANSLATIONS for episodes [#87](https://github.com/UweTrottmann/tmdb-java/pull/87) Thanks to @mlaggner!
+
 ## 2.4.0
 _2021-05-20_
 
