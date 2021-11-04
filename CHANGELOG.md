@@ -3,6 +3,8 @@ Change Log
         
 ## next
 
+* Add more discover filters (watch provider, region and monetization type).
+
 ## 2.5.0
 _2021-09-30_
 
