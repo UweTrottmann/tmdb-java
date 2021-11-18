@@ -14,16 +14,11 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-      - name: Cache Maven packages
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
+          cache: maven
       - name: Build with Maven
         run: mvn --batch-mode -show-version --update-snapshots --errors package
       - name: Publish Unit Test Results
         uses: EnricoMi/publish-unit-test-result-action@v1
-        if: always() # also run if build/step step failed
+        if: always() # also run if build step failed
         with:
           files: target/surefire-reports/*.xml
