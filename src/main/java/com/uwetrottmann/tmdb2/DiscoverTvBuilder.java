@@ -31,6 +31,12 @@ public class DiscoverTvBuilder {
     @Nullable private Boolean include_null_first_air_dates;
     @Nullable private String with_original_language;
     @Nullable private DiscoverFilter without_keywords;
+    @Nullable private Boolean screened_theatrically;
+    @Nullable private DiscoverFilter with_companies;
+    @Nullable private DiscoverFilter with_keywords;
+    @Nullable private DiscoverFilter with_watch_providers;
+    @Nullable private String watch_region;
+    @Nullable private String with_watch_monetization_types;
 
     public DiscoverTvBuilder(DiscoverService discoverService) {
         this.discoverService = discoverService;
@@ -131,6 +137,36 @@ public class DiscoverTvBuilder {
         return this;
     }
 
+    public DiscoverTvBuilder screened_theatrically(@Nullable Boolean screened_theatrically) {
+        this.screened_theatrically = screened_theatrically;
+        return this;
+    }
+
+    public DiscoverTvBuilder with_companies(@Nullable DiscoverFilter with_companies) {
+        this.with_companies = with_companies;
+        return this;
+    }
+
+    public DiscoverTvBuilder with_keywords(@Nullable DiscoverFilter with_keywords) {
+        this.with_keywords = with_keywords;
+        return this;
+    }
+
+    public DiscoverTvBuilder with_watch_providers(@Nullable DiscoverFilter with_watch_providers) {
+        this.with_watch_providers = with_watch_providers;
+        return this;
+    }
+
+    public DiscoverTvBuilder watch_region(@Nullable String watch_region) {
+        this.watch_region = watch_region;
+        return this;
+    }
+
+    public DiscoverTvBuilder with_watch_monetization_types(@Nullable String with_watch_monetization_types) {
+        this.with_watch_monetization_types = with_watch_monetization_types;
+        return this;
+    }
+
     public Call<TvShowResultsPage> build() {
         return discoverService.discoverTv(
                 language,
@@ -151,7 +187,13 @@ public class DiscoverTvBuilder {
                 with_runtime_lte,
                 include_null_first_air_dates,
                 with_original_language,
-                without_keywords
+                without_keywords,
+                screened_theatrically,
+                with_companies,
+                with_keywords,
+                with_watch_providers,
+                watch_region,
+                with_watch_monetization_types
         );
     }
 

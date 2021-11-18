@@ -44,6 +44,9 @@ public class DiscoverMovieBuilder {
     @Nullable private DiscoverFilter with_release_type;
     @Nullable private String with_original_language;
     @Nullable private DiscoverFilter without_keywords;
+    @Nullable private DiscoverFilter with_watch_providers;
+    @Nullable private String watch_region;
+    @Nullable private String with_watch_monetization_types;
 
     public DiscoverMovieBuilder(@Nonnull DiscoverService discoverService) {
         this.discoverService = discoverService;
@@ -204,6 +207,21 @@ public class DiscoverMovieBuilder {
         return this;
     }
 
+    public DiscoverMovieBuilder with_watch_providers(@Nullable DiscoverFilter with_watch_providers) {
+        this.with_watch_providers = with_watch_providers;
+        return this;
+    }
+
+    public DiscoverMovieBuilder watch_region(@Nullable String watch_region) {
+        this.watch_region = watch_region;
+        return this;
+    }
+
+    public DiscoverMovieBuilder with_watch_monetization_types(@Nullable String with_watch_monetization_types) {
+        this.with_watch_monetization_types = with_watch_monetization_types;
+        return this;
+    }
+
     public Call<MovieResultsPage> build() {
         return discoverService.discoverMovie(
                 language,
@@ -236,7 +254,10 @@ public class DiscoverMovieBuilder {
                 with_runtime_lte,
                 with_release_type,
                 with_original_language,
-                without_keywords
+                without_keywords,
+                with_watch_providers,
+                watch_region,
+                with_watch_monetization_types
         );
     }
 
