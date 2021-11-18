@@ -1,7 +1,8 @@
 Change Log
 ==========
-        
-## next
+
+## 2.6.0
+_2021-11-18_
 
 * Add more discover filters (watch provider, region and monetization type).
 
