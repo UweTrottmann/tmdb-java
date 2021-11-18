@@ -29,7 +29,7 @@ public class CreditsServiceTest extends BaseTestCase {
         assertThat(credit.person.name).isNotNull();
         assertThat(credit.person.id).isNotNull();
         assertThat(credit.media).isNotNull();
-        assertThat(credit.media.character).isNotNull();
+        assertThat(credit.media.character).isNotEmpty();
         assertThat(credit.media.id).isNotNull();
         assertThat(credit.media.original_name).isNotNull();
         assertThat(credit.media.name).isNotNull();
@@ -44,6 +44,5 @@ public class CreditsServiceTest extends BaseTestCase {
         assertThat(credit.media.id).isEqualTo(testCredit.media.id);
         assertThat(credit.media.name).isEqualTo(testCredit.media.name);
         assertThat(credit.media.original_name).isEqualTo(testCredit.media.original_name);
-        assertThat(credit.media.character).isEqualTo(testCredit.media.character);
     }
 }
