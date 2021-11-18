@@ -2,17 +2,13 @@ package com.uwetrottmann.tmdb2.services;
 
 import com.uwetrottmann.tmdb2.entities.AppendToResponse;
 import com.uwetrottmann.tmdb2.entities.Company;
-import com.uwetrottmann.tmdb2.entities.DiscoverFilter;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
-import com.uwetrottmann.tmdb2.entities.TmdbDate;
-import com.uwetrottmann.tmdb2.enumerations.SortBy;
+import java.util.Map;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
-
-import java.util.Map;
 
 public interface CompaniesService {
     /**
@@ -54,12 +50,7 @@ public interface CompaniesService {
     /**
      * Get the movies for a specific A Company TMDb id.
      * <p>
-     * Is highly recommend using {@link DiscoverService#discoverMovie(
-     *String, String, SortBy, String, String, String, Boolean, Boolean,
-     * Integer, Integer, TmdbDate, TmdbDate, TmdbDate, TmdbDate, Integer,
-     * Integer, Float, Float, DiscoverFilter, DiscoverFilter, DiscoverFilter,
-     * DiscoverFilter, DiscoverFilter, DiscoverFilter, Integer, DiscoverFilter,
-     * Integer, Integer, DiscoverFilter, String, DiscoverFilter) discoverMovie}
+     * Is highly recommend using {@link DiscoverService#discoverMovie discoverMovie}
      * instead of this method as it is much more flexible.
      *
      * @param companyId A Company TMDb id.

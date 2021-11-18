@@ -1,9 +1,7 @@
 package com.uwetrottmann.tmdb2.services;
 
-import com.uwetrottmann.tmdb2.entities.DiscoverFilter;
 import com.uwetrottmann.tmdb2.entities.GenreResults;
 import com.uwetrottmann.tmdb2.entities.MovieResultsPage;
-import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.enumerations.SortBy;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -35,12 +33,7 @@ public interface GenresService {
     /**
      * Get a list of movies by Genre id.
      *
-     * Is highly recommend using {@link DiscoverService#discoverMovie(
-     *String, String, SortBy, String, String, String, Boolean, Boolean,
-     * Integer, Integer, TmdbDate, TmdbDate, TmdbDate, TmdbDate, Integer,
-     * Integer, Float, Float, DiscoverFilter, DiscoverFilter, DiscoverFilter,
-     * DiscoverFilter, DiscoverFilter, DiscoverFilter, Integer, DiscoverFilter,
-     * Integer, Integer, DiscoverFilter, String, DiscoverFilter) discoverMovie}
+     * Is highly recommend using {@link DiscoverService#discoverMovie discoverMovie}
      * instead of this method as it is much more flexible.
      *
      * @param genreId       A Genre TMDb id.
