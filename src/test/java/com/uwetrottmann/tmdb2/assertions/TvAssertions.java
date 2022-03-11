@@ -74,6 +74,7 @@ public class TvAssertions {
         }
 
         assertThat(tvShow.type).isNotNull();
+        assertThat(tvShow.tagline).isNotNull();
         assertThat(tvShow.status).isNotNull();
 
 

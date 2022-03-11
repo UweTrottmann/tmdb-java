@@ -3,6 +3,8 @@ Change Log
        
 ## next
 
+* Add `tagline` to `TvShow`. [#90](https://github.com/UweTrottmann/tmdb-java/issues/90)
+
 ## 2.6.0
 _2021-11-18_
 

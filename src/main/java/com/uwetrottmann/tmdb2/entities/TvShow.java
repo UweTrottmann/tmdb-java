@@ -18,6 +18,7 @@ public class TvShow extends BaseTvShow {
     public List<BaseCompany> production_companies;
     public List<TvSeason> seasons;
     public String status;
+    public String tagline;
     public String type;
 
     // Following are used with append_to_response
