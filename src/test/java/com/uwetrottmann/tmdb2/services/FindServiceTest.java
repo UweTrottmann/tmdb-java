@@ -1,19 +1,5 @@
 package com.uwetrottmann.tmdb2.services;
 
-import com.uwetrottmann.tmdb2.BaseTestCase;
-import com.uwetrottmann.tmdb2.entities.BaseMovie;
-import com.uwetrottmann.tmdb2.entities.BasePerson;
-import com.uwetrottmann.tmdb2.entities.BaseTvEpisode;
-import com.uwetrottmann.tmdb2.entities.BaseTvSeason;
-import com.uwetrottmann.tmdb2.entities.BaseTvShow;
-import com.uwetrottmann.tmdb2.entities.FindResults;
-import com.uwetrottmann.tmdb2.entities.TvEpisode;
-import com.uwetrottmann.tmdb2.enumerations.ExternalSource;
-import org.junit.Test;
-import retrofit2.Call;
-
-import java.io.IOException;
-
 import static com.uwetrottmann.tmdb2.TestData.testMovie;
 import static com.uwetrottmann.tmdb2.TestData.testPerson;
 import static com.uwetrottmann.tmdb2.TestData.testTvEpisode;
@@ -25,7 +11,33 @@ import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertBaseTvSeason;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertBaseTvShow;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import com.uwetrottmann.tmdb2.BaseTestCase;
+import com.uwetrottmann.tmdb2.entities.BaseMovie;
+import com.uwetrottmann.tmdb2.entities.BasePerson;
+import com.uwetrottmann.tmdb2.entities.BaseTvEpisode;
+import com.uwetrottmann.tmdb2.entities.BaseTvSeason;
+import com.uwetrottmann.tmdb2.entities.BaseTvShow;
+import com.uwetrottmann.tmdb2.entities.FindResults;
+import com.uwetrottmann.tmdb2.enumerations.ExternalSource;
+import java.io.IOException;
+import org.junit.Test;
+import retrofit2.Call;
+
 public class FindServiceTest extends BaseTestCase {
+
+    @Test
+    public void test_find_no_results() throws IOException {
+        FindResults noResults = getUnauthenticatedInstance().findService()
+                .find(1, ExternalSource.TVDB_ID, null)
+                .execute()
+                .body();
+        assertThat(noResults).isNotNull();
+        assertThat(noResults.movie_results).isNotNull();
+        assertThat(noResults.person_results).isNotNull();
+        assertThat(noResults.tv_results).isNotNull();
+        assertThat(noResults.tv_episode_results).isNotNull();
+        assertThat(noResults.tv_season_results).isNotNull();
+    }
 
     @Test
     public void test_find_movie() throws IOException {
