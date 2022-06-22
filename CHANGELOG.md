@@ -3,7 +3,7 @@ Change Log
 
 ## next
 
-
+* Configuration: add `languages` and `primary_translations`.
 
 ## 2.7.0
 _2022-03-11_
