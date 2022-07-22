@@ -7,6 +7,7 @@ public class BaseTvEpisode extends BaseTvEpisodeRatingObject {
     public String name;
     public String overview;
     public String production_code;
+    public Integer runtime;
     public Integer season_number;
     public String still_path;
     public Double vote_average;

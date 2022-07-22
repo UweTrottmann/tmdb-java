@@ -4,6 +4,7 @@ Change Log
 ## next
 
 * Configuration: add `languages` and `primary_translations`.
+* Add `runtime` on the episode level.
 
 ## 2.7.0
 _2022-03-11_

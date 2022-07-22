@@ -173,6 +173,9 @@ public class TvAssertions {
         assertThat(tvEpisode.season_number).isGreaterThanOrEqualTo(0);
         assertThat(tvEpisode.vote_average).isNotNull();
         assertThat(tvEpisode.vote_count).isNotNull();
+        if (tvEpisode.runtime != null) {
+            assertThat(tvEpisode.runtime).isPositive();
+        }
     }
 
     public static void assertTvEpisode(TvEpisode tvEpisode) {
