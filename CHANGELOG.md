@@ -1,15 +1,19 @@
 Change Log
 ==========
 
+## 2.8.1
+_2022-09-01_
+
+* Add explicit Gson dependency [2.9.1]: transient dependency on 2.8.5 has a [security vulnerability](https://github.com/google/gson/pull/1991)
+  and this library uses the Gson API explicitly.
+* Add explicit OkHttp dependency [4.10.0] as this library uses the API directly and to receive latest bug and security fixes.
+
 ## 2.8.0
 _2022-09-01_
 
 * Configuration: add `languages` and `primary_translations`.
 * Add `runtime` on the episode level.
 * Bundle R8 rules into library.
-* Add explicit Gson dependency [2.9.1]: transient dependency on 2.8.5 has a [security vulnerability](https://github.com/google/gson/pull/1991)
-  and this library uses the Gson API explicitly.
-* Add explicit OkHttp dependency [4.10.0] as this library uses the API directly and to receive latest bug and security fixes.
 
 ## 2.7.0
 _2022-03-11_
