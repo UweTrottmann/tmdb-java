@@ -5,6 +5,7 @@ Change Log
 
 * Configuration: add `languages` and `primary_translations`.
 * Add `runtime` on the episode level.
+* Bundle R8 rules into library.
 
 ## 2.7.0
 _2022-03-11_
