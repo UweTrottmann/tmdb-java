@@ -1,7 +1,8 @@
 Change Log
 ==========
 
-## next
+## 2.8.0
+_2022-09-01_
 
 * Configuration: add `languages` and `primary_translations`.
 * Add `runtime` on the episode level.
