@@ -161,8 +161,8 @@ public class Tmdb {
     }
 
     /**
-     * Creates a {@link Retrofit.Builder} that sets the base URL, adds a Gson
-     * converter and sets {@link #okHttpClient()} as its client.
+     * Creates a {@link Retrofit.Builder} that sets the base URL, adds a Gson converter and sets {@link #okHttpClient()}
+     * as its client.
      *
      * @see #okHttpClient()
      */
@@ -175,8 +175,8 @@ public class Tmdb {
 
 
     /**
-     * Returns the default OkHttp client instance. It is strongly recommended to
-     * override this and use your app instance.
+     * Returns the default OkHttp client instance. It is strongly recommended to override this and use your app
+     * instance.
      *
      * @see #setOkHttpClientDefaults(OkHttpClient.Builder)
      */
@@ -197,11 +197,9 @@ public class Tmdb {
     }
 
     /**
-     * Return the current {@link Retrofit} instance. If none exists (first call,
-     * auth changed), builds a new one.
-     * <p>
-     * When building, sets the base url and a custom client with an
-     * {@link Interceptor} which supplies authentication data.
+     * Return the current {@link Retrofit} instance. If none exists (first call, auth changed), builds a new one.
+     * <p>When building, sets the base url and a custom client with an {@link Interceptor} which supplies authentication
+     * data.
      */
     protected Retrofit getRetrofit() {
         if (retrofit == null) {
@@ -211,12 +209,10 @@ public class Tmdb {
     }
 
     /**
-     * Throws a {@link com.uwetrottmann.tmdb2.exceptions.TmdbException} if the given
-     * unsuccessful response contains a known TMDB status code.
+     * Throws a {@link com.uwetrottmann.tmdb2.exceptions.TmdbException} if the given unsuccessful response contains a
+     * known TMDB status code.
      *
-     * @see <a href=
-     *      "https://www.themoviedb.org/documentation/api/status-codes">Status
-     *      Codes</a>
+     * @see <a href="https://www.themoviedb.org/documentation/api/status-codes">Status Codes</a>
      */
     public void throwOnKnownError(Response response) throws IOException {
         if (response.isSuccessful()) {
@@ -238,39 +234,39 @@ public class Tmdb {
         Integer code = status.status_code;
         String message = status.status_message;
         switch (code) {
-        case 2:
-        case 4:
-        case 9:
-        case 11:
-        case 15:
-        case 16:
-        case 19:
-        case 24:
-            throw new TmdbServiceErrorException(code, message);
-        case 3:
-        case 14:
-        case 33:
-        case 7:
-        case 10:
-        case 17:
-        case 18:
-        case 26:
-        case 30:
-        case 31:
-        case 32:
-            throw new TmdbAuthenticationFailedException(code, message);
-        case 5:
-        case 20:
-        case 22:
-        case 23:
-        case 27:
-        case 28:
-            throw new TmdbInvalidParametersException(code, message);
-        case 6:
-        case 34:
-            throw new TmdbNotFoundException(code, message);
-        case 8:
-            throw new TmdbDuplicateEntryException(code, message);
+            case 2:
+            case 4:
+            case 9:
+            case 11:
+            case 15:
+            case 16:
+            case 19:
+            case 24:
+                throw new TmdbServiceErrorException(code, message);
+            case 3:
+            case 14:
+            case 33:
+            case 7:
+            case 10:
+            case 17:
+            case 18:
+            case 26:
+            case 30:
+            case 31:
+            case 32:
+                throw new TmdbAuthenticationFailedException(code, message);
+            case 5:
+            case 20:
+            case 22:
+            case 23:
+            case 27:
+            case 28:
+                throw new TmdbInvalidParametersException(code, message);
+            case 6:
+            case 34:
+                throw new TmdbNotFoundException(code, message);
+            case 8:
+                throw new TmdbDuplicateEntryException(code, message);
         }
     }
 
