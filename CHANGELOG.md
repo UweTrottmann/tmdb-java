@@ -2,6 +2,7 @@ Change Log
 ==========
                       
 ## 2.9.0
+_2023-05-25_
 
 * Add trending endpoint. Thanks @gabrielsme! [#94](https://github.com/UweTrottmann/tmdb-java/issues/94)
 * Update gson [2.9.1 -> 2.10.1].
