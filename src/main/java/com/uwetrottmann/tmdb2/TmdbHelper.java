@@ -14,6 +14,7 @@ import com.uwetrottmann.tmdb2.entities.Media;
 import com.uwetrottmann.tmdb2.entities.PersonCastCredit;
 import com.uwetrottmann.tmdb2.entities.PersonCrewCredit;
 import com.uwetrottmann.tmdb2.entities.RatingObject;
+import com.uwetrottmann.tmdb2.entities.Trending;
 import com.uwetrottmann.tmdb2.enumerations.MediaType;
 import com.uwetrottmann.tmdb2.enumerations.Status;
 import com.uwetrottmann.tmdb2.enumerations.VideoType;
@@ -159,6 +160,37 @@ public class TmdbHelper {
                     } else {
                         return null;
                     }
+                });
+        
+        builder.registerTypeAdapter(Trending.class,
+                (JsonDeserializer<Trending>) (jsonElement, type, jsonDeserializationContext) -> {
+                	Trending trending = new Trending();
+                    if (jsonElement.getAsJsonObject().get("media_type") != null) {
+                    	trending.media_type = jsonDeserializationContext
+                                .deserialize(jsonElement.getAsJsonObject().get("media_type"), MediaType.class);
+                    } else {
+                        if (jsonElement.getAsJsonObject().get("first_air_date") != null) {
+                        	trending.media_type = MediaType.TV;
+                        } else if (jsonElement.getAsJsonObject().get("name") != null) {
+                        	trending.media_type = MediaType.PERSON;
+                        } else if (jsonElement.getAsJsonObject().get("title") != null) {
+                        	trending.media_type = MediaType.MOVIE;
+                        }
+                    }
+                    switch (trending.media_type) {
+                        case MOVIE:
+                        	trending.movie = jsonDeserializationContext.deserialize(jsonElement, BaseMovie.class);
+                            break;
+                        case TV:
+                        	trending.tvShow = jsonDeserializationContext.deserialize(jsonElement, BaseTvShow.class);
+                            break;
+                        case PERSON:
+                        	trending.person = jsonDeserializationContext.deserialize(jsonElement, BasePerson.class);
+                            break;
+                    }
+
+
+                    return trending;
                 });
 
         return builder;

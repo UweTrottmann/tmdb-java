@@ -26,6 +26,7 @@ import com.uwetrottmann.tmdb2.services.PeopleService;
 import com.uwetrottmann.tmdb2.services.ReviewsService;
 import com.uwetrottmann.tmdb2.services.SearchService;
 import com.uwetrottmann.tmdb2.services.TimezonesService;
+import com.uwetrottmann.tmdb2.services.TrendingService;
 import com.uwetrottmann.tmdb2.services.TvEpisodesService;
 import com.uwetrottmann.tmdb2.services.TvSeasonsService;
 import com.uwetrottmann.tmdb2.services.TvService;
@@ -361,6 +362,9 @@ public class Tmdb {
         return getRetrofit().create(TvEpisodesService.class);
     }
 
+    public TrendingService trendingService() {
+        return getRetrofit().create(TrendingService.class);
+    }
 
     public DiscoverMovieBuilder discoverMovie() {
         return new DiscoverMovieBuilder(discoverService());
