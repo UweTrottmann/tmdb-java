@@ -2,10 +2,10 @@
 
 # tmdb-java
 
-A Java wrapper around the [TMDb v3 API](https://developers.themoviedb.org/3) using [retrofit 2](https://square.github.io/retrofit/).
+A Java wrapper around the [TMDb v3 API](https://developer.themoviedb.org/reference/intro/getting-started) using [retrofit 2](https://square.github.io/retrofit/).
 
 ## Usage
-<a href="https://search.maven.org/search?q=tmdb-java">Available on Maven Central</a>
+[Available on Maven Central](https://central.sonatype.com/search?q=tmdb-java)
 
 Add the following dependency to your Gradle project:
 
