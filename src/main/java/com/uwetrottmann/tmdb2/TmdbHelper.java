@@ -98,7 +98,6 @@ public class TmdbHelper {
                             break;
                     }
 
-
                     return media;
                 });
 
@@ -161,35 +160,23 @@ public class TmdbHelper {
                         return null;
                     }
                 });
-        
+
         builder.registerTypeAdapter(Trending.class,
                 (JsonDeserializer<Trending>) (jsonElement, type, jsonDeserializationContext) -> {
-                	Trending trending = new Trending();
-                    if (jsonElement.getAsJsonObject().get("media_type") != null) {
-                    	trending.media_type = jsonDeserializationContext
-                                .deserialize(jsonElement.getAsJsonObject().get("media_type"), MediaType.class);
-                    } else {
-                        if (jsonElement.getAsJsonObject().get("first_air_date") != null) {
-                        	trending.media_type = MediaType.TV;
-                        } else if (jsonElement.getAsJsonObject().get("name") != null) {
-                        	trending.media_type = MediaType.PERSON;
-                        } else if (jsonElement.getAsJsonObject().get("title") != null) {
-                        	trending.media_type = MediaType.MOVIE;
-                        }
-                    }
+                    Trending trending = new Trending();
+                    trending.media_type = jsonDeserializationContext
+                            .deserialize(jsonElement.getAsJsonObject().get("media_type"), MediaType.class);
                     switch (trending.media_type) {
                         case MOVIE:
-                        	trending.movie = jsonDeserializationContext.deserialize(jsonElement, BaseMovie.class);
+                            trending.movie = jsonDeserializationContext.deserialize(jsonElement, BaseMovie.class);
                             break;
                         case TV:
-                        	trending.tvShow = jsonDeserializationContext.deserialize(jsonElement, BaseTvShow.class);
+                            trending.tvShow = jsonDeserializationContext.deserialize(jsonElement, BaseTvShow.class);
                             break;
                         case PERSON:
-                        	trending.person = jsonDeserializationContext.deserialize(jsonElement, BasePerson.class);
+                            trending.person = jsonDeserializationContext.deserialize(jsonElement, BasePerson.class);
                             break;
                     }
-
-
                     return trending;
                 });
 
