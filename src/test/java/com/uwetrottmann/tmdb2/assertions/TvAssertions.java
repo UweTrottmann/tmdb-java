@@ -215,6 +215,7 @@ public class TvAssertions {
         assertThat(actual.instagram_id).isEqualTo(testTvShow.external_ids.instagram_id);
         assertThat(actual.tvrage_id).isEqualTo(testTvShow.external_ids.tvrage_id);
         assertThat(actual.twitter_id).isEqualTo(testTvShow.external_ids.twitter_id);
+        assertThat(actual.wikidata_id).isEqualTo(testTvShow.external_ids.wikidata_id);
     }
 
     public static void assertTvEpisodeExternalIdsMatch(TvEpisodeExternalIds actual) {
@@ -223,6 +224,7 @@ public class TvAssertions {
         assertThat(actual.freebase_id).isEqualTo(testTvEpisode.external_ids.freebase_id);
         assertThat(actual.freebase_mid).isEqualTo(testTvEpisode.external_ids.freebase_mid);
         assertThat(actual.tvrage_id).isEqualTo(testTvEpisode.external_ids.tvrage_id);
+        assertThat(actual.wikidata_id).isEqualTo(testTvEpisode.external_ids.wikidata_id);
     }
 
     public static void assertTvSeasonExternalIdsMatch(TvSeasonExternalIds actual) {
@@ -230,6 +232,7 @@ public class TvAssertions {
         assertThat(actual.freebase_id).isEqualTo(testTvSeason.external_ids.freebase_id);
         assertThat(actual.freebase_mid).isEqualTo(testTvSeason.external_ids.freebase_mid);
         assertThat(actual.tvrage_id).isEqualTo(testTvSeason.external_ids.tvrage_id);
+        assertThat(actual.wikidata_id).isEqualTo(testTvSeason.external_ids.wikidata_id);
     }
 
 }

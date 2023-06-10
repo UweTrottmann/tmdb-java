@@ -11,6 +11,5 @@ public class TvExternalIds {
     public String instagram_id;
     public Integer tvrage_id;
     public String twitter_id;
-
-
+    public String wikidata_id;
 }

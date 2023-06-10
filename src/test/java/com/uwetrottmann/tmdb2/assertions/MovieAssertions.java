@@ -59,6 +59,7 @@ public class MovieAssertions {
         assertMovie(movie);
         assertThat(movie.budget).isGreaterThan(0);
         assertThat(movie.imdb_id).isEqualTo(TestData.testMovie.imdb_id);
+        assertThat(movie.external_ids.wikidata_id).isEqualTo(TestData.testMovie.external_ids.wikidata_id);
         assertThat(movie.production_companies).isNotEmpty();
         assertThat(movie.production_companies.get(0).id).isEqualTo(testProductionCompany.id);
         assertThat(movie.production_companies.get(0).name).isEqualTo(testProductionCompany.name);
