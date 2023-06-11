@@ -6,7 +6,8 @@ public enum ExternalSource {
     FREEBASE_MID("freebase_mid"),
     FREEBASE_ID("freebase_id"),
     TVRAGE_ID("tvrage_id"),
-    TVDB_ID("tvdb_id");
+    TVDB_ID("tvdb_id"),
+    WIKIDATA_ID("wikidata_id");
 
     private final String value;
 
