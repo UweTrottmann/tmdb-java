@@ -137,7 +137,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
-                <version>3.0.0</version>
+                <version>3.0.1</version>
                 <configuration>
                     <arguments>-Dmaven.test.skip=true</arguments>
                     <localCheckout>true</localCheckout>
@@ -150,12 +150,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.1.2</version>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
-                <version>2.15.0</version>
+                <version>2.16.0</version>
             </plugin>
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
