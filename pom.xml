@@ -5,7 +5,7 @@
     <groupId>com.uwetrottmann.tmdb2</groupId>
     <artifactId>tmdb-java</artifactId>
     <packaging>jar</packaging>
-    <version>2.10.0</version>
+    <version>2.10.1-SNAPSHOT</version>
 
     <name>tmdb-java</name>
     <description>tmdb-java is a retrofit2 based wrapper around the themoviedb.org API v3.</description>
@@ -35,7 +35,7 @@
         <url>https://github.com/UweTrottmann/tmdb-java</url>
         <connection>scm:git:git://github.com/UweTrottmann/tmdb-java.git</connection>
         <developerConnection>scm:git:git@github.com:UweTrottmann/tmdb-java.git</developerConnection>
-        <tag>v2.10.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <dependencies>
