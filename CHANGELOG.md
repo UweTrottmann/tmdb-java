@@ -1,5 +1,10 @@
 Change Log
 ==========
+
+## 2.10.0
+_2023-06-14_
+
+* Add WikiData IDs. Thanks @Sheigutn! [#95](https://github.com/UweTrottmann/tmdb-java/pull/95)
                       
 ## 2.9.0
 _2023-05-25_
