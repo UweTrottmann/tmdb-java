@@ -8,8 +8,10 @@ import com.uwetrottmann.tmdb2.entities.Credit;
 import com.uwetrottmann.tmdb2.entities.CreditMedia;
 import com.uwetrottmann.tmdb2.entities.Genre;
 import com.uwetrottmann.tmdb2.entities.Movie;
+import com.uwetrottmann.tmdb2.entities.MovieExternalIds;
 import com.uwetrottmann.tmdb2.entities.Network;
 import com.uwetrottmann.tmdb2.entities.Person;
+import com.uwetrottmann.tmdb2.entities.PersonExternalIds;
 import com.uwetrottmann.tmdb2.entities.Review;
 import com.uwetrottmann.tmdb2.entities.TvEpisode;
 import com.uwetrottmann.tmdb2.entities.TvEpisodeExternalIds;
@@ -98,6 +100,8 @@ public class TestData {
         testPerson.imdb_id = "nm0000255";
         testPerson.place_of_birth = "Berkeley, California, USA";
         testPerson.adult = false;
+        testPerson.external_ids = new PersonExternalIds();
+        testPerson.external_ids.wikidata_id = "Q483118";
 
         testPersonChangesStartDate = JSON_STRING_DATE.parse("2016-12-16");
         testPersonChangesEndDate = JSON_STRING_DATE.parse("2016-12-28");
@@ -136,6 +140,8 @@ public class TestData {
         testMovie.original_language = "en";
         testMovie.imdb_id = "tt0848228";
         testMovie.adult = false;
+        testMovie.external_ids = new MovieExternalIds();
+        testMovie.external_ids.wikidata_id = "Q182218";
 
         testMovieChangesStartDate = JSON_STRING_DATE.parse("2017-3-24");
         testMovieChangesEndDate = JSON_STRING_DATE.parse("2017-4-2");
@@ -158,6 +164,7 @@ public class TestData {
         testTvShow.external_ids.instagram_id= "thesimpsonsfox";
         testTvShow.external_ids.tvrage_id = 6190;
         testTvShow.external_ids.twitter_id = "thesimpsons";
+        testTvShow.external_ids.wikidata_id = "Q886";
         testTvShow.external_ids.id = testTvShow.id;
         testTvShowChangesStartDate = JSON_STRING_DATE.parse("2017-2-2");
         testTvShowChangesEndDate = JSON_STRING_DATE.parse("2017-2-4");
@@ -176,6 +183,7 @@ public class TestData {
         testTvSeason.external_ids.tvrage_id = 0;
         testTvSeason.external_ids.freebase_id = "/en/the_simpsons_season_1";
         testTvSeason.external_ids.freebase_mid = "/m/0cmqz_";
+        testTvSeason.external_ids.wikidata_id = "Q461483";
         testTvSeasonChangesStartDate = JSON_STRING_DATE.parse("2015-10-10");
         testTvSeasonChangesEndDate = JSON_STRING_DATE.parse("2015-10-24");
 
@@ -190,6 +198,7 @@ public class TestData {
         testTvEpisode.external_ids.freebase_id = "/en/simpsons_roasting_on_an_open_fire";
         testTvEpisode.external_ids.tvdb_id = 55452;
         testTvEpisode.external_ids.tvrage_id = 206468;
+        testTvEpisode.external_ids.wikidata_id = "Q753507";
         testTvEpisodeChangesStartDate = JSON_STRING_DATE.parse("2017-2-2");
         testTvEpisodeChangesEndDate = JSON_STRING_DATE.parse("2017-2-4");
 

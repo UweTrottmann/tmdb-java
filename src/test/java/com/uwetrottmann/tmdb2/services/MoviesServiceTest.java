@@ -95,7 +95,8 @@ public class MoviesServiceTest extends BaseTestCase {
                         AppendToResponseItem.RECOMMENDATIONS,
                         AppendToResponseItem.REVIEWS,
                         AppendToResponseItem.LISTS,
-                        AppendToResponseItem.KEYWORDS
+                        AppendToResponseItem.KEYWORDS,
+                        AppendToResponseItem.EXTERNAL_IDS
                 ),
                 opts
         );
@@ -179,6 +180,7 @@ public class MoviesServiceTest extends BaseTestCase {
         assertThat(ids.facebook_id).isEqualTo("BladeRunner2049");
         assertThat(ids.instagram_id).isEqualTo("bladerunnermovie");
         assertThat(ids.twitter_id).isEqualTo("bladerunner");
+        assertThat(ids.wikidata_id).isEqualTo("Q21500755");
     }
 
     @Test

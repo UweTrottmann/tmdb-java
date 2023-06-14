@@ -8,6 +8,6 @@ public class TvEpisodeExternalIds {
     public String freebase_id;
     public String freebase_mid;
     public Integer tvrage_id;
-
+    public String wikidata_id;
 
 }

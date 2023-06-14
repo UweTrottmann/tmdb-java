@@ -69,6 +69,7 @@ public class PersonAssertions {
 
     public static void assertTestPersonExternalIds(PersonExternalIds ids) {
         assertThat(ids.imdb_id).isEqualTo(testPerson.imdb_id);
+        assertThat(ids.wikidata_id).isEqualTo(testPerson.external_ids.wikidata_id);
     }
 
     public static void assertPersonResultsPage(PersonResultsPage personResultsPage) {
