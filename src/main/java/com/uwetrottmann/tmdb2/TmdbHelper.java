@@ -15,6 +15,7 @@ import com.uwetrottmann.tmdb2.entities.PersonCastCredit;
 import com.uwetrottmann.tmdb2.entities.PersonCrewCredit;
 import com.uwetrottmann.tmdb2.entities.RatingObject;
 import com.uwetrottmann.tmdb2.entities.Trending;
+import com.uwetrottmann.tmdb2.enumerations.EpisodeType;
 import com.uwetrottmann.tmdb2.enumerations.MediaType;
 import com.uwetrottmann.tmdb2.enumerations.Status;
 import com.uwetrottmann.tmdb2.enumerations.VideoType;
@@ -178,6 +179,16 @@ public class TmdbHelper {
                             break;
                     }
                     return trending;
+                });
+
+        builder.registerTypeAdapter(EpisodeType.class,
+                (JsonDeserializer<EpisodeType>) (jsonElement, type, jsonDeserializationContext) -> {
+                    String value = jsonElement.getAsString();
+                    if (value != null) {
+                        return EpisodeType.fromValue(value);
+                    } else {
+                        return null;
+                    }
                 });
 
         return builder;

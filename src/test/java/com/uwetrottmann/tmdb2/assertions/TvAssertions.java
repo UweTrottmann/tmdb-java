@@ -148,6 +148,7 @@ public class TvAssertions {
         assertThat(tvSeason.episodes).isNotEmpty();
         for (TvEpisode tvEpisode : tvSeason.episodes) {
             assertTvEpisode(tvEpisode);
+            assertThat(tvEpisode.episode_type).isNotNull();
         }
     }
 
