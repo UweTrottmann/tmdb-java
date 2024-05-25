@@ -20,6 +20,7 @@ import com.uwetrottmann.tmdb2.entities.TvSeason;
 import com.uwetrottmann.tmdb2.entities.TvSeasonExternalIds;
 import com.uwetrottmann.tmdb2.entities.TvShow;
 import com.uwetrottmann.tmdb2.enumerations.CreditType;
+import com.uwetrottmann.tmdb2.enumerations.EpisodeType;
 import com.uwetrottmann.tmdb2.enumerations.MediaType;
 import com.uwetrottmann.tmdb2.enumerations.Status;
 import java.text.ParseException;
@@ -192,6 +193,7 @@ public class TestData {
         testTvEpisode.season_number = 1;
         testTvEpisode.episode_number = 1;
         testTvEpisode.air_date = JSON_STRING_DATE.parse("1989-12-17");
+        testTvEpisode.episode_type = EpisodeType.STANDARD;
         testTvEpisode.external_ids = new TvEpisodeExternalIds();
         testTvEpisode.external_ids.imdb_id = "tt0348034";
         testTvEpisode.external_ids.freebase_mid = "/m/0129zr";
