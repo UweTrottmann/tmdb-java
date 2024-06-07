@@ -1,6 +1,15 @@
 Change Log
 ==========
 
+## 2.11.0
+_2024-06-07_
+                                                                                                   
+* Add Episode type attribute by @ZelKami in https://github.com/UweTrottmann/tmdb-java/pull/96
+* TvService: support aggregate credits by @UweTrottmann in https://github.com/UweTrottmann/tmdb-java/pull/98
+* Update retrofit [2.9.0 -> 2.11.0]
+* Update okhttp [4.10.0 -> 4.12.0] 
+* Update gson [2.10.1 -> 2.11.0]
+
 ## 2.10.0
 _2023-06-14_
 
