@@ -27,7 +27,7 @@ public class ListsServiceTest extends BaseTestCase {
         ListAssertions.assertBaseList(list);
 
         assertThat(list).isNotNull();
-        assertThat(list.created_by).isEqualTo("travisbell");
+        assertThat(list.created_by).isEqualTo("Travis Bell");
         assertThat(list.name).isEqualTo("The Avengers");
 
         assertThat(list.items).isNotNull();

@@ -175,9 +175,10 @@ public class MoviesServiceTest extends BaseTestCase {
         );
 
         MovieExternalIds ids = call.execute().body();
+        assertThat(ids).isNotNull();
         assertThat(ids.id).isEqualTo(movieId);
         assertThat(ids.imdb_id).isEqualTo("tt1856101");
-        assertThat(ids.facebook_id).isEqualTo("BladeRunner2049");
+        assertThat(ids.facebook_id).isEqualTo("bladerunner2049");
         assertThat(ids.instagram_id).isEqualTo("bladerunnermovie");
         assertThat(ids.twitter_id).isEqualTo("bladerunner");
         assertThat(ids.wikidata_id).isEqualTo("Q21500755");
