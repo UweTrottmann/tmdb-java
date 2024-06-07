@@ -21,6 +21,7 @@ import com.uwetrottmann.tmdb2.BaseTestCase;
 import com.uwetrottmann.tmdb2.assertions.TvAssertions;
 import com.uwetrottmann.tmdb2.entities.AlternativeTitles;
 import com.uwetrottmann.tmdb2.entities.AppendToResponse;
+import com.uwetrottmann.tmdb2.entities.BaseTvCredit;
 import com.uwetrottmann.tmdb2.entities.Changes;
 import com.uwetrottmann.tmdb2.entities.ContentRatings;
 import com.uwetrottmann.tmdb2.entities.Credits;
@@ -28,6 +29,9 @@ import com.uwetrottmann.tmdb2.entities.Images;
 import com.uwetrottmann.tmdb2.entities.Keywords;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.Translations;
+import com.uwetrottmann.tmdb2.entities.TvCastCredit;
+import com.uwetrottmann.tmdb2.entities.TvCredits;
+import com.uwetrottmann.tmdb2.entities.TvCrewCredit;
 import com.uwetrottmann.tmdb2.entities.TvExternalIds;
 import com.uwetrottmann.tmdb2.entities.TvShow;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
@@ -141,14 +145,59 @@ public class TvServiceTest extends BaseTestCase {
     }
 
     @Test
+    public void test_aggregateCredits() throws IOException {
+        Call<TvCredits> call =
+                getUnauthenticatedInstance().tvService().aggregateCredits(1416 /* Grey's Anatomy */, null);
+        TvCredits credits = call.execute().body();
+        assertThat(credits).isNotNull();
+        assertThat(credits.id).isPositive();
+
+        assertThat(credits.cast).isNotEmpty();
+        // cast is ordered, so Ellen which has all values is always first
+        TvCastCredit ellenPompeo = credits.cast.get(0);
+        assertThat(ellenPompeo.order).isEqualTo(0);
+        assertTvCredit(ellenPompeo);
+        assertThat(ellenPompeo.roles).isNotEmpty();
+        TvCastCredit.Role role = ellenPompeo.roles.get(0);
+        assertThat(role.credit_id).isNotNull();
+        assertThat(role.character).isNotNull();
+        assertThat(role.episode_count).isPositive();
+
+        assertThat(credits.crew).isNotEmpty();
+        for (TvCrewCredit credit : credits.crew) {
+            // Shonda Rhimes does have all values, unlikely to be removed
+            if ("Shonda Rhimes".equals(credit.name)) {
+                assertTvCredit(credit);
+                assertThat(credit.jobs).isNotEmpty();
+                TvCrewCredit.Job job = credit.jobs.get(0);
+                assertThat(job.credit_id).isNotNull();
+                assertThat(job.job).isNotNull();
+                assertThat(job.episode_count).isPositive();
+                assertThat(credit.department).isNotNull();
+                break;
+            }
+        }
+    }
+
+    private static void assertTvCredit(BaseTvCredit credit) {
+        assertThat(credit.id).isPositive();
+        assertThat(credit.adult).isNotNull();
+        assertThat(credit.gender).isNotNull();
+        assertThat(credit.known_for_department).isNotNull();
+        assertThat(credit.name).isNotNull();
+        assertThat(credit.original_name).isNotNull();
+        assertThat(credit.popularity).isPositive();
+        assertThat(credit.profile_path).isNotNull();
+        assertThat(credit.total_episode_count).isPositive();
+    }
+
+    @Test
     public void test_credits() throws IOException {
         Call<Credits> call = getUnauthenticatedInstance().tvService().credits(
                 testTvShow.id,
                 null
         );
-
         Credits credits = call.execute().body();
-
         assertCredits(credits);
     }
 

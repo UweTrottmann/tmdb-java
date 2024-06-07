@@ -12,6 +12,7 @@ import com.uwetrottmann.tmdb2.entities.RatingObject;
 import com.uwetrottmann.tmdb2.entities.Status;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.entities.Translations;
+import com.uwetrottmann.tmdb2.entities.TvCredits;
 import com.uwetrottmann.tmdb2.entities.TvExternalIds;
 import com.uwetrottmann.tmdb2.entities.TvShow;
 import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
@@ -121,11 +122,16 @@ public interface TvService {
     );
 
     /**
-     * Get the cast and crew information about a TV series. Just like the website, we pull this information from the
-     * last season of the series.
-     *
-     * @param tvShowId A Tv Show TMDb id.
-     * @param language <em>Optional.</em> ISO 639-1 code.
+     * @see <a href="https://developer.themoviedb.org/reference/tv-series-aggregate-credits">Aggregate Credits</a>
+     */
+    @GET("tv/{tv_id}/aggregate_credits")
+    Call<TvCredits> aggregateCredits(
+            @Path("tv_id") int tvShowId,
+            @Query("language") String language
+    );
+
+    /**
+     * @see <a href="https://developer.themoviedb.org/reference/tv-series-credits">Credits</a>
      */
     @GET("tv/{tv_id}/credits")
     Call<Credits> credits(
