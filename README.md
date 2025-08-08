@@ -58,8 +58,11 @@ release which can be interpreted by R8 automatically, ProGuard users must manual
 
 ## License
 
-This work by [Uwe Trottmann](https://uwetrottmann.com) is licensed under the [Apache License 2.0](LICENSE.txt).
+This work by [Uwe Trottmann](https://www.uwetrottmann.com) and [contributors](https://github.com/UweTrottmann/tmdb-java/graphs/contributors)
+is licensed under the [Apache License 2.0](LICENSE.txt). 
+Each relevant file contains an [SPDX short-form identifier](https://spdx.dev/learn/handling-license-info/)
+at the first possible line with the `Apache-2.0` value.
 
-[Contributors](https://github.com/UweTrottmann/tmdb-java/graphs/contributors) and changes are tracked by Git.
+For contributors and changes also see the Git history.
 
 Do not just copy, make it better.
