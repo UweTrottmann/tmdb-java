@@ -84,9 +84,11 @@ public interface MoviesService {
     /**
      * Grab the following account states for a session:
      *
-     * <li>Movie rating</li>
-     * <li>If it belongs to your watchlist</li>
-     * <li>If it belongs to your favorite list</li>
+     * <ul>
+     *     <li>Movie rating</li>
+     *     <li>If it belongs to your watchlist</li>
+     *     <li>If it belongs to your favorite list</li>
+     * </ul>
      *
      * <b>Requires an active Session.</b>
      *
