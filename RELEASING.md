@@ -19,3 +19,11 @@ Then from IDE run tasks (TODO: figure out how to use GUI pin entry from Git Bash
 
 - release:prepare
 - release:perform
+                   
+Push to GitHub:
+                                                                                      
+```bash
+git push origin main --tags
+```
+
+And [create a GitHub release](https://github.com/UweTrottmann/tmdb-java/releases/new). 
