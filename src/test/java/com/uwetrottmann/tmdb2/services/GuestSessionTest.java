@@ -18,9 +18,11 @@ import com.uwetrottmann.tmdb2.entities.TvShowResultsPage;
 import java.io.IOException;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import retrofit2.Call;
 
+@Ignore("Run these tests manually to not risk getting blocked by TMDB servers")
 public class GuestSessionTest extends BaseTestCase {
 
     @Before
