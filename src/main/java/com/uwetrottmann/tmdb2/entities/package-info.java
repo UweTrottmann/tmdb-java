@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: Apache-2.0
+// Copyright 2025 Uwe Trottmann
+
 /**
  * Classes wrapping response or request bodies.
  */

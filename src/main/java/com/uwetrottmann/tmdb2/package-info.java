@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: Apache-2.0
+// Copyright 2025 Uwe Trottmann
+
 /**
  * A Java wrapper around the TMDb v3 API using retrofit 2.
  */
