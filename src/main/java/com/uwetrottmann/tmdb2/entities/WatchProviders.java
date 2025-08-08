@@ -12,7 +12,7 @@ public class WatchProviders {
 
     public Integer id;
     /**
-     * Mapped by ISO 3166-1 two letter country code, e.g. DE and US.
+     * Mapped by ISO 3166-1 two-letter country code, like DE and US.
      */
     @Nonnull public Map<String, CountryInfo> results = new HashMap<>();
 
@@ -27,6 +27,10 @@ public class WatchProviders {
         @Nonnull public java.util.List<WatchProvider> free = new ArrayList<>();
         @Nonnull public java.util.List<WatchProvider> ads = new ArrayList<>();
         @Nonnull public java.util.List<WatchProvider> buy = new ArrayList<>();
+        /**
+         * Only for movies.
+         */
+        @Nonnull public java.util.List<WatchProvider> rent = new ArrayList<>();
 
     }
 

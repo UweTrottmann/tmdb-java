@@ -54,6 +54,7 @@ public class GenericAssertions {
         assertWatchProviders(info.free);
         assertWatchProviders(info.ads);
         assertWatchProviders(info.buy);
+        assertWatchProviders(info.rent);
     }
 
     private static void assertWatchProviders(List<WatchProviders.WatchProvider> providers) {

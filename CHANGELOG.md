@@ -4,6 +4,7 @@ Change Log
 ## Next version
 
 * Note: TMDB has added additional primary translation languages: `ku-TR`, `so-SO` and `uz-UZ`. 
+* Add `rent` to `WatchProviders.CountryInfo` that contains rental providers for a movie.
 
 ## 2.11.0
 _2024-06-07_
