@@ -139,6 +139,7 @@
                     <arguments>-Dmaven.test.skip=true</arguments>
                     <localCheckout>true</localCheckout>
                     <pushChanges>false</pushChanges>
+                    <preparationProfiles>release,heyuwe-sign</preparationProfiles>
                     <releaseProfiles>release,heyuwe-sign</releaseProfiles>
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                 </configuration>
