@@ -18,11 +18,11 @@ jobs:
     steps:
       - name: Check out
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
-      - name: Set up JDK 17
+      - name: Set up JDK
         uses: actions/setup-java@6a0805fcefea3d4657a47ac4c165951e33482018 # v4.2.2
         with:
           distribution: 'temurin'
-          java-version: '17'
+          java-version: '21'
           cache: 'maven'
       - name: Build with Maven
         run: mvn --batch-mode -show-version --update-snapshots --errors package
