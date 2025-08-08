@@ -13,8 +13,9 @@
 
 ```bash
 git commit --all --message "Prepare for release 2.12.0"
-
-./mvnw release:prepare
-
-./mvnw release:perform
 ```
+
+Then from IDE run tasks (TODO: figure out how to use GUI pin entry from Git Bash):
+
+- release:prepare
+- release:perform
