@@ -2,7 +2,8 @@
 
 # tmdb-java
 
-A Java wrapper around the [TMDb v3 API](https://developer.themoviedb.org/reference/intro/getting-started) using [retrofit 2](https://square.github.io/retrofit/).
+tmdb-java is an inofficial wrapper around the [TMDB v3 API](https://developer.themoviedb.org/reference/intro/getting-started)
+using [retrofit 2](https://square.github.io/retrofit/).
 
 ## Usage
 [Available on Maven Central](https://central.sonatype.com/search?q=tmdb-java)
