@@ -11,7 +11,7 @@ using [retrofit 2](https://square.github.io/retrofit/).
 Add the following dependency to your Gradle project:
 
 ```groovy
-implementation("com.uwetrottmann.tmdb2:tmdb-java:2.11.0")
+implementation("com.uwetrottmann.tmdb2:tmdb-java:2.12.0")
 ```
 
 or your Maven project:
@@ -20,7 +20,7 @@ or your Maven project:
 <dependency>
     <groupId>com.uwetrottmann.tmdb2</groupId>
     <artifactId>tmdb-java</artifactId>
-    <version>2.11.0</version>
+    <version>2.12.0</version>
 </dependency>
 ```
 
