@@ -61,7 +61,7 @@ public class ConfigurationServiceTest extends BaseTestCase {
         List<String> languages = call.execute().body();
         assertThat(languages).isNotEmpty();
         // Assert content to detect languages getting added or removed.
-        assertThat(languages).hasSize(137);
+        assertThat(languages).hasSize(140);
         assertThat(languages).containsExactlyInAnyOrder(
                 "af-ZA",
                 "ar-AE",
@@ -158,6 +158,7 @@ public class ConfigurationServiceTest extends BaseTestCase {
                 "kk-KZ",
                 "kn-IN",
                 "ko-KR",
+                "ku-TR",
                 "ky-KG",
                 "lt-LT",
                 "lv-LV",
@@ -181,6 +182,7 @@ public class ConfigurationServiceTest extends BaseTestCase {
                 "si-LK",
                 "sk-SK",
                 "sl-SI",
+                "so-SO",
                 "sq-AL",
                 "sq-XK",
                 "sr-ME",
@@ -194,6 +196,7 @@ public class ConfigurationServiceTest extends BaseTestCase {
                 "tr-TR",
                 "uk-UA",
                 "ur-PK",
+                "uz-UZ",
                 "vi-VN",
                 "zh-CN",
                 "zh-HK",
