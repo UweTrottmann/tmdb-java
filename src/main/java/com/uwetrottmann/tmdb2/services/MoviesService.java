@@ -134,15 +134,23 @@ public interface MoviesService {
     );
 
     /**
-     * Get the external ids that we have stored for a movie.
-     *
-     * @param movieId A Movie TMDb id.
-     * @param language <em>Optional.</em> ISO 639-1 code.
+     * @deprecated Use {@link #externalIds(int)} instead. This method never supported a language parameter.
      */
+    @Deprecated
     @GET("movie/{movie_id}/external_ids")
     Call<MovieExternalIds> externalIds(
             @Path("movie_id") int movieId,
             @Query("language") String language
+    );
+
+    /**
+     * Get the external ids that we have stored for a movie.
+     *
+     * @param movieId A Movie TMDb id.
+     */
+    @GET("movie/{movie_id}/external_ids")
+    Call<MovieExternalIds> externalIds(
+            @Path("movie_id") int movieId
     );
 
     /**

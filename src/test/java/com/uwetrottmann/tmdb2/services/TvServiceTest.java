@@ -220,10 +220,7 @@ public class TvServiceTest extends BaseTestCase {
 
     @Test
     public void test_externalIds() throws IOException {
-        Call<TvExternalIds> call = getUnauthenticatedInstance().tvService().externalIds(
-                testTvShow.id,
-                null
-        );
+        Call<TvExternalIds> call = getUnauthenticatedInstance().tvService().externalIds(testTvShow.id);
 
         TvExternalIds ids = call.execute().body();
 

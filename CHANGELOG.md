@@ -7,6 +7,8 @@ Change Log
 * Add `rent` to `WatchProviders.CountryInfo` that contains rental providers for a movie.
 * `DiscoverTvBuilder`: add `vote_average_lte` and `vote_count_lte`. [#103](https://github.com/UweTrottmann/tmdb-java/issues/103)
 * Add `spoken_languages` to `TvShow`, add `english_name` to `SpokenLanguage`. [#91](https://github.com/UweTrottmann/tmdb-java/issues/91)
+* Deprecate `externalIds` methods that accept a `language` parameter, it was never supported. Use the replacements 
+  without it.
 
 ## 2.11.0
 _2024-06-07_

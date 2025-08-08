@@ -173,9 +173,7 @@ public class MoviesServiceTest extends BaseTestCase {
     @Test
     public void test_externalIds() throws IOException {
         int movieId = 335984;
-        Call<MovieExternalIds> call = getUnauthenticatedInstance().moviesService().externalIds(
-                movieId, null
-        );
+        Call<MovieExternalIds> call = getUnauthenticatedInstance().moviesService().externalIds(movieId);
 
         MovieExternalIds ids = call.execute().body();
         assertThat(ids).isNotNull();

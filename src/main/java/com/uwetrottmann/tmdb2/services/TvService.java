@@ -153,15 +153,23 @@ public interface TvService {
     );
 
     /**
-     * Get the external ids that we have stored for a TV series.
-     *
-     * @param tvShowId A Tv Show TMDb id.
-     * @param language <em>Optional.</em> ISO 639-1 code.
+     * @deprecated Use {@link #externalIds(int)} instead. This method never supported a language parameter.
      */
+    @Deprecated
     @GET("tv/{tv_id}/external_ids")
     Call<TvExternalIds> externalIds(
             @Path("tv_id") int tvShowId,
             @Query("language") String language
+    );
+
+    /**
+     * Get the external ids that we have stored for a TV series.
+     *
+     * @param tvShowId A Tv Show TMDb id.
+     */
+    @GET("tv/{tv_id}/external_ids")
+    Call<TvExternalIds> externalIds(
+            @Path("tv_id") int tvShowId
     );
 
     /**
