@@ -6,6 +6,7 @@ package com.uwetrottmann.tmdb2.assertions;
 import static com.uwetrottmann.tmdb2.TestData.testProductionCompany;
 import static com.uwetrottmann.tmdb2.assertions.CompanyAssertions.assertBaseCompany;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseResultsPage;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertSpokenLanguages;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import com.uwetrottmann.tmdb2.TestData;
@@ -41,7 +42,6 @@ public class MovieAssertions {
     public static void assertMovie(Movie movie) {
         assertBaseMovie(movie);
         assertThat(movie.tagline).isNotEmpty();
-        assertThat(movie.spoken_languages).isNotNull();
         assertThat(movie.homepage).isNotNull();
         assertThat(movie.budget).isNotNull();
         assertThat(movie.imdb_id).isNotNull();
@@ -55,6 +55,8 @@ public class MovieAssertions {
         }
 
         assertThat(movie.revenue).isNotNull();
+        assertThat(movie.spoken_languages).isNotEmpty();
+        assertSpokenLanguages(movie.spoken_languages);
         assertThat(movie.status).isNotNull();
     }
 

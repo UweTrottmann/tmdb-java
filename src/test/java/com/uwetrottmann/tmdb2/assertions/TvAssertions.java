@@ -10,6 +10,7 @@ import static com.uwetrottmann.tmdb2.assertions.CompanyAssertions.assertBaseComp
 import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCastCredits;
 import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCrewCredits;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertBaseResultsPage;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertSpokenLanguages;
 import static com.uwetrottmann.tmdb2.assertions.GenreAssertions.assertGenre;
 import static com.uwetrottmann.tmdb2.assertions.NetworkAssertions.assertNetwork;
 import static com.uwetrottmann.tmdb2.assertions.PersonAssertions.assertBasePerson;
@@ -111,6 +112,8 @@ public class TvAssertions {
             assertThat(tvSeason.episode_count).isGreaterThanOrEqualTo(0);
         }
 
+        assertThat(tvShow.spoken_languages).isNotEmpty();
+        assertSpokenLanguages(tvShow.spoken_languages);
     }
 
     public static void assertTvShowDataIntegrity(TvShow tvShow) {

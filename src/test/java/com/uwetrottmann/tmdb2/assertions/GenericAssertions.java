@@ -14,6 +14,7 @@ import com.uwetrottmann.tmdb2.entities.ContentRating;
 import com.uwetrottmann.tmdb2.entities.ContentRatings;
 import com.uwetrottmann.tmdb2.entities.Image;
 import com.uwetrottmann.tmdb2.entities.NetworkImage;
+import com.uwetrottmann.tmdb2.entities.SpokenLanguage;
 import com.uwetrottmann.tmdb2.entities.Status;
 import com.uwetrottmann.tmdb2.entities.TaggedImage;
 import com.uwetrottmann.tmdb2.entities.TaggedImagesResultsPage;
@@ -160,6 +161,14 @@ public class GenericAssertions {
     public static void assertBaseRatingObject(BaseRatingObject baseRatingObject) {
         assertThat(baseRatingObject).isNotNull();
         assertThat(baseRatingObject.rating).isNotNull();
+    }
+
+    public static void assertSpokenLanguages(List<SpokenLanguage> spokenLanguages) {
+        for (SpokenLanguage language : spokenLanguages) {
+            assertThat(language.english_name).isNotEmpty();
+            assertThat(language.iso_639_1).isNotEmpty();
+            assertThat(language.name).isNotEmpty();
+        }
     }
 
     public static void assertStatus(Status status) {

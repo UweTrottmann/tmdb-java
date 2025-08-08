@@ -20,6 +20,7 @@ public class TvShow extends BaseTvShow {
     public Integer number_of_seasons;
     public List<BaseCompany> production_companies;
     public List<TvSeason> seasons;
+    public List<SpokenLanguage> spoken_languages;
     public String status;
     public String tagline;
     public String type;
