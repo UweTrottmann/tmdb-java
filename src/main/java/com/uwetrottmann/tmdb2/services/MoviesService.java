@@ -38,7 +38,7 @@ public interface MoviesService {
     /**
      * Get the basic movie information for a specific movie id.
      *
-     * @param movieId  A Movie TMDb id.
+     * @param movieId A Movie TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/{movie_id}")
@@ -50,9 +50,11 @@ public interface MoviesService {
     /**
      * Get the basic movie information for a specific movie id.
      *
-     * @param movieId          A Movie TMDb id.
-     * @param language         <em>Optional.</em> ISO 639-1 code.
-     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Value(s):</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
+     * @param movieId A Movie TMDb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Value(s):</b>
+     * alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations,
+     * similar, reviews, lists
      */
     @GET("movie/{movie_id}")
     Call<Movie> summary(
@@ -64,10 +66,12 @@ public interface MoviesService {
     /**
      * Get the basic movie information for a specific movie id.
      *
-     * @param movieId          A Movie TMDb id.
-     * @param language         <em>Optional.</em> ISO 639-1 code.
-     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Value(s):</b> alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations, similar, reviews, lists
-     * @param options          <em>Optional.</em> parameters for the appended extra results.
+     * @param movieId A Movie TMDb id.
+     * @param language <em>Optional.</em> ISO 639-1 code.
+     * @param appendToResponse <em>Optional.</em> extra requests to append to the result. <b>Accepted Value(s):</b>
+     * alternative_titles, changes, credits, images, keywords, release_dates, videos, translations, recommendations,
+     * similar, reviews, lists
+     * @param options <em>Optional.</em> parameters for the appended extra results.
      */
     @GET("movie/{movie_id}")
     Call<Movie> summary(
@@ -80,9 +84,9 @@ public interface MoviesService {
     /**
      * Grab the following account states for a session:
      *
-     * * Movie rating
-     * * If it belongs to your watchlist
-     * * If it belongs to your favorite list
+     * <li>Movie rating</li>
+     * <li>If it belongs to your watchlist</li>
+     * <li>If it belongs to your favorite list</li>
      *
      * <b>Requires an active Session.</b>
      *
@@ -110,10 +114,10 @@ public interface MoviesService {
      * <p>
      * You can query up to 14 days in a single query by using the start_date and end_date query parameters.
      *
-     * @param movieId    A Movie TMDb id.
+     * @param movieId A Movie TMDb id.
      * @param start_date <em>Optional.</em> Starting date of changes occurred to a movie.
-     * @param end_date   <em>Optional.</em> Ending date of changes occurred to a movie.
-     * @param page       <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param end_date <em>Optional.</em> Ending date of changes occurred to a movie.
+     * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      */
     @GET("movie/{movie_id}/changes")
     Call<Changes> changes(
@@ -156,7 +160,7 @@ public interface MoviesService {
     /**
      * Get the images (posters and backdrops) for a specific movie id.
      *
-     * @param movieId  A Movie TMDb id.
+     * @param movieId A Movie TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/{movie_id}/images")
@@ -178,8 +182,8 @@ public interface MoviesService {
     /**
      * Get the lists that the movie belongs to.
      *
-     * @param movieId  A Movie TMDb id.
-     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param movieId A Movie TMDb id.
+     * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/{movie_id}/lists")
@@ -192,8 +196,8 @@ public interface MoviesService {
     /**
      * Get the similar movies for a specific movie id.
      *
-     * @param movieId  A Movie TMDb id.
-     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param movieId A Movie TMDb id.
+     * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/{movie_id}/similar")
@@ -206,8 +210,8 @@ public interface MoviesService {
     /**
      * Get the recommendations for a particular movie id.
      *
-     * @param movieId  A Movie TMDb id.
-     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param movieId A Movie TMDb id.
+     * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/{movie_id}/recommendations")
@@ -219,7 +223,7 @@ public interface MoviesService {
 
     /**
      * Get the release dates, certifications and related information by country for a specific movie id.
-     *
+     * <p>
      * The results are keyed by iso_3166_1 code and contain a type value which on our system, maps to:
      * {@link ReleaseDate#TYPE_PREMIERE}, {@link ReleaseDate#TYPE_THEATRICAL_LIMITED},
      * {@link ReleaseDate#TYPE_THEATRICAL}, {@link ReleaseDate#TYPE_DIGITAL}, {@link ReleaseDate#TYPE_PHYSICAL},
@@ -235,8 +239,8 @@ public interface MoviesService {
     /**
      * Get the reviews for a particular movie id.
      *
-     * @param movieId  A Movie TMDb id.
-     * @param page     <em>Optional.</em> Minimum value is 1, expected value is an integer.
+     * @param movieId A Movie TMDb id.
+     * @param page <em>Optional.</em> Minimum value is 1, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/{movie_id}/reviews")
@@ -259,7 +263,7 @@ public interface MoviesService {
     /**
      * Get the videos (trailers, teasers, clips, etc...) for a specific movie id.
      *
-     * @param movieId  A Movie TMDb id.
+     * @param movieId A Movie TMDb id.
      * @param language <em>Optional.</em> ISO 639-1 code.
      */
     @GET("movie/{movie_id}/videos")
@@ -270,7 +274,7 @@ public interface MoviesService {
 
     /**
      * Get a list of the availabilities per country by provider.
-     *
+     * <p>
      * Please note: In order to use this data you must attribute the source of the data as JustWatch.
      *
      * @see <a href="https://developers.themoviedb.org/3/movies/get-movie-watch-providers">Documentation</a>
@@ -287,11 +291,11 @@ public interface MoviesService {
     Call<Movie> latest();
 
     /**
-     * Get a list of movies in theatres. This is a release type query that looks
-     * for all movies that have a release type of 2 or 3 within the specified date range.
-     *
-     * You can optionally specify a region parameter which will narrow the search
-     * to only look for theatrical release dates within the specified country.
+     * Get a list of movies in theatres. This is a release type query that looks for all movies that have a release type
+     * of 2 or 3 within the specified date range.
+     * <p>
+     * You can optionally specify a region parameter which will narrow the search to only look for theatrical release
+     * dates within the specified country.
      *
      * @see <a href="https://developers.themoviedb.org/3/movies/get-now-playing">Documentation</a>
      */
@@ -327,11 +331,11 @@ public interface MoviesService {
     );
 
     /**
-     * Get a list of upcoming movies in theatres. This is a release type query that looks
-     * for all movies that have a release type of 2 or 3 within the specified date range.
-     *
-     * You can optionally specify a region prameter which will narrow the search to
-     * only look for theatrical release dates within the specified country.
+     * Get a list of upcoming movies in theatres. This is a release type query that looks for all movies that have a
+     * release type of 2 or 3 within the specified date range.
+     * <p>
+     * You can optionally specify a region prameter which will narrow the search to only look for theatrical release
+     * dates within the specified country.
      *
      * @see <a href="https://developers.themoviedb.org/3/movies/get-upcoming">Documentation</a>
      */
@@ -344,11 +348,12 @@ public interface MoviesService {
 
     /**
      * Sets the Rating for the movie with the specified id.
-     *
+     * <p>
      * <b>Requires an active Session.</b>
      *
      * @param movieId A Movie TMDb id.
-     * @param body    <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a number.
+     * @param body <em>Required.</em> A ReviewObject Object. Minimum value is 0.5 and Maximum 10.0, expected value is a
+     * number.
      */
     @POST("movie/{movie_id}/rating")
     Call<Status> addRating(
@@ -358,7 +363,7 @@ public interface MoviesService {
 
     /**
      * Deletes the Rating for the movie with the specified id.
-     *
+     * <p>
      * <b>Requires an active Session.</b>
      *
      * @param movieId A Movie TMDb id.
