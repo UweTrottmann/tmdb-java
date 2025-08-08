@@ -5,6 +5,7 @@ Change Log
 
 * Note: TMDB has added additional primary translation languages: `ku-TR`, `so-SO` and `uz-UZ`. 
 * Add `rent` to `WatchProviders.CountryInfo` that contains rental providers for a movie.
+* `DiscoverTvBuilder`: add `vote_average_lte` and `vote_count_lte`. [#103](https://github.com/UweTrottmann/tmdb-java/issues/103)
 
 ## 2.11.0
 _2024-06-07_

@@ -25,7 +25,9 @@ public class DiscoverTvBuilder {
     @Nullable private Integer page;
     @Nullable private String timezone;
     @Nullable private Float vote_average_gte;
+    @Nullable private Float vote_average_lte;
     @Nullable private Integer vote_count_gte;
+    @Nullable private Integer vote_count_lte;
     @Nullable private DiscoverFilter with_genres;
     @Nullable private DiscoverFilter with_networks;
     @Nullable private DiscoverFilter without_genres;
@@ -95,8 +97,18 @@ public class DiscoverTvBuilder {
         return this;
     }
 
+    public DiscoverTvBuilder vote_average_lte(@Nullable Float value) {
+        this.vote_average_lte = value;
+        return this;
+    }
+
     public DiscoverTvBuilder vote_count_gte(@Nullable Integer value) {
         this.vote_count_gte = value;
+        return this;
+    }
+
+    public DiscoverTvBuilder vote_count_lte(@Nullable Integer value) {
+        this.vote_count_lte = value;
         return this;
     }
 
@@ -182,7 +194,9 @@ public class DiscoverTvBuilder {
                 page,
                 timezone,
                 vote_average_gte,
+                vote_average_lte,
                 vote_count_gte,
+                vote_count_lte,
                 with_genres,
                 with_networks,
                 without_genres,
