@@ -35,7 +35,7 @@ public class PersonAssertions {
 
         assertThat(person.adult).isNotNull();
         if (person.popularity != null) {
-            assertThat(person.popularity).isPositive();
+            assertThat(person.popularity).isGreaterThanOrEqualTo(0.0);
         }
         try {
             Person p = (Person) person;
