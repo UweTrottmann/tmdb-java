@@ -10,6 +10,7 @@ import static com.uwetrottmann.tmdb2.TestData.testTvShow;
 import static com.uwetrottmann.tmdb2.assertions.ChangeAssertions.assertContentChanges;
 import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCredits;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertImages;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertTranslations;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertVideos;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvSeason;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvSeasonDataIntegrity;
@@ -22,6 +23,7 @@ import com.uwetrottmann.tmdb2.entities.Changes;
 import com.uwetrottmann.tmdb2.entities.Credits;
 import com.uwetrottmann.tmdb2.entities.Images;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
+import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.TvSeason;
 import com.uwetrottmann.tmdb2.entities.TvSeasonExternalIds;
 import com.uwetrottmann.tmdb2.entities.Videos;
@@ -123,6 +125,18 @@ public class TvSeasonsServiceTest extends BaseTestCase {
         Images images = call.execute().body();
         assertThat(images.id).isNotNull();
         assertImages(images.posters);
+    }
+
+    @Test
+    public void test_translations() throws IOException {
+        Call<Translations> call = getUnauthenticatedInstance().tvSeasonsService().translations(
+                testTvShow.id,
+                testTvSeason.season_number
+        );
+
+        Translations translations = call.execute().body();
+
+        assertTranslations(translations);
     }
 
     @Test

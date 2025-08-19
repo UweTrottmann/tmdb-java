@@ -9,6 +9,7 @@ import com.uwetrottmann.tmdb2.entities.Changes;
 import com.uwetrottmann.tmdb2.entities.Credits;
 import com.uwetrottmann.tmdb2.entities.Images;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
+import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.TvSeason;
 import com.uwetrottmann.tmdb2.entities.TvSeasonExternalIds;
 import com.uwetrottmann.tmdb2.entities.Videos;
@@ -144,6 +145,18 @@ public interface TvSeasonsService {
             @Path("tv_id") int tvShowId,
             @Path("season_number") int tvShowSeasonNumber,
             @Query("language") String language
+    );
+
+    /**
+     * Get the translations for a TV season by season number.
+     *
+     * @param tvShowId           A Tv Show TvSeason TMDb id.
+     * @param tvShowSeasonNumber TvSeason Number.
+     */
+    @GET("tv/{tv_id}/season/{season_number}/translations")
+    Call<Translations> translations(
+            @Path("tv_id") int tvShowId,
+            @Path("season_number") int tvShowSeasonNumber
     );
 
     /**
