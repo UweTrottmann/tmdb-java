@@ -22,6 +22,7 @@ import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.Videos;
 import com.uwetrottmann.tmdb2.entities.WatchProviders;
 import java.util.List;
+import java.util.Map;
 
 public class GenericAssertions {
 
@@ -50,6 +51,16 @@ public class GenericAssertions {
         }
     }
 
+    public static void assertWatchProviders(WatchProviders providers) {
+        assertThat(providers.results).isNotNull();
+        for (Map.Entry<String, WatchProviders.CountryInfo> entry : providers.results.entrySet()) {
+            assertThat(entry.getKey()).isNotEmpty();
+            WatchProviders.CountryInfo countryInfo = entry.getValue();
+            assertThat(countryInfo.link).isNotEmpty();
+            assertWatchProviderCountryInfo(countryInfo);
+        }
+    }
+
     public static void assertWatchProviderCountryInfo(WatchProviders.CountryInfo info) {
         assertWatchProviders(info.flatrate);
         assertWatchProviders(info.free);
@@ -58,7 +69,7 @@ public class GenericAssertions {
         assertWatchProviders(info.rent);
     }
 
-    private static void assertWatchProviders(List<WatchProviders.WatchProvider> providers) {
+    public static void assertWatchProviders(List<WatchProviders.WatchProvider> providers) {
         for (WatchProviders.WatchProvider provider : providers) {
             assertThat(provider).isNotNull();
             assertThat(provider.display_priority).isGreaterThanOrEqualTo(0);

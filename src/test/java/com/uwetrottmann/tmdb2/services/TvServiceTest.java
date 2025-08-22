@@ -13,7 +13,7 @@ import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertContentR
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertImages;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertTranslations;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertVideos;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertWatchProviderCountryInfo;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertWatchProviders;
 import static com.uwetrottmann.tmdb2.assertions.KeywordAssertions.assertKeywords;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShow;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvShowDataIntegrity;
@@ -43,7 +43,6 @@ import com.uwetrottmann.tmdb2.entities.WatchProviders;
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 import org.junit.Test;
 import retrofit2.Call;
 
@@ -295,21 +294,15 @@ public class TvServiceTest extends BaseTestCase {
 
     @Test
     public void watchProviders() throws IOException {
-        Call<WatchProviders> call = getUnauthenticatedInstance().tvService().watchProviders(
-                testTvShow.id
-        );
-
-        WatchProviders providers = call.execute().body();
+        WatchProviders providers = getUnauthenticatedInstance()
+                .tvService()
+                .watchProviders(testTvShow.id)
+                .execute()
+                .body();
 
         assertThat(providers).isNotNull();
         assertThat(providers.id).isEqualTo(testTvShow.id);
-        assertThat(providers.results).isNotNull();
-        for (Map.Entry<String, WatchProviders.CountryInfo> entry : providers.results.entrySet()) {
-            assertThat(entry.getKey()).isNotEmpty();
-            WatchProviders.CountryInfo countryInfo = entry.getValue();
-            assertThat(countryInfo.link).isNotEmpty();
-            assertWatchProviderCountryInfo(countryInfo);
-        }
+        assertWatchProviders(providers);
     }
 
     @Test

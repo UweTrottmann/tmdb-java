@@ -33,6 +33,7 @@ import com.uwetrottmann.tmdb2.services.TrendingService;
 import com.uwetrottmann.tmdb2.services.TvEpisodesService;
 import com.uwetrottmann.tmdb2.services.TvSeasonsService;
 import com.uwetrottmann.tmdb2.services.TvService;
+import com.uwetrottmann.tmdb2.services.WatchProvidersService;
 import java.io.IOException;
 import javax.annotation.Nullable;
 import okhttp3.Interceptor;
@@ -309,6 +310,14 @@ public class Tmdb {
         return getRetrofit().create(DiscoverService.class);
     }
 
+    public DiscoverMovieBuilder discoverMovie() {
+        return new DiscoverMovieBuilder(discoverService());
+    }
+
+    public DiscoverTvBuilder discoverTv() {
+        return new DiscoverTvBuilder(discoverService());
+    }
+
     public FindService findService() {
         return getRetrofit().create(FindService.class);
     }
@@ -369,12 +378,8 @@ public class Tmdb {
         return getRetrofit().create(TrendingService.class);
     }
 
-    public DiscoverMovieBuilder discoverMovie() {
-        return new DiscoverMovieBuilder(discoverService());
-    }
-
-    public DiscoverTvBuilder discoverTv() {
-        return new DiscoverTvBuilder(discoverService());
+    public WatchProvidersService watchProvidersService() {
+        return getRetrofit().create(WatchProvidersService.class);
     }
 
 }

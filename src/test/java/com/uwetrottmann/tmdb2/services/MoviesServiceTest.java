@@ -12,7 +12,7 @@ import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertAlternat
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertImages;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertTranslations;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertVideos;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertWatchProviderCountryInfo;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertWatchProviders;
 import static com.uwetrottmann.tmdb2.assertions.KeywordAssertions.assertKeywords;
 import static com.uwetrottmann.tmdb2.assertions.ListAssertions.assertListResultsPage;
 import static com.uwetrottmann.tmdb2.assertions.MovieAssertions.assertMovie;
@@ -43,7 +43,6 @@ import com.uwetrottmann.tmdb2.entities.WatchProviders;
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 import org.junit.Test;
 import retrofit2.Call;
 
@@ -238,21 +237,15 @@ public class MoviesServiceTest extends BaseTestCase {
 
     @Test
     public void watchProviders() throws IOException {
-        Call<WatchProviders> call = getUnauthenticatedInstance().moviesService().watchProviders(
-                testMovie.id
-        );
-
-        WatchProviders providers = call.execute().body();
+        WatchProviders providers = getUnauthenticatedInstance()
+                .moviesService()
+                .watchProviders(testMovie.id)
+                .execute()
+                .body();
 
         assertThat(providers).isNotNull();
+        assertWatchProviders(providers);
         assertThat(providers.id).isEqualTo(testMovie.id);
-        assertThat(providers.results).isNotNull();
-        for (Map.Entry<String, WatchProviders.CountryInfo> entry : providers.results.entrySet()) {
-            assertThat(entry.getKey()).isNotEmpty();
-            WatchProviders.CountryInfo countryInfo = entry.getValue();
-            assertThat(countryInfo.link).isNotEmpty();
-            assertWatchProviderCountryInfo(countryInfo);
-        }
     }
 
     @Test

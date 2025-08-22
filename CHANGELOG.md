@@ -3,6 +3,7 @@
 ## Next version
 
 * Add TV season translations method by @laurentblue in https://github.com/UweTrottmann/tmdb-java/pull/108
+* Add Watch Providers service with methods for movies and TV shows.
 
 ## 2.12.0 - 2025-08-08
 
