@@ -142,7 +142,10 @@ public interface PeopleService {
      * @param personId A Person TMDb id.
      * @param page     <em>Optional.</em> Minimum value is 1, maximum 1000, expected value is an integer.
      * @param language <em>Optional.</em> ISO 639-1 code.
+     *
+     * @deprecated TMDB has marked this as deprecated and using it may lead to a server error.
      */
+    @Deprecated
     @GET("person/{person_id}/tagged_images")
     Call<TaggedImagesResultsPage> taggedImages(
             @Path("person_id") int personId,

@@ -37,6 +37,10 @@ public enum AppendToResponseItem {
     MOVIE_CREDITS("movie_credits"),
     TV_CREDITS("tv_credits"),
     COMBINED_CREDITS("combined_credits"),
+    /**
+     * @deprecated TMDB has marked support for tagged images as deprecated. Using this may lead to a server error.
+     */
+    @Deprecated
     TAGGED_IMAGES("tagged_images"),
 
     // Applies to Keywords, Companies

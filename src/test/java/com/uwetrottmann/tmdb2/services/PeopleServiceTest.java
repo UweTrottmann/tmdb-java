@@ -8,7 +8,6 @@ import static com.uwetrottmann.tmdb2.TestData.testPersonChangesEndDate;
 import static com.uwetrottmann.tmdb2.TestData.testPersonChangesStartDate;
 import static com.uwetrottmann.tmdb2.assertions.ChangeAssertions.assertContentChanges;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertImages;
-import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertTaggedImages;
 import static com.uwetrottmann.tmdb2.assertions.PersonAssertions.assertPerson;
 import static com.uwetrottmann.tmdb2.assertions.PersonAssertions.assertPersonCredits;
 import static com.uwetrottmann.tmdb2.assertions.PersonAssertions.assertPersonDataIntegrity;
@@ -24,7 +23,6 @@ import com.uwetrottmann.tmdb2.entities.PersonCredits;
 import com.uwetrottmann.tmdb2.entities.PersonExternalIds;
 import com.uwetrottmann.tmdb2.entities.PersonImages;
 import com.uwetrottmann.tmdb2.entities.PersonResultsPage;
-import com.uwetrottmann.tmdb2.entities.TaggedImagesResultsPage;
 import com.uwetrottmann.tmdb2.entities.TmdbDate;
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
 import java.io.IOException;
@@ -61,7 +59,6 @@ public class PeopleServiceTest extends BaseTestCase {
                         AppendToResponseItem.COMBINED_CREDITS,
                         AppendToResponseItem.EXTERNAL_IDS,
                         AppendToResponseItem.CHANGES,
-                        AppendToResponseItem.TAGGED_IMAGES,
                         AppendToResponseItem.TV_CREDITS
                 ),
                 opts
@@ -72,7 +69,6 @@ public class PeopleServiceTest extends BaseTestCase {
         assertPersonDataIntegrity(person);
         assertContentChanges(person.changes);
         assertImages(person.images.profiles);
-        assertTaggedImages(person.tagged_images);
         assertPersonCredits(person.movie_credits);
         assertPersonCredits(person.tv_credits);
         assertPersonCredits(person.combined_credits);
@@ -148,15 +144,6 @@ public class PeopleServiceTest extends BaseTestCase {
         PersonImages images = call.execute().body();
 
         assertImages(images.profiles);
-        assertThat(images.id).isEqualTo(testPerson.id);
-    }
-
-    @Test
-    public void test_tagged_images() throws IOException {
-        Call<TaggedImagesResultsPage> call = getUnauthenticatedInstance().personService().taggedImages(testPerson.id, null, null);
-        TaggedImagesResultsPage images = call.execute().body();
-
-        assertTaggedImages(images);
         assertThat(images.id).isEqualTo(testPerson.id);
     }
 

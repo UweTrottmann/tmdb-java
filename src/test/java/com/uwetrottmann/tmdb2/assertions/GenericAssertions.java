@@ -16,8 +16,6 @@ import com.uwetrottmann.tmdb2.entities.Image;
 import com.uwetrottmann.tmdb2.entities.NetworkImage;
 import com.uwetrottmann.tmdb2.entities.SpokenLanguage;
 import com.uwetrottmann.tmdb2.entities.Status;
-import com.uwetrottmann.tmdb2.entities.TaggedImage;
-import com.uwetrottmann.tmdb2.entities.TaggedImagesResultsPage;
 import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.Videos;
 import com.uwetrottmann.tmdb2.entities.WatchProviders;
@@ -113,21 +111,6 @@ public class GenericAssertions {
         assertThat(image.vote_count).isGreaterThanOrEqualTo(0);
     }
 
-
-    public static void assertTaggedImage(TaggedImage image) {
-        assertImage(image);
-        assertThat(image.media_type).isNotNull();
-        assertThat(image.media).isNotNull();
-        switch(image.media_type) {
-            case "movie":
-                assertThat(image.media.movie).isNotNull();
-                break;
-            case "tv":
-                assertThat(image.media.tvShow).isNotNull();
-                break;
-        }
-    }
-
     public static void assertNetworkImage(NetworkImage image) {
         assertImage(image);
         assertThat(image.file_type).isNotNull();
@@ -138,14 +121,6 @@ public class GenericAssertions {
         assertThat(images).isNotEmpty();
         for (Image image : images) {
             assertImage(image);
-        }
-    }
-
-    public static void assertTaggedImages(TaggedImagesResultsPage images) {
-        assertBaseResultsPage(images);
-
-        for (TaggedImage image : images.results) {
-            assertTaggedImage(image);
         }
     }
 

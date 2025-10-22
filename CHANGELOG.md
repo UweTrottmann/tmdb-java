@@ -5,6 +5,8 @@
 * Add `TvSeasonsService.translations` by @laurentblue in https://github.com/UweTrottmann/tmdb-java/pull/108
 * Add `TvSeasonsService.watchProviders` to get watch providers for a specific season
 * Add `Tmdb.watchProvidersService` to get all available watch providers for movies and TV shows in a region
+* Deprecate tagged images of people. [TMDB has marked this as deprecated](https://developer.themoviedb.org/reference/person-tagged-images),
+  using it may return a server error.
 * Note: TMDB has added additional primary translation languages: Bangla (India, `bn-IN`), Nepali (Nepal, `ne-NP`) and 
   Occitan (France, `oc-FR`).
 

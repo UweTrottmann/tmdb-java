@@ -24,6 +24,10 @@ public class Person extends BasePerson {
     public PersonCredits movie_credits;
     public PersonCredits tv_credits;
     public PersonImages images;
+    /**
+     * @deprecated TMDB has marked support for tagged images as deprecated. Using this may lead to a server error.
+     */
+    @Deprecated
     public TaggedImagesResultsPage tagged_images;
     public Changes changes;
 
