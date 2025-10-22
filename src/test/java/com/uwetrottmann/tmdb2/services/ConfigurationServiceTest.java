@@ -60,8 +60,7 @@ public class ConfigurationServiceTest extends BaseTestCase {
         Call<List<String>> call = getUnauthenticatedInstance().configurationService().primary_translations();
         List<String> languages = call.execute().body();
         assertThat(languages).isNotEmpty();
-        // Assert content to detect languages getting added or removed.
-        assertThat(languages).hasSize(140);
+        // Assert content to detect languages getting added or removed and note them in changelog
         assertThat(languages).containsExactlyInAnyOrder(
                 "af-ZA",
                 "ar-AE",
@@ -78,6 +77,7 @@ public class ConfigurationServiceTest extends BaseTestCase {
                 "be-BY",
                 "bg-BG",
                 "bn-BD",
+                "bn-IN",
                 "br-FR",
                 "ca-AD",
                 "ca-ES",
@@ -167,9 +167,11 @@ public class ConfigurationServiceTest extends BaseTestCase {
                 "ms-MY",
                 "ms-SG",
                 "nb-NO",
+                "ne-NP",
                 "nl-BE",
                 "nl-NL",
                 "no-NO",
+                "oc-FR",
                 "pa-IN",
                 "pl-PL",
                 "pt-AO",

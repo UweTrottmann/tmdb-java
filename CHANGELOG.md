@@ -4,10 +4,13 @@
 
 * Add TV season translations method by @laurentblue in https://github.com/UweTrottmann/tmdb-java/pull/108
 * Add Watch Providers service with methods for movies and TV shows.
+* Note: TMDB has added additional primary translation languages: Bangla (India, `bn-IN`), Nepali (Nepal, `ne-NP`) and 
+  Occitan (France, `oc-FR`).
 
 ## 2.12.0 - 2025-08-08
 
-* Note: TMDB has added additional primary translation languages: `ku-TR`, `so-SO` and `uz-UZ`. 
+* Note: TMDB has added additional primary translation languages: Kurdish (Türkiye, `ku-TR`), Somali (Somalia, `so-SO`) 
+  and  Uzbek (Uzbekistan, `uz-UZ`). 
 * Add `rent` to `WatchProviders.CountryInfo` that contains rental providers for a movie.
 * `DiscoverTvBuilder`: add `vote_average_lte` and `vote_count_lte`. [#103](https://github.com/UweTrottmann/tmdb-java/issues/103)
 * Add `spoken_languages` to `TvShow`, add `english_name` to `SpokenLanguage`. [#91](https://github.com/UweTrottmann/tmdb-java/issues/91)
