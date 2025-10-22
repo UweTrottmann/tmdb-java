@@ -12,7 +12,7 @@
 - Update versions in [README](README.md)
 
 ```bash
-git commit --all --message "Prepare for release 2.12.0"
+git commit --all --message "Prepare for release 2.13.0"
 ```
 
 Then from IDE run tasks (TODO: figure out how to use GUI pin entry from Git Bash):
@@ -26,4 +26,4 @@ Push to GitHub:
 git push origin main --tags
 ```
 
-And [create a GitHub release](https://github.com/UweTrottmann/tmdb-java/releases/new). 
+And [create a GitHub release](https://github.com/UweTrottmann/tmdb-java/releases/new).

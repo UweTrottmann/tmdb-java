@@ -1,6 +1,6 @@
 # Changelog
 
-## Next version
+## 2.13.0 - 2025-10-22
 
 * Add `TvSeasonsService.translations` by @laurentblue in https://github.com/UweTrottmann/tmdb-java/pull/108
 * Add `TvSeasonsService.watchProviders` to get watch providers for a specific season
