@@ -2,8 +2,9 @@
 
 ## Next version
 
-* Add TV season translations method by @laurentblue in https://github.com/UweTrottmann/tmdb-java/pull/108
-* Add Watch Providers service with methods for movies and TV shows.
+* Add `TvSeasonsService.translations` by @laurentblue in https://github.com/UweTrottmann/tmdb-java/pull/108
+* Add `TvSeasonsService.watchProviders` to get watch providers for a specific season
+* Add `Tmdb.watchProvidersService` to get all available watch providers for movies and TV shows in a region
 * Note: TMDB has added additional primary translation languages: Bangla (India, `bn-IN`), Nepali (Nepal, `ne-NP`) and 
   Occitan (France, `oc-FR`).
 

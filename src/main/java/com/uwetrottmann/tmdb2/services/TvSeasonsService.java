@@ -13,13 +13,13 @@ import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.TvSeason;
 import com.uwetrottmann.tmdb2.entities.TvSeasonExternalIds;
 import com.uwetrottmann.tmdb2.entities.Videos;
+import com.uwetrottmann.tmdb2.entities.WatchProviders;
+import java.util.Map;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
-
-import java.util.Map;
 
 public interface TvSeasonsService {
 
@@ -173,5 +173,12 @@ public interface TvSeasonsService {
             @Query("language") String language
     );
 
-
+    /**
+     * See <a href="https://developer.themoviedb.org/reference/tv-season-watch-providers">Watch Providers</a>.
+     */
+    @GET("tv/{tv_id}/season/{season_number}/watch/providers")
+    Call<WatchProviders> watchProviders(
+            @Path("tv_id") int tvShowId,
+            @Path("season_number") int tvShowSeasonNumber
+    );
 }

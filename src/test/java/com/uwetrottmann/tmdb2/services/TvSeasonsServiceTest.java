@@ -12,6 +12,7 @@ import static com.uwetrottmann.tmdb2.assertions.CreditAssertions.assertCredits;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertImages;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertTranslations;
 import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertVideos;
+import static com.uwetrottmann.tmdb2.assertions.GenericAssertions.assertWatchProviders;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvSeason;
 import static com.uwetrottmann.tmdb2.assertions.TvAssertions.assertTvSeasonDataIntegrity;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -27,6 +28,7 @@ import com.uwetrottmann.tmdb2.entities.Translations;
 import com.uwetrottmann.tmdb2.entities.TvSeason;
 import com.uwetrottmann.tmdb2.entities.TvSeasonExternalIds;
 import com.uwetrottmann.tmdb2.entities.Videos;
+import com.uwetrottmann.tmdb2.entities.WatchProviders;
 import com.uwetrottmann.tmdb2.enumerations.AppendToResponseItem;
 import java.io.IOException;
 import org.junit.Test;
@@ -149,6 +151,19 @@ public class TvSeasonsServiceTest extends BaseTestCase {
         Videos videos = call.execute().body();
 
         assertVideos(videos);
+    }
+
+    @Test
+    public void watchProviders() throws IOException {
+        WatchProviders providers = getUnauthenticatedInstance()
+                .tvSeasonsService()
+                .watchProviders(testTvShow.id, testTvSeason.season_number)
+                .execute()
+                .body();
+
+        assertThat(providers).isNotNull();
+        assertThat(providers.id).isEqualTo(testTvSeason.id);
+        assertWatchProviders(providers);
     }
 
 }
