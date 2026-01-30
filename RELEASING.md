@@ -2,8 +2,14 @@
 
 ## Local testing
 
+Note: on Windows, avoid Git Bash. It uses its own `gpg`.
+
 ```bash
-./mwnw clean install -P release,heyuwe-sign
+./mvnw clean install -P release,heyuwe-sign -DskipTests
+```
+
+```powershell
+.\mvnw.cmd clean install -P release,heyuwe-sign -DskipTests
 ```
 
 ## Preparing a release and deploying it to Maven Central
