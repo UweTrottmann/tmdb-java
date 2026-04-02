@@ -1,5 +1,5 @@
 # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
-name: Build and test
+name: Build
 
 on:
   pull_request:
@@ -7,10 +7,10 @@ on:
 
 jobs:
   package:
-    name: Maven Build and Test
+    name: Maven Build
     runs-on: ubuntu-latest
     permissions:
-      checks: write # to publish unit test results
+      contents: read
 
     steps:
       - name: Check out
@@ -26,4 +26,5 @@ jobs:
         # -show-version: Print Maven and JDK version info.
         # --update-snapshots: Force update of snapshot dependencies.
         # --errors: Show full error stack traces on failure.
-        run: ./mvnw --batch-mode -show-version --update-snapshots --errors package
+        # -DskipTests: Skip running tests. They should be run locally with custom credentials, see CONTRIBUTING.md.
+        run: ./mvnw --batch-mode -show-version --update-snapshots --errors package -DskipTests
