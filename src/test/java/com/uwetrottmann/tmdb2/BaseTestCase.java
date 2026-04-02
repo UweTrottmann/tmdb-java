@@ -1,18 +1,27 @@
 // SPDX-License-Identifier: Apache-2.0
-// Copyright 2025 Uwe Trottmann
+// Copyright 2012 Uwe Trottmann
 
 package com.uwetrottmann.tmdb2;
 
 import com.google.common.util.concurrent.RateLimiter;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 public abstract class BaseTestCase {
 
-    private static final boolean LOG_BODY = System.getenv("CI") == null;
+    private static final String TEST_API_KEY;
 
-    // Do NOT use this API key in your application, it is only for testing tmdb-java!
-    private static final String TEST_API_KEY = "25da90e9f8f0b3892d8bdeb6c3d6267d";
+    static {
+        Properties secrets = tryToloadSecrets();
+        TEST_API_KEY = getVarFromEnvOrProperties(secrets, "TEST_API_KEY");
+        checkVarNotEmpty(TEST_API_KEY, "TEST_API_KEY");
+    }
+
+    private static final boolean LOG_BODY = System.getenv("CI") == null;
     // limit requests for tests to avoid hitting TMDb rate limit (40 requests/10 seconds)
     @SuppressWarnings("UnstableApiUsage") private static final RateLimiter rateLimiter = RateLimiter.create(5);
 
@@ -45,6 +54,32 @@ public abstract class BaseTestCase {
             HttpLoggingInterceptor logging = new HttpLoggingInterceptor(System.out::println);
             logging.setLevel(LOG_BODY ? HttpLoggingInterceptor.Level.BODY : HttpLoggingInterceptor.Level.BASIC);
             builder.addNetworkInterceptor(logging);
+        }
+    }
+
+    protected static Properties tryToloadSecrets() {
+        Properties properties = new Properties();
+
+        try (InputStream input = new FileInputStream("secrets.properties")) {
+            properties.load(input);
+        } catch (IOException e) {
+            // File not found or cannot be read, will try environment variables
+        }
+
+        return properties;
+    }
+
+    protected static String getVarFromEnvOrProperties(Properties properties, String key) {
+        String value = System.getenv(key);
+        if (value != null && !value.isEmpty()) {
+            return value;
+        }
+        return properties.getProperty(key);
+    }
+
+    private static void checkVarNotEmpty(String value, String name) {
+        if (value == null || value.isEmpty()) {
+            throw new IllegalStateException(name + " must be set via environment variable or secrets.properties file");
         }
     }
 

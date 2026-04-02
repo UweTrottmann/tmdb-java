@@ -14,3 +14,6 @@ bin
 !.idea/
 .idea/*
 !.idea/codeStyles
+
+# Secrets for tests
+secrets.properties

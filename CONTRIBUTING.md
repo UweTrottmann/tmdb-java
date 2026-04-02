@@ -21,6 +21,27 @@ sure to read and agree with the license.
 3. If you add or modify methods, make sure to also create and run basic tests (see `src/test`).
 4. [Start a pull request](https://github.com/UweTrottmann/tmdb-java/compare) against `main`.
 
+## Setting up Test Credentials
+
+The tests require a TMDB API key to run:
+
+- `TEST_API_KEY`: a TMDB API key
+
+It can be set either
+
+- in a `secrets.properties` file (a template is available in [secrets.properties.template](secrets.properties.template))
+- or as an environment variable.
+
+If both are set, the environment variable takes precedence over the properties file.
+
+### Getting Credentials
+
+To obtain a TMDB API key:
+
+1. Create or sign in to a TMDB account at https://www.themoviedb.org/
+2. Create an API key at https://www.themoviedb.org/settings/api
+3. Copy the API Key and set it as `TEST_API_KEY`
+
 ## No code!
 
 You can [discuss or submit bug reports](https://github.com/UweTrottmann/tmdb-java/issues)!
